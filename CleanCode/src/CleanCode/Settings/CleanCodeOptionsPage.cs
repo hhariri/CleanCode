@@ -27,7 +27,7 @@
 
 #endregion
 
-using InjectionHappyDetector.resources;
+using System.Windows.Forms;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Features.Environment.Options.Inspections;
@@ -35,23 +35,23 @@ using JetBrains.UI.CommonControls.Fonts;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.Helpers;
 
-namespace InjectionHappyDetector
+namespace CleanCode.Settings
 {
     /// <summary>
     /// Implements an options page that holds a set of setting editors stacked in lines from top to bottom.
     /// </summary>
-    [OptionsPage(PID, "InjectionHappy Detector", "InjectionHappyDetector.resources.InjectionHappyDetector.png",
+    [OptionsPage(PID, "Clean Code", "CleanCode.Settings.CleanCode.png",
         ParentId = CodeInspectionPage.PID)]
-    public class InjectionHappyDetectorOptionPage : AStackPanelOptionsPage
+    public class CleanCodeOptionsPage : AStackPanelOptionsPage
     {
-        const string PID = "InjectionHappyDetector";
+        const string PID = "CleanCode";
         readonly Lifetime _lifetime;
         readonly OptionsSettingsSmartContext _settings;
 
         /// <summary>
-        /// Creates new instance of InjectionHappyDetectorOptionPage
+        /// Creates new instance of CleanCodeOptionsPage
         /// </summary>
-        public InjectionHappyDetectorOptionPage(Lifetime lifetime, FontsManager fontsManager,
+        public CleanCodeOptionsPage(Lifetime lifetime, FontsManager fontsManager,
                                                 OptionsSettingsSmartContext settings)
             : base(lifetime, fontsManager, PID)
         {
@@ -62,28 +62,40 @@ namespace InjectionHappyDetector
 
         void InitControls()
         {
-            Controls.Spin spin; // This variable may be reused if there's more than one spin on the page
+            Controls.Spin maximumDependencies; // This variable may be reused if there's more than one spin on the page
             Controls.HorzStackPanel stack;
 
             // The upper cue banner, stacked in the first line of our page, docked to full width with word wrapping, as needed
-            Controls.Add(new Controls.Label(Stringtable.Options_Banner));
+            Controls.Add(new Controls.Label(Stringtable.Options_Header));
+
+            Controls.Add(new Controls.Label(Stringtable.Options_SubHeader));
 
             // Some spacing
             Controls.Add(JetBrains.UI.Options.Helpers.Controls.Separator.DefaultHeight);
 
             // A horizontal stack of a text label and a spin-edit
             Controls.Add(stack = new Controls.HorzStackPanel());
-            stack.Controls.Add(new Controls.Label(Stringtable.Options_MaximumArgumentLabel)); // The first column of the stack
-            stack.Controls.Add(spin = new Controls.Spin());
+            stack.Controls.Add(new Controls.Label(Stringtable.Options_LabelMaximumDependenciesCheck));
+            var maximumDependenciesCheckbox = new Controls.CheckBox();
+            stack.Controls.Add(maximumDependenciesCheckbox);
+            stack.Controls.Add(new Controls.Label(Stringtable.Options_LabelTooManyDependencies)); // The first column of the stack
+            stack.Controls.Add(maximumDependencies = new Controls.Spin());
 
             // Set up the spin we've just added
-            spin.Maximum = new decimal(new[] {20, 0, 0, 0});
-            spin.Minimum = new decimal(new[] {1, 0, 0, 0});
-            spin.Value = new decimal(new[] {1, 0, 0, 0});
+            maximumDependencies.Maximum = new decimal(new[] {20, 0, 0, 0});
+            maximumDependencies.Minimum = new decimal(new[] {1, 0, 0, 0});
+            maximumDependencies.Value = new decimal(new[] {1, 0, 0, 0});
 
-            // This binding will take the initial value from InjectionHappyDetectorAnalysisElementProcessor, put it into the edit, and pass back from UI to the control if the OK button is hit
-            _settings.SetBinding(_lifetime, (InjectionHappyDetectorSettings s) => s.MaximumParameters,
-                                  spin.IntegerValue);
+            _settings.SetBinding(_lifetime, (CleanCodeSettings s) => s.MaximumDependencies,
+                                  maximumDependencies.IntegerValue);
+            _settings.SetBinding(_lifetime, (CleanCodeSettings s) => s.MaximumDependenciesEnabled,
+                                 maximumDependenciesCheckbox.Checked);
+            maximumDependenciesCheckbox.CheckedChanged +=
+                (sender, args) =>
+                { maximumDependencies.Enabled = maximumDependenciesCheckbox.CheckState == CheckState.Checked; };
+
+
+
         }
     }
 }

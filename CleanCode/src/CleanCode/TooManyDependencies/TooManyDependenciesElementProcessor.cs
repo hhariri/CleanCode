@@ -24,27 +24,26 @@
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
+
 using System.Collections.Generic;
 using System.Linq;
-using InjectionHappyDetector.resources;
+using CleanCode.Settings;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.ControlFlow;
-using JetBrains.ReSharper.Psi.ControlFlow.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
 
-namespace InjectionHappyDetector
+namespace CleanCode.TooManyDependencies
 {
-  public class InjectionHappyDetectorElementProcessor : IRecursiveElementProcessor
+  public class TooManyDependenciesElementProcessor : IRecursiveElementProcessor
   {
     private readonly List<HighlightingInfo> _highlights = new List<HighlightingInfo>();
 
     private readonly IDaemonProcess _daemonProcess;
     private readonly int _maxParams;
 
-    public InjectionHappyDetectorElementProcessor(IDaemonProcess daemonProcess, int maxParams)
+    public TooManyDependenciesElementProcessor(IDaemonProcess daemonProcess, int maxParams)
     {
       _daemonProcess = daemonProcess;
       _maxParams = maxParams;
@@ -62,12 +61,12 @@ namespace InjectionHappyDetector
     {
         var constructorParams = constructorDeclaration.ParameterDeclarations;
 
-        var interfaceCount = constructorParams.Count(regularParameterDeclaration => regularParameterDeclaration.DeclaredElement.Type.IsInterfaceType());
+        var interfaceCount = constructorParams.Count(regularParameterDeclaration => TypesUtil.IsInterfaceType(regularParameterDeclaration.DeclaredElement.Type));
 
         if (interfaceCount > _maxParams)
         {
-            string message = Stringtable.TooManyArgumentsWarning;
-            var warning = new InjectionHappyDetectorWarning(message);
+            string message = Stringtable.Warning_TooManyDependencies;
+            var warning = new TooManyDependenciesWarning(message);
             _highlights.Add(new HighlightingInfo(constructorDeclaration.GetNameDocumentRange(), warning));
         }
     }

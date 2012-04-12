@@ -1,4 +1,5 @@
 #region License
+
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -23,42 +24,21 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
+
 #endregion
-using JetBrains.ReSharper.Daemon;
 
-namespace InjectionHappyDetector
+using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Settings;
+
+namespace CleanCode.Settings
 {
-  /// <summary>
-  /// The highlighting that warns about high complexity
-  /// </summary>
-  [StaticSeverityHighlighting(Severity.WARNING, "CSharpInfo")]
-  public class InjectionHappyDetectorWarning : IHighlighting
-  {
-    private readonly string _tooltip;
-
-    public InjectionHappyDetectorWarning(string toolTip)
+    [SettingsKey(typeof (CodeInspectionSettings), "CleanCode")]
+    public class CleanCodeSettings
     {
-      _tooltip = toolTip;
-    }
+        [SettingsEntry(3, "MaximumDependencies")]
+        public readonly int MaximumDependencies;
 
-    public string ToolTip
-    {
-      get { return _tooltip; }
+        [SettingsEntry(true, "MaximumDependenciesEnabled")]
+        public readonly bool MaximumDependenciesEnabled;
     }
-
-    public string ErrorStripeToolTip
-    {
-      get { return _tooltip; }
-    }
-
-    public int NavigationOffsetPatch
-    {
-      get { return 0; }
-    }
-
-    public bool IsValid()
-    {
-      return true;
-    }
-  }
 }

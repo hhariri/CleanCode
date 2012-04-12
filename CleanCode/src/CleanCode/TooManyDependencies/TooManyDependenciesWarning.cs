@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -24,20 +24,44 @@
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
-using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.ProjectModel;
+
 using JetBrains.ReSharper.Daemon;
 
-namespace InjectionHappyDetector
+namespace CleanCode.TooManyDependencies
 {
-  [SolutionComponent]
-  public class InjectionHappyDetectorInvalidateOnMaximumArgumentsChange
+  /// <summary>
+  /// The highlighting that warns about high complexity
+  /// </summary>
+  /// 
+  [StaticSeverityHighlighting(Severity.WARNING, "CSharpInfo")]
+  // TODO: Change to ConfigurableSeverityHighlighting
+  public class TooManyDependenciesWarning : IHighlighting
   {
-    public InjectionHappyDetectorInvalidateOnMaximumArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+    private readonly string _tooltip;
+
+    public TooManyDependenciesWarning(string toolTip)
     {
-      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((InjectionHappyDetectorSettings s) => s.MaximumParameters);
-      settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
+      _tooltip = toolTip;
+    }
+
+    public string ToolTip
+    {
+      get { return _tooltip; }
+    }
+
+    public string ErrorStripeToolTip
+    {
+      get { return _tooltip; }
+    }
+
+    public int NavigationOffsetPatch
+    {
+      get { return 0; }
+    }
+
+    public bool IsValid()
+    {
+      return true;
     }
   }
 }

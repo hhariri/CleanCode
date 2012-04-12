@@ -24,35 +24,22 @@
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
-using System;
+
+using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Psi;
 
-namespace InjectionHappyDetector
+namespace CleanCode.TooManyDependencies
 {
-  /// <summary>
-  /// Daemon stage for comlexity analysis. This class is automatically loaded by ReSharper daemon 
-  /// because it's marked with the attribute.
-  /// </summary>
-  [DaemonStage]
-  public class InjectionHappyDetectorDaemonStage : IDaemonStage
+  [SolutionComponent]
+  public class TooManyDependenciesInvalidateOnMaximumDependenciesChange
   {
-    /// <summary>
-    /// This method provides a <see cref="IDaemonStageProcess"/> instance which is assigned to highlighting a single document
-    /// </summary>
-    public IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings, DaemonProcessKind kind)
+    public TooManyDependenciesInvalidateOnMaximumDependenciesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-      if (process == null)
-        throw new ArgumentNullException("process");
-
-      return new InjectionHappyDetectorDaemonStageProcess(process, settings.GetValue((InjectionHappyDetectorSettings s) => s.MaximumParameters));
-    }
-
-    public ErrorStripeRequest NeedsErrorStripe(IPsiSourceFile sourceFile, IContextBoundSettingsStore settings)
-    {
-      // We want to add markers to the right-side stripe as well as contribute to document errors
-      return ErrorStripeRequest.STRIPE_AND_ERRORS;
+      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumDependencies);
+      settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
     }
   }
 }
