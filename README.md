@@ -6,7 +6,7 @@ A collection of plugins for ReSharper
 
 ### CleanCode
 
-An experiment in trying to automate some of concepts described in [Uncle Bob's books on CleanCode|http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882]. 
+An experiment in trying to automate some of concepts described in [Uncle Bob's books on Clean Code](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882). 
 
 Currently includes: 
 
