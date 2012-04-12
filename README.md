@@ -10,7 +10,7 @@ An experiment in trying to automate some of concepts described in [Uncle Bob's b
 
 Currently includes: 
 
-* InjectionHappyDetector - Detects when a constructor has more than X interfaces passed in. X is configurable via options dialog
+* TooManyDependencies - Detects when a constructor has more than X interfaces passed in. X is configurable via options dialog
 
 
 ## Installing
