@@ -1,8 +1,14 @@
 # ReSharper Plugins
 
-Random plugins for ReSharper
+A collection of plugins for ReSharper
 
 ## Current Plugins
+
+### CleanCode
+
+An experiment in trying to automate some of concepts described in [Uncle Bob's books on CleanCode|http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882]. 
+
+Currently includes: 
 
 * InjectionHappyDetector - Detects when a constructor has more than X interfaces passed in. X is configurable via options dialog
 
