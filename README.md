@@ -21,4 +21,4 @@ Copy the DLL for each Plugin to the ReSharper\bin\Plugins folder
 
 Licensed under MIT (c) 2012  Hadi Hariri and Contributors
 
-Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)
+Note: All references to [Clean Code](http://www.cleancoders.com/), including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)
