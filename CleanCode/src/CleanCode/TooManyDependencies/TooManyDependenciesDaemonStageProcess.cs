@@ -24,6 +24,7 @@
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
+
 using System;
 using JetBrains.Application.Progress;
 using JetBrains.ReSharper.Daemon;
@@ -31,14 +32,14 @@ using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace InjectionHappyDetector
+namespace CleanCode.TooManyDependencies
 {
-  public class InjectionHappyDetectorDaemonStageProcess : IDaemonStageProcess
+  public class TooManyDependenciesDaemonStageProcess : IDaemonStageProcess
   {
     private readonly IDaemonProcess _daemonProcess;
     private readonly int _maxParams;
 
-    public InjectionHappyDetectorDaemonStageProcess(IDaemonProcess daemonProcess, int maxParams)
+    public TooManyDependenciesDaemonStageProcess(IDaemonProcess daemonProcess, int maxParams)
     {
       _daemonProcess = daemonProcess;
       _maxParams = maxParams;
@@ -54,7 +55,7 @@ namespace InjectionHappyDetector
         return;
 
       // Running visitor against the PSI
-      var elementProcessor = new InjectionHappyDetectorElementProcessor(_daemonProcess, _maxParams);
+      var elementProcessor = new TooManyDependenciesElementProcessor(_daemonProcess, _maxParams);
       file.ProcessDescendants(elementProcessor);
 
       // Checking if the daemon is interrupted by user activity

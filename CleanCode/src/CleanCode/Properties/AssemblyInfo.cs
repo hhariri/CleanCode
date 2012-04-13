@@ -26,17 +26,20 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
+using CleanCode.TooManyDependencies;
 using JetBrains.Application.PluginSupport;
+using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Daemon.Asp.Highlightings;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly : AssemblyTitle("ReSharper PowerToys: Cyclomatic Complexity")]
+[assembly : AssemblyTitle("ReSharper Clean Code Plugin")]
 [assembly : AssemblyDescription("")]
-[assembly : AssemblyCompany("JetBrains s.r.o.")]
-[assembly : AssemblyProduct("ReSharper PowerToys")]
-[assembly : AssemblyCopyright("Copyright \u00A9 2006-2011 JetBrains s.r.o. All rights reserved.")]
+[assembly : AssemblyCompany("Hadi Hariri and Contributors")]
+[assembly : AssemblyProduct("ReSharper Clean Code Plugin")]
+[assembly : AssemblyCopyright("Copyright \u00A9 2012 Hadi Hariri and Contributors")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
 
@@ -48,7 +51,7 @@ using JetBrains.Application.PluginSupport;
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly : Guid("5f1e5e77-2329-46f6-a95d-58018b440dcb")]
+[assembly : Guid("97927FF9-8C9C-4DC5-A309-29C23F41DA47")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -63,6 +66,15 @@ using JetBrains.Application.PluginSupport;
 [assembly : AssemblyVersion("3.0.0.0")]
 [assembly : AssemblyFileVersion("3.0.0.0")]
 
-[assembly : PluginTitle("ReSharper PowerToys: Cyclomatic Complexity")]
-[assembly : PluginVendor("JetBrains s.r.o.")]
-[assembly : PluginDescription("Analyses cyclomatic complexity for a member and issues warnings.")]
+[assembly : PluginTitle("ReSharper Clean Code Plugin")]
+[assembly : PluginVendor("Hadi Hariri and Contributors")]
+
+[assembly:
+  RegisterConfigurableSeverity(
+        TooManyDependenciesHighlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Too Many Dependencies",
+        "Too many dependencies passed into constructor",
+        Severity.SUGGESTION,
+        false)]

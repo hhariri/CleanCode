@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace InjectionHappyDetector.resources {
+namespace CleanCode.Settings {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace InjectionHappyDetector.resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("InjectionHappyDetector.resources.Stringtable", typeof(Stringtable).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Settings.Stringtable", typeof(Stringtable).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,47 @@ namespace InjectionHappyDetector.resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This page allows you to configure the settings for the InjectionHappy Detector plug-in, which tries to determine if you are passing in too many dependecies in your consructors, often a sign of a design smell.
+        ///   Looks up a localized string similar to The options below help enforce certain practices that can be considered to leading to cleaner and more maintainable code..
         /// </summary>
-        internal static string Options_Banner {
+        internal static string Options_Header {
             get {
-                return ResourceManager.GetString("Options_Banner", resourceCulture);
+                return ResourceManager.GetString("Options_Header", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum number of parameters allowed in constructors.
+        ///   Looks up a localized string similar to Enable Maximum Dependencies Check.
         /// </summary>
-        internal static string Options_MaximumArgumentLabel {
+        internal static string Options_LabelMaximumDependenciesCheck {
             get {
-                return ResourceManager.GetString("Options_MaximumArgumentLabel", resourceCulture);
+                return ResourceManager.GetString("Options_LabelMaximumDependenciesCheck", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are too many interfaces being passed in to this construuctor. You might be violating SRP.
+        ///   Looks up a localized string similar to Set maximum dependencies to.
         /// </summary>
-        internal static string TooManyArgumentsWarning {
+        internal static string Options_LabelTooManyDependencies {
             get {
-                return ResourceManager.GetString("TooManyArgumentsWarning", resourceCulture);
+                return ResourceManager.GetString("Options_LabelTooManyDependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob).
+        /// </summary>
+        internal static string Options_SubHeader {
+            get {
+                return ResourceManager.GetString("Options_SubHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating SRP.
+        /// </summary>
+        internal static string Warning_TooManyDependencies {
+            get {
+                return ResourceManager.GetString("Warning_TooManyDependencies", resourceCulture);
             }
         }
     }

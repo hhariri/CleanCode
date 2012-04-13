@@ -1,4 +1,5 @@
-﻿#region License
+#region License
+
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -23,21 +24,21 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
-#endregion
-using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.ProjectModel;
-using JetBrains.ReSharper.Daemon;
 
-namespace InjectionHappyDetector
+#endregion
+
+using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Settings;
+
+namespace CleanCode.Settings
 {
-  [SolutionComponent]
-  public class InjectionHappyDetectorInvalidateOnMaximumArgumentsChange
-  {
-    public InjectionHappyDetectorInvalidateOnMaximumArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+    [SettingsKey(typeof (CodeInspectionSettings), "CleanCode")]
+    public class CleanCodeSettings
     {
-      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((InjectionHappyDetectorSettings s) => s.MaximumParameters);
-      settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
+        [SettingsEntry(3, "MaximumDependencies")]
+        public readonly int MaximumDependencies;
+
+        [SettingsEntry(true, "MaximumDependenciesEnabled")]
+        public readonly bool MaximumDependenciesEnabled;
     }
-  }
 }
