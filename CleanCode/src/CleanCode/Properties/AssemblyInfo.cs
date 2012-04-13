@@ -26,7 +26,10 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
+using CleanCode.TooManyDependencies;
 using JetBrains.Application.PluginSupport;
+using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Daemon.Asp.Highlightings;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -65,4 +68,13 @@ using JetBrains.Application.PluginSupport;
 
 [assembly : PluginTitle("ReSharper Clean Code Plugin")]
 [assembly : PluginVendor("Hadi Hariri and Contributors")]
-[assembly : PluginDescription("Helping in writing cleaner code")]
+
+[assembly:
+  RegisterConfigurableSeverity(
+        TooManyDependenciesHighlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Too Many Dependencies",
+        "Too many dependencies passed into constructor",
+        Severity.SUGGESTION,
+        false)]

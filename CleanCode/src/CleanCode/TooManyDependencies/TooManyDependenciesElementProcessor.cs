@@ -66,7 +66,7 @@ namespace CleanCode.TooManyDependencies
         if (interfaceCount > _maxParams)
         {
             string message = Stringtable.Warning_TooManyDependencies;
-            var warning = new TooManyDependenciesWarning(message);
+            var warning = new TooManyDependenciesHighlighting(message);
             _highlights.Add(new HighlightingInfo(constructorDeclaration.GetNameDocumentRange(), warning));
         }
     }

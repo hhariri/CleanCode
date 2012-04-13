@@ -26,6 +26,7 @@
 #endregion
 
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.TooManyDependencies
 {
@@ -33,13 +34,16 @@ namespace CleanCode.TooManyDependencies
   /// The highlighting that warns about high complexity
   /// </summary>
   /// 
-  [StaticSeverityHighlighting(Severity.WARNING, "CSharpInfo")]
   // TODO: Change to ConfigurableSeverityHighlighting
-  public class TooManyDependenciesWarning : IHighlighting
+    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
+
+  [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+  public class TooManyDependenciesHighlighting : IHighlighting
   {
+    internal const string SeverityID = "TooManyDependencies"; 
     private readonly string _tooltip;
 
-    public TooManyDependenciesWarning(string toolTip)
+    public TooManyDependenciesHighlighting(string toolTip)
     {
       _tooltip = toolTip;
     }

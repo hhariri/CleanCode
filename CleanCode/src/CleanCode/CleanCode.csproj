@@ -45,7 +45,7 @@
     <Compile Include="TooManyDependencies\TooManyDependenciesDaemonStageProcess.cs" />
     <Compile Include="TooManyDependencies\TooManyDependenciesElementProcessor.cs" />
     <Compile Include="TooManyDependencies\TooManyDependenciesInvalidateOnMaximumDependenciesChange.cs" />
-    <Compile Include="TooManyDependencies\TooManyDependenciesWarning.cs" />
+    <Compile Include="TooManyDependencies\TooManyDependenciesHighlighting.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Settings\Stringtable.Designer.cs">
       <AutoGen>True</AutoGen>
