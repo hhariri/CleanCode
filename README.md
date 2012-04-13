@@ -1,8 +1,4 @@
-# ReSharper Plugins
-
-A collection of plugins for ReSharper
-
-## Current Plugins
+# Clean Code ReSharper Plugin Project
 
 ### CleanCode
 
@@ -12,7 +8,11 @@ Currently includes:
 
 * InjectionHappyDetector - Detects when a constructor has more than X interfaces passed in. X is configurable via options dialog
 
+### Upcoming features
 
+All features are [logged here](http://youtrack.codebetter.com/issues/cc)
+
+Please use the previous issue tracker for logging bugs, feature requests, etc.
 ## Installing
 
 Copy the DLL for each Plugin to the ReSharper\bin\Plugins folder
