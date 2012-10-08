@@ -40,7 +40,7 @@ namespace CleanCode.Settings
     /// <summary>
     /// Implements an options page that holds a set of setting editors stacked in lines from top to bottom.
     /// </summary>
-    [OptionsPage(PID, "Clean Code", "CleanCode.Settings.CleanCode.png",
+    [OptionsPage(PID, "Clean Code", typeof(SettingsThemedIcons.CleanCode),
         ParentId = CodeInspectionPage.PID)]
     public class CleanCodeOptionsPage : AStackPanelOptionsPage
     {
