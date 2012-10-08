@@ -50,7 +50,7 @@ namespace CleanCode.TooManyDependencies
       // Getting PSI (AST) for the file being highlighted
       PsiManager manager = _daemonProcess.Solution.GetPsiServices().PsiManager;
 
-      var file = manager.GetPsiFile(_daemonProcess.SourceFile, CSharpLanguage.Instance) as ICSharpFile;
+      var file = _daemonProcess.SourceFile.GetNonInjectedPsiFile<CSharpLanguage>() as ICSharpFile;
       if (file == null)
         return;
 
