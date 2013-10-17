@@ -27,13 +27,11 @@
 
 #endregion
 
-using System;
-using System.Collections.Generic;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Psi;
-using JetBrains.Util;
+using JetBrains.ReSharper.Daemon.CSharp.Stages;
+using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace CleanCode.TooManyDependencies
 {
@@ -42,34 +40,17 @@ namespace CleanCode.TooManyDependencies
     /// because it's marked with the attribute.
     /// </summary>
     [DaemonStage]
-    public class TooManyDependenciesDaemonStage : IDaemonStage
+    public class TooManyDependenciesDaemonStage : CSharpDaemonStageBase
     {
-
-        /// <summary>
-        /// This method provides a <see cref="IDaemonStageProcess"/> instance which is assigned to highlighting a single document
-        /// </summary>
-        public IEnumerable<IDaemonStageProcess> CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
-                                                              DaemonProcessKind kind)
+        protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
+            DaemonProcessKind processKind, ICSharpFile file)
         {
-            if (process == null)
-                throw new ArgumentNullException("process");
-
             if (settings.GetValue((CleanCodeSettings s) => s.MaximumDependenciesEnabled))
             {
-                return new[]
-                    {
-                        new TooManyDependenciesDaemonStageProcess(process,
-                                                                  settings.GetValue(
-                                                                      (CleanCodeSettings s) => s.MaximumDependencies))
-                    };
+                var maximumDependencies = settings.GetValue((CleanCodeSettings s) => s.MaximumDependencies);
+                return new TooManyDependenciesDaemonStageProcess(process, file, maximumDependencies);
             }
-            return EmptyList<IDaemonStageProcess>.InstanceList;
-        }
-
-        public ErrorStripeRequest NeedsErrorStripe(IPsiSourceFile sourceFile, IContextBoundSettingsStore settings)
-        {
-            // We want to add markers to the right-side stripe as well as contribute to document errors
-            return ErrorStripeRequest.STRIPE_AND_ERRORS;
+            return null;
         }
     }
 }

@@ -31,7 +31,7 @@ using System.Windows.Forms;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Features.Environment.Options.Inspections;
-using JetBrains.UI.CommonControls.Fonts;
+using JetBrains.UI.Application;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.Helpers;
 
@@ -40,20 +40,21 @@ namespace CleanCode.Settings
     /// <summary>
     /// Implements an options page that holds a set of setting editors stacked in lines from top to bottom.
     /// </summary>
-    [OptionsPage(PID, "Clean Code", typeof(SettingsThemedIcons.CleanCode),
+    [OptionsPage(PageId, "Clean Code", typeof(SettingsThemedIcons.CleanCode),
         ParentId = CodeInspectionPage.PID)]
     public class CleanCodeOptionsPage : AStackPanelOptionsPage
     {
-        const string PID = "CleanCode";
+        const string PageId = "CleanCode";
+
         readonly Lifetime _lifetime;
-        readonly OptionsSettingsSmartContext _settings;
+      readonly OptionsSettingsSmartContext _settings;
 
         /// <summary>
         /// Creates new instance of CleanCodeOptionsPage
         /// </summary>
-        public CleanCodeOptionsPage(Lifetime lifetime, FontsManager fontsManager,
-                                                OptionsSettingsSmartContext settings)
-            : base(lifetime, fontsManager, PID)
+        public CleanCodeOptionsPage(Lifetime lifetime, IUIApplication environment,
+                                    OptionsSettingsSmartContext settings)
+            : base(lifetime, environment, PageId)
         {
             _lifetime = lifetime;
             _settings = settings;
@@ -74,7 +75,7 @@ namespace CleanCode.Settings
             Controls.Add(JetBrains.UI.Options.Helpers.Controls.Separator.DefaultHeight);
 
             // A horizontal stack of a text label and a spin-edit
-            Controls.Add(stack = new Controls.HorzStackPanel());
+            Controls.Add(stack = new Controls.HorzStackPanel(Environment));
             stack.Controls.Add(new Controls.Label(Stringtable.Options_LabelMaximumDependenciesCheck));
             var maximumDependenciesCheckbox = new Controls.CheckBox();
             stack.Controls.Add(maximumDependenciesCheckbox);
@@ -93,9 +94,6 @@ namespace CleanCode.Settings
             maximumDependenciesCheckbox.CheckedChanged +=
                 (sender, args) =>
                 { maximumDependencies.Enabled = maximumDependenciesCheckbox.CheckState == CheckState.Checked; };
-
-
-
         }
     }
 }

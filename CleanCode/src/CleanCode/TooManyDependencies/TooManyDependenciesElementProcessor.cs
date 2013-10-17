@@ -61,7 +61,7 @@ namespace CleanCode.TooManyDependencies
     {
         var constructorParams = constructorDeclaration.ParameterDeclarations;
 
-        var interfaceCount = constructorParams.Count(regularParameterDeclaration => TypesUtil.IsInterfaceType(regularParameterDeclaration.DeclaredElement.Type));
+        var interfaceCount = constructorParams.Count(regularParameterDeclaration => regularParameterDeclaration.DeclaredElement.Type.IsInterfaceType());
 
         if (interfaceCount > _maxParams)
         {
