@@ -29,16 +29,15 @@ using System.Runtime.InteropServices;
 using CleanCode.TooManyDependencies;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Daemon.Asp.Highlightings;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
 [assembly : AssemblyTitle("ReSharper Clean Code Plugin")]
-[assembly : AssemblyDescription("")]
-[assembly : AssemblyCompany("Hadi Hariri and Contributors")]
+[assembly : AssemblyCompany("Hadi Hariri")]
 [assembly : AssemblyProduct("ReSharper Clean Code Plugin")]
+[assembly : AssemblyDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
 [assembly : AssemblyCopyright("Copyright \u00A9 2012 Hadi Hariri and Contributors")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
@@ -63,10 +62,10 @@ using JetBrains.ReSharper.Daemon.Asp.Highlightings;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly : AssemblyVersion("3.0.0.0")]
-[assembly : AssemblyFileVersion("3.0.0.0")]
+[assembly : AssemblyVersion("3.0.0.*")]
 
-[assembly : PluginTitle("ReSharper Clean Code Plugin")]
+[assembly : PluginTitle("Clean Code")]
+[assembly : PluginDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
 [assembly : PluginVendor("Hadi Hariri and Contributors")]
 
 [assembly:
