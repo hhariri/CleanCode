@@ -28,35 +28,29 @@
 using System;
 using JetBrains.Application.Progress;
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace CleanCode.TooManyDependencies
 {
-  public class TooManyDependenciesDaemonStageProcess : IDaemonStageProcess
+  public class TooManyDependenciesDaemonStageProcess : CSharpDaemonStageProcessBase
   {
     private readonly IDaemonProcess _daemonProcess;
     private readonly int _maxParams;
 
-    public TooManyDependenciesDaemonStageProcess(IDaemonProcess daemonProcess, int maxParams)
+    public TooManyDependenciesDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
+        : base(daemonProcess, file)
     {
       _daemonProcess = daemonProcess;
       _maxParams = maxParams;
     }
 
-    public void Execute(Action<DaemonStageResult> commiter)
+    public override void Execute(Action<DaemonStageResult> commiter)
     {
-      // Getting PSI (AST) for the file being highlighted
-      PsiManager manager = _daemonProcess.Solution.GetPsiServices().PsiManager;
-
-      var file = _daemonProcess.SourceFile.GetNonInjectedPsiFile<CSharpLanguage>() as ICSharpFile;
-      if (file == null)
-        return;
-
       // Running visitor against the PSI
       var elementProcessor = new TooManyDependenciesElementProcessor(_daemonProcess, _maxParams);
-      file.ProcessDescendants(elementProcessor);
+      File.ProcessDescendants(elementProcessor);
 
       // Checking if the daemon is interrupted by user activity
       if (_daemonProcess.InterruptFlag)
@@ -64,11 +58,6 @@ namespace CleanCode.TooManyDependencies
 
       // Commit the result into document
       commiter(new DaemonStageResult(elementProcessor.Highlightings));
-    }
-
-    public IDaemonProcess DaemonProcess
-    {
-      get { return _daemonProcess; }
     }
   }
 }
