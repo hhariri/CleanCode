@@ -35,6 +35,12 @@ using JetBrains.UI.Application;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.Helpers;
 
+#if RESHARPER_80
+using CleanCode.Resources.Icons80;
+#elif RESHARPER_81
+using CleanCode.Resources.Icons81;
+#endif
+
 namespace CleanCode.Settings
 {
     /// <summary>
