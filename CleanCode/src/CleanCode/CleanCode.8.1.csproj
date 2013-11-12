@@ -1,18 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <ReSharperSdkTargets Condition=" '$(ReSharperSdkTargets)' == '' ">$(MSBuildExtensionsPath)\JetBrains\ReSharper.SDK\v8.0</ReSharperSdkTargets>
-  </PropertyGroup>
+  <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{4FF42D42-187D-4332-8154-49506B1DB698}</ProjectGuid>
+    <ProjectGuid>{5F96119C-2646-4298-AD40-30209E7E7BB2}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CleanCode</RootNamespace>
-    <AssemblyName>CleanCode.8.0</AssemblyName>
+    <AssemblyName>CleanCode.8.1</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -22,7 +20,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT,RESHARPER_80</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT,RESHARPER_81</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -30,9 +28,15 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;RESHARPER_80</DefineConstants>
+    <DefineConstants>TRACE;RESHARPER_81</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <StartAction>Program</StartAction>
+    <StartProgram>$(VsInstallDir)devenv.exe</StartProgram>
+    <StartArguments>/ReSharper.Plugin $(AssemblyName).dll /ReSharper.Internal</StartArguments>
+    <StartWorkingDirectory>$(MSBuildProjectDirectory)\$(OutputPath)</StartWorkingDirectory>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
@@ -44,7 +48,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\Icons-8.0\Settings\ThemedIcons.Settings.Generated.cs" />
+    <Compile Include="Resources\Icons-8.1\Settings\ThemedIcons.Settings.Generated.cs" />
     <Compile Include="TooManyDependencies\TooManyDependenciesDaemonStage.cs" />
     <Compile Include="TooManyDependencies\TooManyDependenciesDaemonStageProcess.cs" />
     <Compile Include="TooManyDependencies\TooManyDependenciesElementProcessor.cs" />
@@ -69,13 +73,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="CleanCode.nuspec" />
+    <None Include="CleanCode.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ThemedIconPng Include="Resources\Icons-8.0\Settings\CleanCode.png" />
+    <ThemedIconPng Include="Resources\Icons-8.1\Settings\CleanCode.png" />
   </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <Import Project="$(ReSharperSdkTargets)\Plugin.Targets" />
-  <Import Project="$(ReSharperSdkTools)\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets')" />
+  <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets')" />
 </Project>
