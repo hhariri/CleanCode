@@ -28,6 +28,7 @@
 #endregion
 
 using System.Windows.Forms;
+using CleanCode.Resources.Icons81;
 using JetBrains.Application.Settings;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Features.Environment.Options.Inspections;
@@ -38,7 +39,7 @@ using JetBrains.UI.Options.Helpers;
 #if RESHARPER_80
 using CleanCode.Resources.Icons80;
 #elif RESHARPER_81
-using CleanCode.Resources.Icons81;
+
 #endif
 
 namespace CleanCode.Settings
@@ -53,7 +54,7 @@ namespace CleanCode.Settings
         const string PageId = "CleanCode";
 
         readonly Lifetime _lifetime;
-      readonly OptionsSettingsSmartContext _settings;
+        readonly OptionsSettingsSmartContext _settings;
 
         /// <summary>
         /// Creates new instance of CleanCodeOptionsPage
@@ -69,37 +70,72 @@ namespace CleanCode.Settings
 
         void InitControls()
         {
-            Controls.Spin maximumDependencies; // This variable may be reused if there's more than one spin on the page
-            Controls.HorzStackPanel stack;
-
             // The upper cue banner, stacked in the first line of our page, docked to full width with word wrapping, as needed
-            Controls.Add(new Controls.Label(Stringtable.Options_Header));
+            Controls.Add(new Controls.Label(StringTable.Options_Header));
 
-            Controls.Add(new Controls.Label(Stringtable.Options_SubHeader));
+            Controls.Add(new Controls.Label(StringTable.Options_SubHeader));
 
             // Some spacing
             Controls.Add(JetBrains.UI.Options.Helpers.Controls.Separator.DefaultHeight);
 
+            var stack = new Controls.HorzStackPanel(Environment);
+            Controls.Add(stack);
+            AddMaximumContructorDependenciesSection(stack);
+            AddMaximumMethodArgsSection(stack);
+        }
+
+        private void AddMaximumMethodArgsSection(Control stack)
+        {
             // A horizontal stack of a text label and a spin-edit
-            Controls.Add(stack = new Controls.HorzStackPanel(Environment));
-            stack.Controls.Add(new Controls.Label(Stringtable.Options_LabelMaximumDependenciesCheck));
+            Controls.Spin maximumArgumentsSpin;
+            stack.Controls.Add(new Controls.Label(StringTable.Options_LabelMaximumMethodArgumentsCheck));
+            var maximumMethodArgumentsCheckBox = new Controls.CheckBox();
+            stack.Controls.Add(maximumMethodArgumentsCheckBox);
+            stack.Controls.Add(new Controls.Label(StringTable.Options_LabelTooManyMethodArguments));
+            // The first column of the stack
+            stack.Controls.Add(maximumArgumentsSpin = new Controls.Spin());
+
+            // Set up the spin we've just added
+            maximumArgumentsSpin.Maximum = new decimal(new[] { 20, 0, 0, 0 });
+            maximumArgumentsSpin.Minimum = new decimal(new[] { 1, 0, 0, 0 });
+            maximumArgumentsSpin.Value = new decimal(new[] { 1, 0, 0, 0 });
+
+            _settings.SetBinding(_lifetime, (CleanCodeSettings s) => s.MaximumMethodArguments,
+                maximumArgumentsSpin.IntegerValue);
+            _settings.SetBinding(_lifetime, (CleanCodeSettings s) => s.MaximumMethodArgumentsEnabled,
+                maximumMethodArgumentsCheckBox.Checked);
+
+            maximumMethodArgumentsCheckBox.CheckedChanged +=
+                (sender, args) =>
+                {
+                    maximumArgumentsSpin.Enabled = maximumMethodArgumentsCheckBox.CheckState == CheckState.Checked;
+                };
+        }
+
+        private void AddMaximumContructorDependenciesSection(Control stack)
+        {
+            Controls.Spin maximumDependencies;
+            stack.Controls.Add(new Controls.Label(StringTable.Options_LabelMaximumDependenciesCheck));
             var maximumDependenciesCheckbox = new Controls.CheckBox();
             stack.Controls.Add(maximumDependenciesCheckbox);
-            stack.Controls.Add(new Controls.Label(Stringtable.Options_LabelTooManyDependencies)); // The first column of the stack
+            stack.Controls.Add(new Controls.Label(StringTable.Options_LabelTooManyDependencies));
+            // The first column of the stack
             stack.Controls.Add(maximumDependencies = new Controls.Spin());
 
             // Set up the spin we've just added
-            maximumDependencies.Maximum = new decimal(new[] {20, 0, 0, 0});
-            maximumDependencies.Minimum = new decimal(new[] {1, 0, 0, 0});
-            maximumDependencies.Value = new decimal(new[] {1, 0, 0, 0});
+            maximumDependencies.Maximum = new decimal(new[] { 20, 0, 0, 0 });
+            maximumDependencies.Minimum = new decimal(new[] { 1, 0, 0, 0 });
+            maximumDependencies.Value = new decimal(new[] { 1, 0, 0, 0 });
 
             _settings.SetBinding(_lifetime, (CleanCodeSettings s) => s.MaximumDependencies,
-                                  maximumDependencies.IntegerValue);
+                maximumDependencies.IntegerValue);
             _settings.SetBinding(_lifetime, (CleanCodeSettings s) => s.MaximumDependenciesEnabled,
-                                 maximumDependenciesCheckbox.Checked);
+                maximumDependenciesCheckbox.Checked);
             maximumDependenciesCheckbox.CheckedChanged +=
                 (sender, args) =>
-                { maximumDependencies.Enabled = maximumDependenciesCheckbox.CheckState == CheckState.Checked; };
+                {
+                    maximumDependencies.Enabled = maximumDependenciesCheckbox.CheckState == CheckState.Checked;
+                };
         }
     }
 }

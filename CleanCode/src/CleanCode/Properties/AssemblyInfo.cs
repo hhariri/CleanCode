@@ -27,6 +27,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using CleanCode.TooManyDependencies;
+using CleanCode.TooManyMethodArguments;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
 
@@ -75,5 +76,15 @@ using JetBrains.ReSharper.Daemon;
         HighlightingGroupIds.CodeSmell,
         "Too Many Dependencies",
         "Too many dependencies passed into constructor",
+        Severity.SUGGESTION,
+        false)]
+
+[assembly:
+  RegisterConfigurableSeverity(
+        TooManyMethodArgumentsHighlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Too Many Arguments",
+        "Too many arguments passed to a method",
         Severity.SUGGESTION,
         false)]

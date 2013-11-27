@@ -40,5 +40,13 @@ namespace CleanCode.Settings
 
         [SettingsEntry(true, "MaximumDependenciesEnabled")]
         public readonly bool MaximumDependenciesEnabled;
+
+
+
+        [SettingsEntry(3, "MaximumMethodArguments")]
+        public readonly int MaximumMethodArguments;
+
+        [SettingsEntry(true, "MaximumDependenciesEnabled")]
+        public readonly bool MaximumMethodArgumentsEnabled;
     }
 }
