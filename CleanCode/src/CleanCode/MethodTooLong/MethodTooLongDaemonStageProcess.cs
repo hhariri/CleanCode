@@ -32,32 +32,32 @@ using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.TooManyDependencies
+namespace CleanCode.MethodTooLong
 {
-    public class TooManyDependenciesDaemonStageProcess : CSharpDaemonStageProcessBase
+  public class MethodTooLongDaemonStageProcess : CSharpDaemonStageProcessBase
+  {
+    private readonly IDaemonProcess _daemonProcess;
+    private readonly int _maxParams;
+
+    public MethodTooLongDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
+        : base(daemonProcess, file)
     {
-        private readonly IDaemonProcess _daemonProcess;
-        private readonly int _maxParams;
-
-        public TooManyDependenciesDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
-            : base(daemonProcess, file)
-        {
-            _daemonProcess = daemonProcess;
-            _maxParams = maxParams;
-        }
-
-        public override void Execute(Action<DaemonStageResult> commiter)
-        {
-            // Running visitor against the PSI
-            var elementProcessor = new TooManyDependenciesElementProcessor(_daemonProcess, _maxParams);
-            File.ProcessDescendants(elementProcessor);
-
-            // Checking if the daemon is interrupted by user activity
-            if (_daemonProcess.InterruptFlag)
-                throw new ProcessCancelledException();
-
-            // Commit the result into document
-            commiter(new DaemonStageResult(elementProcessor.Highlightings));
-        }
+      _daemonProcess = daemonProcess;
+      _maxParams = maxParams;
     }
+
+    public override void Execute(Action<DaemonStageResult> commiter)
+    {
+      // Running visitor against the PSI
+      var elementProcessor = new MethodTooLongElementProcessor(_daemonProcess, _maxParams);
+      File.ProcessDescendants(elementProcessor);
+
+      // Checking if the daemon is interrupted by user activity
+      if (_daemonProcess.InterruptFlag)
+        throw new ProcessCancelledException();
+
+      // Commit the result into document
+      commiter(new DaemonStageResult(elementProcessor.Highlightings));
+    }
+  }
 }

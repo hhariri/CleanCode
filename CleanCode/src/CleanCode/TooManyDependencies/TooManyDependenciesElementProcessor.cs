@@ -27,6 +27,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi;
@@ -36,63 +37,56 @@ using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode.TooManyDependencies
 {
-  public class TooManyDependenciesElementProcessor : IRecursiveElementProcessor
-  {
-    private readonly List<HighlightingInfo> _highlights = new List<HighlightingInfo>();
-
-    private readonly IDaemonProcess _daemonProcess;
-    private readonly int _maxParams;
-
-    public TooManyDependenciesElementProcessor(IDaemonProcess daemonProcess, int maxParams)
+    public class TooManyDependenciesElementProcessor : IRecursiveElementProcessor
     {
-      _daemonProcess = daemonProcess;
-      _maxParams = maxParams;
-    }
+        private readonly IDaemonProcess daemonProcess;
+        private int MaxParams { get; set; }
 
-    public List<HighlightingInfo> Highlightings
-    {
-      get
-      {
-        return _highlights;
-      }
-    }
-
-    private void ProcessFunctionDeclaration(IConstructorDeclaration constructorDeclaration)
-    {
-        var constructorParams = constructorDeclaration.ParameterDeclarations;
-
-        var interfaceCount = constructorParams.Count(regularParameterDeclaration => regularParameterDeclaration.DeclaredElement.Type.IsInterfaceType());
-
-        if (interfaceCount > _maxParams)
+        public TooManyDependenciesElementProcessor(IDaemonProcess daemonProcess, int maxParams)
         {
-            string message = StringTable.Warning_TooManyDependencies;
-            var warning = new TooManyDependenciesHighlighting(message);
-            _highlights.Add(new HighlightingInfo(constructorDeclaration.GetNameDocumentRange(), warning));
+            Highlightings = new List<HighlightingInfo>();
+            this.daemonProcess = daemonProcess;
+            this.MaxParams = maxParams;
+        }
+
+        public List<HighlightingInfo> Highlightings { get; set; }
+
+        private void ProcessFunctionDeclaration(IConstructorDeclaration constructorDeclaration)
+        {
+            var constructorParams = constructorDeclaration.ParameterDeclarations;
+
+            var interfaceCount = constructorParams.Count(regularParameterDeclaration => regularParameterDeclaration.DeclaredElement.Type.IsInterfaceType());
+
+            if (interfaceCount > MaxParams)
+            {
+                var message = StringTable.Warning_TooManyDependencies;
+                var warning = new TooManyDependenciesHighlighting(message);
+                Highlightings.Add(new HighlightingInfo(constructorDeclaration.GetNameDocumentRange(), warning));
+            }
+        }
+
+        public bool InteriorShouldBeProcessed(ITreeNode element)
+        {
+            return true;
+        }
+
+        public void ProcessBeforeInterior(ITreeNode element)
+        {
+        }
+
+        public void ProcessAfterInterior(ITreeNode element)
+        {
+            var constructorDeclaration = element as IConstructorDeclaration;
+            if (constructorDeclaration != null)
+                ProcessFunctionDeclaration(constructorDeclaration);
+        }
+
+        public bool ProcessingIsFinished
+        {
+            get
+            {
+                return daemonProcess.InterruptFlag;
+            }
         }
     }
-
-    public bool InteriorShouldBeProcessed(ITreeNode element)
-    {
-      return true;
-    }
-
-    public void ProcessBeforeInterior(ITreeNode element)
-    {
-    }
-
-    public void ProcessAfterInterior(ITreeNode element)
-    {
-      var constructorDeclaration = element as IConstructorDeclaration;
-      if (constructorDeclaration != null)
-        ProcessFunctionDeclaration(constructorDeclaration);
-    }
-
-    public bool ProcessingIsFinished
-    {
-      get
-      {
-        return _daemonProcess.InterruptFlag;
-      }
-    }
-  }
 }

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CleanCode.Settings {
+namespace CleanCode.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace CleanCode.Settings {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Settings.StringTable", typeof(StringTable).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Resources.StringTable", typeof(StringTable).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -111,6 +111,15 @@ namespace CleanCode.Settings {
         internal static string Options_SubHeader {
             get {
                 return ResourceManager.GetString("Options_SubHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This method is too long ({0} lines)..
+        /// </summary>
+        internal static string Warning_MethodTooLong {
+            get {
+                return ResourceManager.GetString("Warning_MethodTooLong", resourceCulture);
             }
         }
         

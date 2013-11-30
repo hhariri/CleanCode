@@ -26,7 +26,7 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
-using CleanCode.TooManyDependencies;
+using CleanCode.MethodTooLong;
 using CleanCode.TooManyMethodArguments;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
@@ -71,7 +71,7 @@ using JetBrains.ReSharper.Daemon;
 
 [assembly:
   RegisterConfigurableSeverity(
-        TooManyDependenciesHighlighting.SeverityID,
+        MethodTooLongHighlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
         "Too Many Dependencies",

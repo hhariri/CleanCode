@@ -1,4 +1,5 @@
 #region License
+
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -23,41 +24,29 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
+
 #endregion
 
-using System;
-using JetBrains.Application.Progress;
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.TooManyDependencies
-{
-    public class TooManyDependenciesDaemonStageProcess : CSharpDaemonStageProcessBase
+namespace CleanCode.MethodTooLong
+{ 
+    [DaemonStage]
+    public class MethodTooLongDaemonStage : CSharpDaemonStageBase
     {
-        private readonly IDaemonProcess _daemonProcess;
-        private readonly int _maxParams;
-
-        public TooManyDependenciesDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
-            : base(daemonProcess, file)
+        protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
+            DaemonProcessKind processKind, ICSharpFile file)
         {
-            _daemonProcess = daemonProcess;
-            _maxParams = maxParams;
-        }
-
-        public override void Execute(Action<DaemonStageResult> commiter)
-        {
-            // Running visitor against the PSI
-            var elementProcessor = new TooManyDependenciesElementProcessor(_daemonProcess, _maxParams);
-            File.ProcessDescendants(elementProcessor);
-
-            // Checking if the daemon is interrupted by user activity
-            if (_daemonProcess.InterruptFlag)
-                throw new ProcessCancelledException();
-
-            // Commit the result into document
-            commiter(new DaemonStageResult(elementProcessor.Highlightings));
+            if (settings.GetValue((CleanCodeSettings s) => s.MaximumDependenciesEnabled))
+            {
+                var maximumDependencies = settings.GetValue((CleanCodeSettings s) => s.MaximumDependencies);
+                return new MethodTooLongDaemonStageProcess(process, file, maximumDependencies);
+            }
+            return null;
         }
     }
 }

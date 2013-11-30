@@ -141,4 +141,7 @@
   <data name="Options_LabelTooManyMethodArguments" xml:space="preserve">
     <value>Set maximum arguments to</value>
   </data>
+  <data name="Warning_MethodTooLong" xml:space="preserve">
+    <value>This method is too long ({0} lines).</value>
+  </data>
 </root>
