@@ -25,21 +25,39 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using CleanCode.Settings;
-using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.ProjectModel;
+using System;
+using JetBrains.Application.Progress;
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Daemon.CSharp.Stages;
+using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.Features.TooManyDependencies
+namespace CleanCode.Features.TooManyMethodArguments
 {
-  [SolutionComponent]
-  public class TooManyDependenciesInvalidateOnMaximumDependenciesChange
-  {
-    public TooManyDependenciesInvalidateOnMaximumDependenciesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+    public class DaemonStageProcess : CSharpDaemonStageProcessBase
     {
-      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumDependencies);
-      settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
+        private readonly IDaemonProcess daemonProcess;
+        private readonly int maxParams;
+
+        public DaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
+            : base(daemonProcess, file)
+        {
+            this.daemonProcess = daemonProcess;
+            this.maxParams = maxParams;
+        }
+
+        public override void Execute(Action<DaemonStageResult> commiter)
+        {
+            // Running visitor against the PSI
+            var elementProcessor = new ElementProcessor(daemonProcess, maxParams);
+            File.ProcessDescendants(elementProcessor);
+
+            // Checking if the daemon is interrupted by user activity
+            if (daemonProcess.InterruptFlag)
+                throw new ProcessCancelledException();
+
+            // Commit the result into document
+            commiter(new DaemonStageResult(elementProcessor.Highlightings));
+        }
     }
-  }
 }

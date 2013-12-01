@@ -25,39 +25,47 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
-using JetBrains.Application.Progress;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Features.TooManyDependencies
+namespace CleanCode.Features.MethodTooLong
 {
-    public class TooManyDependenciesDaemonStageProcess : CSharpDaemonStageProcessBase
-    {
-        private readonly IDaemonProcess _daemonProcess;
-        private readonly int _maxParams;
+    /// <summary>
+    /// The highlighting that warns about high complexity
+    /// </summary>
+    /// 
+    // TODO: Change to ConfigurableSeverityHighlighting
+    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
 
-        public TooManyDependenciesDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
-            : base(daemonProcess, file)
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    public class Highlighting : IHighlighting
+    {
+        internal const string SeverityID = "MethodTooLong";
+        private readonly string tooltip;
+
+        public Highlighting(string toolTip)
         {
-            _daemonProcess = daemonProcess;
-            _maxParams = maxParams;
+            tooltip = toolTip;
         }
 
-        public override void Execute(Action<DaemonStageResult> commiter)
+        public string ToolTip
         {
-            // Running visitor against the PSI
-            var elementProcessor = new TooManyDependenciesElementProcessor(_daemonProcess, _maxParams);
-            File.ProcessDescendants(elementProcessor);
+            get { return tooltip; }
+        }
 
-            // Checking if the daemon is interrupted by user activity
-            if (_daemonProcess.InterruptFlag)
-                throw new ProcessCancelledException();
+        public string ErrorStripeToolTip
+        {
+            get { return tooltip; }
+        }
 
-            // Commit the result into document
-            commiter(new DaemonStageResult(elementProcessor.Highlightings));
+        public int NavigationOffsetPatch
+        {
+            get { return 0; }
+        }
+
+        public bool IsValid()
+        {
+            return true;
         }
     }
 }

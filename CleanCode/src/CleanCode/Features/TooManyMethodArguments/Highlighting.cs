@@ -30,43 +30,43 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.Features.TooManyMethodArguments
 {
-  /// <summary>
-  /// The highlighting that warns about high complexity
-  /// </summary>
-  /// 
-  
+    /// <summary>
+    /// The highlighting that warns about high complexity
+    /// </summary>
+    /// 
+
     // TODO: Change to ConfigurableSeverityHighlighting
     //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
 
-  [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-  public class TooManyMethodArgumentsHighlighting : IHighlighting
-  {
-    internal const string SeverityID = "TooManyArguments"; 
-    private readonly string _tooltip;
-
-    public TooManyMethodArgumentsHighlighting(string toolTip)
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    public class Highlighting : IHighlighting
     {
-      _tooltip = toolTip;
-    }
+        internal const string SeverityID = "TooManyArguments";
+        private readonly string tooltip;
 
-    public string ToolTip
-    {
-      get { return _tooltip; }
-    }
+        public Highlighting(string toolTip)
+        {
+            tooltip = toolTip;
+        }
 
-    public string ErrorStripeToolTip
-    {
-      get { return _tooltip; }
-    }
+        public string ToolTip
+        {
+            get { return tooltip; }
+        }
 
-    public int NavigationOffsetPatch
-    {
-      get { return 0; }
-    }
+        public string ErrorStripeToolTip
+        {
+            get { return tooltip; }
+        }
 
-    public bool IsValid()
-    {
-      return true;
+        public int NavigationOffsetPatch
+        {
+            get { return 0; }
+        }
+
+        public bool IsValid()
+        {
+            return true;
+        }
     }
-  }
 }

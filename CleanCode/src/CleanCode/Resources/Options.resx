@@ -117,13 +117,29 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Warning_TooManyDependencies" xml:space="preserve">
-    <value>There are too many interfaces being passed in to this constructor. You might be violating SRP.</value>
+  <data name="Options_Header" xml:space="preserve">
+    <value>The options below help enforce certain practices that can be considered to leading to cleaner and more maintainable code.</value>
   </data>
-  <data name="Warning_TooManyMethodArguments" xml:space="preserve">
-    <value>This method requires too many arguments.</value>
+  <data name="MaximumDependenciesCheck" xml:space="preserve">
+    <value>Maximum Dependencies Check</value>
   </data>
-  <data name="Warning_MethodTooLong" xml:space="preserve">
-    <value>This method contains too many statements.</value>
+  <data name="MaximumMethodArgumentsCheck" xml:space="preserve">
+    <value>Maximum Method Arguments Check</value>
+  </data>
+  <data name="MethodTooLongCheck" xml:space="preserve">
+    <value>Maximum Statements Per Method Check
+</value>
+  </data>
+  <data name="TooLongLinesPerMethod" xml:space="preserve">
+    <value>Maximum statements per method</value>
+  </data>
+  <data name="TooManyDependencies" xml:space="preserve">
+    <value>Set maximum dependencies to</value>
+  </data>
+  <data name="TooManyMethodArguments" xml:space="preserve">
+    <value>Set maximum arguments to</value>
+  </data>
+  <data name="Options_SubHeader" xml:space="preserve">
+    <value>Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)</value>
   </data>
 </root>

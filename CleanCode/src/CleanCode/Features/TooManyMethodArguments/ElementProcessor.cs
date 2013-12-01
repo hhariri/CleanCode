@@ -32,35 +32,41 @@ using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.ReSharper.Psi.Util;
 
-namespace CleanCode.Features.TooManyDependencies
+namespace CleanCode.Features.TooManyMethodArguments
 {
-    public class TooManyDependenciesElementProcessor : IRecursiveElementProcessor
+    public class ElementProcessor : IRecursiveElementProcessor
     {
-        private readonly IDaemonProcess daemonProcess;
-        private int MaxParams { get; set; }
+        private readonly List<HighlightingInfo> highlights = new List<HighlightingInfo>();
 
-        public TooManyDependenciesElementProcessor(IDaemonProcess daemonProcess, int maxParams)
+        private readonly IDaemonProcess daemonProcess;
+        private readonly int maxParams;
+
+        public ElementProcessor(IDaemonProcess daemonProcess, int maxParams)
         {
-            Highlightings = new List<HighlightingInfo>();
             this.daemonProcess = daemonProcess;
-            this.MaxParams = maxParams;
+            this.maxParams = maxParams;
         }
 
-        public List<HighlightingInfo> Highlightings { get; set; }
-
-        private void ProcessFunctionDeclaration(IConstructorDeclaration constructorDeclaration)
+        public List<HighlightingInfo> Highlightings
         {
-            var constructorParams = constructorDeclaration.ParameterDeclarations;
-
-            var interfaceCount = constructorParams.Count(regularParameterDeclaration => regularParameterDeclaration.DeclaredElement.Type.IsInterfaceType());
-
-            if (interfaceCount > MaxParams)
+            get
             {
-                var message = Common.Warning_TooManyDependencies;
-                var warning = new TooManyDependenciesHighlighting(message);
-                Highlightings.Add(new HighlightingInfo(constructorDeclaration.GetNameDocumentRange(), warning));
+                return highlights;
+            }
+        }
+
+        private void ProcessFunctionDeclaration(IMethodDeclaration methodDeclaration)
+        {
+            var constructorParams = methodDeclaration.ParameterDeclarations;
+
+            var paramCount = constructorParams.Count();
+
+           if (paramCount > maxParams)
+            {
+                string message = Common.Warning_TooManyMethodArguments;
+                var warning = new Highlighting(message);
+                highlights.Add(new HighlightingInfo(methodDeclaration.GetNameDocumentRange(), warning));
             }
         }
 
@@ -75,9 +81,11 @@ namespace CleanCode.Features.TooManyDependencies
 
         public void ProcessAfterInterior(ITreeNode element)
         {
-            var constructorDeclaration = element as IConstructorDeclaration;
-            if (constructorDeclaration != null)
-                ProcessFunctionDeclaration(constructorDeclaration);
+            var methodDeclaration = element as IMethodDeclaration;
+            if (methodDeclaration != null)
+            {
+                ProcessFunctionDeclaration(methodDeclaration);
+            }
         }
 
         public bool ProcessingIsFinished

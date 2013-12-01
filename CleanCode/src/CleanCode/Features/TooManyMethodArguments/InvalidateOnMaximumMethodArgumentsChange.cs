@@ -25,47 +25,21 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Features.MethodTooLong
+namespace CleanCode.Features.TooManyMethodArguments
 {
-  /// <summary>
-  /// The highlighting that warns about high complexity
-  /// </summary>
-  /// 
-  // TODO: Change to ConfigurableSeverityHighlighting
-    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
-
-  [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-  public class MethodTooLongHighlighting : IHighlighting
+  [SolutionComponent]
+  public class InvalidateOnMaximumMethodArgumentsChange
   {
-    internal const string SeverityID = "MethodTooLong"; 
-    private readonly string tooltip;
-
-    public MethodTooLongHighlighting(string toolTip)
+    public InvalidateOnMaximumMethodArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-      tooltip = toolTip;
-    }
-
-    public string ToolTip
-    {
-      get { return tooltip; }
-    }
-
-    public string ErrorStripeToolTip
-    {
-      get { return tooltip; }
-    }
-
-    public int NavigationOffsetPatch
-    {
-      get { return 0; }
-    }
-
-    public bool IsValid()
-    {
-      return true;
+      var maxArguments = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumMethodArguments);
+      settingsStore.AdviseChange(lifetime, maxArguments, daemon.Invalidate);
     }
   }
 }

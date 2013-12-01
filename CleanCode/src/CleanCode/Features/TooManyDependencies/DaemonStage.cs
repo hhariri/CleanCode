@@ -40,7 +40,7 @@ namespace CleanCode.Features.TooManyDependencies
     /// because it's marked with the attribute.
     /// </summary>
     [DaemonStage]
-    public class TooManyDependenciesDaemonStage : CSharpDaemonStageBase
+    public class DaemonStage : CSharpDaemonStageBase
     {
         protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
             DaemonProcessKind processKind, ICSharpFile file)
@@ -48,7 +48,7 @@ namespace CleanCode.Features.TooManyDependencies
             if (settings.GetValue((CleanCodeSettings s) => s.MaximumDependenciesEnabled))
             {
                 var maximumDependencies = settings.GetValue((CleanCodeSettings s) => s.MaximumDependencies);
-                return new TooManyDependenciesDaemonStageProcess(process, file, maximumDependencies);
+                return new DaemonStageProcess(process, file, maximumDependencies);
             }
             return null;
         }

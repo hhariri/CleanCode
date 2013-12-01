@@ -6,11 +6,11 @@
              xmlns:settings="clr-namespace:CleanCode.Settings"
              xmlns:resources="clr-namespace:CleanCode.Resources"
              mc:Ignorable="d"              
-             d:DesignHeight="138" d:DesignWidth="293" d:DataContext="{d:DesignInstance settings:OptionsViewModel}">
+             d:DesignHeight="137" d:DesignWidth="478" d:DataContext="{d:DesignInstance settings:OptionsViewModel}">
     <UserControl.Resources>
         <resources:LocalizedStrings x:Key="LocalizedStrings"></resources:LocalizedStrings>
     </UserControl.Resources>
-    <StackPanel>
+    <StackPanel Margin="5">
         <StackPanel.Resources>
             <Style TargetType="TextBlock">
                 <Setter Property="TextWrapping" Value="Wrap" />
@@ -19,9 +19,13 @@
                 <Setter Property="DockPanel.Dock" Value="Right" />
                 <Setter Property="Width" Value="30" />
                 <Setter Property="VerticalAlignment" Value="Center" />
+                <Setter Property="TextAlignment" Value="Center" />
+            </Style>
+            <Style x:Key="GridStyle" TargetType="Grid">
+                <Setter Property="Margin" Value="5" />
             </Style>
         </StackPanel.Resources>
-        <Grid>
+        <Grid Style="{StaticResource GridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -30,7 +34,7 @@
                 <CheckBox IsChecked="{Binding EnabledMethodTooLong}">
                     <CheckBox.Content>
                         <TextBlock
-                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Common.Options_LabelMethodTooLongCheck}" />
+                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.MethodTooLongCheck}" />
                     </CheckBox.Content>
                 </CheckBox>
             </DockPanel>
@@ -40,11 +44,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Common.Options_LabelMethodTooLongLinesPerMethod}" />
+                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooLongLinesPerMethod}" />
                 <TextBox DockPanel.Dock="Right" Text="{Binding MaxLinesPerMethod ,UpdateSourceTrigger=PropertyChanged}" Width="30" Grid.Column="1" />
             </Grid>
         </Grid>
-        <Grid>
+        <Grid Style="{StaticResource GridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -53,7 +57,7 @@
                 <CheckBox IsChecked="{Binding EnabledMethodTooLong}">
                     <CheckBox.Content>
                         <TextBlock
-                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Common.Options_LabelMaximumDependenciesCheck}" />
+                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.MaximumDependenciesCheck}" />
                     </CheckBox.Content>
                 </CheckBox>
             </DockPanel>
@@ -63,11 +67,11 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Common.Options_LabelTooManyDependencies}" />
+                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooManyDependencies}" />
                 <TextBox DockPanel.Dock="Right" Text="{Binding MaxDependencies, UpdateSourceTrigger=PropertyChanged}" Width="30" Grid.Column="1" />
             </Grid>
         </Grid>
-        <Grid>
+        <Grid Style="{StaticResource GridStyle}">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -75,7 +79,7 @@
             <DockPanel>
                 <CheckBox IsChecked="{Binding EnabledMethodTooLong}">
                     <CheckBox.Content>
-                        <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=Common.Options_LabelTooManyMethodArguments}" />
+                        <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooManyMethodArguments}" />
                     </CheckBox.Content>
                 </CheckBox>
             </DockPanel>
@@ -85,7 +89,7 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Common.Options_LabelTooManyMethodArguments}" />
+                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooManyMethodArguments}" />
                 <TextBox Text="{Binding MaxMethodArguments, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Column="1" />
             </Grid>

@@ -25,47 +25,21 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.Features.TooManyDependencies
 {
-  /// <summary>
-  /// The highlighting that warns about high complexity
-  /// </summary>
-  /// 
-  // TODO: Change to ConfigurableSeverityHighlighting
-    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
-
-  [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-  public class TooManyDependenciesHighlighting : IHighlighting
+  [SolutionComponent]
+  public class InvalidateOnMaximumDependenciesChange
   {
-    internal const string SeverityID = "TooManyDependencies"; 
-    private readonly string _tooltip;
-
-    public TooManyDependenciesHighlighting(string toolTip)
+    public InvalidateOnMaximumDependenciesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-      _tooltip = toolTip;
-    }
-
-    public string ToolTip
-    {
-      get { return _tooltip; }
-    }
-
-    public string ErrorStripeToolTip
-    {
-      get { return _tooltip; }
-    }
-
-    public int NavigationOffsetPatch
-    {
-      get { return 0; }
-    }
-
-    public bool IsValid()
-    {
-      return true;
+      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumDependencies);
+      settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
     }
   }
 }

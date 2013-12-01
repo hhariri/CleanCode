@@ -31,6 +31,7 @@ using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
+using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -72,7 +73,7 @@ using JetBrains.ReSharper.Daemon;
 
 [assembly:
   RegisterConfigurableSeverity(
-        TooManyDependenciesHighlighting.SeverityID,
+        Highlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
         "Too Many Dependencies",
@@ -82,7 +83,7 @@ using JetBrains.ReSharper.Daemon;
 
 [assembly:
   RegisterConfigurableSeverity(
-        TooManyMethodArgumentsHighlighting.SeverityID,
+        CleanCode.Features.TooManyMethodArguments.Highlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
         "Too Many Arguments",
@@ -92,7 +93,7 @@ using JetBrains.ReSharper.Daemon;
 
 [assembly:
   RegisterConfigurableSeverity(
-        MethodTooLongHighlighting.SeverityID,
+        CleanCode.Features.MethodTooLong.Highlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
         "Method Too Long",

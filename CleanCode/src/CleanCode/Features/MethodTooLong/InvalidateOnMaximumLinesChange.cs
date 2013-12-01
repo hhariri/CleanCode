@@ -25,39 +25,21 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
-using JetBrains.Application.Progress;
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace CleanCode.Features.MethodTooLong
 {
-  public class MethodTooLongDaemonStageProcess : CSharpDaemonStageProcessBase
+  [SolutionComponent]
+  public class InvalidateOnMaximumLinesChange
   {
-    private readonly IDaemonProcess _daemonProcess;
-    private readonly int _maxParams;
-
-    public MethodTooLongDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
-        : base(daemonProcess, file)
+    public InvalidateOnMaximumLinesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-      _daemonProcess = daemonProcess;
-      _maxParams = maxParams;
-    }
-
-    public override void Execute(Action<DaemonStageResult> commiter)
-    {
-      // Running visitor against the PSI
-      var elementProcessor = new MethodTooLongElementProcessor(_daemonProcess, _maxParams);
-      File.ProcessDescendants(elementProcessor);
-
-      // Checking if the daemon is interrupted by user activity
-      if (_daemonProcess.InterruptFlag)
-        throw new ProcessCancelledException();
-
-      // Commit the result into document
-      commiter(new DaemonStageResult(elementProcessor.Highlightings));
+      var maxLines = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumMethodLines);
+      settingsStore.AdviseChange(lifetime, maxLines, daemon.Invalidate);
     }
   }
 }

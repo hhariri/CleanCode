@@ -22,14 +22,14 @@ namespace CleanCode.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Common {
+    public class Options {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Common() {
+        internal Options() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CleanCode.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Resources.Common", typeof(Common).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Resources.Options", typeof(Options).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,75 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method contains too many statements..
+        ///   Looks up a localized string similar to Maximum Dependencies Check.
         /// </summary>
-        public static string Warning_MethodTooLong {
+        public static string MaximumDependenciesCheck {
             get {
-                return ResourceManager.GetString("Warning_MethodTooLong", resourceCulture);
+                return ResourceManager.GetString("MaximumDependenciesCheck", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating SRP..
+        ///   Looks up a localized string similar to Maximum Method Arguments Check.
         /// </summary>
-        public static string Warning_TooManyDependencies {
+        public static string MaximumMethodArgumentsCheck {
             get {
-                return ResourceManager.GetString("Warning_TooManyDependencies", resourceCulture);
+                return ResourceManager.GetString("MaximumMethodArgumentsCheck", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method requires too many arguments..
+        ///   Looks up a localized string similar to Maximum Statements Per Method Check
+        ///.
         /// </summary>
-        public static string Warning_TooManyMethodArguments {
+        public static string MethodTooLongCheck {
             get {
-                return ResourceManager.GetString("Warning_TooManyMethodArguments", resourceCulture);
+                return ResourceManager.GetString("MethodTooLongCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The options below help enforce certain practices that can be considered to leading to cleaner and more maintainable code..
+        /// </summary>
+        public static string Options_Header {
+            get {
+                return ResourceManager.GetString("Options_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob).
+        /// </summary>
+        public static string Options_SubHeader {
+            get {
+                return ResourceManager.GetString("Options_SubHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum statements per method.
+        /// </summary>
+        public static string TooLongLinesPerMethod {
+            get {
+                return ResourceManager.GetString("TooLongLinesPerMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set maximum dependencies to.
+        /// </summary>
+        public static string TooManyDependencies {
+            get {
+                return ResourceManager.GetString("TooManyDependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set maximum arguments to.
+        /// </summary>
+        public static string TooManyMethodArguments {
+            get {
+                return ResourceManager.GetString("TooManyMethodArguments", resourceCulture);
             }
         }
     }

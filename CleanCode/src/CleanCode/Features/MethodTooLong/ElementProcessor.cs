@@ -27,7 +27,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using CleanCode.Resources;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi;
@@ -36,14 +35,14 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodTooLong
 {
-    public class MethodTooLongElementProcessor : IRecursiveElementProcessor
+    public class ElementProcessor : IRecursiveElementProcessor
     {
         private readonly List<HighlightingInfo> highlights = new List<HighlightingInfo>();
 
         private readonly IDaemonProcess daemonProcess;
         private readonly int maxLines;
 
-        public MethodTooLongElementProcessor(IDaemonProcess daemonProcess, int maxLines)
+        public ElementProcessor(IDaemonProcess daemonProcess, int maxLines)
         {
             this.daemonProcess = daemonProcess;
             this.maxLines = maxLines;
@@ -59,60 +58,16 @@ namespace CleanCode.Features.MethodTooLong
 
         private void ProcessMethodDeclaration(IMethodDeclaration method)
         {
-            var totalLines = CountLines(method);
+            var totalLines = method.CountChildren<IStatement>();
+
             if (totalLines > maxLines)
             {
-                var message = string.Format(Common.Warning_MethodTooLong, totalLines);
-                var warning = new MethodTooLongHighlighting(message);
-                Highlightings.Add(new HighlightingInfo(method.GetNameDocumentRange(), warning));
+                var message = string.Format(Common.Warning_MethodTooLong);
+                var highlighting = new Highlighting(message);
+                Highlightings.Add(new HighlightingInfo(method.GetNameDocumentRange(), highlighting));
             }
         }
 
-        private int CountLines(IMethodDeclaration method)
-        {
-            var totalLines = 0;
-            foreach (var treeNode in method.Children())
-            {
-                if (ContainsLines(treeNode))
-                {
-                    totalLines += CountLines(treeNode);
-                }
-            }
-
-
-            return totalLines;
-        }
-
-        private int CountLines(ITreeNode node)
-        {
-            var treeNodes = node.Children().ToList();
-
-            var statements = treeNodes.OfType<IStatement>();
-            var count = statements.Count();
-
-
-            var ifStatements = treeNodes.OfType<IIfStatement>();
-
-            foreach (var ifStatement in ifStatements)
-            {
-                count += CountLines(ifStatement);
-            } 
-
-            var blocks = node.Children().OfType<IBlock>();
-
-            foreach (var block in blocks)
-            {
-                count += CountLines(block);
-            }            
-
-            Debug.WriteLine(count);
-            return count;
-        }
-
-        private bool ContainsLines(ITreeNode treeNode)
-        {
-            return true;
-        }
 
         public bool InteriorShouldBeProcessed(ITreeNode element)
         {
