@@ -112,10 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Options_Header" xml:space="preserve">
     <value>The options below help enforce certain practices that can be considered to leading to cleaner and more maintainable code.</value>
@@ -130,18 +130,25 @@
     <value>There are too many interfaces being passed in to this constructor. You might be violating SRP</value>
   </data>
   <data name="Options_LabelMaximumDependenciesCheck" xml:space="preserve">
-    <value>Enable Maximum Dependencies Check</value>
+    <value>Maximum Dependencies Check</value>
   </data>
   <data name="Warning_TooManyMethodArguments" xml:space="preserve">
     <value>This method requires too many arguments.</value>
   </data>
   <data name="Options_LabelMaximumMethodArgumentsCheck" xml:space="preserve">
-    <value>Enable Maximum Method Arguments Check</value>
+    <value>Maximum Method Arguments Check</value>
   </data>
   <data name="Options_LabelTooManyMethodArguments" xml:space="preserve">
     <value>Set maximum arguments to</value>
   </data>
   <data name="Warning_MethodTooLong" xml:space="preserve">
     <value>This method is too long ({0} lines).</value>
+  </data>
+  <data name="Options_LabelMethodTooLongCheck" xml:space="preserve">
+    <value>Maximum Lines Per Method Check
+</value>
+  </data>
+  <data name="Options_LabelMethodTooLongLinesPerMethod" xml:space="preserve">
+    <value>Maximum lines per method</value>
   </data>
 </root>

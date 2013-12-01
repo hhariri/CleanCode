@@ -26,28 +26,23 @@
 #endregion
 
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using CleanCode.Resources;
-using CleanCode.Settings;
-using CleanCode.TooManyDependencies;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.ReSharper.Psi.Util;
-using JetBrains.ReSharper.UnitTestFramework.Resources;
 
-namespace CleanCode.MethodTooLong
+namespace CleanCode.Features.TooManyMethodArguments
 {
-    public class MethodTooLongElementProcessor : IRecursiveElementProcessor
+    public class TooManyMethodArgumentsElementProcessor : IRecursiveElementProcessor
     {
         private readonly List<HighlightingInfo> _highlights = new List<HighlightingInfo>();
 
         private readonly IDaemonProcess _daemonProcess;
         private readonly int _maxParams;
 
-        public MethodTooLongElementProcessor(IDaemonProcess daemonProcess, int maxParams)
+        public TooManyMethodArgumentsElementProcessor(IDaemonProcess daemonProcess, int maxParams)
         {
             _daemonProcess = daemonProcess;
             _maxParams = maxParams;
@@ -61,61 +56,18 @@ namespace CleanCode.MethodTooLong
             }
         }
 
-        private void ProcessMethodDeclaration(IMethodDeclaration method)
+        private void ProcessFunctionDeclaration(IMethodDeclaration methodDeclaration)
         {
-            var lines = CountLines(method);
-            if (lines > 5)
+            var constructorParams = methodDeclaration.ParameterDeclarations;
+
+            var paramCount = constructorParams.Count();
+
+            if (paramCount > _maxParams)
             {
-                var message = string.Format(StringTable.Warning_MethodTooLong, lines);
-                var warning = new MethodTooLongHighlighting(message);
-                Highlightings.Add(new HighlightingInfo(method.GetNameDocumentRange(), warning));
+                string message = Common.Warning_TooManyMethodArguments;
+                var warning = new TooManyMethodArgumentsHighlighting(message);
+                _highlights.Add(new HighlightingInfo(methodDeclaration.GetNameDocumentRange(), warning));
             }
-        }
-
-        private int CountLines(IMethodDeclaration method)
-        {
-            var totalLines = 0;
-            foreach (var treeNode in method.Children())
-            {
-                if (ContainsLines(treeNode))
-                {
-                    totalLines += CountLines(treeNode);
-                }
-            }
-
-
-            return totalLines;
-        }
-
-        private int CountLines(ITreeNode node)
-        {
-            var treeNodes = node.Children().ToList();
-
-            var statements = treeNodes.OfType<IStatement>();
-            var count = statements.Count();
-
-
-            var ifStatements = treeNodes.OfType<IIfStatement>();
-
-            foreach (var ifStatement in ifStatements)
-            {
-                count += CountLines(ifStatement);
-            } 
-
-            var blocks = node.Children().OfType<IBlock>();
-
-            foreach (var block in blocks)
-            {
-                count += CountLines(block);
-            }            
-
-            Debug.WriteLine(count);
-            return count;
-        }
-
-        private bool ContainsLines(ITreeNode treeNode)
-        {
-            return true;
         }
 
         public bool InteriorShouldBeProcessed(ITreeNode element)
@@ -132,7 +84,7 @@ namespace CleanCode.MethodTooLong
             var methodDeclaration = element as IMethodDeclaration;
             if (methodDeclaration != null)
             {
-                ProcessMethodDeclaration(methodDeclaration);
+                ProcessFunctionDeclaration(methodDeclaration);
             }
         }
 

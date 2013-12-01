@@ -22,24 +22,24 @@ namespace CleanCode.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class StringTable {
+    public class Common {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal StringTable() {
+        internal Common() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Resources.StringTable", typeof(StringTable).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Resources.Common", typeof(Common).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace CleanCode.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,34 +63,53 @@ namespace CleanCode.Resources {
         /// <summary>
         ///   Looks up a localized string similar to The options below help enforce certain practices that can be considered to leading to cleaner and more maintainable code..
         /// </summary>
-        internal static string Options_Header {
+        public static string Options_Header {
             get {
                 return ResourceManager.GetString("Options_Header", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable Maximum Dependencies Check.
+        ///   Looks up a localized string similar to Maximum Dependencies Check.
         /// </summary>
-        internal static string Options_LabelMaximumDependenciesCheck {
+        public static string Options_LabelMaximumDependenciesCheck {
             get {
                 return ResourceManager.GetString("Options_LabelMaximumDependenciesCheck", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enable Maximum Method Arguments Check.
+        ///   Looks up a localized string similar to Maximum Method Arguments Check.
         /// </summary>
-        internal static string Options_LabelMaximumMethodArgumentsCheck {
+        public static string Options_LabelMaximumMethodArgumentsCheck {
             get {
                 return ResourceManager.GetString("Options_LabelMaximumMethodArgumentsCheck", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Lines Per Method Check
+        ///.
+        /// </summary>
+        public static string Options_LabelMethodTooLongCheck {
+            get {
+                return ResourceManager.GetString("Options_LabelMethodTooLongCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum lines per method.
+        /// </summary>
+        public static string Options_LabelMethodTooLongLinesPerMethod {
+            get {
+                return ResourceManager.GetString("Options_LabelMethodTooLongLinesPerMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set maximum dependencies to.
         /// </summary>
-        internal static string Options_LabelTooManyDependencies {
+        public static string Options_LabelTooManyDependencies {
             get {
                 return ResourceManager.GetString("Options_LabelTooManyDependencies", resourceCulture);
             }
@@ -99,7 +118,7 @@ namespace CleanCode.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Set maximum arguments to.
         /// </summary>
-        internal static string Options_LabelTooManyMethodArguments {
+        public static string Options_LabelTooManyMethodArguments {
             get {
                 return ResourceManager.GetString("Options_LabelTooManyMethodArguments", resourceCulture);
             }
@@ -108,7 +127,7 @@ namespace CleanCode.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob).
         /// </summary>
-        internal static string Options_SubHeader {
+        public static string Options_SubHeader {
             get {
                 return ResourceManager.GetString("Options_SubHeader", resourceCulture);
             }
@@ -117,7 +136,7 @@ namespace CleanCode.Resources {
         /// <summary>
         ///   Looks up a localized string similar to This method is too long ({0} lines)..
         /// </summary>
-        internal static string Warning_MethodTooLong {
+        public static string Warning_MethodTooLong {
             get {
                 return ResourceManager.GetString("Warning_MethodTooLong", resourceCulture);
             }
@@ -126,7 +145,7 @@ namespace CleanCode.Resources {
         /// <summary>
         ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating SRP.
         /// </summary>
-        internal static string Warning_TooManyDependencies {
+        public static string Warning_TooManyDependencies {
             get {
                 return ResourceManager.GetString("Warning_TooManyDependencies", resourceCulture);
             }
@@ -135,7 +154,7 @@ namespace CleanCode.Resources {
         /// <summary>
         ///   Looks up a localized string similar to This method requires too many arguments..
         /// </summary>
-        internal static string Warning_TooManyMethodArguments {
+        public static string Warning_TooManyMethodArguments {
             get {
                 return ResourceManager.GetString("Warning_TooManyMethodArguments", resourceCulture);
             }

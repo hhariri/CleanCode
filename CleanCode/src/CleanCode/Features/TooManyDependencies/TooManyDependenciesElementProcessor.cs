@@ -28,14 +28,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using CleanCode.Resources;
-using CleanCode.Settings;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
 
-namespace CleanCode.TooManyDependencies
+namespace CleanCode.Features.TooManyDependencies
 {
     public class TooManyDependenciesElementProcessor : IRecursiveElementProcessor
     {
@@ -59,7 +58,7 @@ namespace CleanCode.TooManyDependencies
 
             if (interfaceCount > MaxParams)
             {
-                var message = StringTable.Warning_TooManyDependencies;
+                var message = Common.Warning_TooManyDependencies;
                 var warning = new TooManyDependenciesHighlighting(message);
                 Highlightings.Add(new HighlightingInfo(constructorDeclaration.GetNameDocumentRange(), warning));
             }

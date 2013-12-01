@@ -9,8 +9,8 @@
 //------------------------------------------------------------------------------
 
 [assembly: global::System.Windows.Markup.XmlnsDefinitionAttribute("urn:shemas-jetbrains-com:ui-application-icons-settings", "CleanCode.Resources.Icons81")]
-[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="CleanCode.8.1;component/Resources/Icons-8.1/Settings/ThemedIcons.Settings.Generat" +
-	"ed.Xaml", IconNames=new string[] {
+[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="CleanCode.8.1;component/Resources/Icons81/Settings/ThemedIcons.Settings.Generated" +
+	".Xaml", IconNames=new string[] {
 		"CleanCode"})]
 
 namespace CleanCode.Resources.Icons81
@@ -77,8 +77,8 @@ namespace CleanCode.Resources.Icons81
 		///<example>
 		///  <code>themediconmanager.GetIcon&lt;SettingsThemedIcons.CleanCode&gt;()        // Icon image for rendering</code>
 		///</example>
-		[global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClassAttribute("CleanCode.8.1;component/Resources/Icons-8.1/Settings/ThemedIcons.Settings.Generat" +
-			"ed.Xaml", 0, "CleanCode")]
+		[global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClassAttribute("CleanCode.8.1;component/Resources/Icons81/Settings/ThemedIcons.Settings.Generated" +
+			".Xaml", 0, "CleanCode")]
 		public sealed class CleanCode : global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClass
 		{
 			
@@ -104,8 +104,8 @@ namespace CleanCode.Resources.Icons81
 			///<example>
 			///  <code>themediconmanager.GetIcon&lt;SettingsThemedIcons.CleanCode&gt;()        // Icon image for rendering</code>
 			///</example>
-			public static global::JetBrains.UI.Icons.IconId Id = new global::JetBrains.UI.Icons.CompiledIcons.CompiledIconId("CleanCode.8.1;component/Resources/Icons-8.1/Settings/ThemedIcons.Settings.Generat" +
-					"ed.Xaml", 0, "CleanCode");
+			public static global::JetBrains.UI.Icons.IconId Id = new global::JetBrains.UI.Icons.CompiledIcons.CompiledIconId("CleanCode.8.1;component/Resources/Icons81/Settings/ThemedIcons.Settings.Generated" +
+					".Xaml", 0, "CleanCode");
 		}
 	}
 }

@@ -18,8 +18,7 @@ namespace CleanCode.Settings
             OptionsSettingsSmartContext settings)
             : this()
         {
-            this.lifetime = lifetime;
-            this.settings = settings;
+            DataContext = new OptionsViewModel(settings);
         }
 
         private OptionsPage()

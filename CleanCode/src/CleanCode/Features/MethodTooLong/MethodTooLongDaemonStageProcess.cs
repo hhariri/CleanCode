@@ -25,47 +25,39 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
+using JetBrains.Application.Progress;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Psi.CSharp;
+using JetBrains.ReSharper.Daemon.CSharp.Stages;
+using JetBrains.ReSharper.Psi;
+using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.MethodTooLong
+namespace CleanCode.Features.MethodTooLong
 {
-  /// <summary>
-  /// The highlighting that warns about high complexity
-  /// </summary>
-  /// 
-  // TODO: Change to ConfigurableSeverityHighlighting
-    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
-
-  [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-  public class MethodTooLongHighlighting : IHighlighting
+  public class MethodTooLongDaemonStageProcess : CSharpDaemonStageProcessBase
   {
-    internal const string SeverityID = "MethodTooLong"; 
-    private readonly string tooltip;
+    private readonly IDaemonProcess _daemonProcess;
+    private readonly int _maxParams;
 
-    public MethodTooLongHighlighting(string toolTip)
+    public MethodTooLongDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
+        : base(daemonProcess, file)
     {
-      tooltip = toolTip;
+      _daemonProcess = daemonProcess;
+      _maxParams = maxParams;
     }
 
-    public string ToolTip
+    public override void Execute(Action<DaemonStageResult> commiter)
     {
-      get { return tooltip; }
-    }
+      // Running visitor against the PSI
+      var elementProcessor = new MethodTooLongElementProcessor(_daemonProcess, _maxParams);
+      File.ProcessDescendants(elementProcessor);
 
-    public string ErrorStripeToolTip
-    {
-      get { return tooltip; }
-    }
+      // Checking if the daemon is interrupted by user activity
+      if (_daemonProcess.InterruptFlag)
+        throw new ProcessCancelledException();
 
-    public int NavigationOffsetPatch
-    {
-      get { return 0; }
-    }
-
-    public bool IsValid()
-    {
-      return true;
+      // Commit the result into document
+      commiter(new DaemonStageResult(elementProcessor.Highlightings));
     }
   }
 }

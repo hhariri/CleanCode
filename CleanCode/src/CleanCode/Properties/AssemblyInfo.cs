@@ -26,8 +26,8 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
-using CleanCode.MethodTooLong;
-using CleanCode.TooManyMethodArguments;
+using CleanCode.Features.MethodTooLong;
+using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
 

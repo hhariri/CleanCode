@@ -27,32 +27,30 @@
 
 #endregion
 
+using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Settings;
+using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Daemon.CSharp.Stages;
+using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.Settings
+namespace CleanCode.Features.TooManyMethodArguments
 {
-    [SettingsKey(typeof (CodeInspectionSettings), "CleanCode")]
-    public class CleanCodeSettings
+    /// <summary>
+    /// Daemon stage for complexity analysis. This class is automatically loaded by ReSharper daemon 
+    /// because it's marked with the attribute.
+    /// </summary>
+    [DaemonStage]
+    public class TooManyMethodArgumentsDaemonStage : CSharpDaemonStageBase
     {
-        [SettingsEntry(3, "MaximumDependencies")]
-        public readonly int MaximumDependencies;
-
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumDependenciesEnabled;
-
-        
-        [SettingsEntry(3, "MaximumMethodArguments")]
-        public readonly int MaximumMethodArguments;
-
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumMethodArgumentsEnabled;
-
-
-        [SettingsEntry(true, "EnabledMethodTooLong")] 
-        public readonly bool MethodTooLongEnabled;
-
-        [SettingsEntry(15, "MaximumMethodLines")]
-        public readonly int MaximumMethodLines;
+        protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
+            DaemonProcessKind processKind, ICSharpFile file)
+        {
+            if (settings.GetValue((CleanCodeSettings s) => s.MaximumDependenciesEnabled))
+            {
+                var maximumParameters = settings.GetValue((CleanCodeSettings s) => s.MaximumMethodArguments);
+                return new TooManyMethodArgumentsDaemonStageProcess(process, file, maximumParameters);
+            }
+            return null;
+        }
     }
 }

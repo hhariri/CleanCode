@@ -32,28 +32,28 @@ using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.TooManyDependencies
+namespace CleanCode.Features.TooManyMethodArguments
 {
-    public class TooManyDependenciesDaemonStageProcess : CSharpDaemonStageProcessBase
+    public class TooManyMethodArgumentsDaemonStageProcess : CSharpDaemonStageProcessBase
     {
-        private readonly IDaemonProcess _daemonProcess;
-        private readonly int _maxParams;
+        private readonly IDaemonProcess daemonProcess;
+        private readonly int maxParams;
 
-        public TooManyDependenciesDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
+        public TooManyMethodArgumentsDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxParams)
             : base(daemonProcess, file)
         {
-            _daemonProcess = daemonProcess;
-            _maxParams = maxParams;
+            this.daemonProcess = daemonProcess;
+            this.maxParams = maxParams;
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
         {
             // Running visitor against the PSI
-            var elementProcessor = new TooManyDependenciesElementProcessor(_daemonProcess, _maxParams);
+            var elementProcessor = new TooManyMethodArgumentsElementProcessor(daemonProcess, maxParams);
             File.ProcessDescendants(elementProcessor);
 
             // Checking if the daemon is interrupted by user activity
-            if (_daemonProcess.InterruptFlag)
+            if (daemonProcess.InterruptFlag)
                 throw new ProcessCancelledException();
 
             // Commit the result into document

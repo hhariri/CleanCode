@@ -40,12 +40,6 @@
     <StartWorkingDirectory>$(MSBuildProjectDirectory)\$(OutputPath)</StartWorkingDirectory>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cinch.WPF">
-      <HintPath>..\packages\Cinch.2.0.70832\lib\net40\Cinch.WPF.dll</HintPath>
-    </Reference>
-    <Reference Include="MEFedMVVM.WPF">
-      <HintPath>..\packages\Cinch.2.0.70832\lib\net40\MEFedMVVM.WPF.dll</HintPath>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -57,57 +51,60 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MethodTooLong\MethodTooLongDaemonStage.cs">
+    <Compile Include="Features\MethodTooLong\MethodTooLongDaemonStage.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MethodTooLong\MethodTooLongDaemonStageProcess.cs">
+    <Compile Include="Features\MethodTooLong\MethodTooLongDaemonStageProcess.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MethodTooLong\MethodTooLongElementProcessor.cs">
+    <Compile Include="Features\MethodTooLong\MethodTooLongElementProcessor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MethodTooLong\MethodTooLongHighlighting.cs">
+    <Compile Include="Features\MethodTooLong\MethodTooLongHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MethodTooLong\MethodTooLongInvalidateOnMaximumDependenciesChange.cs">
+    <Compile Include="Features\MethodTooLong\MethodTooLongInvalidateOnMaximumDependenciesChange.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Icons-8.1\Settings\ThemedIcons.Settings.Generated.cs" />
-    <Compile Include="Resources\StringTable1.Designer.cs">
-      <DependentUpon>StringTable.resx</DependentUpon>
+    <Compile Include="Resources\Icons81\Localization.cs" />
+    <Compile Include="Resources\Icons81\Settings\ThemedIcons.Settings.Generated.cs" />
+    <Compile Include="Resources\Common.Designer.cs">
+      <DependentUpon>Common.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Localization.cs" />
     <Compile Include="Settings\CleanCodeSettings.cs" />
     <Compile Include="Settings\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TooManyDependencies\TooManyDependenciesDaemonStage.cs">
+    <Compile Include="Settings\OptionsViewModel.cs" />
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesDaemonStage.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TooManyDependencies\TooManyDependenciesDaemonStageProcess.cs">
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesDaemonStageProcess.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TooManyDependencies\TooManyDependenciesElementProcessor.cs">
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesElementProcessor.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TooManyDependencies\TooManyDependenciesHighlighting.cs">
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TooManyDependencies\TooManyDependenciesInvalidateOnMaximumDependenciesChange.cs">
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesInvalidateOnMaximumDependenciesChange.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="TooManyMethodArguments\TooManyMethodArgumentsDaemonStage.cs" />
-    <Compile Include="TooManyMethodArguments\TooManyMethodArgumentsDaemonStageProcess.cs" />
-    <Compile Include="TooManyMethodArguments\TooManyMethodArgumentsElementProcessor.cs" />
-    <Compile Include="TooManyMethodArguments\TooManyMethodArgumentsHighlighting.cs" />
-    <Compile Include="TooManyMethodArguments\TooManyMethodArgumentsInvalidateOnMaximumMethodArgumentsChange.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsDaemonStage.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsDaemonStageProcess.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsElementProcessor.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsHighlighting.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsInvalidateOnMaximumMethodArgumentsChange.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\StringTable.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>StringTable1.Designer.cs</LastGenOutput>
+    <EmbeddedResource Include="Resources\Common.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Common.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
@@ -118,10 +115,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ThemedIconPng Include="Resources\Icons-8.1\Settings\CleanCode.png" />
+    <ThemedIconPng Include="Resources\Icons81\Settings\CleanCode.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Resources\Icons-8.1\Settings\ThemedIcons.Settings.Generated.Xaml">
+    <Page Include="Resources\Icons81\Settings\ThemedIcons.Settings.Generated.Xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

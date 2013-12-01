@@ -1,5 +1,4 @@
 #region License
-
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -24,35 +23,23 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
-
 #endregion
 
+using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
+using JetBrains.ReSharper.Daemon;
 
-namespace CleanCode.Settings
+namespace CleanCode.Features.TooManyMethodArguments
 {
-    [SettingsKey(typeof (CodeInspectionSettings), "CleanCode")]
-    public class CleanCodeSettings
+  [SolutionComponent]
+  public class TooManyMethodArgumentsInvalidateOnMaximumMethodArgumentsChange
+  {
+    public TooManyMethodArgumentsInvalidateOnMaximumMethodArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-        [SettingsEntry(3, "MaximumDependencies")]
-        public readonly int MaximumDependencies;
-
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumDependenciesEnabled;
-
-        
-        [SettingsEntry(3, "MaximumMethodArguments")]
-        public readonly int MaximumMethodArguments;
-
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumMethodArgumentsEnabled;
-
-
-        [SettingsEntry(true, "EnabledMethodTooLong")] 
-        public readonly bool MethodTooLongEnabled;
-
-        [SettingsEntry(15, "MaximumMethodLines")]
-        public readonly int MaximumMethodLines;
+      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumMethodArguments);
+      settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
     }
+  }
 }

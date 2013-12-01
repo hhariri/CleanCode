@@ -1,5 +1,4 @@
 #region License
-
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -24,33 +23,23 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
-
 #endregion
 
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.TooManyDependencies
+namespace CleanCode.Features.TooManyDependencies
 {
-    /// <summary>
-    /// Daemon stage for comlexity analysis. This class is automatically loaded by ReSharper daemon 
-    /// because it's marked with the attribute.
-    /// </summary>
-    [DaemonStage]
-    public class TooManyDependenciesDaemonStage : CSharpDaemonStageBase
+  [SolutionComponent]
+  public class TooManyDependenciesInvalidateOnMaximumDependenciesChange
+  {
+    public TooManyDependenciesInvalidateOnMaximumDependenciesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-        protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
-            DaemonProcessKind processKind, ICSharpFile file)
-        {
-            if (settings.GetValue((CleanCodeSettings s) => s.MaximumDependenciesEnabled))
-            {
-                var maximumDependencies = settings.GetValue((CleanCodeSettings s) => s.MaximumDependencies);
-                return new TooManyDependenciesDaemonStageProcess(process, file, maximumDependencies);
-            }
-            return null;
-        }
+      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumDependencies);
+      settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
     }
+  }
 }

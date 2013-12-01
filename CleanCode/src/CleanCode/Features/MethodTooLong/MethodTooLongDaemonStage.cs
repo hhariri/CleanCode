@@ -33,7 +33,7 @@ using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.MethodTooLong
+namespace CleanCode.Features.MethodTooLong
 { 
     [DaemonStage]
     public class MethodTooLongDaemonStage : CSharpDaemonStageBase
@@ -41,10 +41,10 @@ namespace CleanCode.MethodTooLong
         protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
             DaemonProcessKind processKind, ICSharpFile file)
         {
-            if (settings.GetValue((CleanCodeSettings s) => s.MaximumDependenciesEnabled))
+            if (settings.GetValue((CleanCodeSettings s) => s.MethodTooLongEnabled))
             {
-                var maximumDependencies = settings.GetValue((CleanCodeSettings s) => s.MaximumDependencies);
-                return new MethodTooLongDaemonStageProcess(process, file, maximumDependencies);
+                var maxLines = settings.GetValue((CleanCodeSettings s) => s.MaximumMethodLines);
+                return new MethodTooLongDaemonStageProcess(process, file, maxLines);
             }
             return null;
         }

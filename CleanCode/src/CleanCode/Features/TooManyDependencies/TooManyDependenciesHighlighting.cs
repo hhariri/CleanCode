@@ -1,5 +1,4 @@
 #region License
-
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -24,35 +23,49 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
-
 #endregion
 
-using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Settings;
+using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Settings
+namespace CleanCode.Features.TooManyDependencies
 {
-    [SettingsKey(typeof (CodeInspectionSettings), "CleanCode")]
-    public class CleanCodeSettings
+  /// <summary>
+  /// The highlighting that warns about high complexity
+  /// </summary>
+  /// 
+  // TODO: Change to ConfigurableSeverityHighlighting
+    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
+
+  [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+  public class TooManyDependenciesHighlighting : IHighlighting
+  {
+    internal const string SeverityID = "TooManyDependencies"; 
+    private readonly string _tooltip;
+
+    public TooManyDependenciesHighlighting(string toolTip)
     {
-        [SettingsEntry(3, "MaximumDependencies")]
-        public readonly int MaximumDependencies;
-
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumDependenciesEnabled;
-
-        
-        [SettingsEntry(3, "MaximumMethodArguments")]
-        public readonly int MaximumMethodArguments;
-
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumMethodArgumentsEnabled;
-
-
-        [SettingsEntry(true, "EnabledMethodTooLong")] 
-        public readonly bool MethodTooLongEnabled;
-
-        [SettingsEntry(15, "MaximumMethodLines")]
-        public readonly int MaximumMethodLines;
+      _tooltip = toolTip;
     }
+
+    public string ToolTip
+    {
+      get { return _tooltip; }
+    }
+
+    public string ErrorStripeToolTip
+    {
+      get { return _tooltip; }
+    }
+
+    public int NavigationOffsetPatch
+    {
+      get { return 0; }
+    }
+
+    public bool IsValid()
+    {
+      return true;
+    }
+  }
 }
