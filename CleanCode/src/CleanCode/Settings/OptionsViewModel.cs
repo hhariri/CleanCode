@@ -22,6 +22,8 @@ namespace CleanCode.Settings
         private bool enabledMethodTooLong;
         private int maxDependencies;
         private int maxLinesPerMethod;
+        private bool enabledMaxDepth;
+        private int maxDepth;
 
         public OptionsViewModel(OptionsSettingsSmartContext settings)
         {
@@ -31,10 +33,12 @@ namespace CleanCode.Settings
             EnabledMethodTooLong = settings.GetValue((CleanCodeSettings e) => e.MethodTooLongEnabled);
             EnableTooManyDependencies = settings.GetValue((CleanCodeSettings e) => e.MaximumDependenciesEnabled);
             EnableTooManyMethodArguments = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodArgumentsEnabled);
+            EnabledMaxDepth = settings.GetValue((CleanCodeSettings e) => e.MaximumCodeDepthEnabled);
 
             MaxMethodArguments = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodArguments);
             MaxLinesPerMethod = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodLines);
             MaxDependencies = settings.GetValue((CleanCodeSettings e) => e.MaximumDependencies);
+            MaxDepth = settings.GetValue((CleanCodeSettings e) => e.MaximumCodeDepth);
         }
 
         public bool EnabledMethodTooLong
@@ -105,6 +109,30 @@ namespace CleanCode.Settings
                 if (value == maxLinesPerMethod) return;
                 maxLinesPerMethod = value;
                 settings.SetValue((CleanCodeSettings e) => e.MaximumMethodLines, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public bool EnabledMaxDepth
+        {
+            get { return enabledMaxDepth; }
+            set
+            {
+                if (Equals(value, enabledMaxDepth)) return;
+                enabledMaxDepth = value;
+                settings.SetValue((CleanCodeSettings e) => e.MaximumCodeDepthEnabled, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public int MaxDepth
+        {
+            get { return maxDepth; }
+            set
+            {
+                if (value == maxDepth) return;
+                maxDepth = value;
+                settings.SetValue((CleanCodeSettings e) => e.MaximumCodeDepth, value);
                 OnPropertyChanged();
             }
         }

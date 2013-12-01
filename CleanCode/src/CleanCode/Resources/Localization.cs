@@ -6,9 +6,9 @@
         public LocalizedStrings()
         {
             Common = new Common();
-            Options = new Options();
+            Settings = new Settings();
         }
         public Common Common { get; set; }
-        public Options Options { get; set; }
+        public Settings Settings { get; set; }
     }
 }

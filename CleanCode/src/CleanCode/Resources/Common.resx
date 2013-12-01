@@ -126,4 +126,7 @@
   <data name="Warning_MethodTooLong" xml:space="preserve">
     <value>This method contains too many statements.</value>
   </data>
+  <data name="Warning_ExcessiveDepth" xml:space="preserve">
+    <value>Excessive depth of nested code blocks.</value>
+  </data>
 </root>

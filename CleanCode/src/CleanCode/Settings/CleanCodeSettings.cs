@@ -32,7 +32,7 @@ using JetBrains.ReSharper.Settings;
 
 namespace CleanCode.Settings
 {
-    [SettingsKey(typeof (CodeInspectionSettings), "CleanCode")]
+    [SettingsKey(typeof(CodeInspectionSettings), "CleanCode")]
     public class CleanCodeSettings
     {
         [SettingsEntry(3, "MaximumDependencies")]
@@ -41,7 +41,7 @@ namespace CleanCode.Settings
         [SettingsEntry(true, "MaximumDependenciesEnabled")]
         public readonly bool MaximumDependenciesEnabled;
 
-        
+
         [SettingsEntry(3, "MaximumMethodArguments")]
         public readonly int MaximumMethodArguments;
 
@@ -49,10 +49,16 @@ namespace CleanCode.Settings
         public readonly bool MaximumMethodArgumentsEnabled;
 
 
-        [SettingsEntry(true, "EnabledMethodTooLong")] 
+        [SettingsEntry(true, "EnabledMethodTooLong")]
         public readonly bool MethodTooLongEnabled;
 
         [SettingsEntry(15, "MaximumMethodLines")]
         public readonly int MaximumMethodLines;
+
+        [SettingsEntry(3, "MaximumCodeDepth")]
+        public int MaximumCodeDepth { get; set; }
+
+        [SettingsEntry(true, "MaximumCodeDepthEnabled")]
+        public bool MaximumCodeDepthEnabled { get; set; }
     }
 }

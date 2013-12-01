@@ -52,6 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\ExtensionMethods.cs" />
+    <Compile Include="Features\ExcessiveIndentation\DaemonStage.cs" />
+    <Compile Include="Features\ExcessiveIndentation\DaemonStageProcess.cs" />
+    <Compile Include="Features\ExcessiveIndentation\ElementProcessor.cs" />
+    <Compile Include="Features\ExcessiveIndentation\Highlighting.cs" />
+    <Compile Include="Features\ExcessiveIndentation\InvalidateOnMaximumLinesChange.cs" />
     <Compile Include="Features\MethodTooLong\DaemonStage.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -68,11 +73,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Options.Designer.cs">
-      <DependentUpon>Options.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Resources\Icons81\Localization.cs" />
     <Compile Include="Resources\Icons81\Settings\ThemedIcons.Settings.Generated.cs" />
     <Compile Include="Resources\Common.Designer.cs">
@@ -81,6 +81,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Resources\Localization.cs" />
+    <Compile Include="Resources\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Settings\CleanCodeSettings.cs" />
     <Compile Include="Settings\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
@@ -108,9 +113,9 @@
     <Compile Include="Features\TooManyMethodArguments\InvalidateOnMaximumMethodArgumentsChange.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Options.resx">
+    <EmbeddedResource Include="Resources\Settings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Options.Designer.cs</LastGenOutput>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Common.resx">

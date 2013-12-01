@@ -34,7 +34,7 @@
                 <CheckBox IsChecked="{Binding EnabledMethodTooLong}">
                     <CheckBox.Content>
                         <TextBlock
-                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.MethodTooLongCheck}" />
+                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.MethodTooLongCheck}" />
                     </CheckBox.Content>
                 </CheckBox>
             </DockPanel>
@@ -44,7 +44,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooLongLinesPerMethod}" />
+                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.TooLongLinesPerMethod}" />
                 <TextBox DockPanel.Dock="Right" Text="{Binding MaxLinesPerMethod ,UpdateSourceTrigger=PropertyChanged}" Width="30" Grid.Column="1" />
             </Grid>
         </Grid>
@@ -57,7 +57,7 @@
                 <CheckBox IsChecked="{Binding EnabledMethodTooLong}">
                     <CheckBox.Content>
                         <TextBlock
-                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.MaximumDependenciesCheck}" />
+                            Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.MaximumDependenciesCheck}" />
                     </CheckBox.Content>
                 </CheckBox>
             </DockPanel>
@@ -67,7 +67,7 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooManyDependencies}" />
+                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.TooManyDependencies}" />
                 <TextBox DockPanel.Dock="Right" Text="{Binding MaxDependencies, UpdateSourceTrigger=PropertyChanged}" Width="30" Grid.Column="1" />
             </Grid>
         </Grid>
@@ -79,7 +79,7 @@
             <DockPanel>
                 <CheckBox IsChecked="{Binding EnabledMethodTooLong}">
                     <CheckBox.Content>
-                        <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooManyMethodArguments}" />
+                        <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.TooManyMethodArguments}" />
                     </CheckBox.Content>
                 </CheckBox>
             </DockPanel>
@@ -89,8 +89,31 @@
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock
-                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Options.TooManyMethodArguments}" />
+                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.TooManyMethodArguments}" />
                 <TextBox Text="{Binding MaxMethodArguments, UpdateSourceTrigger=PropertyChanged}"
+                         Grid.Column="1" />
+            </Grid>
+        </Grid>
+        <Grid Style="{StaticResource GridStyle}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <DockPanel>
+                <CheckBox IsChecked="{Binding EnabledMaxDepth}">
+                    <CheckBox.Content>
+                        <TextBlock Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.ExcessiveDepthCheck}" />
+                    </CheckBox.Content>
+                </CheckBox>
+            </DockPanel>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock
+                    Text="{Binding Source={StaticResource LocalizedStrings}, Path=Settings.ExcessiveDepth}" />
+                <TextBox Text="{Binding MaxDepth, UpdateSourceTrigger=PropertyChanged}"
                          Grid.Column="1" />
             </Grid>
         </Grid>

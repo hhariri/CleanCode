@@ -61,6 +61,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Excessive depth of nested code blocks..
+        /// </summary>
+        public static string Warning_ExcessiveDepth {
+            get {
+                return ResourceManager.GetString("Warning_ExcessiveDepth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This method contains too many statements..
         /// </summary>
         public static string Warning_MethodTooLong {

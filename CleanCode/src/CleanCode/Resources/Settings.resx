@@ -142,4 +142,10 @@
   <data name="Options_SubHeader" xml:space="preserve">
     <value>Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)</value>
   </data>
+  <data name="ExcessiveDepth" xml:space="preserve">
+    <value>Maximum level of nesting</value>
+  </data>
+  <data name="ExcessiveDepthCheck" xml:space="preserve">
+    <value>Excessive Depth Of Nesting Check</value>
+  </data>
 </root>

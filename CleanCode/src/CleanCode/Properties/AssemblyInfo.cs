@@ -37,23 +37,23 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly : AssemblyTitle("ReSharper Clean Code Plugin")]
-[assembly : AssemblyCompany("Hadi Hariri")]
-[assembly : AssemblyProduct("ReSharper Clean Code Plugin")]
-[assembly : AssemblyDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
-[assembly : AssemblyCopyright("Copyright \u00A9 2012 Hadi Hariri and Contributors")]
-[assembly : AssemblyTrademark("")]
-[assembly : AssemblyCulture("")]
+[assembly: AssemblyTitle("ReSharper Clean Code Plugin")]
+[assembly: AssemblyCompany("Hadi Hariri")]
+[assembly: AssemblyProduct("ReSharper Clean Code Plugin")]
+[assembly: AssemblyDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
+[assembly: AssemblyCopyright("Copyright \u00A9 2012 Hadi Hariri and Contributors")]
+[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
 // COM, set the ComVisible attribute to true on that type.
 
-[assembly : ComVisible(false)]
+[assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
 
-[assembly : Guid("97927FF9-8C9C-4DC5-A309-29C23F41DA47")]
+[assembly: Guid("97927FF9-8C9C-4DC5-A309-29C23F41DA47")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -65,11 +65,11 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
 // You can specify all the values or you can default the Revision and Build Numbers 
 // by using the '*' as shown below:
 
-[assembly : AssemblyVersion("3.0.0.*")]
+[assembly: AssemblyVersion("3.0.0.*")]
 
-[assembly : PluginTitle("Clean Code")]
-[assembly : PluginDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
-[assembly : PluginVendor("Hadi Hariri and Contributors")]
+[assembly: PluginTitle("Clean Code")]
+[assembly: PluginDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
+[assembly: PluginVendor("Hadi Hariri and Contributors")]
 
 [assembly:
   RegisterConfigurableSeverity(
@@ -77,7 +77,7 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
         null,
         HighlightingGroupIds.CodeSmell,
         "Too Many Dependencies",
-        "Too many dependencies passed into constructor",
+        "Too many dependencies passed into constructor.",
         Severity.SUGGESTION,
         false)]
 
@@ -87,7 +87,7 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
         null,
         HighlightingGroupIds.CodeSmell,
         "Too Many Arguments",
-        "Too many arguments passed to a method",
+        "Too many arguments passed to a method.",
         Severity.SUGGESTION,
         false)]
 
@@ -97,6 +97,16 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
         null,
         HighlightingGroupIds.CodeSmell,
         "Method Too Long",
-        "The method is bigger than it should be",
+        "The method is bigger than it should be.",
+        Severity.SUGGESTION,
+        false)]
+
+[assembly:
+  RegisterConfigurableSeverity(
+        CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Excessive depth",
+        "The nesting in this method is excessive.",
         Severity.SUGGESTION,
         false)]
