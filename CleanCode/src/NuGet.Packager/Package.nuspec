@@ -1,0 +1,23 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>CleanCode</id>
+    <version>3.0.8-EAP-20131201</version>
+    <title>CleanCode</title>
+    <authors>Hadi Hariri</authors>
+    <owners>Hadi Hariri, Matt Ellis</owners>
+    <iconUrl>https://raw.github.com/hhariri/CleanCode/master/CleanCode/src/CleanCode/Settings/CleanCode.png</iconUrl>
+    <projectUrl>https://github.com/hhariri/CleanCode</projectUrl>
+    <licenseUrl>https://raw.github.com/hhariri/CleanCode/master/license.txt</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
+    <copyright>Copyright 2013 Hadi Hariri and Contributors</copyright>
+    <dependencies>
+      <dependency id="ReSharper" version="8.1" />
+    </dependencies>
+    <tags>clean code</tags>
+  </metadata>
+  <files>    
+    <file src="lib\CleanCode.8.1.dll" target="ReSharper\v8.1\plugins" />
+  </files>
+</package>

@@ -62,7 +62,7 @@ namespace CleanCode.Features.TooManyMethodArguments
 
             var paramCount = constructorParams.Count();
 
-            if (paramCount > _maxParams)
+           if (paramCount > _maxParams)
             {
                 string message = Common.Warning_TooManyMethodArguments;
                 var warning = new TooManyMethodArgumentsHighlighting(message);

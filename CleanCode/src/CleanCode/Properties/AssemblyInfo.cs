@@ -27,6 +27,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 using CleanCode.Features.MethodTooLong;
+using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
@@ -71,7 +72,7 @@ using JetBrains.ReSharper.Daemon;
 
 [assembly:
   RegisterConfigurableSeverity(
-        MethodTooLongHighlighting.SeverityID,
+        TooManyDependenciesHighlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
         "Too Many Dependencies",
@@ -86,5 +87,15 @@ using JetBrains.ReSharper.Daemon;
         HighlightingGroupIds.CodeSmell,
         "Too Many Arguments",
         "Too many arguments passed to a method",
+        Severity.SUGGESTION,
+        false)]
+
+[assembly:
+  RegisterConfigurableSeverity(
+        MethodTooLongHighlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Method Too Long",
+        "The method is bigger than it should be",
         Severity.SUGGESTION,
         false)]
