@@ -25,12 +25,15 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using CleanCode.Resources;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
+using JetBrains.ReSharper.UnitTestFramework.Resources;
 
 namespace CleanCode.Features.ExcessiveIndentation
 {
@@ -58,6 +61,7 @@ namespace CleanCode.Features.ExcessiveIndentation
         private void ProcessMethod(IMethodDeclaration method)
         {
             var depth = method.GetChildrenDepth();
+            Trace.WriteLine(string.Format("Method {0}, Depth={1}", method.NameIdentifier.Name, depth));
 
             if (depth > maxDepth)
             {

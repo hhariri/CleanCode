@@ -33,13 +33,13 @@ using JetBrains.ReSharper.Daemon;
 
 namespace CleanCode.Features.ExcessiveIndentation
 {
-  [SolutionComponent]
-  public class InvalidateOnMaxiumDepthChange
-  {
-      public InvalidateOnMaxiumDepthChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+    [SolutionComponent]
+    public class InvalidateOnMaxiumDepthChange
     {
-      var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumCodeDepth);
-      settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);
+        public InvalidateOnMaxiumDepthChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        {
+            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumCodeDepth);
+            settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);
+        }
     }
-  }
 }
