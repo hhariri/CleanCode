@@ -61,8 +61,7 @@ namespace CleanCode.Features.ExcessiveIndentation
         private void ProcessMethod(IMethodDeclaration method)
         {
             var depth = method.GetChildrenDepth();
-            Trace.WriteLine(string.Format("Method {0}, Depth={1}", method.NameIdentifier.Name, depth));
-
+            
             if (depth > maxDepth)
             {
                 var message = string.Format(Common.Warning_ExcessiveDepth);
