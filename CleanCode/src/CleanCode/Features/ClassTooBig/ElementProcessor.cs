@@ -57,13 +57,15 @@ namespace CleanCode.Features.ClassTooBig
 
         private void ProcessClass(IClassDeclaration classDeclaration)
         {
-            var depth = classDeclaration.CountChildren<IMethodDeclaration>();
+            var methodCount = classDeclaration.CountChildren<IMethodDeclaration>();
             
-            if (depth > maxMethods)
+            if (methodCount > maxMethods)
             {
                 var message = string.Format(Common.Warning_ClassTooBig);
                 var highlighting = new Highlighting(message);
-                Highlightings.Add(new HighlightingInfo(classDeclaration.GetNameDocumentRange(), highlighting));
+                var declarationIdentifier = classDeclaration.NameIdentifier;
+                var documentRange = declarationIdentifier.GetDocumentRange();
+                Highlightings.Add(new HighlightingInfo(documentRange, highlighting));
             }
         }
 

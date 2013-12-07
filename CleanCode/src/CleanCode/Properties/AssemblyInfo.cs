@@ -103,6 +103,16 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
 
 [assembly:
   RegisterConfigurableSeverity(
+        CleanCode.Features.ClassTooBig.Highlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Class Too Big",
+        "This class contains too many methods",
+        Severity.SUGGESTION,
+        false)]
+
+[assembly:
+  RegisterConfigurableSeverity(
         CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,

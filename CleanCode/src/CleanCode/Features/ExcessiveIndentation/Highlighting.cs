@@ -40,7 +40,7 @@ namespace CleanCode.Features.ExcessiveIndentation
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {
-        internal const string SeverityID = "ExcessiveDepth";
+        internal const string SeverityID = "ExcessiveIndentation";
         private readonly string tooltip;
 
         public Highlighting(string toolTip)

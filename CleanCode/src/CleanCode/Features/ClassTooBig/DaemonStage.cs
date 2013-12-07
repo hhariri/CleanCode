@@ -43,9 +43,8 @@ namespace CleanCode.Features.ClassTooBig
         {
             if (settings.GetValue((CleanCodeSettings s) => s.MaximumMethodsPerClassEnabled))
             {
-                var maxDepth = settings.GetValue((CleanCodeSettings s) => s.MaximumMethodsPerClass);
-                maxDepth = 1;
-                return new DaemonStageProcess(process, file, maxDepth);
+                var maxMethodsPerClass = settings.GetValue((CleanCodeSettings s) => s.MaximumMethodsPerClass);                
+                return new DaemonStageProcess(process, file, maxMethodsPerClass);
             }
             return null;
         }

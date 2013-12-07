@@ -40,7 +40,7 @@ namespace CleanCode.Features.ClassTooBig
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {
-        internal const string SeverityID = "Demeter";
+        internal const string SeverityID = "MaximumChainedReferences";
         private readonly string tooltip;
 
         public Highlighting(string toolTip)
