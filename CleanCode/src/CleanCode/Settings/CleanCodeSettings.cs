@@ -37,28 +37,32 @@ namespace CleanCode.Settings
     {
         [SettingsEntry(3, "MaximumDependencies")]
         public readonly int MaximumDependencies;
-
         [SettingsEntry(true, "MaximumDependenciesEnabled")]
         public readonly bool MaximumDependenciesEnabled;
 
-
         [SettingsEntry(3, "MaximumMethodArguments")]
         public readonly int MaximumMethodArguments;
-
         [SettingsEntry(true, "MaximumDependenciesEnabled")]
         public readonly bool MaximumMethodArgumentsEnabled;
 
-
         [SettingsEntry(true, "EnabledMethodTooLong")]
         public readonly bool MethodTooLongEnabled;
-
         [SettingsEntry(15, "MaximumMethodLines")]
         public readonly int MaximumMethodLines;
 
         [SettingsEntry(3, "MaximumCodeDepth")]
         public int MaximumCodeDepth { get; set; }
-
         [SettingsEntry(true, "MaximumCodeDepthEnabled")]
         public bool MaximumCodeDepthEnabled { get; set; }
+
+        [SettingsEntry(true, "MaximumMethodsPerClassEnabled")]
+        public bool MaximumMethodsPerClassEnabled { get; set; }
+        [SettingsEntry(20, "MaximumMethodsPerClass")]
+        public int MaximumMethodsPerClass { get; set; }
+
+        [SettingsEntry(true, "MaximumChainedReferencesEnabled")]
+        public bool MaximumChainedReferencesEnabled { get; set; }
+        [SettingsEntry(2, "MaximumChainedReferences")]
+        public int MaximumChainedReferences { get; set; }
     }
 }

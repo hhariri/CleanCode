@@ -51,6 +51,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\ChainedReferences\DaemonStage.cs" />
+    <Compile Include="Features\ChainedReferences\DaemonStageProcess.cs" />
+    <Compile Include="Features\ChainedReferences\ElementProcessor.cs" />
+    <Compile Include="Features\ChainedReferences\Highlighting.cs" />
+    <Compile Include="Features\ChainedReferences\InvalidateOnMaximumLinesChange.cs" />
+    <Compile Include="Features\ClassTooBig\DaemonStage.cs" />
+    <Compile Include="Features\ClassTooBig\DaemonStageProcess.cs" />
+    <Compile Include="Features\ClassTooBig\ElementProcessor.cs" />
+    <Compile Include="Features\ClassTooBig\Highlighting.cs" />
+    <Compile Include="Features\ClassTooBig\InvalidateOnMaximumMethodsPerClass.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
     <Compile Include="Features\ExcessiveIndentation\DaemonStage.cs" />
     <Compile Include="Features\ExcessiveIndentation\DaemonStageProcess.cs" />

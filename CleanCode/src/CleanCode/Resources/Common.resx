@@ -129,4 +129,10 @@
   <data name="Warning_ExcessiveDepth" xml:space="preserve">
     <value>Excessive depth of nested code blocks.</value>
   </data>
+  <data name="Warning_ClassTooBig" xml:space="preserve">
+    <value>Class contains too many methods.</value>
+  </data>
+  <data name="Warning_ChainedReferences" xml:space="preserve">
+    <value>Too many chained references.</value>
+  </data>
 </root>

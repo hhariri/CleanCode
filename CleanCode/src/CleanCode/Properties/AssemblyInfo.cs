@@ -106,7 +106,17 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
         CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
-        "Excessive depth",
+        "Excessive Depth",
         "The nesting in this method is excessive.",
         Severity.SUGGESTION,
+        false)]
+
+[assembly:
+  RegisterConfigurableSeverity(
+        CleanCode.Features.ChainedReferences.Highlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Chained References",
+        "There are too many chained references.",
+        Severity.HINT,
         false)]

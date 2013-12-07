@@ -3,27 +3,27 @@ using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
 using JetBrains.Application;
 using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.UI.Application;
 using JetBrains.UI.Options;
 using IContextBoundSettingsStore = JetBrains.Application.Settings.IContextBoundSettingsStore;
 
 namespace CleanCode.Settings
 {
 
-    public class OptionsViewModel : INotifyPropertyChanged
+    public sealed class OptionsViewModel : INotifyPropertyChanged
     {
-        private Lifetime lifetime;
-        private IUIApplication environment;
-        private OptionsSettingsSmartContext settings;
+        private readonly OptionsSettingsSmartContext settings;
         private int maxMethodArguments;
         private bool enableTooManyMethodArguments;
+        private bool enableClassTooBig;
         private bool enableTooManyDependencies;
         private bool enabledMethodTooLong;
         private int maxDependencies;
         private int maxLinesPerMethod;
         private bool enabledMaxDepth;
         private int maxDepth;
+        private int maxMethodsPerClass;
+        private bool enableChainedReferences;
+        private int maxChainedReferences;
 
         public OptionsViewModel(OptionsSettingsSmartContext settings)
         {
@@ -34,11 +34,15 @@ namespace CleanCode.Settings
             EnableTooManyDependencies = settings.GetValue((CleanCodeSettings e) => e.MaximumDependenciesEnabled);
             EnableTooManyMethodArguments = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodArgumentsEnabled);
             EnabledMaxDepth = settings.GetValue((CleanCodeSettings e) => e.MaximumCodeDepthEnabled);
+            EnableClassTooBig = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodsPerClassEnabled);
+            EnableChainedReferences = settings.GetValue((CleanCodeSettings e) => e.MaximumChainedReferencesEnabled);
 
             MaxMethodArguments = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodArguments);
             MaxLinesPerMethod = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodLines);
             MaxDependencies = settings.GetValue((CleanCodeSettings e) => e.MaximumDependencies);
             MaxDepth = settings.GetValue((CleanCodeSettings e) => e.MaximumCodeDepth);
+            maxMethodsPerClass = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodsPerClass);
+            MaxChainedReferences = settings.GetValue((CleanCodeSettings e) => e.MaximumChainedReferences);
         }
 
         public bool EnabledMethodTooLong
@@ -73,6 +77,18 @@ namespace CleanCode.Settings
                 if (value.Equals(enableTooManyMethodArguments)) return;
                 enableTooManyMethodArguments = value;
                 settings.SetValue((CleanCodeSettings e) => e.MaximumMethodArgumentsEnabled, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public bool EnableClassTooBig
+        {
+            get { return enableClassTooBig; }
+            set
+            {
+                if (value.Equals(enableClassTooBig)) return;
+                enableClassTooBig = value;
+                settings.SetValue((CleanCodeSettings e) => e.MaximumMethodsPerClassEnabled, value);
                 OnPropertyChanged();
             }
         }
@@ -113,6 +129,18 @@ namespace CleanCode.Settings
             }
         }
 
+        public int MaxMethodsPerClass
+        {
+            get { return maxMethodsPerClass; }
+            set
+            {
+                if (value == maxMethodsPerClass) return;
+                maxMethodsPerClass = value;
+                settings.SetValue((CleanCodeSettings e) => e.MaximumMethodsPerClass, value);
+                OnPropertyChanged();
+            }
+        }
+
         public bool EnabledMaxDepth
         {
             get { return enabledMaxDepth; }
@@ -137,10 +165,34 @@ namespace CleanCode.Settings
             }
         }
 
+        public bool EnableChainedReferences
+        {
+            get { return enableChainedReferences; }
+            set
+            {
+                if (value.Equals(enableChainedReferences)) return;
+                enableChainedReferences = value;
+                settings.SetValue((CleanCodeSettings e) => e.MaximumChainedReferencesEnabled, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public int MaxChainedReferences
+        {
+            get { return maxChainedReferences; }
+            set
+            {
+                if (value == maxChainedReferences) return;
+                maxChainedReferences = value;
+                settings.SetValue((CleanCodeSettings e) => e.MaximumChainedReferences, value);
+                OnPropertyChanged();
+            }
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         [NotifyPropertyChangedInvocator]
-        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));

@@ -61,6 +61,24 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Too many chained references..
+        /// </summary>
+        public static string Warning_ChainedReferences {
+            get {
+                return ResourceManager.GetString("Warning_ChainedReferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Class contains too many methods..
+        /// </summary>
+        public static string Warning_ClassTooBig {
+            get {
+                return ResourceManager.GetString("Warning_ClassTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Excessive depth of nested code blocks..
         /// </summary>
         public static string Warning_ExcessiveDepth {

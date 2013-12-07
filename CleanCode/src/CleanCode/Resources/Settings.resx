@@ -148,4 +148,16 @@
   <data name="ExcessiveDepthCheck" xml:space="preserve">
     <value>Excessive Depth Of Nesting Check</value>
   </data>
+  <data name="ClassTooBig" xml:space="preserve">
+    <value>Maximum Methods Per Class</value>
+  </data>
+  <data name="ClassTooBigCheck" xml:space="preserve">
+    <value>Maximum Methods Per Class Check</value>
+  </data>
+  <data name="MaxChainedReferences" xml:space="preserve">
+    <value>Maximum Chained References</value>
+  </data>
+  <data name="MaxChainedReferencesCheck" xml:space="preserve">
+    <value>Maximum Chained References Check</value>
+  </data>
 </root>

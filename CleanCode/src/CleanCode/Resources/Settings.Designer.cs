@@ -61,6 +61,24 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Methods Per Class.
+        /// </summary>
+        public static string ClassTooBig {
+            get {
+                return ResourceManager.GetString("ClassTooBig", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Methods Per Class Check.
+        /// </summary>
+        public static string ClassTooBigCheck {
+            get {
+                return ResourceManager.GetString("ClassTooBigCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum level of nesting.
         /// </summary>
         public static string ExcessiveDepth {
@@ -75,6 +93,24 @@ namespace CleanCode.Resources {
         public static string ExcessiveDepthCheck {
             get {
                 return ResourceManager.GetString("ExcessiveDepthCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Chained References.
+        /// </summary>
+        public static string MaxChainedReferences {
+            get {
+                return ResourceManager.GetString("MaxChainedReferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Chained References Check.
+        /// </summary>
+        public static string MaxChainedReferencesCheck {
+            get {
+                return ResourceManager.GetString("MaxChainedReferencesCheck", resourceCulture);
             }
         }
         

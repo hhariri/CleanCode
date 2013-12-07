@@ -2,11 +2,11 @@
 <package >
   <metadata>
     <id>CleanCode</id>
-    <version>3.0.14-EAP-20131203</version>
+    <version>3.0.15-EAP-20131207</version>
     <title>CleanCode</title>
     <authors>Hadi Hariri</authors>
     <owners>Hadi Hariri, Matt Ellis</owners>
-    <iconUrl>https://raw.github.com/hhariri/CleanCode/master/CleanCode/src/CleanCode/Settings/CleanCode.png</iconUrl>
+    <iconUrl>http://s29.postimg.org/h8qk7jwzb/clean_code_72_color.png</iconUrl>
     <projectUrl>https://github.com/hhariri/CleanCode</projectUrl>
     <licenseUrl>https://raw.github.com/hhariri/CleanCode/master/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>

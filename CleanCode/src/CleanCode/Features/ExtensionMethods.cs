@@ -21,6 +21,7 @@ namespace CleanCode.Features
             return count;
         }
 
+        
         public static int GetChildrenDepth(this ITreeNode node)
         {           
             var childrenDepth = 0;
