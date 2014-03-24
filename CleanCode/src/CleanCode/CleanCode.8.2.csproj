@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Props')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Props')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Props')" />
   <PropertyGroup>
@@ -11,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CleanCode</RootNamespace>
-    <AssemblyName>CleanCode.8.1</AssemblyName>
+    <AssemblyName>CleanCode.8.2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -21,7 +22,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT,RESHARPER_81</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;JET_MODE_ASSERT,RESHARPER_82</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
@@ -51,35 +52,29 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\ChainedReferences\DaemonStage.cs" />
-    <Compile Include="Features\ChainedReferences\DaemonStageProcess.cs" />
-    <Compile Include="Features\ChainedReferences\ElementProcessor.cs" />
-    <Compile Include="Features\ChainedReferences\Highlighting.cs" />
-    <Compile Include="Features\ChainedReferences\InvalidateOnMaximumLinesChange.cs" />
-    <Compile Include="Features\ClassTooBig\DaemonStage.cs" />
-    <Compile Include="Features\ClassTooBig\DaemonStageProcess.cs" />
-    <Compile Include="Features\ClassTooBig\ElementProcessor.cs" />
-    <Compile Include="Features\ClassTooBig\Highlighting.cs" />
-    <Compile Include="Features\ClassTooBig\InvalidateOnMaximumMethodsPerClass.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
-    <Compile Include="Features\ExcessiveIndentation\DaemonStage.cs" />
-    <Compile Include="Features\ExcessiveIndentation\DaemonStageProcess.cs" />
-    <Compile Include="Features\ExcessiveIndentation\ElementProcessor.cs" />
-    <Compile Include="Features\ExcessiveIndentation\Highlighting.cs" />
-    <Compile Include="Features\ExcessiveIndentation\InvalidateOnMaximumLinesChange.cs" />
-    <Compile Include="Features\MethodTooLong\DaemonStage.cs">
+    <Compile Include="CleanCodeDaemonStageProcess.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Features\MethodTooLong\DaemonStageProcess.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Features\MethodTooLong\ElementProcessor.cs">
+    <Compile Include="DaemonStage.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\MethodTooLong\Highlighting.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\MethodTooLong\InvalidateOnMaximumLinesChange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Features\TooManyDependencies\Highlighting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Features\TooManyDependencies\InvalidateOnMaximumDependenciesChange.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Features\TooManyMethodArguments\Highlighting.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Features\TooManyMethodArguments\InvalidateOnMaximumMethodArgumentsChange.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -101,26 +96,6 @@
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\OptionsViewModel.cs" />
-    <Compile Include="Features\TooManyDependencies\DaemonStage.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Features\TooManyDependencies\DaemonStageProcess.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Features\TooManyDependencies\ElementProcessor.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Features\TooManyDependencies\Highlighting.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Features\TooManyDependencies\InvalidateOnMaximumDependenciesChange.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Features\TooManyMethodArguments\ArgumentsDaemonStage.cs" />
-    <Compile Include="Features\TooManyMethodArguments\DaemonStageProcess.cs" />
-    <Compile Include="Features\TooManyMethodArguments\ElementProcessor.cs" />
-    <Compile Include="Features\TooManyMethodArguments\Highlighting.cs" />
-    <Compile Include="Features\TooManyMethodArguments\InvalidateOnMaximumMethodArgumentsChange.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Settings.resx">
@@ -157,4 +132,12 @@
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Props'))" />
+    <Error Condition="!Exists('..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Targets'))" />
+  </Target>
+  <Import Project="..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Targets')" />
 </Project>

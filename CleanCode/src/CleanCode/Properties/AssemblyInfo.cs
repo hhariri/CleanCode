@@ -26,12 +26,8 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
-using CleanCode.Features.MethodTooLong;
-using CleanCode.Features.TooManyDependencies;
-using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
-using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
 
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
@@ -41,7 +37,7 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
 [assembly: AssemblyCompany("Hadi Hariri")]
 [assembly: AssemblyProduct("ReSharper Clean Code Plugin")]
 [assembly: AssemblyDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
-[assembly: AssemblyCopyright("Copyright \u00A9 2012 Hadi Hariri and Contributors")]
+[assembly: AssemblyCopyright("Copyright \u00A9 2014 Hadi Hariri and Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -73,7 +69,7 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
 
 [assembly:
   RegisterConfigurableSeverity(
-        Highlighting.SeverityID,
+        CleanCode.Features.TooManyDependencies.Highlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
         "Too Many Dependencies",
@@ -101,32 +97,32 @@ using Highlighting = CleanCode.Features.TooManyDependencies.Highlighting;
         Severity.SUGGESTION,
         false)]
 
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.ClassTooBig.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Class Too Big",
-        "This class contains too many methods",
-        Severity.SUGGESTION,
-        false)]
+//[assembly:
+//  RegisterConfigurableSeverity(
+//        CleanCode.Features.ClassTooBig.Highlighting.SeverityID,
+//        null,
+//        HighlightingGroupIds.CodeSmell,
+//        "Class Too Big",
+//        "This class contains too many methods",
+//        Severity.SUGGESTION,
+//        false)]
 
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Excessive Depth",
-        "The nesting in this method is excessive.",
-        Severity.SUGGESTION,
-        false)]
+//[assembly:
+//  RegisterConfigurableSeverity(
+//        CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
+//        null,
+//        HighlightingGroupIds.CodeSmell,
+//        "Excessive Depth",
+//        "The nesting in this method is excessive.",
+//        Severity.SUGGESTION,
+//        false)]
 
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.ChainedReferences.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Chained References",
-        "There are too many chained references.",
-        Severity.HINT,
-        false)]
+//[assembly:
+//  RegisterConfigurableSeverity(
+//        CleanCode.Features.ChainedReferences.Highlighting.SeverityID,
+//        null,
+//        HighlightingGroupIds.CodeSmell,
+//        "Chained References",
+//        "There are too many chained references.",
+//        Severity.HINT,
+//        false)]

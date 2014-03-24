@@ -33,24 +33,15 @@ using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.Features.TooManyMethodArguments
+namespace CleanCode.Features.MethodTooLong
 {
-    /// <summary>
-    /// Daemon stage for complexity analysis. This class is automatically loaded by ReSharper daemon 
-    /// because it's marked with the attribute.
-    /// </summary>
     [DaemonStage]
-    public class ArgumentsDaemonStage : CSharpDaemonStageBase
+    public class DaemonStage : CSharpDaemonStageBase
     {
         protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
             DaemonProcessKind processKind, ICSharpFile file)
         {
-            if (settings.GetValue((CleanCodeSettings s) => s.MaximumDependenciesEnabled))
-            {
-                var maximumParameters = settings.GetValue((CleanCodeSettings s) => s.MaximumMethodArguments);
-                return new DaemonStageProcess(process, file, maximumParameters);
-            }
-            return null;
+            return new CleanCodeDaemonStageProcess(process, file, settings);
         }
     }
 }
