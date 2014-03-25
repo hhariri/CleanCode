@@ -52,7 +52,9 @@
     <None Include="NuGetPackage.ps1" />
     <None Include="NuGetSetup.ps1" />
     <None Include="NuGet.exe" />
-    <None Include="NuGet.config" />
+    <None Include="NuGet.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Package.nuspec" />
     <None Include="tools\init.ps1" />
     <None Include="tools\install.ps1" />
@@ -66,7 +68,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CleanCode\CleanCode.8.2.csproj">
       <Project>{5f96119c-2646-4298-ad40-30209e7e7bb2}</Project>
-      <Name>CleanCode.8.1</Name>
+      <Name>CleanCode.8.2</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

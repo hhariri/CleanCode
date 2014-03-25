@@ -29,6 +29,7 @@ using System;
 using System.Linq;
 using CleanCode.Features;
 using CleanCode.Features.ClassTooBig;
+using CleanCode.Features.MethodTooLong;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Progress;
@@ -47,6 +48,7 @@ namespace CleanCode
     {
         private readonly IDaemonProcess daemonProcess;
         private readonly IContextBoundSettingsStore settingsStore;
+        private readonly MethodTooLongCheck methodTooLongCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
@@ -54,6 +56,7 @@ namespace CleanCode
             this.daemonProcess = daemonProcess;
 
             this.settingsStore = settingsStore;
+            methodTooLongCheck = new MethodTooLongCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -69,7 +72,7 @@ namespace CleanCode
 
         public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
         {
-            CheckMethodTooLong(methodDeclaration, context);
+            methodTooLongCheck.Execute(methodDeclaration, context);
             CheckTooManyArguments(methodDeclaration, context);
             CheckExcessiveIndentation(methodDeclaration, context);
             CheckMethodNameNotMeaningful(methodDeclaration, context);
@@ -129,18 +132,6 @@ namespace CleanCode
             if (parameterDeclarations.Count > maxParameters)
             {
                 var highlighting = new Features.TooManyMethodArguments.Highlighting(Common.Warning_TooManyMethodArguments);
-                context.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
-            }
-        }
-
-        private void CheckMethodTooLong(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
-        {
-            var maxLength = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodLines);
-
-            var statementCount = methodDeclaration.CountChildren<IStatement>();
-            if (statementCount > maxLength)
-            {
-                var highlighting = new Features.MethodTooLong.Highlighting(Common.Warning_MethodTooLong);
                 context.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
             }
         }
