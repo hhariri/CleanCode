@@ -64,7 +64,7 @@
     <Folder Include="src\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CleanCode\CleanCode.8.1.csproj">
+    <ProjectReference Include="..\CleanCode\CleanCode.8.2.csproj">
       <Project>{5f96119c-2646-4298-ad40-30209e7e7bb2}</Project>
       <Name>CleanCode.8.1</Name>
     </ProjectReference>
