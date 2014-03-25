@@ -25,41 +25,21 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using System;
-using JetBrains.Application.Progress;
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Psi;
-using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.Features.ClassTooBig
+namespace CleanCode.Features.MethodNamesNotMeaningful
 {
-    public class DaemonStageProcess : CSharpDaemonStageProcessBase
+    [SolutionComponent]
+    public class InvalidateOnMinimumMethodNameLenghtChange
     {
-        private readonly IDaemonProcess daemonProcess;
-        private readonly int maxDepth;
-
-        public DaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, int maxDepth)
-            : base(daemonProcess, file)
+        public InvalidateOnMinimumMethodNameLenghtChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
         {
-            this.daemonProcess = daemonProcess;
-            this.maxDepth = maxDepth;
-        }
-
-        public override void Execute(Action<DaemonStageResult> commiter)
-        {
-            // Running visitor against the PSI
-            var elementProcessor = new ElementProcessor(daemonProcess, maxDepth);
-            File.ProcessDescendants(elementProcessor);
-
-            // Checking if the daemon is interrupted by user activity
-            if (daemonProcess.InterruptFlag)
-            {
-                throw new ProcessCancelledException();
-            }
-
-            // Commit the result into document
-            commiter(new DaemonStageResult(elementProcessor.Highlightings));
+            var minMethodNameLenght = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MinimumMethodNameLenghtEnabled);
+            settingsStore.AdviseChange(lifetime, minMethodNameLenght, daemon.Invalidate);
         }
     }
 }

@@ -51,13 +51,21 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\ChainedReferences\Highlighting.cs" />
+    <Compile Include="Features\ChainedReferences\InvalidateOnMaximumChainedCalls.cs" />
+    <Compile Include="Features\ClassTooBig\Highlighting.cs" />
+    <Compile Include="Features\ClassTooBig\InvalidateOnMaximumMethodsPerClass.cs" />
+    <Compile Include="Features\ExcessiveIndentation\Highlighting.cs" />
+    <Compile Include="Features\ExcessiveIndentation\InvalidateOnExcessiveIndentationChange.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
     <Compile Include="CleanCodeDaemonStageProcess.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DaemonStage.cs">
+    <Compile Include="CleanCodeDaemonStage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Features\MethodNamesNotMeaningful\Highlighting.cs" />
+    <Compile Include="Features\MethodNamesNotMeaningful\InvalidateOnMinimumMethodNameLenghtChange.cs" />
     <Compile Include="Features\MethodTooLong\Highlighting.cs">
       <SubType>Code</SubType>
     </Compile>

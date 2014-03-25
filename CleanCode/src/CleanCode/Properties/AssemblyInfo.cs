@@ -97,32 +97,42 @@ using JetBrains.ReSharper.Daemon;
         Severity.SUGGESTION,
         false)]
 
-//[assembly:
-//  RegisterConfigurableSeverity(
-//        CleanCode.Features.ClassTooBig.Highlighting.SeverityID,
-//        null,
-//        HighlightingGroupIds.CodeSmell,
-//        "Class Too Big",
-//        "This class contains too many methods",
-//        Severity.SUGGESTION,
-//        false)]
+[assembly:
+  RegisterConfigurableSeverity(
+        CleanCode.Features.ClassTooBig.Highlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Class Too Big",
+        "This class contains too many methods",
+        Severity.SUGGESTION,
+        false)]
 
-//[assembly:
-//  RegisterConfigurableSeverity(
-//        CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
-//        null,
-//        HighlightingGroupIds.CodeSmell,
-//        "Excessive Depth",
-//        "The nesting in this method is excessive.",
-//        Severity.SUGGESTION,
-//        false)]
+[assembly:
+  RegisterConfigurableSeverity(
+        CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Excessive Depth",
+        "The nesting in this method is excessive.",
+        Severity.SUGGESTION,
+        false)]
 
-//[assembly:
-//  RegisterConfigurableSeverity(
-//        CleanCode.Features.ChainedReferences.Highlighting.SeverityID,
-//        null,
-//        HighlightingGroupIds.CodeSmell,
-//        "Chained References",
-//        "There are too many chained references.",
-//        Severity.HINT,
-//        false)]
+[assembly:
+  RegisterConfigurableSeverity(
+        CleanCode.Features.ChainedReferences.Highlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Chained References",
+        "There are too many chained references.",
+        Severity.HINT,
+        false)]
+
+[assembly:
+  RegisterConfigurableSeverity(
+        CleanCode.Features.MethodNamesNotMeaningful.Highlighting.SeverityID,
+        null,
+        HighlightingGroupIds.CodeSmell,
+        "Method Name Not Meaningful",
+        "This method name is to short to be meaningful. Please, choose a better name that describes its intent.",
+        Severity.HINT,
+        false)]

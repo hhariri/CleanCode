@@ -1,5 +1,4 @@
 #region License
-
 // Copyright (C) 2012 Hadi Hariri and Contributors
 // 
 // Permission is hereby granted, free of charge, to any person 
@@ -24,29 +23,49 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
 // OR OTHER DEALINGS IN THE SOFTWARE.
-
 #endregion
 
-using CleanCode.Settings;
-using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Features.ClassTooBig
-{ 
-    [DaemonStage]
-    public class DaemonStage : CSharpDaemonStageBase
+namespace CleanCode.Features.MethodNamesNotMeaningful
+{
+    /// <summary>
+    /// The highlighting that warns about high complexity
+    /// </summary>
+    /// 
+    // TODO: Change to ConfigurableSeverityHighlighting
+    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
+
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    public class Highlighting : IHighlighting
     {
-        protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
-            DaemonProcessKind processKind, ICSharpFile file)
+        internal const string SeverityID = "MethodNamesNotMeaningful";
+        private readonly string tooltip;
+
+        public Highlighting(string toolTip)
         {
-            if (settings.GetValue((CleanCodeSettings s) => s.MaximumMethodsPerClassEnabled))
-            {
-                var maxMethodsPerClass = settings.GetValue((CleanCodeSettings s) => s.MaximumMethodsPerClass);                
-                return new DaemonStageProcess(process, file, maxMethodsPerClass);
-            }
-            return null;
+            tooltip = toolTip;
+        }
+
+        public string ToolTip
+        {
+            get { return tooltip; }
+        }
+
+        public string ErrorStripeToolTip
+        {
+            get { return tooltip; }
+        }
+
+        public int NavigationOffsetPatch
+        {
+            get { return 0; }
+        }
+
+        public bool IsValid()
+        {
+            return true;
         }
     }
 }

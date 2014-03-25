@@ -34,9 +34,9 @@ using JetBrains.ReSharper.Daemon;
 namespace CleanCode.Features.ExcessiveIndentation
 {
     [SolutionComponent]
-    public class InvalidateOnMaxiumDepthChange
+    public class InvalidateOnExcessiveIndentationChange
     {
-        public InvalidateOnMaxiumDepthChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        public InvalidateOnExcessiveIndentationChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
         {
             var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumCodeDepth);
             settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);

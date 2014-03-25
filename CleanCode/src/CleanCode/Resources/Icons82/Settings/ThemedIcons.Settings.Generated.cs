@@ -8,8 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::System.Windows.Markup.XmlnsDefinitionAttribute("urn:shemas-jetbrains-com:ui-application-icons-settings", "CleanCode.Resources.Icons80")]
-[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="CleanCode.8.0;component/Resources/Icons82/Settings/ThemedIcons.Settings.Generat" +
+[assembly: global::System.Windows.Markup.XmlnsDefinitionAttribute("urn:shemas-jetbrains-com:ui-application-icons-settings", "CleanCode.Resources.Icons82")]
+[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="CleanCode.8.2;component/Resources/Icons82/Settings/ThemedIcons.Settings.Generat" +
 	"ed.Xaml", IconNames=new string[] {
 		"CleanCode"})]
 

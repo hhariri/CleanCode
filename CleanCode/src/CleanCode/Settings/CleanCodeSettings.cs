@@ -64,5 +64,10 @@ namespace CleanCode.Settings
         public bool MaximumChainedReferencesEnabled { get; set; }
         [SettingsEntry(2, "MaximumChainedReferences")]
         public int MaximumChainedReferences { get; set; }
+
+        [SettingsEntry(true, "MaximumChainedReferencesEnabled")]
+        public bool MinimumMethodNameLenghtEnabled { get; set; }
+        [SettingsEntry(5, "MinimumMethodNameLenghtEnabled")]
+        public int MinimumMethodNameLenght { get; set; }
     }
 }

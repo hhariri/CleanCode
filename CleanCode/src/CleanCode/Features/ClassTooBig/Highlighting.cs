@@ -29,14 +29,7 @@ using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.Features.ClassTooBig
-{
-    /// <summary>
-    /// The highlighting that warns about high complexity
-    /// </summary>
-    /// 
-    // TODO: Change to ConfigurableSeverityHighlighting
-    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
-
+{ 
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {

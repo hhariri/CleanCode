@@ -28,6 +28,7 @@
 using System;
 using System.Linq;
 using CleanCode.Features;
+using CleanCode.Features.ClassTooBig;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Progress;
@@ -66,22 +67,47 @@ namespace CleanCode
             }
         }
 
-        public override void VisitMethodDeclaration(IMethodDeclaration method, IHighlightingConsumer context)
+        public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
         {
-            CheckMethodTooLong(method, context);
-            CheckTooManyArguments(method, context);
+            CheckMethodTooLong(methodDeclaration, context);
+            CheckTooManyArguments(methodDeclaration, context);
+            CheckExcessiveIndentation(methodDeclaration, context);
+            CheckMethodNameNotMeaningful(methodDeclaration, context);
         }
 
-        public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclarationParam, IHighlightingConsumer context)
+        private void CheckMethodNameNotMeaningful(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
         {
-            CheckTooManyDependencies(constructorDeclarationParam, context);
+            var minimumMethodNameLenght = settingsStore.GetValue((CleanCodeSettings s) => s.MinimumMethodNameLenght);
+            var methodNameLenght = methodDeclaration.NameIdentifier.GetText().Length;
+            if (minimumMethodNameLenght > methodNameLenght)
+            {
+                var highlighting = new Features.ExcessiveIndentation.Highlighting(Common.WarningMethodNameNotMeaningful);
+                context.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
+            }
         }
 
-        private void CheckTooManyDependencies(IConstructorDeclaration constructorDeclarationParam, IHighlightingConsumer context)
+        private void CheckExcessiveIndentation(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
+        {            
+            var maxIndentation = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumCodeDepth);
+            var depth = methodDeclaration.GetChildrenDepth();
+
+            if (depth > maxIndentation)
+            {
+                var highlighting = new Features.ExcessiveIndentation.Highlighting(Common.Warning_ExcessiveDepth);
+                context.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
+            }
+        }
+
+        public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
+        {
+            CheckTooManyDependencies(constructorDeclaration, context);
+        }
+
+        private void CheckTooManyDependencies(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
         {
             var maxDependencies = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumDependencies);
 
-            var depedencies = constructorDeclarationParam.ParameterDeclarations.Select(
+            var depedencies = constructorDeclaration.ParameterDeclarations.Select(
                 declaration => declaration.DeclaredElement != null &&
                                declaration.DeclaredElement.Type.IsInterfaceType());
 
@@ -90,7 +116,7 @@ namespace CleanCode
             if (dependenciesCount > maxDependencies)
             {
                 var highlighting = new Features.TooManyDependencies.Highlighting(Common.Warning_TooManyDependencies);
-                context.AddHighlighting(highlighting, constructorDeclarationParam.GetNameDocumentRange());
+                context.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
             }
         }
 
@@ -119,42 +145,58 @@ namespace CleanCode
             }
         }
 
-        //#region Used by ChainedReferences (Refactor as class)
+        #region Used by ChainedReferences (Refactor as class)
 
-        //public override void ProcessAfterInterior(ITreeNode element, IHighlightingConsumer consumer)
-        //{
-        //    //CheckChainedReferences(element, consumer);
-        //}
+        public override void VisitReferenceExpression(IReferenceExpression referenceExpressionParam, IHighlightingConsumer context)
+        {            
+            CheckChainedReferences(referenceExpressionParam, context);        
+        }
 
-        //private void CheckChainedReferences(ITreeNode element, IHighlightingConsumer consumer)
-        //{
-        //    var reference = element as IReferenceExpression;
+        private void CheckChainedReferences(IReferenceExpression element, IHighlightingConsumer consumer)
+        {
+            if (element != null && !ParentIsReference(element))
+            {
+                ProcessReference(element, consumer);
+            }
+        }
 
-        //    if (reference != null && !ParentIsReference(element))
-        //    {
-        //        ProcessReference(reference, consumer);
-        //    }
-        //}
+        private void ProcessReference(IReferenceExpression reference, IHighlightingConsumer consumer)
+        {
+            var length = reference.CountChildren<IReferenceExpression>();
+            var maximumChainedReferences = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumChainedReferences);
 
-        //private void ProcessReference(IReferenceExpression reference, IHighlightingConsumer consumer)
-        //{
-        //    var length = reference.CountChildren<IReferenceExpression>();
-        //    var maximumChainedReferences = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumChainedReferences);
+            if (length > maximumChainedReferences)
+            {
+                var highlighting = new Features.ChainedReferences.Highlighting(Common.Warning_ChainedReferences);
+                consumer.AddHighlighting(highlighting, reference.GetDocumentRange());
+            }
+        }
 
-        //    if (length > maximumChainedReferences)
-        //    {
-        //        var highlighting = new Features.ChainedReferences.Highlighting(Common.Warning_ChainedReferences);
-        //        consumer.AddHighlighting(highlighting, reference.GetDocumentRange());
-        //    }
-        //}
+        private static bool ParentIsReference(ITreeNode element)
+        {
+            var reference = element.Parent as IReferenceExpression;
+            return reference != null;
+        }
 
-        //private bool ParentIsReference(ITreeNode element)
-        //{
-        //    var reference = element.Parent as IReferenceExpression;
-        //    return reference != null;
-        //}
+        #endregion
 
-        //#endregion
+        public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
+        {
+            CheckClassTooBig(classDeclaration, context);
+        }
 
+        private void CheckClassTooBig(IClassDeclaration classDeclaration, IHighlightingConsumer context)
+        {
+            var methodCount = classDeclaration.CountChildren<IMethodDeclaration>();
+            var maxMethods = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodsPerClass);
+
+            if (methodCount > maxMethods)
+            {
+                var declarationIdentifier = classDeclaration.NameIdentifier;
+                var documentRange = declarationIdentifier.GetDocumentRange();
+                var highlighting = new Features.MethodTooLong.Highlighting(Common.Warning_ClassTooBig);
+                context.AddHighlighting(highlighting, documentRange);
+            }
+        }
     }
 }

@@ -25,6 +25,9 @@ namespace CleanCode.Settings
         private bool enableChainedReferences;
         private int maxChainedReferences;
 
+        private bool enableMinimumMethodNameLenght;
+        private int minimumMethodNameLenght;
+
         public OptionsViewModel(OptionsSettingsSmartContext settings)
         {
             this.settings = settings;
@@ -36,6 +39,7 @@ namespace CleanCode.Settings
             EnabledMaxDepth = settings.GetValue((CleanCodeSettings e) => e.MaximumCodeDepthEnabled);
             EnableClassTooBig = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodsPerClassEnabled);
             EnableChainedReferences = settings.GetValue((CleanCodeSettings e) => e.MaximumChainedReferencesEnabled);
+            EnableMinimumMethodNameLegtht = settings.GetValue((CleanCodeSettings e) => e.MaximumChainedReferencesEnabled);
 
             MaxMethodArguments = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodArguments);
             MaxLinesPerMethod = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodLines);
@@ -43,6 +47,7 @@ namespace CleanCode.Settings
             MaxDepth = settings.GetValue((CleanCodeSettings e) => e.MaximumCodeDepth);
             maxMethodsPerClass = settings.GetValue((CleanCodeSettings e) => e.MaximumMethodsPerClass);
             MaxChainedReferences = settings.GetValue((CleanCodeSettings e) => e.MaximumChainedReferences);
+            MinimumMethodNameLegth = settings.GetValue((CleanCodeSettings e) => e.MinimumMethodNameLenght);
         }
 
         public bool EnabledMethodTooLong
@@ -173,6 +178,30 @@ namespace CleanCode.Settings
                 if (value.Equals(enableChainedReferences)) return;
                 enableChainedReferences = value;
                 settings.SetValue((CleanCodeSettings e) => e.MaximumChainedReferencesEnabled, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public int MinimumMethodNameLegth
+        {
+            get { return minimumMethodNameLenght; }
+            set
+            {
+                if (value == minimumMethodNameLenght) return;
+                minimumMethodNameLenght = value;
+                settings.SetValue((CleanCodeSettings e) => e.MinimumMethodNameLenght, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public bool EnableMinimumMethodNameLegtht
+        {
+            get { return enableMinimumMethodNameLenght; }
+            set
+            {
+                if (value.Equals(enableMinimumMethodNameLenght)) return;
+                enableMinimumMethodNameLenght = value;
+                settings.SetValue((CleanCodeSettings e) => e.MinimumMethodNameLenghtEnabled, value);
                 OnPropertyChanged();
             }
         }

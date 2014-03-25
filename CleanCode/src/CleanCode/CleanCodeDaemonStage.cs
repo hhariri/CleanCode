@@ -27,26 +27,20 @@
 
 #endregion
 
-using CleanCode.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 
-namespace CleanCode.Features.ExcessiveIndentation
-{ 
+namespace CleanCode
+{
     [DaemonStage]
-    public class DaemonStage : CSharpDaemonStageBase
+    public class CleanCodeDaemonStage : CSharpDaemonStageBase
     {
         protected override IDaemonStageProcess CreateProcess(IDaemonProcess process, IContextBoundSettingsStore settings,
             DaemonProcessKind processKind, ICSharpFile file)
         {
-            if (settings.GetValue((CleanCodeSettings s) => s.MaximumCodeDepthEnabled))
-            {
-                var maxDepth = settings.GetValue((CleanCodeSettings s) => s.MaximumCodeDepth);
-                return new DaemonStageProcess(process, file, maxDepth);
-            }
-            return null;
+            return new CleanCodeDaemonStageProcess(process, file, settings);
         }
     }
 }

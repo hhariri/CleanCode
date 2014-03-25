@@ -135,4 +135,7 @@
   <data name="Warning_ChainedReferences" xml:space="preserve">
     <value>Too many chained references.</value>
   </data>
+  <data name="WarningMethodNameNotMeaningful" xml:space="preserve">
+    <value>The name of this method is too short to be meaningful.</value>
+  </data>
 </root>
