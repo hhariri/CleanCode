@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.2.1158\build\JetBrains.ReSharper.SDK.Props')" />
-  <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Props')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Props" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -78,13 +77,12 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources\Icons81\Localization.cs" />
-    <Compile Include="Resources\Icons81\Settings\ThemedIcons.Settings.Generated.cs" />
     <Compile Include="Resources\Common.Designer.cs">
       <DependentUpon>Common.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Resources\Icons82\Settings\ThemedIcons.Settings.Generated.cs" />
     <Compile Include="Resources\Localization.cs" />
     <Compile Include="Resources\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -116,10 +114,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ThemedIconPng Include="Resources\Icons81\Settings\CleanCode.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Include="Resources\Icons81\Settings\ThemedIcons.Settings.Generated.Xaml">
+    <Page Include="Resources\Icons82\Settings\ThemedIcons.Settings.Generated.Xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -128,10 +123,12 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\Icons82\Settings\CleanCode.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets')" />
-  <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.555\build\JetBrains.ReSharper.SDK.Targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>

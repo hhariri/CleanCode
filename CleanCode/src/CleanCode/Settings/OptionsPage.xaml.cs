@@ -1,4 +1,4 @@
-﻿using CleanCode.Resources.Icons81;
+﻿using CleanCode.Resources.Icons82;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Features.Environment.Options.Inspections;
 using JetBrains.UI.Application;
