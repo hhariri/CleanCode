@@ -19,7 +19,7 @@ namespace CleanCode.Features.ClassTooBig
         {
             var maxLength = Threshold;
 
-            var statementCount = classDeclaration.CountChildren<IStatement>();
+            var statementCount = classDeclaration.CountChildren<IMethodDeclaration>();
             if (statementCount > maxLength)
             {
                 var declarationIdentifier = classDeclaration.NameIdentifier;
