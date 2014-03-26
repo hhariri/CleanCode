@@ -38,7 +38,7 @@ namespace CleanCode.Features.ChainedReferences
     {
         public InvalidateOnMaximumChainedCalls(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
         {
-            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumChainedReferences);
+            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum);
             settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);
         }
     }

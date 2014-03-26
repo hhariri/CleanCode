@@ -38,7 +38,7 @@ namespace CleanCode.Features.TooManyMethodArguments
   {
     public InvalidateOnMaximumMethodArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-      var maxArguments = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumMethodArguments);
+      var maxArguments = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum);
       settingsStore.AdviseChange(lifetime, maxArguments, daemon.Invalidate);
     }
   }

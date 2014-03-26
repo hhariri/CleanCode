@@ -28,8 +28,14 @@
 using System;
 using System.Linq;
 using CleanCode.Features;
+using CleanCode.Features.ChainedReferences;
 using CleanCode.Features.ClassTooBig;
+using CleanCode.Features.ExcessiveIndentation;
+using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
+using CleanCode.Features.TooManyChainedReferences;
+using CleanCode.Features.TooManyDependencies;
+using CleanCode.Features.TooManyMethodArguments;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Progress;
@@ -48,15 +54,29 @@ namespace CleanCode
     {
         private readonly IDaemonProcess daemonProcess;
         private readonly IContextBoundSettingsStore settingsStore;
+
         private readonly MethodTooLongCheck methodTooLongCheck;
+        private readonly ClassTooBigCheck classTooBigCheck;
+        private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
+        private readonly ExcessiveIndentationCheck excessiveIndentationCheck;
+        private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
+        private readonly MethodNamesNotMeaningfulCheck methodNamesNotMeaningfulCheck;
+        private readonly TooManyChainedReferencesCheck tooManyChainedReferencesCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
         {
             this.daemonProcess = daemonProcess;
-
             this.settingsStore = settingsStore;
+
+            // Simple checks.
             methodTooLongCheck = new MethodTooLongCheck(settingsStore);
+            classTooBigCheck = new ClassTooBigCheck(settingsStore);
+            tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
+            excessiveIndentationCheck = new ExcessiveIndentationCheck(settingsStore);
+            tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
+            methodNamesNotMeaningfulCheck = new MethodNamesNotMeaningfulCheck(settingsStore);
+            tooManyChainedReferencesCheck = new TooManyChainedReferencesCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -72,122 +92,25 @@ namespace CleanCode
 
         public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
         {
-            methodTooLongCheck.Execute(methodDeclaration, context);
-            CheckTooManyArguments(methodDeclaration, context);
-            CheckExcessiveIndentation(methodDeclaration, context);
-            CheckMethodNameNotMeaningful(methodDeclaration, context);
-        }
-
-        private void CheckMethodNameNotMeaningful(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
-        {
-            var minimumMethodNameLenght = settingsStore.GetValue((CleanCodeSettings s) => s.MinimumMethodNameLenght);
-            var methodNameLenght = methodDeclaration.NameIdentifier.GetText().Length;
-            if (minimumMethodNameLenght > methodNameLenght)
-            {
-                var highlighting = new Features.ExcessiveIndentation.Highlighting(Common.WarningMethodNameNotMeaningful);
-                context.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
-            }
-        }
-
-        private void CheckExcessiveIndentation(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
-        {            
-            var maxIndentation = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumCodeDepth);
-            var depth = methodDeclaration.GetChildrenDepth();
-
-            if (depth > maxIndentation)
-            {
-                var highlighting = new Features.ExcessiveIndentation.Highlighting(Common.Warning_ExcessiveDepth);
-                context.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
-            }
+            methodTooLongCheck.ExecuteIfEnabled(methodDeclaration, context);
+            tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
+            excessiveIndentationCheck.ExecuteIfEnabled(methodDeclaration, context);
+            methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
         }
 
         public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
         {
-            CheckTooManyDependencies(constructorDeclaration, context);
+            tooManyDependenciesCheck.ExecuteIfEnabled(constructorDeclaration, context);
         }
-
-        private void CheckTooManyDependencies(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
-        {
-            var maxDependencies = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumDependencies);
-
-            var depedencies = constructorDeclaration.ParameterDeclarations.Select(
-                declaration => declaration.DeclaredElement != null &&
-                               declaration.DeclaredElement.Type.IsInterfaceType());
-
-            var dependenciesCount = depedencies.Count();
-
-            if (dependenciesCount > maxDependencies)
-            {
-                var highlighting = new Features.TooManyDependencies.Highlighting(Common.Warning_TooManyDependencies);
-                context.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
-            }
-        }
-
-
-        private void CheckTooManyArguments(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
-        {
-            var parameterDeclarations = methodDeclaration.ParameterDeclarations;
-            var maxParameters = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodArguments);
-
-            if (parameterDeclarations.Count > maxParameters)
-            {
-                var highlighting = new Features.TooManyMethodArguments.Highlighting(Common.Warning_TooManyMethodArguments);
-                context.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
-            }
-        }
-
-        #region Used by ChainedReferences (Refactor as class)
 
         public override void VisitReferenceExpression(IReferenceExpression referenceExpressionParam, IHighlightingConsumer context)
-        {            
-            CheckChainedReferences(referenceExpressionParam, context);        
-        }
-
-        private void CheckChainedReferences(IReferenceExpression element, IHighlightingConsumer consumer)
         {
-            if (element != null && !ParentIsReference(element))
-            {
-                ProcessReference(element, consumer);
-            }
+            tooManyChainedReferencesCheck.ExecuteIfEnabled(referenceExpressionParam, context);
         }
-
-        private void ProcessReference(IReferenceExpression reference, IHighlightingConsumer consumer)
-        {
-            var length = reference.CountChildren<IReferenceExpression>();
-            var maximumChainedReferences = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumChainedReferences);
-
-            if (length > maximumChainedReferences)
-            {
-                var highlighting = new Features.ChainedReferences.Highlighting(Common.Warning_ChainedReferences);
-                consumer.AddHighlighting(highlighting, reference.GetDocumentRange());
-            }
-        }
-
-        private static bool ParentIsReference(ITreeNode element)
-        {
-            var reference = element.Parent as IReferenceExpression;
-            return reference != null;
-        }
-
-        #endregion
 
         public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
         {
-            CheckClassTooBig(classDeclaration, context);
-        }
-
-        private void CheckClassTooBig(IClassDeclaration classDeclaration, IHighlightingConsumer context)
-        {
-            var methodCount = classDeclaration.CountChildren<IMethodDeclaration>();
-            var maxMethods = settingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodsPerClass);
-
-            if (methodCount > maxMethods)
-            {
-                var declarationIdentifier = classDeclaration.NameIdentifier;
-                var documentRange = declarationIdentifier.GetDocumentRange();
-                var highlighting = new Features.MethodTooLong.Highlighting(Common.Warning_ClassTooBig);
-                context.AddHighlighting(highlighting, documentRange);
-            }
+            classTooBigCheck.ExecuteIfEnabled(classDeclaration, context);
         }
     }
 }

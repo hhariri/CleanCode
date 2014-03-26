@@ -13,7 +13,7 @@ namespace CleanCode.Features
             this.settingsStore = settingsStore;
         }
 
-        public void Execute(TElement methodDeclaration, IHighlightingConsumer context)
+        public void ExecuteIfEnabled(TElement methodDeclaration, IHighlightingConsumer context)
         {
             if (!IsEnabled)
             {
@@ -22,7 +22,7 @@ namespace CleanCode.Features
             ExecuteCore(methodDeclaration, context);
         }
 
-        protected abstract void ExecuteCore(TElement element, IHighlightingConsumer context);
+        protected abstract void ExecuteCore(TElement element, IHighlightingConsumer consumer);
 
         protected abstract TThreshold Threshold { get; }
 

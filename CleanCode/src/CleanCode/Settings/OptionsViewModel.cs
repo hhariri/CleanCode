@@ -33,50 +33,86 @@ namespace CleanCode.Settings
 
         public ArrayList Options { get; set; }
 
+        // TODO: We need to refactor this method.
+        // ReSharper disable once MethodTooLong
         private static ArrayList GetViewModels(IContextBoundSettingsStore settings)
         {
             var viewModels = new ArrayList();
 
             var methodTooLong = new SingleCheckSettingViewModel<int>(
-                settings, codeSettings => codeSettings.MethodTooLongEnabled,
-                codeSettings => codeSettings.MaximumMethodLines);
+                settings,
+                codeSettings => codeSettings.MethodTooLongEnabled,
+                codeSettings => codeSettings.MethodTooLongMaximum)
+                {
+                    IsEnabledDescription = Resources.Settings.MethodTooLongCheck,
+                    ValueDescription = Resources.Settings.TooLongLinesPerMethod,
+                };
             viewModels.Add(methodTooLong);
 
-            //var tooManyDependencies = new SingleCheckSettingViewModel<int>(settings.GetValue(
-            //    (CleanCodeSettings cleanCodeSettings) => cleanCodeSettings),
-            //    e => e.MaximumDependenciesEnabled,
-            //    e => e.MaximumDependencies);
-            //viewModels.Add(tooManyDependencies);
+            var tooManyDependencies = new SingleCheckSettingViewModel<int>(
+                settings,
+                e => e.TooManyDependenciesMaximumEnabled,
+                e => e.TooManyDependenciesMaximum)
+                {
+                    IsEnabledDescription = Resources.Settings.MaximumDependenciesCheck,
+                    ValueDescription = Resources.Settings.TooManyDependencies,
+                };
+            viewModels.Add(tooManyDependencies);
 
-            //var tooManyMethodArguments = new SingleCheckSettingViewModel<int>(settings.GetValue(
-            //    (CleanCodeSettings cleanCodeSettings) => cleanCodeSettings),
-            //    e => e.MaximumMethodArgumentsEnabled,
-            //    e => e.MaximumMethodArguments);
-            //viewModels.Add(tooManyMethodArguments);
+            var tooManyMethodArguments = new SingleCheckSettingViewModel<int>(
+                settings,
+                e => e.TooManyMethodArgumentsEnabled,
+                e => e.TooManyMethodArgumentsMaximum)
+                {
+                    IsEnabledDescription = Resources.Settings.MaximumMethodArgumentsCheck,
+                    ValueDescription = Resources.Settings.TooManyMethodArguments,
+                };
 
-            //var enabledMaxDepth = new SingleCheckSettingViewModel<int>(settings.GetValue(
-            //    (CleanCodeSettings cleanCodeSettings) => cleanCodeSettings),
-            //    e => e.MaximumDependenciesEnabled,
-            //    e => e.MaximumCodeDepth);
-            //viewModels.Add(enabledMaxDepth);
+            viewModels.Add(tooManyMethodArguments);
 
-            //var enableClassTooBig = new SingleCheckSettingViewModel<int>(settings.GetValue(
-            //    (CleanCodeSettings cleanCodeSettings) => cleanCodeSettings),
-            //    e => e.MaximumMethodsPerClassEnabled,
-            //    e => e.MaximumMethodsPerClass);
-            //viewModels.Add(enableClassTooBig);
+            var enabledMaxDepth = new SingleCheckSettingViewModel<int>(
+                settings,
+                e => e.TooManyDependenciesMaximumEnabled,
+                e => e.ExcessiveIndentationMaximum)
+                {
+                    IsEnabledDescription = Resources.Settings.ExcessiveDepthCheck,
+                    ValueDescription = Resources.Settings.ExcessiveDepth,
+                };
 
-            //var enableChainedReferences = new SingleCheckSettingViewModel<int>(settings.GetValue(
-            //    (CleanCodeSettings cleanCodeSettings) => cleanCodeSettings),
-            //    e => e.MaximumChainedReferencesEnabled,
-            //    e => e.MaximumChainedReferences);
-            //viewModels.Add(enableChainedReferences);
+            viewModels.Add(enabledMaxDepth);
 
-            //var enableMinimumMethodNameLength = new SingleCheckSettingViewModel<int>(settings.GetValue(
-            //    (CleanCodeSettings cleanCodeSettings) => cleanCodeSettings),
-            //    e => e.MinimumMethodNameLenghtEnabled,
-            //    e => e.MinimumMethodNameLenght);
-            //viewModels.Add(enableMinimumMethodNameLength);
+            var enableClassTooBig = new SingleCheckSettingViewModel<int>(
+                settings,
+                e => e.ClassTooBigEnabled,
+                e => e.ClassTooBigMaximum)
+                {
+                    IsEnabledDescription = Resources.Settings.ClassTooBigCheck,
+                    ValueDescription = Resources.Settings.ClassTooBig,
+                };
+
+            viewModels.Add(enableClassTooBig);
+
+            var enableChainedReferences = new SingleCheckSettingViewModel<int>(
+                settings,
+                e => e.TooManyChainedReferencesEnabled,
+                e => e.TooManyChainedReferencesMaximum)
+                {
+                    IsEnabledDescription = Resources.Settings.MaxChainedReferencesCheck,
+                    ValueDescription = Resources.Settings.MaxChainedReferences,
+                };
+
+            viewModels.Add(enableChainedReferences);
+
+            var enableMinimumMethodNameLength = new SingleCheckSettingViewModel<int>(
+                settings,
+                e => e.MethodNameNotMeaningfulMinimumEnabled,
+                e => e.MethodNameNotMeaningfulMinimum)
+                {
+                    IsEnabledDescription = Resources.Settings.MinimumMethodNameLengthCheck,
+                    ValueDescription = Resources.Settings.MinimumMethodNameLength,
+                };
+
+            viewModels.Add(enableMinimumMethodNameLength);
 
             return viewModels;
         }

@@ -38,7 +38,7 @@ namespace CleanCode.Features.ClassTooBig
     {
         public InvalidateOnMaximumMethodsPerClass(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
         {
-            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumMethodsPerClass);
+            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.ClassTooBigMaximum);
             settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);
         }
     }

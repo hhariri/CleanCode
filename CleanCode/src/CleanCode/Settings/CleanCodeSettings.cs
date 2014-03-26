@@ -35,39 +35,39 @@ namespace CleanCode.Settings
     [SettingsKey(typeof(CodeInspectionSettings), "CleanCode")]
     public class CleanCodeSettings
     {
-        [SettingsEntry(3, "MaximumDependencies")]
-        public readonly int MaximumDependencies;
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumDependenciesEnabled;
+        [SettingsEntry(3, "TooManyDependenciesMaximum")]
+        public readonly int TooManyDependenciesMaximum;
+        [SettingsEntry(true, "TooManyDependenciesMaximumEnabled")]
+        public readonly bool TooManyDependenciesMaximumEnabled;
 
-        [SettingsEntry(3, "MaximumMethodArguments")]
-        public readonly int MaximumMethodArguments;
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumMethodArgumentsEnabled;
+        [SettingsEntry(3, "TooManyMethodArgumentsMaximum")]
+        public readonly int TooManyMethodArgumentsMaximum;
+        [SettingsEntry(true, "TooManyMethodArgumentsEnabled")]
+        public readonly bool TooManyMethodArgumentsEnabled;
 
-        [SettingsEntry(true, "EnabledMethodTooLong")]
+        [SettingsEntry(true, "MethodTooLongEnabled")]
         public readonly bool MethodTooLongEnabled;
-        [SettingsEntry(15, "MaximumMethodLines")]
-        public readonly int MaximumMethodLines;
+        [SettingsEntry(15, "MethodTooLongMaximum")]
+        public readonly int MethodTooLongMaximum;
 
-        [SettingsEntry(3, "MaximumCodeDepth")]
-        public int MaximumCodeDepth { get; set; }
-        [SettingsEntry(true, "MaximumCodeDepthEnabled")]
-        public bool MaximumCodeDepthEnabled { get; set; }
+        [SettingsEntry(3, "ExcessiveIndentationMaximum")]
+        public int ExcessiveIndentationMaximum { get; set; }
+        [SettingsEntry(true, "ExcessiveIndentationEnabled")]
+        public bool ExcessiveIndentationEnabled { get; set; }
 
-        [SettingsEntry(true, "MaximumMethodsPerClassEnabled")]
-        public bool MaximumMethodsPerClassEnabled { get; set; }
-        [SettingsEntry(20, "MaximumMethodsPerClass")]
-        public int MaximumMethodsPerClass { get; set; }
+        [SettingsEntry(true, "ClassTooBigEnabled")]
+        public bool ClassTooBigEnabled { get; set; }
+        [SettingsEntry(20, "ClassTooBigMaximum")]
+        public int ClassTooBigMaximum { get; set; }
 
-        [SettingsEntry(true, "MaximumChainedReferencesEnabled")]
-        public bool MaximumChainedReferencesEnabled { get; set; }
-        [SettingsEntry(2, "MaximumChainedReferences")]
-        public int MaximumChainedReferences { get; set; }
+        [SettingsEntry(true, "TooManyChainedReferencesEnabled")]
+        public bool TooManyChainedReferencesEnabled { get; set; }
+        [SettingsEntry(2, "TooManyChainedReferencesMaximum")]
+        public int TooManyChainedReferencesMaximum { get; set; }
 
-        [SettingsEntry(true, "MaximumChainedReferencesEnabled")]
-        public bool MinimumMethodNameLenghtEnabled { get; set; }
-        [SettingsEntry(5, "MinimumMethodNameLenghtEnabled")]
-        public int MinimumMethodNameLenght { get; set; }
+        [SettingsEntry(true, "MethodNameNotMeaningfulMinimumEnabled")]
+        public bool MethodNameNotMeaningfulMinimumEnabled { get; set; }
+        [SettingsEntry(4, "MethodNameNotMeaningfulMinimum")]
+        public int MethodNameNotMeaningfulMinimum { get; set; }
     }
 }

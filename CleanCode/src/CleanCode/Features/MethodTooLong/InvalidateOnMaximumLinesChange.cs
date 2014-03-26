@@ -38,7 +38,7 @@ namespace CleanCode.Features.MethodTooLong
   {
     public InvalidateOnMaximumLinesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-      var maxLines = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumMethodLines);
+      var maxLines = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MethodTooLongMaximum);
       settingsStore.AdviseChange(lifetime, maxLines, daemon.Invalidate);
     }
   }

@@ -16,23 +16,22 @@ namespace CleanCode.Features.MethodTooLong
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration element, IHighlightingConsumer context)
+        protected override void ExecuteCore(IMethodDeclaration element, IHighlightingConsumer consumer)
         {
             var maxLength = Threshold;
 
             var statementCount = element.CountChildren<IStatement>();
             if (statementCount > maxLength)
             {
-                var highlighting = new Highlighting(Common.Warning_MethodTooLong);
-                context.AddHighlighting(highlighting, element.GetNameDocumentRange());
+                var highlighting = new Highlighting(Warnings.Warning_MethodTooLong);
+                consumer.AddHighlighting(highlighting, element.GetNameDocumentRange());
             }
         }
 
         protected override int Threshold
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodLines); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum); }
         }
-
 
         protected override bool IsEnabled
         {

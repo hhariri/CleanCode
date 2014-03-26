@@ -117,25 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Warning_TooManyDependencies" xml:space="preserve">
+  <data name="TooManyDependencies" xml:space="preserve">
     <value>There are too many interfaces being passed in to this constructor. You might be violating SRP.</value>
   </data>
-  <data name="Warning_TooManyMethodArguments" xml:space="preserve">
+  <data name="TooManyMethodArguments" xml:space="preserve">
     <value>This method requires too many arguments.</value>
   </data>
   <data name="Warning_MethodTooLong" xml:space="preserve">
     <value>This method contains too many statements.</value>
   </data>
-  <data name="Warning_ExcessiveDepth" xml:space="preserve">
+  <data name="ExcessiveDepth" xml:space="preserve">
     <value>Excessive depth of nested code blocks.</value>
   </data>
-  <data name="Warning_ClassTooBig" xml:space="preserve">
+  <data name="ClassTooBig" xml:space="preserve">
     <value>Class contains too many methods.</value>
   </data>
-  <data name="Warning_ChainedReferences" xml:space="preserve">
+  <data name="ChainedReferences" xml:space="preserve">
     <value>Too many chained references.</value>
   </data>
-  <data name="WarningMethodNameNotMeaningful" xml:space="preserve">
+  <data name="MethodNameNotMeaningful" xml:space="preserve">
     <value>The name of this method is too short to be meaningful.</value>
   </data>
 </root>

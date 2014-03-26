@@ -38,7 +38,7 @@ namespace CleanCode.Features.ExcessiveIndentation
     {
         public InvalidateOnExcessiveIndentationChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
         {
-            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MaximumCodeDepth);
+            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.ExcessiveIndentationMaximum);
             settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);
         }
     }

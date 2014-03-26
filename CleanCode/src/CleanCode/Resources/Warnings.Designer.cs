@@ -22,14 +22,14 @@ namespace CleanCode.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class Common {
+    public class Warnings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Common() {
+        internal Warnings() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace CleanCode.Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Resources.Common", typeof(Common).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("CleanCode.Resources.Warnings", typeof(Warnings).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -63,27 +63,54 @@ namespace CleanCode.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Too many chained references..
         /// </summary>
-        public static string Warning_ChainedReferences {
+        public static string ChainedReferences {
             get {
-                return ResourceManager.GetString("Warning_ChainedReferences", resourceCulture);
+                return ResourceManager.GetString("ChainedReferences", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Class contains too many methods..
         /// </summary>
-        public static string Warning_ClassTooBig {
+        public static string ClassTooBig {
             get {
-                return ResourceManager.GetString("Warning_ClassTooBig", resourceCulture);
+                return ResourceManager.GetString("ClassTooBig", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Excessive depth of nested code blocks..
         /// </summary>
-        public static string Warning_ExcessiveDepth {
+        public static string ExcessiveDepth {
             get {
-                return ResourceManager.GetString("Warning_ExcessiveDepth", resourceCulture);
+                return ResourceManager.GetString("ExcessiveDepth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name of this method is too short to be meaningful..
+        /// </summary>
+        public static string MethodNameNotMeaningful {
+            get {
+                return ResourceManager.GetString("MethodNameNotMeaningful", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating SRP..
+        /// </summary>
+        public static string TooManyDependencies {
+            get {
+                return ResourceManager.GetString("TooManyDependencies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This method requires too many arguments..
+        /// </summary>
+        public static string TooManyMethodArguments {
+            get {
+                return ResourceManager.GetString("TooManyMethodArguments", resourceCulture);
             }
         }
         
@@ -93,33 +120,6 @@ namespace CleanCode.Resources {
         public static string Warning_MethodTooLong {
             get {
                 return ResourceManager.GetString("Warning_MethodTooLong", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating SRP..
-        /// </summary>
-        public static string Warning_TooManyDependencies {
-            get {
-                return ResourceManager.GetString("Warning_TooManyDependencies", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This method requires too many arguments..
-        /// </summary>
-        public static string Warning_TooManyMethodArguments {
-            get {
-                return ResourceManager.GetString("Warning_TooManyMethodArguments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The name of this method is too short to be meaningful..
-        /// </summary>
-        public static string WarningMethodNameNotMeaningful {
-            get {
-                return ResourceManager.GetString("WarningMethodNameNotMeaningful", resourceCulture);
             }
         }
     }

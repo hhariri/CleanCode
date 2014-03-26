@@ -1,40 +1,38 @@
 ﻿using System;
 using System.Linq.Expressions;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Feature.Services.CSharp.CodeCleanup;
-using JetBrains.UI.Options;
 
 namespace CleanCode.Settings
 {
     public class SingleCheckSettingViewModel<TType> : ViewModel
     {
-        private readonly Expression<Func<CleanCodeSettings, bool>> getIsEnabled;
-        private readonly Expression<Func<CleanCodeSettings, TType>> getValue;
+        private readonly Expression<Func<CleanCodeSettings, bool>> isEnabledSelector;
+        private readonly Expression<Func<CleanCodeSettings, TType>> valueSelector;
         private readonly IContextBoundSettingsStore settings;
 
-        public SingleCheckSettingViewModel(IContextBoundSettingsStore settings, Expression<Func<CleanCodeSettings, bool>> getIsEnabled, Expression<Func<CleanCodeSettings, TType>> getValue)
+        public SingleCheckSettingViewModel(IContextBoundSettingsStore settings, Expression<Func<CleanCodeSettings, bool>> isEnabledSelector, Expression<Func<CleanCodeSettings, TType>> valueSelector)
         {
             this.settings = settings;
-            this.getIsEnabled = getIsEnabled;
-            this.getValue = getValue;
+            this.isEnabledSelector = isEnabledSelector;
+            this.valueSelector = valueSelector;
         }
 
         public bool IsEnabled
         {
-            get { return settings.GetValue(getIsEnabled); }
+            get { return settings.GetValue(isEnabledSelector); }
             set
             {
-                settings.SetValue(getIsEnabled, value);
+                settings.SetValue(isEnabledSelector, value);
                 OnPropertyChanged();
             }
         }
 
         public TType Value
         {
-            get { return settings.GetValue(getValue); }
+            get { return settings.GetValue(valueSelector); }
             set
             {
-                settings.SetValue(getValue, value);
+                settings.SetValue(valueSelector, value);
                 OnPropertyChanged();
             }
         }

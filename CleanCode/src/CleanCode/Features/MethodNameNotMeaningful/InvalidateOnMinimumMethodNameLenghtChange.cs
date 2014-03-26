@@ -31,14 +31,14 @@ using JetBrains.DataFlow;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
 
-namespace CleanCode.Features.MethodNamesNotMeaningful
+namespace CleanCode.Features.MethodNameNotMeaningful
 {
     [SolutionComponent]
     public class InvalidateOnMinimumMethodNameLenghtChange
     {
         public InvalidateOnMinimumMethodNameLenghtChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
         {
-            var minMethodNameLenght = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MinimumMethodNameLenghtEnabled);
+            var minMethodNameLenght = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimumEnabled);
             settingsStore.AdviseChange(lifetime, minMethodNameLenght, daemon.Invalidate);
         }
     }

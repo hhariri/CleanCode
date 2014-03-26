@@ -26,6 +26,7 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
+using CleanCode.Features.MethodNameNotMeaningful;
 using JetBrains.Application.PluginSupport;
 using JetBrains.ReSharper.Daemon;
 
@@ -37,7 +38,7 @@ using JetBrains.ReSharper.Daemon;
 [assembly: AssemblyCompany("Hadi Hariri")]
 [assembly: AssemblyProduct("ReSharper Clean Code Plugin")]
 [assembly: AssemblyDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
-[assembly: AssemblyCopyright("Copyright \u00A9 2014 Hadi Hariri and Contributors")]
+[assembly: AssemblyCopyright("Copyright ® 2014 Hadi Hariri and Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -74,7 +75,7 @@ using JetBrains.ReSharper.Daemon;
         HighlightingGroupIds.CodeSmell,
         "Too Many Dependencies",
         "Too many dependencies passed into constructor.",
-        Severity.SUGGESTION,
+        Severity.WARNING,
         false)]
 
 [assembly:
@@ -84,7 +85,7 @@ using JetBrains.ReSharper.Daemon;
         HighlightingGroupIds.CodeSmell,
         "Too Many Arguments",
         "Too many arguments passed to a method.",
-        Severity.SUGGESTION,
+        Severity.WARNING,
         false)]
 
 [assembly:
@@ -114,7 +115,7 @@ using JetBrains.ReSharper.Daemon;
         HighlightingGroupIds.CodeSmell,
         "Excessive Depth",
         "The nesting in this method is excessive.",
-        Severity.SUGGESTION,
+        Severity.WARNING,
         false)]
 
 [assembly:
@@ -124,15 +125,15 @@ using JetBrains.ReSharper.Daemon;
         HighlightingGroupIds.CodeSmell,
         "Chained References",
         "There are too many chained references.",
-        Severity.HINT,
+        Severity.WARNING,
         false)]
 
 [assembly:
   RegisterConfigurableSeverity(
-        CleanCode.Features.MethodNamesNotMeaningful.Highlighting.SeverityID,
+        Highlighting.SeverityID,
         null,
         HighlightingGroupIds.CodeSmell,
         "Method Name Not Meaningful",
         "This method name is to short to be meaningful. Please, choose a better name that describes its intent.",
-        Severity.HINT,
+        Severity.WARNING,
         false)]

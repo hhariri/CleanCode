@@ -28,7 +28,7 @@
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Features.MethodNamesNotMeaningful
+namespace CleanCode.Features.MethodNameNotMeaningful
 {
     /// <summary>
     /// The highlighting that warns about high complexity
