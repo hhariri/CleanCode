@@ -60,7 +60,10 @@
     <None Include="tools\install.ps1" />
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="lib\CleanCode.8.2.dll" />
+    <Content Include="lib\CleanCode.8.2.pdb" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CleanCode\CleanCode.8.2.csproj">
       <Project>{5f96119c-2646-4298-ad40-30209e7e7bb2}</Project>

@@ -1,4 +1,3 @@
-using CleanCode.Features.ChainedReferences;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;

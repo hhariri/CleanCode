@@ -25,47 +25,45 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Features.TooManyDependencies;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null,
+    HighlightingGroupIds.CodeSmell, "Too Many Dependencies", "Too many dependencies passed into constructor.",
+    Severity.WARNING, false)]
+
 namespace CleanCode.Features.TooManyDependencies
 {
-  /// <summary>
-  /// The highlighting that warns about high complexity
-  /// </summary>
-  /// 
-  // TODO: Change to ConfigurableSeverityHighlighting
-    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
-
-  [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-  public class Highlighting : IHighlighting
-  {
-    internal const string SeverityID = "TooManyDependencies"; 
-    private readonly string _tooltip;
-
-    public Highlighting(string toolTip)
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    public class Highlighting : IHighlighting
     {
-      _tooltip = toolTip;
-    }
+        internal const string SeverityID = "TooManyDependencies";
+        private readonly string tooltip;
 
-    public string ToolTip
-    {
-      get { return _tooltip; }
-    }
+        public Highlighting(string toolTip)
+        {
+            tooltip = toolTip;
+        }
 
-    public string ErrorStripeToolTip
-    {
-      get { return _tooltip; }
-    }
+        public string ToolTip
+        {
+            get { return tooltip; }
+        }
 
-    public int NavigationOffsetPatch
-    {
-      get { return 0; }
-    }
+        public string ErrorStripeToolTip
+        {
+            get { return tooltip; }
+        }
 
-    public bool IsValid()
-    {
-      return true;
+        public int NavigationOffsetPatch
+        {
+            get { return 0; }
+        }
+
+        public bool IsValid()
+        {
+            return true;
+        }
     }
-  }
 }

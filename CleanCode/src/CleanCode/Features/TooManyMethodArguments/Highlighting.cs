@@ -25,13 +25,16 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
+    HighlightingGroupIds.CodeSmell, "Too Many Arguments", "Too many arguments passed to a method.",
+    Severity.WARNING, false)]
+
 namespace CleanCode.Features.TooManyMethodArguments
 {
-    // TODO: Change to ConfigurableSeverityHighlighting
-    // Don't forget to use RegisterConfigurableSeverity
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {

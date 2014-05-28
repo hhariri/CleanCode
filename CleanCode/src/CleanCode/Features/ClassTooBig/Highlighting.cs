@@ -25,8 +25,13 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Features.ClassTooBig;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null,
+    HighlightingGroupIds.CodeSmell, "Class Too Big", "This class contains too many methods",
+    Severity.SUGGESTION, false)]
 
 namespace CleanCode.Features.ClassTooBig
 { 

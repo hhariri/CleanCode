@@ -33,13 +33,14 @@ using JetBrains.ReSharper.Daemon;
 
 namespace CleanCode.Features.TooManyMethodArguments
 {
-  [SolutionComponent]
-  public class InvalidateOnMaximumMethodArgumentsChange
-  {
-    public InvalidateOnMaximumMethodArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+    [SolutionComponent]
+    public class InvalidateOnMaximumMethodArgumentsChange
     {
-      var maxArguments = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum);
-      settingsStore.AdviseChange(lifetime, maxArguments, daemon.Invalidate);
+        public InvalidateOnMaximumMethodArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        {
+            var maxArguments =
+                settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum);
+            settingsStore.AdviseChange(lifetime, maxArguments, daemon.Invalidate);
+        }
     }
-  }
 }

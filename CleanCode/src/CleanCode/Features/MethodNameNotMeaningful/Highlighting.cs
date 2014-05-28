@@ -25,18 +25,20 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Features.MethodNameNotMeaningful;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
+    HighlightingGroupIds.CodeSmell, "Method Name Not Meaningful",
+    "This method name is to short to be meaningful. Please, choose a better name that describes its intent.",
+    Severity.WARNING, false)]
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {
     /// <summary>
     /// The highlighting that warns about high complexity
     /// </summary>
-    /// 
-    // TODO: Change to ConfigurableSeverityHighlighting
-    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
-
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {

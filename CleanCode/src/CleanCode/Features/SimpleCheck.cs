@@ -8,7 +8,7 @@ namespace CleanCode.Features
     {
         private readonly IContextBoundSettingsStore settingsStore;
 
-        public SimpleCheck(IContextBoundSettingsStore settingsStore)
+        protected SimpleCheck(IContextBoundSettingsStore settingsStore)
         {
             this.settingsStore = settingsStore;
         }

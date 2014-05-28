@@ -31,7 +31,7 @@ using JetBrains.DataFlow;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Daemon;
 
-namespace CleanCode.Features.ChainedReferences
+namespace CleanCode.Features.TooManyChainedReferences
 {
     [SolutionComponent]
     public class InvalidateOnMaximumChainedCalls
