@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="CleanCode.Settings.OptionsPage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:settings="clr-namespace:CleanCode.Settings"
+             mc:Ignorable="d"              
+             d:DataContext="{d:DesignInstance settings:OptionsViewModel}" d:DesignWidth="529" d:DesignHeight="126">
+    <UserControl.Resources>
+    </UserControl.Resources>
+    <ItemsControl ItemsSource="{Binding Options}">
+        <ItemsControl.ItemContainerStyle>
+            <Style>
+                <Setter Property="Control.Margin" Value="5" />
+            </Style>
+        </ItemsControl.ItemContainerStyle>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate>
+                <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>                    
+                    <Grid>
+                        <CheckBox IsChecked="{Binding IsEnabled}" 
+                                  VerticalContentAlignment="Center">                            
+                            <CheckBox.Content>
+                                <TextBlock Text="{Binding IsEnabledDescription}" />
+                            </CheckBox.Content>
+                        </CheckBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding ValueDescription}" />                        
+                        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
+                                 VerticalAlignment="Center" 
+                                 MaxLength="3"
+                                 HorizontalAlignment="Stretch" Grid.Column="1">
+                        </TextBox>
+                    </Grid>
+                </Grid>
+                <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    
+
+</UserControl>

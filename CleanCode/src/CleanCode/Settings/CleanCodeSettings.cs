@@ -32,13 +32,42 @@ using JetBrains.ReSharper.Settings;
 
 namespace CleanCode.Settings
 {
-    [SettingsKey(typeof (CodeInspectionSettings), "CleanCode")]
+    [SettingsKey(typeof(CodeInspectionSettings), "CleanCode")]
     public class CleanCodeSettings
     {
-        [SettingsEntry(3, "MaximumDependencies")]
-        public readonly int MaximumDependencies;
+        [SettingsEntry(3, "TooManyDependenciesMaximum")]
+        public readonly int TooManyDependenciesMaximum;
+        [SettingsEntry(true, "TooManyDependenciesMaximumEnabled")]
+        public readonly bool TooManyDependenciesMaximumEnabled;
 
-        [SettingsEntry(true, "MaximumDependenciesEnabled")]
-        public readonly bool MaximumDependenciesEnabled;
+        [SettingsEntry(3, "TooManyMethodArgumentsMaximum")]
+        public readonly int TooManyMethodArgumentsMaximum;
+        [SettingsEntry(true, "TooManyMethodArgumentsEnabled")]
+        public readonly bool TooManyMethodArgumentsEnabled;
+
+        [SettingsEntry(true, "MethodTooLongEnabled")]
+        public readonly bool MethodTooLongEnabled;
+        [SettingsEntry(15, "MethodTooLongMaximum")]
+        public readonly int MethodTooLongMaximum;
+
+        [SettingsEntry(3, "ExcessiveIndentationMaximum")]
+        public int ExcessiveIndentationMaximum { get; set; }
+        [SettingsEntry(true, "ExcessiveIndentationEnabled")]
+        public bool ExcessiveIndentationEnabled { get; set; }
+
+        [SettingsEntry(true, "ClassTooBigEnabled")]
+        public bool ClassTooBigEnabled { get; set; }
+        [SettingsEntry(20, "ClassTooBigMaximum")]
+        public int ClassTooBigMaximum { get; set; }
+
+        [SettingsEntry(true, "TooManyChainedReferencesEnabled")]
+        public bool TooManyChainedReferencesEnabled { get; set; }
+        [SettingsEntry(2, "TooManyChainedReferencesMaximum")]
+        public int TooManyChainedReferencesMaximum { get; set; }
+
+        [SettingsEntry(true, "MethodNameNotMeaningfulMinimumEnabled")]
+        public bool MethodNameNotMeaningfulMinimumEnabled { get; set; }
+        [SettingsEntry(4, "MethodNameNotMeaningfulMinimum")]
+        public int MethodNameNotMeaningfulMinimum { get; set; }
     }
 }
