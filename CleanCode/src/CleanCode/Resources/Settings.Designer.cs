@@ -133,8 +133,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Statements Per Method Check
-        ///.
+        ///   Looks up a localized string similar to Maximum Statements Per Method Check.
         /// </summary>
         public static string MethodTooLongCheck {
             get {

@@ -127,8 +127,7 @@
     <value>Maximum Method Arguments Check</value>
   </data>
   <data name="MethodTooLongCheck" xml:space="preserve">
-    <value>Maximum Statements Per Method Check
-</value>
+    <value>Maximum Statements Per Method Check</value>
   </data>
   <data name="TooLongLinesPerMethod" xml:space="preserve">
     <value>Maximum statements per method</value>
