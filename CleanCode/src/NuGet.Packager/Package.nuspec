@@ -6,12 +6,12 @@
     <title>CleanCode</title>
     <authors>Hadi Hariri, Matt Ellis, SuperJMN</authors>
     <owners>Hadi Hariri, Matt Ellis</owners>
-    <iconUrl>https://raw.githubusercontent.com/hhariri/CleanCode/master/CleanCode/src/CleanCode/Resources/Icons-8.0/Settings/CleanCode.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/hhariri/CleanCode/master/logo.png</iconUrl>
     <projectUrl>https://github.com/hhariri/CleanCode</projectUrl>
     <licenseUrl>https://raw.github.com/hhariri/CleanCode/master/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
-    <releaseNotes>Major update, thanks to SuperJMN!
+    <releaseNotes>Major update, thanks to @SuperJMN!
 &#8226; Warning if a method contains too many nested blocks
 &#8226; Warning if a method name is too short to be meaningful
 &#8226; Warning if an epression is breaking the Law of Demeter
