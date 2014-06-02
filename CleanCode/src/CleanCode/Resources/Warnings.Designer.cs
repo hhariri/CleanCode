@@ -88,6 +88,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This method does more than one thing. Passing a boolean into a function is a truly terrible practice..
+        /// </summary>
+        public static string FlagMethodArguments {
+            get {
+                return ResourceManager.GetString("FlagMethodArguments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name of this method is too short to be meaningful..
         /// </summary>
         public static string MethodNameNotMeaningful {
