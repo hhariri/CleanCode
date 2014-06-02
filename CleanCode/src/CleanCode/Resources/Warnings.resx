@@ -138,4 +138,7 @@
   <data name="MethodNameNotMeaningful" xml:space="preserve">
     <value>The name of this method is too short to be meaningful.</value>
   </data>
+  <data name="FlagMethodArguments" xml:space="preserve">
+    <value>This method does more than one thing. Passing a boolean into a function is a truly terrible practice.</value>
+  </data>
 </root>
