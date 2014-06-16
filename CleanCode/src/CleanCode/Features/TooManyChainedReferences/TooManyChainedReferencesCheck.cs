@@ -54,14 +54,9 @@ namespace CleanCode.Features.TooManyChainedReferences
 
         private IEnumerable<IType> GetTypesFromChildren(IReferenceExpression reference)
         {
-            var children = reference.GetChildrenRecursive<IReferenceExpression>();
-
+            var children = reference.GetChildrenRecursive<IReferenceExpression>().Where(expression => expression.Reference.IsQualified);
             var typesFromChildren = children.Select(expression => this.GetReturnTypeFrom(expression.Reference));
-
-            var list = typesFromChildren.ToList();
-            list.RemoveAt(list.Count - 1);
-
-            return list;
+            return typesFromChildren;
         }
 
         private static void AddHighlightning(IReferenceExpression reference, IHighlightingConsumer consumer)
@@ -73,7 +68,8 @@ namespace CleanCode.Features.TooManyChainedReferences
 
         private static bool SomeTypeIsDifferent(IType type, IEnumerable<IType> typesFromChildren)
         {
-            return typesFromChildren.Any(otherType => !type.Equals(otherType));
+            bool someTypeIsDifferent = typesFromChildren.Any(otherType => !type.ToString().Equals(otherType.ToString()));
+            return someTypeIsDifferent;
         }
 
         private static bool IsStillUnknown(IType type)
@@ -92,7 +88,7 @@ namespace CleanCode.Features.TooManyChainedReferences
                 if (parameternsOwner != null)
                 {
                     return parameternsOwner.ReturnType;
-                }
+                }               
             }
 
             return null;
