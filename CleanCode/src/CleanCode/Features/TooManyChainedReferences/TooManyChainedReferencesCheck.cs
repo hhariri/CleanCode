@@ -7,14 +7,11 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using System.Collections.Generic;
 using System.Linq;
-using CleanCode.Features.ChainedReferences;
 using JetBrains.ReSharper.Psi;
 
 
 namespace CleanCode.Features.TooManyChainedReferences
 {
-    using JetBrains.DocumentModel;
-
     public class TooManyChainedReferencesCheck : SimpleCheck<IReferenceExpression, int>
     {
         public TooManyChainedReferencesCheck(IContextBoundSettingsStore settingsStore)
