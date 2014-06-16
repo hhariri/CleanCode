@@ -25,18 +25,19 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Features.ExcessiveIndentation;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+
+[assembly:RegisterConfigurableSeverity(Highlighting.SeverityID, null,
+    HighlightingGroupIds.CodeSmell, "Excessive Depth", "The nesting in this method is excessive.",
+    Severity.WARNING, false)]
 
 namespace CleanCode.Features.ExcessiveIndentation
 {
     /// <summary>
     /// The highlighting that warns about high complexity
     /// </summary>
-    /// 
-    // TODO: Change to ConfigurableSeverityHighlighting
-    //: don't forget to use RegisterConfigurableSeverityAttribute when creating your highlightings with configurable severity
-
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {

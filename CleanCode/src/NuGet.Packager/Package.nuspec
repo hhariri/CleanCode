@@ -2,18 +2,26 @@
 <package >
   <metadata>
     <id>CleanCode</id>
-    <version>3.1.0.1</version>
+    <version>4.0.0.0</version>
     <title>CleanCode</title>
-    <authors>Hadi Hariri</authors>
+    <authors>Hadi Hariri, Matt Ellis, SuperJMN</authors>
     <owners>Hadi Hariri, Matt Ellis</owners>
-    <iconUrl>http://s29.postimg.org/h8qk7jwzb/clean_code_72_color.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/hhariri/CleanCode/master/logo.png</iconUrl>
     <projectUrl>https://github.com/hhariri/CleanCode</projectUrl>
     <licenseUrl>https://raw.github.com/hhariri/CleanCode/master/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
-    <copyright>Copyright 2013 Hadi Hariri and Contributors</copyright>
+    <releaseNotes>Major update, thanks to @SuperJMN!
+&#8226; Warning if a method contains too many nested blocks
+&#8226; Warning if a method name is too short to be meaningful
+&#8226; Warning if an epression is breaking the Law of Demeter
+&#8226; Warning if a constructor has too many parameters, indicating too many dependencies
+&#8226; Warning if a method has too many arguments
+&#8226; Suggestion highlight if class has too many methods
+&#8226; Suggestion highlight if method has too many statements</releaseNotes>
+    <copyright>Copyright 2014 Hadi Hariri and Contributors</copyright>
     <dependencies>
-      <dependency id="ReSharper" version="8.2" />
+      <dependency id="ReSharper" version="[8.2,8.3)" />
     </dependencies>
     <tags>clean code</tags>
   </metadata>

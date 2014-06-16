@@ -25,12 +25,16 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Features.MethodTooLong;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
+    HighlightingGroupIds.CodeSmell, "Method Too Long", "The method is bigger than it should be.",
+    Severity.SUGGESTION, false)]
+
 namespace CleanCode.Features.MethodTooLong
 {
-   
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {

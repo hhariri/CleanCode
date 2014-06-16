@@ -1,14 +1,8 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using JetBrains.Annotations;
-using JetBrains.Application;
 using JetBrains.Application.Settings;
-using JetBrains.Application.Settings.Logging;
-using JetBrains.Application.Settings.Store.Implementation;
-using JetBrains.UI.Options;
-using IContextBoundSettingsStore = JetBrains.Application.Settings.IContextBoundSettingsStore;
 
 namespace CleanCode.Settings
 {

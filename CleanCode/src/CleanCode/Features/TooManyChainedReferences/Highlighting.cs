@@ -25,10 +25,15 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Features.TooManyChainedReferences;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Features.ChainedReferences
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null,
+    HighlightingGroupIds.CodeSmell, "Chained References", "There are too many chained references.",
+    Severity.WARNING, false)]
+
+namespace CleanCode.Features.TooManyChainedReferences
 {
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting

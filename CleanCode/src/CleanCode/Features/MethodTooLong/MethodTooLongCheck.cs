@@ -3,7 +3,6 @@ using CleanCode.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Daemon.Stages;
-using JetBrains.ReSharper.Features.Browsing.CallHierarchy.Strategy;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 

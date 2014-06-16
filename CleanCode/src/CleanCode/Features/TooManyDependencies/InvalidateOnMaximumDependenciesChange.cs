@@ -38,7 +38,7 @@ namespace CleanCode.Features.TooManyDependencies
   {
     public InvalidateOnMaximumDependenciesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
     {
-      SettingsScalarEntry maxParams = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyDependenciesMaximum);
+      var maxParams = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyDependenciesMaximum);
       settingsStore.AdviseChange(lifetime, maxParams, daemon.Invalidate);
     }
   }

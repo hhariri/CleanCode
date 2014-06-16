@@ -26,13 +26,7 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
-using CleanCode.Features.MethodNameNotMeaningful;
 using JetBrains.Application.PluginSupport;
-using JetBrains.ReSharper.Daemon;
-
-// General Information about an assembly is controlled through the following 
-// set of attributes. Change these attribute values to modify the information
-// associated with an assembly.
 
 [assembly: AssemblyTitle("ReSharper Clean Code Plugin")]
 [assembly: AssemblyCompany("Hadi Hariri")]
@@ -42,98 +36,11 @@ using JetBrains.ReSharper.Daemon;
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
-// Setting ComVisible to false makes the types in this assembly not visible 
-// to COM components.  If you need to access a type in this assembly from 
-// COM, set the ComVisible attribute to true on that type.
-
 [assembly: ComVisible(false)]
-
-// The following GUID is for the ID of the typelib if this project is exposed to COM
-
 [assembly: Guid("97927FF9-8C9C-4DC5-A309-29C23F41DA47")]
 
-// Version information for an assembly consists of the following four values:
-//
-//      Major Version
-//      Minor Version 
-//      Build Number
-//      Revision
-//
-// You can specify all the values or you can default the Revision and Build Numbers 
-// by using the '*' as shown below:
-
-[assembly: AssemblyVersion("3.0.0.*")]
+[assembly: AssemblyVersion("4.0.0.*")]
 
 [assembly: PluginTitle("Clean Code")]
 [assembly: PluginDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
 [assembly: PluginVendor("Hadi Hariri and Contributors")]
-
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.TooManyDependencies.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Too Many Dependencies",
-        "Too many dependencies passed into constructor.",
-        Severity.WARNING,
-        false)]
-
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.TooManyMethodArguments.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Too Many Arguments",
-        "Too many arguments passed to a method.",
-        Severity.WARNING,
-        false)]
-
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.MethodTooLong.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Method Too Long",
-        "The method is bigger than it should be.",
-        Severity.SUGGESTION,
-        false)]
-
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.ClassTooBig.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Class Too Big",
-        "This class contains too many methods",
-        Severity.SUGGESTION,
-        false)]
-
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.ExcessiveIndentation.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Excessive Depth",
-        "The nesting in this method is excessive.",
-        Severity.WARNING,
-        false)]
-
-[assembly:
-  RegisterConfigurableSeverity(
-        CleanCode.Features.ChainedReferences.Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Chained References",
-        "There are too many chained references.",
-        Severity.WARNING,
-        false)]
-
-[assembly:
-  RegisterConfigurableSeverity(
-        Highlighting.SeverityID,
-        null,
-        HighlightingGroupIds.CodeSmell,
-        "Method Name Not Meaningful",
-        "This method name is to short to be meaningful. Please, choose a better name that describes its intent.",
-        Severity.WARNING,
-        false)]

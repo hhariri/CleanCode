@@ -33,13 +33,13 @@ using JetBrains.ReSharper.Daemon;
 
 namespace CleanCode.Features.MethodTooLong
 {
-  [SolutionComponent]
-  public class InvalidateOnMaximumLinesChange
-  {
-    public InvalidateOnMaximumLinesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+    [SolutionComponent]
+    public class InvalidateOnMaximumLinesChange
     {
-      var maxLines = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MethodTooLongMaximum);
-      settingsStore.AdviseChange(lifetime, maxLines, daemon.Invalidate);
+        public InvalidateOnMaximumLinesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        {
+            var maxLines = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MethodTooLongMaximum);
+            settingsStore.AdviseChange(lifetime, maxLines, daemon.Invalidate);
+        }
     }
-  }
 }

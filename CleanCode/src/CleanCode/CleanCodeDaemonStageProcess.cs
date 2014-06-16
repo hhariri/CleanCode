@@ -26,9 +26,6 @@
 #endregion
 
 using System;
-using System.Linq;
-using CleanCode.Features;
-using CleanCode.Features.ChainedReferences;
 using CleanCode.Features.ClassTooBig;
 using CleanCode.Features.ExcessiveIndentation;
 using CleanCode.Features.MethodNameNotMeaningful;
@@ -36,23 +33,17 @@ using CleanCode.Features.MethodTooLong;
 using CleanCode.Features.TooManyChainedReferences;
 using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
-using CleanCode.Resources;
-using CleanCode.Settings;
-using JetBrains.Application.Progress;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Daemon.Stages;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Tree;
-using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode
 {
     public class CleanCodeDaemonStageProcess : CSharpDaemonStageProcessBase
     {
-        private readonly IDaemonProcess daemonProcess;
         private readonly IContextBoundSettingsStore settingsStore;
 
         private readonly MethodTooLongCheck methodTooLongCheck;
@@ -66,7 +57,6 @@ namespace CleanCode
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
         {
-            this.daemonProcess = daemonProcess;
             this.settingsStore = settingsStore;
 
             // Simple checks.
@@ -82,12 +72,6 @@ namespace CleanCode
         public override void Execute(Action<DaemonStageResult> commiter)
         {
             HighlightInFile((file, consumer) => file.ProcessDescendants(this, consumer), commiter, settingsStore);
-
-            // Checking if the daemon is interrupted by user activity
-            if (daemonProcess.InterruptFlag)
-            {
-                throw new ProcessCancelledException();
-            }
         }
 
         public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)

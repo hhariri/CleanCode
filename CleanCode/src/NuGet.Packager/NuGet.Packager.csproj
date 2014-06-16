@@ -61,9 +61,8 @@
     <None Include="tools\uninstall.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="content\" />
-    <Folder Include="lib\" />
-    <Folder Include="src\" />
+    <Content Include="lib\CleanCode.8.2.dll" />
+    <Content Include="lib\CleanCode.8.2.pdb" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CleanCode\CleanCode.8.2.csproj">
