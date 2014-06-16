@@ -29,12 +29,14 @@ namespace CleanCode.Features.TooManyChainedReferences
 
         private void ProcessReference(IReferenceExpression reference, IHighlightingConsumer consumer)
         {
-            
             var count = reference.CountChildren<IReferenceExpression>();
 
             if (count >= Threshold)
             {
-                var rootType = GetReturnTypeFrom(reference.Reference);
+                var referenceExpressionReference = reference.Reference;
+                referenceExpressionReference.Resolve();
+
+                var rootType = GetReturnTypeFrom(referenceExpressionReference);
 
                 if (IsStillUnknown(rootType))
                 {
@@ -43,10 +45,10 @@ namespace CleanCode.Features.TooManyChainedReferences
 
                 var childrenTypes = this.GetTypesFromChildren(reference);
 
-                if (!EveryTypeIsTheSame(rootType, childrenTypes))
+                if (SomeTypeIsDifferent(rootType, childrenTypes))
                 {
                     AddHighlightning(reference, consumer);
-                }              
+                }
             }
         }
 
@@ -55,7 +57,11 @@ namespace CleanCode.Features.TooManyChainedReferences
             var children = reference.GetChildrenRecursive<IReferenceExpression>();
 
             var typesFromChildren = children.Select(expression => this.GetReturnTypeFrom(expression.Reference));
-            return typesFromChildren;
+
+            var list = typesFromChildren.ToList();
+            list.RemoveAt(list.Count - 1);
+
+            return list;
         }
 
         private static void AddHighlightning(IReferenceExpression reference, IHighlightingConsumer consumer)
@@ -65,9 +71,9 @@ namespace CleanCode.Features.TooManyChainedReferences
             consumer.AddHighlighting(highlighting, nameIdentifier.GetDocumentRange());
         }
 
-        private static bool EveryTypeIsTheSame(IType type, IEnumerable<IType> typesFromChildren)
+        private static bool SomeTypeIsDifferent(IType type, IEnumerable<IType> typesFromChildren)
         {
-            return typesFromChildren.Any(otherType => Equals(type, otherType));
+            return typesFromChildren.Any(otherType => !type.Equals(otherType));
         }
 
         private static bool IsStillUnknown(IType type)
@@ -77,15 +83,16 @@ namespace CleanCode.Features.TooManyChainedReferences
 
         private IType GetReturnTypeFrom(IReferenceExpressionReference reference)
         {
+            reference.Resolve();
+
             if (reference.CurrentResolveResult != null)
             {
                 var declaredElement = reference.CurrentResolveResult.DeclaredElement;
                 var parameternsOwner = declaredElement as IParametersOwner;
                 if (parameternsOwner != null)
                 {
-                    var r = parameternsOwner.ReturnType;
-                    return r;
-                }                
+                    return parameternsOwner.ReturnType;
+                }
             }
 
             return null;
