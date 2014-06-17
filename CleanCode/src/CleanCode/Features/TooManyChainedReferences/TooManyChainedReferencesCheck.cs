@@ -12,6 +12,8 @@ using JetBrains.ReSharper.Psi;
 
 namespace CleanCode.Features.TooManyChainedReferences
 {
+    using JetBrains.ReSharper.Psi.Resolve;
+
     public class TooManyChainedReferencesCheck : SimpleCheck<IReferenceExpression, int>
     {
         public TooManyChainedReferencesCheck(IContextBoundSettingsStore settingsStore)
@@ -29,33 +31,43 @@ namespace CleanCode.Features.TooManyChainedReferences
 
         private void ProcessReference(IReferenceExpression reference, IHighlightingConsumer consumer)
         {
-            var count = reference.CountChildren<IReferenceExpression>();
+            var chainedReferencesCount = reference.CountChildren<IReferenceExpression>();
 
-            if (count >= Threshold)
+            if (chainedReferencesCount >= this.Threshold)
             {
-                var referenceExpressionReference = reference.Reference;
-                referenceExpressionReference.Resolve();
+                var rootType = GetRootType(reference);
 
-                var rootType = GetReturnTypeFrom(referenceExpressionReference);
-
-                if (IsStillUnknown(rootType))
+                if (IsTypeStillUnknown(rootType))
                 {
                     return;
                 }
 
-                var childrenTypes = this.GetTypesFromChildren(reference);
-
-                if (SomeTypeIsDifferent(rootType, childrenTypes))
+                if (this.RootTypeAndChainedReferencesTypesAreDifferent(reference, rootType))
                 {
                     AddHighlightning(reference, consumer);
                 }
             }
         }
 
+        private static IType GetRootType(IReferenceExpression reference)
+        {
+            var referenceOfReference = reference.Reference;
+            referenceOfReference.Resolve();
+
+            var rootType = GetReturnTypeFrom(referenceOfReference);
+            return rootType;
+        }
+
+        private bool RootTypeAndChainedReferencesTypesAreDifferent(IReferenceExpression reference, IType rootType)
+        {
+            var childrenTypes = this.GetTypesFromChildren(reference);
+            return SomeTypeIsDifferent(rootType, childrenTypes);
+        }
+
         private IEnumerable<IType> GetTypesFromChildren(IReferenceExpression reference)
         {
             var children = reference.GetChildrenRecursive<IReferenceExpression>().Where(expression => expression.Reference.IsQualified);
-            var typesFromChildren = children.Select(expression => this.GetReturnTypeFrom(expression.Reference));
+            var typesFromChildren = children.Select(expression => GetReturnTypeFrom(expression.Reference));
             return typesFromChildren;
         }
 
@@ -68,16 +80,21 @@ namespace CleanCode.Features.TooManyChainedReferences
 
         private static bool SomeTypeIsDifferent(IType type, IEnumerable<IType> typesFromChildren)
         {
-            bool someTypeIsDifferent = typesFromChildren.Any(otherType => !type.ToString().Equals(otherType.ToString()));
+            bool someTypeIsDifferent = typesFromChildren.Any(otherType => Equals(type, otherType));
             return someTypeIsDifferent;
         }
 
-        private static bool IsStillUnknown(IType type)
+        private static bool Equals(IType type, IType otherType)
+        {
+            return !type.ToString().Equals(otherType.ToString());
+        }
+
+        private static bool IsTypeStillUnknown(IType type)
         {
             return type == null;
         }
 
-        private IType GetReturnTypeFrom(IReferenceExpressionReference reference)
+        private static IType GetReturnTypeFrom(IReference reference)
         {
             reference.Resolve();
 
