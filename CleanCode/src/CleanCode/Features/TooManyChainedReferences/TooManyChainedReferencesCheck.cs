@@ -12,41 +12,107 @@ using JetBrains.ReSharper.Psi;
 
 namespace CleanCode.Features.TooManyChainedReferences
 {
+    using JetBrains;
     using JetBrains.ReSharper.Psi.Resolve;
 
-    public class TooManyChainedReferencesCheck : SimpleCheck<IReferenceExpression, int>
+    public class TooManyChainedReferencesCheck : SimpleCheck<IStatement, int>
     {
         public TooManyChainedReferencesCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IReferenceExpression referenceExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IStatement referenceExpression, IHighlightingConsumer consumer)
         {
             if (referenceExpression != null)
             {
-                ProcessReference(referenceExpression, consumer);
+                this.HighlightMethodChainsThatAreTooLong(referenceExpression, consumer);
             }
         }
 
-        private void ProcessReference(IReferenceExpression reference, IHighlightingConsumer consumer)
+        private void HighlightMethodChainsThatAreTooLong(ITreeNode statement, IHighlightingConsumer consumer)
         {
-            var chainedReferencesCount = reference.CountChildren<IReferenceExpression>();
+            var children = statement.Children();
 
-            if (chainedReferencesCount >= this.Threshold)
+            foreach (var treeNode in children)
             {
-                var rootType = GetRootType(reference);
-
-                if (IsTypeStillUnknown(rootType))
+                var referenceExpression = treeNode as IReferenceExpression;
+                if (referenceExpression != null)
                 {
-                    return;
+                    this.HightlightReferenceExpressionIfNeeded(referenceExpression, consumer);
                 }
-
-                if (this.RootTypeAndChainedReferencesTypesAreDifferent(reference, rootType))
+                else
                 {
-                    AddHighlightning(reference, consumer);
+                    HighlightMethodChainsThatAreTooLong(treeNode, consumer);
                 }
             }
+        }
+
+        private void HightlightReferenceExpressionIfNeeded(IReferenceExpression referenceExpression, IHighlightingConsumer consumer)
+        {
+            var equalityComparer = new TypeEqualityComparer();
+            var types = new HashSet<IType>(equalityComparer);
+
+            ITreeNode child = referenceExpression;
+            int chainedCount = 0;
+            
+            while (child != null)
+            {
+                var childReturnType = this.GetReturnTypeFrom(child);
+
+                if (childReturnType != null)
+                {
+                    types.Add(childReturnType);
+                }
+
+                child = GetFirstChild(child);
+                chainedCount++;
+            }
+
+            var isFluentChain = types.Count == 1;
+
+            if (!isFluentChain)
+            {
+                if (chainedCount > Threshold)
+                {
+                    AddHighlightning(referenceExpression, consumer);
+                }
+            }         
+        }
+
+        private IType GetReturnTypeFrom(ITreeNode treeNode)
+        {
+            IType type = null;
+            var reference = treeNode as IReferenceExpression;
+            if (reference != null)
+            {
+                type = GetReturnTypeFromReference(reference.Reference);
+            }
+
+            var invocationExpression = treeNode as IInvocationExpression;
+            if (invocationExpression != null)
+            {
+                type = GetReturnTypeFromReference(invocationExpression.Reference);
+            }
+
+            return type;
+        }
+
+        private static ITreeNode GetFirstChild(ITreeNode referenceExpression)
+        {
+            return referenceExpression.Children().FirstOrDefault();
+        }
+
+        private IList<ITreeNode> GetChainedNodes(ITreeNode statement)
+        {
+            var list = new List<ITreeNode>();
+            var firstOrDefault = statement.Children().FirstOrDefault();
+            if (firstOrDefault != null)
+            {
+                list.Add(firstOrDefault);
+                list.AddRange(this.GetChainedNodes(firstOrDefault));
+            }
+            return list;
         }
 
         private static IType GetRootType(IReferenceExpression reference)
@@ -54,7 +120,7 @@ namespace CleanCode.Features.TooManyChainedReferences
             var referenceOfReference = reference.Reference;
             referenceOfReference.Resolve();
 
-            var rootType = GetReturnTypeFrom(referenceOfReference);
+            var rootType = GetReturnTypeFromReference(referenceOfReference);
             return rootType;
         }
 
@@ -67,7 +133,7 @@ namespace CleanCode.Features.TooManyChainedReferences
         private IEnumerable<IType> GetTypesFromChildren(IReferenceExpression reference)
         {
             var children = reference.GetChildrenRecursive<IReferenceExpression>().Where(expression => expression.Reference.IsQualified);
-            var typesFromChildren = children.Select(expression => GetReturnTypeFrom(expression.Reference));
+            var typesFromChildren = children.Select(expression => GetReturnTypeFromReference(expression.Reference));
             return typesFromChildren;
         }
 
@@ -86,7 +152,12 @@ namespace CleanCode.Features.TooManyChainedReferences
 
         private static bool Equals(IType type, IType otherType)
         {
-            return !type.ToString().Equals(otherType.ToString());
+            if (type == null || otherType == null)
+            {
+                return false;
+            }
+
+            return type.ToString().Equals(otherType.ToString());
         }
 
         private static bool IsTypeStillUnknown(IType type)
@@ -94,7 +165,7 @@ namespace CleanCode.Features.TooManyChainedReferences
             return type == null;
         }
 
-        private static IType GetReturnTypeFrom(IReference reference)
+        private static IType GetReturnTypeFromReference(IReference reference)
         {
             reference.Resolve();
 
@@ -105,7 +176,7 @@ namespace CleanCode.Features.TooManyChainedReferences
                 if (parameternsOwner != null)
                 {
                     return parameternsOwner.ReturnType;
-                }               
+                }
             }
 
             return null;
@@ -119,6 +190,19 @@ namespace CleanCode.Features.TooManyChainedReferences
         protected override bool IsEnabled
         {
             get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesEnabled); }
+        }
+    }
+
+    internal class TypeEqualityComparer : IEqualityComparer<IType>
+    {
+        public bool Equals(IType x, IType y)
+        {
+            return x.ToString().Equals(y.ToString());
+        }
+
+        public int GetHashCode(IType obj)
+        {
+            return obj.ToString().GetHashCode();
         }
     }
 }

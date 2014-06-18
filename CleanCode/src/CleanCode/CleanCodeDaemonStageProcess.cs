@@ -82,14 +82,14 @@ namespace CleanCode
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
         }
 
+        public override void VisitCSharpStatement(ICSharpStatement cSharpStatementParam, IHighlightingConsumer context)
+        {
+            tooManyChainedReferencesCheck.ExecuteIfEnabled(cSharpStatementParam, context);
+        }
+
         public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
         {
             tooManyDependenciesCheck.ExecuteIfEnabled(constructorDeclaration, context);
-        }
-
-        public override void VisitReferenceExpression(IReferenceExpression referenceExpressionParam, IHighlightingConsumer context)
-        {
-            tooManyChainedReferencesCheck.ExecuteIfEnabled(referenceExpressionParam, context);
         }
 
         public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
