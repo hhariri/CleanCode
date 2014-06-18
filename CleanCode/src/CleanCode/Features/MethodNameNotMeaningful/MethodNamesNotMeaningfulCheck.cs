@@ -15,21 +15,21 @@ namespace CleanCode.Features.MethodNameNotMeaningful
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration methodDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration statement, IHighlightingConsumer consumer)
         {
             var minimumMethodNameLenght = Threshold;
 
-            if (methodDeclaration.NameIdentifier == null)
+            if (statement.NameIdentifier == null)
             {
                 return;
             }
 
-            var name = methodDeclaration.NameIdentifier.GetText();
+            var name = statement.NameIdentifier.GetText();
             var methodNameLenght = name.Length;
             if (methodNameLenght < minimumMethodNameLenght)
             {
                 var highlighting = new Highlighting(Warnings.MethodNameNotMeaningful);
-                consumer.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, statement.GetNameDocumentRange());
             }
         }
 

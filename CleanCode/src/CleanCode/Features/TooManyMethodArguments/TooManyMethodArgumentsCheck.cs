@@ -15,15 +15,15 @@ namespace CleanCode.Features.TooManyMethodArguments
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration methodDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration statement, IHighlightingConsumer consumer)
         {
-            var parameterDeclarations = methodDeclaration.ParameterDeclarations;
+            var parameterDeclarations = statement.ParameterDeclarations;
             var maxParameters = Threshold;
 
             if (parameterDeclarations.Count > maxParameters)
             {
                 var highlighting = new Highlighting(Warnings.TooManyMethodArguments);
-                consumer.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, statement.GetNameDocumentRange());
             }
         }
 

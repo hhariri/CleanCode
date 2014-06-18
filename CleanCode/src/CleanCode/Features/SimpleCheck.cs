@@ -22,7 +22,7 @@ namespace CleanCode.Features
             ExecuteCore(methodDeclaration, context);
         }
 
-        protected abstract void ExecuteCore(TElement element, IHighlightingConsumer consumer);
+        protected abstract void ExecuteCore(TElement statement, IHighlightingConsumer consumer);
 
         protected abstract TThreshold Threshold { get; }
 
