@@ -51,9 +51,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\TooManyChainedReferences\Highlighting.cs" />
-    <Compile Include="Features\TooManyChainedReferences\InvalidateOnMaximumChainedCalls.cs" />
-    <Compile Include="Features\TooManyChainedReferences\TooManyChainedReferencesCheck.cs" />
+    <Compile Include="Features\ChainedReferences\Highlighting.cs" />
+    <Compile Include="Features\ChainedReferences\InvalidateOnMaximumChainedCalls.cs" />
+    <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
     <Compile Include="Features\ClassTooBig\Highlighting.cs" />
     <Compile Include="Features\ClassTooBig\InvalidateOnMaximumMethodsPerClass.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
@@ -77,7 +77,7 @@
     </Compile>
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
     <Compile Include="Features\SimpleCheck.cs" />
-    <Compile Include="Features\TooManyChainedReferences\TypeEqualityComparer.cs" />
+    <Compile Include="Features\ChainedReferences\TypeEqualityComparer.cs" />
     <Compile Include="Features\TooManyDependencies\Highlighting.cs">
       <SubType>Code</SubType>
     </Compile>

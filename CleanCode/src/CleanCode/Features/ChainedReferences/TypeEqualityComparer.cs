@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using JetBrains.ReSharper.Psi;
 
-namespace CleanCode.Features.TooManyChainedReferences
+namespace CleanCode.Features.ChainedReferences
 {
     internal class TypeEqualityComparer : IEqualityComparer<IType>
     {

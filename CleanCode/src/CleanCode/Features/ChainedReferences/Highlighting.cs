@@ -25,21 +25,45 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using CleanCode.Settings;
-using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.ProjectModel;
+using CleanCode.Features.ChainedReferences;
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Features.TooManyChainedReferences
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null,
+    HighlightingGroupIds.CodeSmell, "Chained References", "There are too many chained references.",
+    Severity.WARNING, false)]
+
+namespace CleanCode.Features.ChainedReferences
 {
-    [SolutionComponent]
-    public class InvalidateOnMaximumChainedCalls
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    public class Highlighting : IHighlighting
     {
-        public InvalidateOnMaximumChainedCalls(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        internal const string SeverityID = "MaximumChainedReferences";
+        private readonly string tooltip;
+
+        public Highlighting(string toolTip)
         {
-            var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum);
-            settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);
+            tooltip = toolTip;
+        }
+
+        public string ToolTip
+        {
+            get { return tooltip; }
+        }
+
+        public string ErrorStripeToolTip
+        {
+            get { return tooltip; }
+        }
+
+        public int NavigationOffsetPatch
+        {
+            get { return 0; }
+        }
+
+        public bool IsValid()
+        {
+            return true;
         }
     }
 }

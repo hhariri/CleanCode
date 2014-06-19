@@ -19,6 +19,7 @@ namespace CleanCode.Features
             {
                 return;
             }
+
             ExecuteCore(methodDeclaration, context);
         }
 

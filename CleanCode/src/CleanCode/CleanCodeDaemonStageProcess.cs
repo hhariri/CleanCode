@@ -26,11 +26,11 @@
 #endregion
 
 using System;
+using CleanCode.Features.ChainedReferences;
 using CleanCode.Features.ClassTooBig;
 using CleanCode.Features.ExcessiveIndentation;
 using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
-using CleanCode.Features.TooManyChainedReferences;
 using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.Progress;
@@ -54,7 +54,7 @@ namespace CleanCode
         private readonly ExcessiveIndentationCheck excessiveIndentationCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly MethodNamesNotMeaningfulCheck methodNamesNotMeaningfulCheck;
-        private readonly TooManyChainedReferencesCheck tooManyChainedReferencesCheck;
+        private readonly ChainedReferencesCheck chainedReferencesCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
@@ -69,7 +69,7 @@ namespace CleanCode
             excessiveIndentationCheck = new ExcessiveIndentationCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNamesNotMeaningfulCheck(settingsStore);
-            tooManyChainedReferencesCheck = new TooManyChainedReferencesCheck(settingsStore);
+            chainedReferencesCheck = new ChainedReferencesCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -92,7 +92,7 @@ namespace CleanCode
 
         public override void VisitCSharpStatement(ICSharpStatement cSharpStatementParam, IHighlightingConsumer context)
         {
-            tooManyChainedReferencesCheck.ExecuteIfEnabled(cSharpStatementParam, context);
+            chainedReferencesCheck.ExecuteIfEnabled(cSharpStatementParam, context);
         }
 
         public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
