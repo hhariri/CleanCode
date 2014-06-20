@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
@@ -40,6 +41,39 @@ namespace CleanCode.Features
                 return childrenDepth + 1;    
             }
             return childrenDepth;
+        }
+
+        public static IEnumerable<T> GetFlattenedHierarchyOfType<T>(this ITreeNode root) where T : class, ITreeNode
+        {
+            var list = new List<T>();
+
+            var rootAsType = root as T;
+            if (rootAsType != null)
+            {
+                list.Add(rootAsType);
+            }
+
+            list.AddRange(root.GetChildrenRecursive<T>());
+
+            return list;
+        }
+
+        public static IEnumerable<T> GetChildrenRecursive<T>(this ITreeNode node) where T : ITreeNode
+        {
+            var nodeChildren = node.Children().ToList();
+
+            var list = new List<T>();
+
+            var childOfType = nodeChildren.OfType<T>();
+            list.AddRange(childOfType);
+
+            foreach (var childNode in nodeChildren)
+            {
+                var childrenOfType = GetChildrenRecursive<T>(childNode);
+                list.AddRange(childrenOfType);
+            }
+
+            return list;
         }
 
         private static bool IsNodeThatIncreasesDepth(ITreeNode node)
@@ -136,7 +170,7 @@ namespace CleanCode.Features
             return closedType;
         }
 
-        private static ResolveResultWithInfo GetResolveResult(IReference reference)
+        public static ResolveResultWithInfo GetResolveResult(this IReference reference)
         {
             if (reference.CurrentResolveResult != null)
             {

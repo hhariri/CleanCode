@@ -66,6 +66,9 @@
     <Compile Include="CleanCodeDaemonStage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Features\FlagArguments\Highlighting.cs" />
+    <Compile Include="Features\FlagArguments\InvalidateOnMaximumMethodArgumentsChange.cs" />
+    <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\Highlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\InvalidateOnMinimumMethodNameLenghtChange.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNamesNotMeaningfulCheck.cs" />
@@ -141,6 +144,7 @@
   <ItemGroup>
     <Content Include="Resources\Icons82\Settings\CleanCode.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets')" />

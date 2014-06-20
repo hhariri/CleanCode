@@ -29,6 +29,7 @@ using System;
 using CleanCode.Features.ChainedReferences;
 using CleanCode.Features.ClassTooBig;
 using CleanCode.Features.ExcessiveIndentation;
+using CleanCode.Features.FlagArguments;
 using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
 using CleanCode.Features.TooManyDependencies;
@@ -55,6 +56,7 @@ namespace CleanCode
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly MethodNamesNotMeaningfulCheck methodNamesNotMeaningfulCheck;
         private readonly ChainedReferencesCheck chainedReferencesCheck;
+        private readonly FlagArgumentsCheck flagArgumentsCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
@@ -70,6 +72,7 @@ namespace CleanCode
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNamesNotMeaningfulCheck(settingsStore);
             chainedReferencesCheck = new ChainedReferencesCheck(settingsStore);
+            flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -79,7 +82,6 @@ namespace CleanCode
             {
                 throw new ProcessCancelledException();
             }
-
         }
 
         public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
@@ -88,6 +90,7 @@ namespace CleanCode
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
             excessiveIndentationCheck.ExecuteIfEnabled(methodDeclaration, context);
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
+            flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
         }
 
         public override void VisitCSharpStatement(ICSharpStatement cSharpStatementParam, IHighlightingConsumer context)

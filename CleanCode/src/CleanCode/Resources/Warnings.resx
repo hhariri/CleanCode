@@ -138,4 +138,7 @@
   <data name="MethodNameNotMeaningful" xml:space="preserve">
     <value>The name of this method is too short to be meaningful.</value>
   </data>
+  <data name="FlagArgument" xml:space="preserve">
+    <value>This argument is used as a flag in the method. It usually means that the method has more than one responsibility.</value>
+  </data>
 </root>

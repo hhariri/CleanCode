@@ -88,6 +88,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This argument is used as a flag in the method. It usually means that the method has more than one responsibility..
+        /// </summary>
+        public static string FlagArgument {
+            get {
+                return ResourceManager.GetString("FlagArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name of this method is too short to be meaningful..
         /// </summary>
         public static string MethodNameNotMeaningful {
