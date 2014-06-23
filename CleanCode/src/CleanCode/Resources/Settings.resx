@@ -165,4 +165,10 @@
   <data name="MinimumMethodNameLengthCheck" xml:space="preserve">
     <value>Minimum Method Name Length</value>
   </data>
+  <data name="ComplexExpressionCheck" xml:space="preserve">
+    <value>Complex expression check (conditions)</value>
+  </data>
+  <data name="ComplexExpressionMaximum" xml:space="preserve">
+    <value>Set the maximum of expressions that can be part of a condition</value>
+  </data>
 </root>

@@ -36,12 +36,12 @@ namespace CleanCode.Features.TooManyDependencies
 
         protected override int Threshold
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximumEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximumEnabled); }
         }
     }
 }

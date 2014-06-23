@@ -44,6 +44,8 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 
 namespace CleanCode
 {
+    using CleanCode.Features.ComplexExpression;
+
     public class CleanCodeDaemonStageProcess : CSharpDaemonStageProcessBase
     {
         private readonly IDaemonProcess daemonProcess;
@@ -54,9 +56,10 @@ namespace CleanCode
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
         private readonly ExcessiveIndentationCheck excessiveIndentationCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
-        private readonly MethodNamesNotMeaningfulCheck methodNamesNotMeaningfulCheck;
+        private readonly MethodNameNotMeaningfulCheck methodNamesNotMeaningfulCheck;
         private readonly ChainedReferencesCheck chainedReferencesCheck;
         private readonly FlagArgumentsCheck flagArgumentsCheck;
+        private readonly ComplexExpressionCheck complexExpressionCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
@@ -70,9 +73,10 @@ namespace CleanCode
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
             excessiveIndentationCheck = new ExcessiveIndentationCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
-            methodNamesNotMeaningfulCheck = new MethodNamesNotMeaningfulCheck(settingsStore);
+            methodNamesNotMeaningfulCheck = new MethodNameNotMeaningfulCheck(settingsStore);
             chainedReferencesCheck = new ChainedReferencesCheck(settingsStore);
             flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
+            complexExpressionCheck = new ComplexExpressionCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -106,6 +110,26 @@ namespace CleanCode
         public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
         {
             classTooBigCheck.ExecuteIfEnabled(classDeclaration, context);
+        }
+
+        public override void VisitIfStatement(IIfStatement ifStatementParam, IHighlightingConsumer context)
+        {
+            this.complexExpressionCheck.ExecuteIfEnabled(ifStatementParam.Condition, context);
+        }
+
+        public override void VisitWhileStatement(IWhileStatement whileStatementParam, IHighlightingConsumer context)
+        {
+            this.complexExpressionCheck.ExecuteIfEnabled(whileStatementParam.Condition, context);
+        }
+
+        public override void VisitForStatement(IForStatement forStatementParam, IHighlightingConsumer context)
+        {
+            this.complexExpressionCheck.ExecuteIfEnabled(forStatementParam.Condition, context);
+        }
+
+        public override void VisitDoStatement(IDoStatement doStatementParam, IHighlightingConsumer context)
+        {
+            this.complexExpressionCheck.ExecuteIfEnabled(doStatementParam.Condition, context);
         }
     }
 }

@@ -10,12 +10,10 @@ using JetBrains.ReSharper.Psi.Tree;
 using System.Collections.Generic;
 using System.Diagnostics;
 using JetBrains.ReSharper.Psi.Util;
-using IType = JetBrains.ReSharper.Psi.IType;
-
 
 namespace CleanCode.Features.FlagArguments
 {
-    public class FlagArgumentsCheck : SimpleCheck<IMethodDeclaration, int>
+    public class FlagArgumentsCheck : SimpleCheckBase<IMethodDeclaration>
     {
         public FlagArgumentsCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
@@ -75,9 +73,14 @@ namespace CleanCode.Features.FlagArguments
             return allReferencesInConditions.Where(reference => IsReferenceToArgument(reference, declaredElementInArgument));
         }
 
-        private static bool IsReferenceToArgument(IReferenceExpression r, IDeclaredElement toFind)
+        private static bool IsReferenceToArgument(IReferenceExpression referenceExpression, IDeclaredElement toFind)
         {
-            var resolveResultWithInfo = r.Reference.GetResolveResult();
+            if (referenceExpression == null)
+            {
+                return false;
+            }
+
+            var resolveResultWithInfo = referenceExpression.Reference.GetResolveResult();
             var declaredElement = resolveResultWithInfo.DeclaredElement;
 
             Debug.Assert(declaredElement != null, "declaredElement != null");
@@ -85,14 +88,9 @@ namespace CleanCode.Features.FlagArguments
             return declaredElement.ShortName == toFind.ShortName;
         }
 
-        protected override int Threshold
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum); }
-        }
-
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.FlagArgumentsEnabled); }
         }
     }
 }

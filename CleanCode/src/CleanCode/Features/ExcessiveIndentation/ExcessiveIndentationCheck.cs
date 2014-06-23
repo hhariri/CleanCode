@@ -29,12 +29,12 @@ namespace CleanCode.Features.ExcessiveIndentation
 
         protected override int Threshold
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationEnabled); }
         }
     }
 }

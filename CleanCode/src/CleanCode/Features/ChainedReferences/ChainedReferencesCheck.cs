@@ -79,12 +79,12 @@ namespace CleanCode.Features.ChainedReferences
 
         protected override int Threshold
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesEnabled); }
         }
 
         public static void AddHighlightning(IReferenceExpression reference, IHighlightingConsumer consumer)

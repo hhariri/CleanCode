@@ -8,9 +8,9 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {
-    public class MethodNamesNotMeaningfulCheck : SimpleCheck<IMethodDeclaration, int>
+    public class MethodNameNotMeaningfulCheck : SimpleCheck<IMethodDeclaration, int>
     {
-        public MethodNamesNotMeaningfulCheck(IContextBoundSettingsStore settingsStore)
+        public MethodNameNotMeaningfulCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
@@ -35,12 +35,12 @@ namespace CleanCode.Features.MethodNameNotMeaningful
 
         protected override int Threshold
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimumEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimumEnabled); }
         }
     }
 }

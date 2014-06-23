@@ -69,5 +69,13 @@ namespace CleanCode.Settings
         public bool MethodNameNotMeaningfulMinimumEnabled { get; set; }
         [SettingsEntry(4, "MethodNameNotMeaningfulMinimum")]
         public int MethodNameNotMeaningfulMinimum { get; set; }
+
+        [SettingsEntry(true, "FlagArgumentsEnabled")]
+        public bool FlagArgumentsEnabled { get; set; }        
+
+        [SettingsEntry(true, "ComplexExpressionEnabled")]
+        public bool ComplexExpressionEnabled { get; set; }
+        [SettingsEntry(1, "ComplexExpressionMaximum")]
+        public int ComplexExpressionMaximum { get; set; }
     }
 }

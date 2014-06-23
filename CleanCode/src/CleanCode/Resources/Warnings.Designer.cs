@@ -88,6 +88,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This expression is too complex to be legible. Please, simplify it..
+        /// </summary>
+        public static string ExpressionTooComplex {
+            get {
+                return ResourceManager.GetString("ExpressionTooComplex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This argument is used as a flag in the method. It usually means that the method has more than one responsibility..
         /// </summary>
         public static string FlagArgument {

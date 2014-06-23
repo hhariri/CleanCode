@@ -4,34 +4,44 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features
 {
-    public abstract class SimpleCheck<TElement, TThreshold> where TElement : ITreeNode
+    public abstract class SimpleCheckBase<TElement>
+        where TElement : ITreeNode
     {
         private readonly IContextBoundSettingsStore settingsStore;
 
-        protected SimpleCheck(IContextBoundSettingsStore settingsStore)
+        protected SimpleCheckBase(IContextBoundSettingsStore settingsStore)
         {
             this.settingsStore = settingsStore;
         }
-
-        public void ExecuteIfEnabled(TElement methodDeclaration, IHighlightingConsumer context)
-        {
-            if (!IsEnabled)
-            {
-                return;
-            }
-
-            ExecuteCore(methodDeclaration, context);
-        }
-
-        protected abstract void ExecuteCore(TElement statement, IHighlightingConsumer consumer);
-
-        protected abstract TThreshold Threshold { get; }
 
         protected abstract bool IsEnabled { get; }
 
         protected IContextBoundSettingsStore SettingsStore
         {
-            get { return settingsStore; }
+            get { return this.settingsStore; }
         }
+
+        public void ExecuteIfEnabled(TElement methodDeclaration, IHighlightingConsumer context)
+        {
+            if (!this.IsEnabled)
+            {
+                return;
+            }
+
+            this.ExecuteCore(methodDeclaration, context);
+        }
+
+        protected abstract void ExecuteCore(TElement statement, IHighlightingConsumer consumer);
+    }
+
+    public abstract class SimpleCheck<TElement, TThreshold> : SimpleCheckBase<TElement>
+        where TElement : ITreeNode
+    {
+        protected SimpleCheck(IContextBoundSettingsStore settingsStore)
+            : base(settingsStore)
+        {
+        }
+
+        protected abstract TThreshold Threshold { get; }
     }
 }

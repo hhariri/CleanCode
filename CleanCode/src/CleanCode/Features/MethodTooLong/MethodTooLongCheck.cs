@@ -29,12 +29,12 @@ namespace CleanCode.Features.MethodTooLong
 
         protected override int Threshold
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongEnabled); }
         }
     }
 }

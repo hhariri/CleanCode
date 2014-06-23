@@ -64,7 +64,7 @@ namespace CleanCode.Settings
 
             viewModels.Add(tooManyMethodArguments);
 
-            var enabledMaxDepth = new SingleCheckSettingViewModel<int>(
+            var excessiveDepth = new SingleCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyDependenciesMaximumEnabled,
                 e => e.ExcessiveIndentationMaximum)
@@ -73,9 +73,9 @@ namespace CleanCode.Settings
                     ValueDescription = Resources.Settings.ExcessiveDepth,
                 };
 
-            viewModels.Add(enabledMaxDepth);
+            viewModels.Add(excessiveDepth);
 
-            var enableClassTooBig = new SingleCheckSettingViewModel<int>(
+            var classTooBig = new SingleCheckSettingViewModel<int>(
                 settings,
                 e => e.ClassTooBigEnabled,
                 e => e.ClassTooBigMaximum)
@@ -84,9 +84,9 @@ namespace CleanCode.Settings
                     ValueDescription = Resources.Settings.ClassTooBig,
                 };
 
-            viewModels.Add(enableClassTooBig);
+            viewModels.Add(classTooBig);
 
-            var enableChainedReferences = new SingleCheckSettingViewModel<int>(
+            var chainedReferences = new SingleCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyChainedReferencesEnabled,
                 e => e.TooManyChainedReferencesMaximum)
@@ -95,9 +95,9 @@ namespace CleanCode.Settings
                     ValueDescription = Resources.Settings.MaxChainedReferences,
                 };
 
-            viewModels.Add(enableChainedReferences);
+            viewModels.Add(chainedReferences);
 
-            var enableMinimumMethodNameLength = new SingleCheckSettingViewModel<int>(
+            var methodNameLength = new SingleCheckSettingViewModel<int>(
                 settings,
                 e => e.MethodNameNotMeaningfulMinimumEnabled,
                 e => e.MethodNameNotMeaningfulMinimum)
@@ -106,7 +106,18 @@ namespace CleanCode.Settings
                     ValueDescription = Resources.Settings.MinimumMethodNameLength,
                 };
 
-            viewModels.Add(enableMinimumMethodNameLength);
+            viewModels.Add(methodNameLength);
+
+            var complexCondition = new SingleCheckSettingViewModel<int>(
+               settings,
+               e => e.ComplexExpressionEnabled,
+               e => e.ComplexExpressionMaximum)
+            {
+                IsEnabledDescription = Resources.Settings.ComplexExpressionCheck,
+                ValueDescription = Resources.Settings.ComplexExpressionMaximum,
+            };
+
+            viewModels.Add(complexCondition);
 
             return viewModels;
         }

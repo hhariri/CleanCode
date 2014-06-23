@@ -57,6 +57,9 @@
     <Compile Include="Features\ClassTooBig\Highlighting.cs" />
     <Compile Include="Features\ClassTooBig\InvalidateOnMaximumMethodsPerClass.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
+    <Compile Include="Features\ComplexExpression\Highlighting.cs" />
+    <Compile Include="Features\ComplexExpression\InvalidateOnComplexExpressionChange.cs" />
+    <Compile Include="Features\ComplexExpression\ExpressionTooComplexCheck.cs" />
     <Compile Include="Features\ExcessiveIndentation\Highlighting.cs" />
     <Compile Include="Features\ExcessiveIndentation\InvalidateOnExcessiveIndentationChange.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
@@ -67,11 +70,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\FlagArguments\Highlighting.cs" />
-    <Compile Include="Features\FlagArguments\InvalidateOnMaximumMethodArgumentsChange.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\Highlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\InvalidateOnMinimumMethodNameLenghtChange.cs" />
-    <Compile Include="Features\MethodNameNotMeaningful\MethodNamesNotMeaningfulCheck.cs" />
+    <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
     <Compile Include="Features\MethodTooLong\Highlighting.cs">
       <SubType>Code</SubType>
     </Compile>

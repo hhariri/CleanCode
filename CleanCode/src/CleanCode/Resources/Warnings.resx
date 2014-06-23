@@ -141,4 +141,7 @@
   <data name="FlagArgument" xml:space="preserve">
     <value>This argument is used as a flag in the method. It usually means that the method has more than one responsibility.</value>
   </data>
+  <data name="ExpressionTooComplex" xml:space="preserve">
+    <value>This expression is too complex to be legible. Please, simplify it.</value>
+  </data>
 </root>

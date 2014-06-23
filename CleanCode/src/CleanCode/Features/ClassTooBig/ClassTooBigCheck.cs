@@ -31,12 +31,12 @@ namespace CleanCode.Features.ClassTooBig
 
         protected override int Threshold
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigEnabled); }
         }
     }
 }

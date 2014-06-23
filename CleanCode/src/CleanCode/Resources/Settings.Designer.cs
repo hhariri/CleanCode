@@ -79,6 +79,24 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex expression check (conditions).
+        /// </summary>
+        public static string ComplexExpressionCheck {
+            get {
+                return ResourceManager.GetString("ComplexExpressionCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the maximum of expressions that can be part of a condition.
+        /// </summary>
+        public static string ComplexExpressionMaximum {
+            get {
+                return ResourceManager.GetString("ComplexExpressionMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum level of nesting.
         /// </summary>
         public static string ExcessiveDepth {
@@ -142,7 +160,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum lenght for the name of methods.
+        ///   Looks up a localized string similar to Minimum length for the name of methods.
         /// </summary>
         public static string MinimumMethodNameLength {
             get {
@@ -151,7 +169,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum Method Name Lenght.
+        ///   Looks up a localized string similar to Minimum Method Name Length.
         /// </summary>
         public static string MinimumMethodNameLengthCheck {
             get {

@@ -25,22 +25,46 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using CleanCode.Settings;
-using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.ProjectModel;
+using CleanCode.Features.ComplexExpression;
 using JetBrains.ReSharper.Daemon;
+using JetBrains.ReSharper.Psi.CSharp;
 
-namespace CleanCode.Features.FlagArguments
+[assembly:RegisterConfigurableSeverity(Highlighting.SeverityID, null,
+    HighlightingGroupIds.CodeSmell, "Expression Too Complex", "The expression contains too complex.",
+    Severity.WARNING, false)]
+
+namespace CleanCode.Features.ComplexExpression
 {
-    [SolutionComponent]
-    public class InvalidateOnMaximumMethodArgumentsChange
+
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    public class Highlighting : IHighlighting
     {
-        public InvalidateOnMaximumMethodArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        internal const string SeverityID = "ComplexExpression";
+        private readonly string tooltip;
+
+        public Highlighting(string toolTip)
         {
-            var maxArguments =
-                settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum);
-            settingsStore.AdviseChange(lifetime, maxArguments, daemon.Invalidate);
+            this.tooltip = toolTip;
+        }
+
+        public string ToolTip
+        {
+            get { return this.tooltip; }
+        }
+
+        public string ErrorStripeToolTip
+        {
+            get { return this.tooltip; }
+        }
+
+        public int NavigationOffsetPatch
+        {
+            get { return 0; }
+        }
+
+        public bool IsValid()
+        {
+            return true;
         }
     }
 }
