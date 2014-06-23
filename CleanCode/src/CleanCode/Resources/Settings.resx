@@ -171,4 +171,7 @@
   <data name="ComplexExpressionMaximum" xml:space="preserve">
     <value>Set the maximum of expressions that can be part of a condition</value>
   </data>
+  <data name="FlagArgumentsCheck" xml:space="preserve">
+    <value>Flag Arguments Check</value>
+  </data>
 </root>

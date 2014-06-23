@@ -33,7 +33,7 @@ namespace CleanCode.Settings
         {
             var viewModels = new ArrayList();
 
-            var methodTooLong = new SingleCheckSettingViewModel<int>(
+            var methodTooLong = new ThresholdCheckSettingViewModel<int>(
                 settings,
                 codeSettings => codeSettings.MethodTooLongEnabled,
                 codeSettings => codeSettings.MethodTooLongMaximum)
@@ -43,7 +43,7 @@ namespace CleanCode.Settings
                 };
             viewModels.Add(methodTooLong);
 
-            var tooManyDependencies = new SingleCheckSettingViewModel<int>(
+            var tooManyDependencies = new ThresholdCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyDependenciesMaximumEnabled,
                 e => e.TooManyDependenciesMaximum)
@@ -53,7 +53,7 @@ namespace CleanCode.Settings
                 };
             viewModels.Add(tooManyDependencies);
 
-            var tooManyMethodArguments = new SingleCheckSettingViewModel<int>(
+            var tooManyMethodArguments = new ThresholdCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyMethodArgumentsEnabled,
                 e => e.TooManyMethodArgumentsMaximum)
@@ -64,7 +64,7 @@ namespace CleanCode.Settings
 
             viewModels.Add(tooManyMethodArguments);
 
-            var excessiveDepth = new SingleCheckSettingViewModel<int>(
+            var excessiveDepth = new ThresholdCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyDependenciesMaximumEnabled,
                 e => e.ExcessiveIndentationMaximum)
@@ -75,7 +75,7 @@ namespace CleanCode.Settings
 
             viewModels.Add(excessiveDepth);
 
-            var classTooBig = new SingleCheckSettingViewModel<int>(
+            var classTooBig = new ThresholdCheckSettingViewModel<int>(
                 settings,
                 e => e.ClassTooBigEnabled,
                 e => e.ClassTooBigMaximum)
@@ -86,7 +86,7 @@ namespace CleanCode.Settings
 
             viewModels.Add(classTooBig);
 
-            var chainedReferences = new SingleCheckSettingViewModel<int>(
+            var chainedReferences = new ThresholdCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyChainedReferencesEnabled,
                 e => e.TooManyChainedReferencesMaximum)
@@ -97,7 +97,7 @@ namespace CleanCode.Settings
 
             viewModels.Add(chainedReferences);
 
-            var methodNameLength = new SingleCheckSettingViewModel<int>(
+            var methodNameLength = new ThresholdCheckSettingViewModel<int>(
                 settings,
                 e => e.MethodNameNotMeaningfulMinimumEnabled,
                 e => e.MethodNameNotMeaningfulMinimum)
@@ -108,16 +108,25 @@ namespace CleanCode.Settings
 
             viewModels.Add(methodNameLength);
 
-            var complexCondition = new SingleCheckSettingViewModel<int>(
+            var complexCondition = new ThresholdCheckSettingViewModel<int>(
                settings,
                e => e.ComplexExpressionEnabled,
                e => e.ComplexExpressionMaximum)
             {
-                IsEnabledDescription = Resources.Settings.ComplexExpressionCheck,
+                IsEnabledDescription = Resources.Settings.ComplexExpressionCheck,                
                 ValueDescription = Resources.Settings.ComplexExpressionMaximum,
             };
 
             viewModels.Add(complexCondition);
+
+            var flagArguments = new CheckSettingViewModel(
+                settings,
+               e => e.FlagArgumentsEnabled)
+            {
+                IsEnabledDescription = Resources.Settings.FlagArgumentsCheck,
+            };
+
+            viewModels.Add(flagArguments);
 
             return viewModels;
         }

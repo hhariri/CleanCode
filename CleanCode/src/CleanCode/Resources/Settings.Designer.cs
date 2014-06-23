@@ -115,6 +115,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Flag Arguments Check.
+        /// </summary>
+        public static string FlagArgumentsCheck {
+            get {
+                return ResourceManager.GetString("FlagArgumentsCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Chained References.
         /// </summary>
         public static string MaxChainedReferences {

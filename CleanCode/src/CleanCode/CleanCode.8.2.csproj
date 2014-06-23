@@ -111,12 +111,14 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Settings.resx</DependentUpon>
     </Compile>
+    <Compile Include="Settings\CheckTemplateSelector.cs" />
     <Compile Include="Settings\CleanCodeSettings.cs" />
     <Compile Include="Settings\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\OptionsViewModel.cs" />
-    <Compile Include="Settings\SingleCheckSettingViewModel.cs" />
+    <Compile Include="Settings\CheckSettingViewModel.cs" />
+    <Compile Include="Settings\ThresholdCheckSettingViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Settings.resx">

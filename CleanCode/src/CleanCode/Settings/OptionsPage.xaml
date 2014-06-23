@@ -7,45 +7,65 @@
              mc:Ignorable="d"              
              d:DataContext="{d:DesignInstance settings:OptionsViewModel}" d:DesignWidth="529" d:DesignHeight="126">
     <UserControl.Resources>
+        <DataTemplate x:Key="ThresholdDataTemplate">
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>                    
+                <Grid>
+                    <CheckBox IsChecked="{Binding IsEnabled}" 
+                              VerticalContentAlignment="Center">                            
+                        <CheckBox.Content>
+                            <TextBlock Text="{Binding IsEnabledDescription}" />
+                        </CheckBox.Content>
+                    </CheckBox>
+                </Grid>
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="40" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding ValueDescription}" />                        
+                    <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
+                             VerticalAlignment="Center" 
+                             MaxLength="3"
+                             HorizontalAlignment="Stretch" Grid.Column="1">
+                    </TextBox>
+                </Grid>
+            </Grid>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+        </DataTemplate>
+
+        <DataTemplate x:Key="SingleDataTemplate">
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <CheckBox IsChecked="{Binding IsEnabled}" 
+                              VerticalContentAlignment="Center">
+                        <CheckBox.Content>
+                            <TextBlock Text="{Binding IsEnabledDescription}" />
+                        </CheckBox.Content>
+                    </CheckBox>
+                </Grid>               
+            </Grid>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+        </DataTemplate>
+        <settings:CheckTemplateSelector x:Key="DataTemplateSelector" 
+                                        BasicCheckTemplate="{StaticResource SingleDataTemplate}" 
+                                        ThresholdCheckTemplate="{StaticResource ThresholdDataTemplate}" />
     </UserControl.Resources>
-    <ItemsControl ItemsSource="{Binding Options}">
+    <ItemsControl ItemsSource="{Binding Options}" ItemTemplateSelector="{StaticResource DataTemplateSelector}">
         <ItemsControl.ItemContainerStyle>
             <Style>
                 <Setter Property="Control.Margin" Value="5" />
             </Style>
         </ItemsControl.ItemContainerStyle>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>                    
-                    <Grid>
-                        <CheckBox IsChecked="{Binding IsEnabled}" 
-                                  VerticalContentAlignment="Center">                            
-                            <CheckBox.Content>
-                                <TextBlock Text="{Binding IsEnabledDescription}" />
-                            </CheckBox.Content>
-                        </CheckBox>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="40" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding ValueDescription}" />                        
-                        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
-                                 VerticalAlignment="Center" 
-                                 MaxLength="3"
-                                 HorizontalAlignment="Stretch" Grid.Column="1">
-                        </TextBox>
-                    </Grid>
-                </Grid>
-                <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
     </ItemsControl>
     
 
