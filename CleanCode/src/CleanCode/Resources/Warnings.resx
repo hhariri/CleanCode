@@ -145,6 +145,6 @@
     <value>This expression is too complex to be legible. Please, simplify it.</value>
   </data>
   <data name="HollowTypeName" xml:space="preserve">
-    <value>The usage of the suffix '{0}' is discouraged. It doesn't express the responsiblity of the type accurately. Chose a meaningful name.</value>
+    <value>The usage of the suffix '{0}' is discouraged because it's too generic. Please, choose a meaningful name instead to clarify its intent and responsibilities.</value>
   </data>
 </root>

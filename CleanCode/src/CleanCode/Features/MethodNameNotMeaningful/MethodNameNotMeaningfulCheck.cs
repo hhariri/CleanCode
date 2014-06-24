@@ -8,32 +8,32 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {
-    public class MethodNameNotMeaningfulCheck : SimpleCheck<IMethodDeclaration, int>
+    public class MethodNameNotMeaningfulCheck : MonoValueCheck<IMethodDeclaration, int>
     {
         public MethodNameNotMeaningfulCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration typeExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration classDeclaration, IHighlightingConsumer consumer)
         {
-            var minimumMethodNameLenght = Threshold;
+            var minimumMethodNameLenght = Value;
 
-            if (typeExpression.NameIdentifier == null)
+            if (classDeclaration.NameIdentifier == null)
             {
                 return;
             }
 
-            var name = typeExpression.NameIdentifier.GetText();
+            var name = classDeclaration.NameIdentifier.GetText();
             var methodNameLenght = name.Length;
             if (methodNameLenght < minimumMethodNameLenght)
             {
                 var highlighting = new Highlighting(Warnings.MethodNameNotMeaningful);
-                consumer.AddHighlighting(highlighting, typeExpression.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, classDeclaration.GetNameDocumentRange());
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
             get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum); }
         }

@@ -8,26 +8,26 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodTooLong
 {
-    public class MethodTooLongCheck : SimpleCheck<IMethodDeclaration, int>
+    public class MethodTooLongCheck : MonoValueCheck<IMethodDeclaration, int>
     {
         public MethodTooLongCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration typeExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration classDeclaration, IHighlightingConsumer consumer)
         {
-            var maxLength = Threshold;
+            var maxLength = Value;
 
-            var statementCount = typeExpression.CountChildren<IStatement>();
+            var statementCount = classDeclaration.CountChildren<IStatement>();
             if (statementCount > maxLength)
             {
                 var highlighting = new Highlighting(Warnings.Warning_MethodTooLong);
-                consumer.AddHighlighting(highlighting, typeExpression.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, classDeclaration.GetNameDocumentRange());
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
             get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum); }
         }

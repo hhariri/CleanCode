@@ -106,7 +106,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The usage of the suffix &apos;{0}&apos; is discouraged. It doesn&apos;t express the responsiblity of the type accurately. Chose a meaningful name..
+        ///   Looks up a localized string similar to The usage of the suffix &apos;{0}&apos; is discouraged because it&apos;s too generic. Please, choose a meaningful name instead to clarify its intent and responsibilities..
         /// </summary>
         public static string HollowTypeName {
             get {

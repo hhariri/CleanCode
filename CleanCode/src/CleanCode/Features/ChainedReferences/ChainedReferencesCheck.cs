@@ -13,18 +13,18 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ChainedReferences
 {
-    public class ChainedReferencesCheck : SimpleCheck<ICSharpStatement, int>
+    public class ChainedReferencesCheck : MonoValueCheck<ICSharpStatement, int>
     {
         public ChainedReferencesCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(ICSharpStatement typeExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(ICSharpStatement classDeclaration, IHighlightingConsumer consumer)
         {
-            if (typeExpression != null && !typeExpression.IsEmbeddedStatement)
+            if (classDeclaration != null && !classDeclaration.IsEmbeddedStatement)
             {
-                this.HighlightMethodChainsThatAreTooLong(typeExpression, consumer);
+                this.HighlightMethodChainsThatAreTooLong(classDeclaration, consumer);
             }
         }
 
@@ -70,14 +70,14 @@ namespace CleanCode.Features.ChainedReferences
 
             if (!isFluentChain)
             {
-                if (chainLength > Threshold)
+                if (chainLength > Value)
                 {
                     AddHighlightning(referenceExpression, consumer);
                 }
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
             get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum); }
         }

@@ -11,26 +11,26 @@ namespace CleanCode.Features.ComplexExpression
     using JetBrains.ReSharper.Psi.CSharp.Tree;
     using JetBrains.ReSharper.Psi.Tree;
 
-    public class ComplexExpressionCheck : SimpleCheck<IExpression, int>
+    public class ComplexExpressionCheck : MonoValueCheck<IExpression, int>
     {
         public ComplexExpressionCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IExpression typeExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IExpression classDeclaration, IHighlightingConsumer consumer)
         {
-            var maxExpressions = this.Threshold;
-            var depth = typeExpression.GetChildrenRecursive<IOperatorExpression>().Count();
+            var maxExpressions = this.Value;
+            var depth = classDeclaration.GetChildrenRecursive<IOperatorExpression>().Count();
 
             if (depth > maxExpressions)
             {
                 var highlighting = new ExcessiveIndentation.Highlighting(Warnings.ExpressionTooComplex);
-                consumer.AddHighlighting(highlighting, typeExpression.GetDocumentRange());
+                consumer.AddHighlighting(highlighting, classDeclaration.GetDocumentRange());
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
             get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ComplexExpressionMaximum); }
         }
