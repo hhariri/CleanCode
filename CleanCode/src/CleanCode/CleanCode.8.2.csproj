@@ -71,6 +71,9 @@
     </Compile>
     <Compile Include="Features\FlagArguments\Highlighting.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
+    <Compile Include="Features\HollowNames\Highlighting.cs" />
+    <Compile Include="Features\HollowNames\InvalidateOnMaximumLinesChange.cs" />
+    <Compile Include="Features\HollowNames\MethodTooLongCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\Highlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\InvalidateOnMinimumMethodNameLenghtChange.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />

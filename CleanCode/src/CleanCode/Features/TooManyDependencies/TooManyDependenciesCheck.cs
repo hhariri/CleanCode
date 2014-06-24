@@ -17,11 +17,11 @@ namespace CleanCode.Features.TooManyDependencies
         {
         }
 
-        protected override void ExecuteCore(IConstructorDeclaration statement, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IConstructorDeclaration typeExpression, IHighlightingConsumer consumer)
         {
             var maxDependencies = Threshold;
 
-            var depedencies = statement.ParameterDeclarations.Select(
+            var depedencies = typeExpression.ParameterDeclarations.Select(
                 declaration => declaration.DeclaredElement != null &&
                                declaration.DeclaredElement.Type.IsInterfaceType());
 
@@ -30,7 +30,7 @@ namespace CleanCode.Features.TooManyDependencies
             if (dependenciesCount > maxDependencies)
             {
                 var highlighting = new Highlighting(Warnings.TooManyDependencies);
-                consumer.AddHighlighting(highlighting, statement.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, typeExpression.GetNameDocumentRange());
             }
         }
 

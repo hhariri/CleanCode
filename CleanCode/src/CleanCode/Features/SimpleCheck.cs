@@ -31,7 +31,7 @@ namespace CleanCode.Features
             this.ExecuteCore(methodDeclaration, context);
         }
 
-        protected abstract void ExecuteCore(TElement statement, IHighlightingConsumer consumer);
+        protected abstract void ExecuteCore(TElement typeExpression, IHighlightingConsumer consumer);
     }
 
     public abstract class SimpleCheck<TElement, TThreshold> : SimpleCheckBase<TElement>

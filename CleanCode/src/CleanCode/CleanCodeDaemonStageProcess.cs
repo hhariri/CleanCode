@@ -45,6 +45,7 @@ using JetBrains.ReSharper.Psi.CSharp.Tree;
 namespace CleanCode
 {
     using CleanCode.Features.ComplexExpression;
+    using CleanCode.Features.HollowNames;
 
     public class CleanCodeDaemonStageProcess : CSharpDaemonStageProcessBase
     {
@@ -60,6 +61,7 @@ namespace CleanCode
         private readonly ChainedReferencesCheck chainedReferencesCheck;
         private readonly FlagArgumentsCheck flagArgumentsCheck;
         private readonly ComplexExpressionCheck complexExpressionCheck;
+        private readonly HollowNamesCheck hollowNamesCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
@@ -67,7 +69,7 @@ namespace CleanCode
             this.daemonProcess = daemonProcess;
             this.settingsStore = settingsStore;
 
-            // Simple checks.
+            // TODO: This is starting to feel like a beach of Benidorm in July. Refactoring needed.
             methodTooLongCheck = new MethodTooLongCheck(settingsStore);
             classTooBigCheck = new ClassTooBigCheck(settingsStore);
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
@@ -77,6 +79,7 @@ namespace CleanCode
             chainedReferencesCheck = new ChainedReferencesCheck(settingsStore);
             flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
             complexExpressionCheck = new ComplexExpressionCheck(settingsStore);
+            hollowNamesCheck = new HollowNamesCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -94,7 +97,7 @@ namespace CleanCode
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
             excessiveIndentationCheck.ExecuteIfEnabled(methodDeclaration, context);
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
-            flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
+            flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);            
         }
 
         public override void VisitCSharpStatement(ICSharpStatement cSharpStatementParam, IHighlightingConsumer context)
@@ -110,6 +113,7 @@ namespace CleanCode
         public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
         {
             classTooBigCheck.ExecuteIfEnabled(classDeclaration, context);
+            hollowNamesCheck.ExecuteIfEnabled(classDeclaration, context);
         }
 
         public override void VisitIfStatement(IIfStatement ifStatementParam, IHighlightingConsumer context)

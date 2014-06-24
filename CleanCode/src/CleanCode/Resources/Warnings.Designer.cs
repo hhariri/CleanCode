@@ -106,6 +106,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The usage of the suffix &apos;{0}&apos; is discouraged. It doesn&apos;t express the responsiblity of the type accurately. Chose a meaningful name..
+        /// </summary>
+        public static string HollowTypeName {
+            get {
+                return ResourceManager.GetString("HollowTypeName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The name of this method is too short to be meaningful..
         /// </summary>
         public static string MethodNameNotMeaningful {

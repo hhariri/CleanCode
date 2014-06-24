@@ -71,7 +71,10 @@ namespace CleanCode.Settings
         public int MethodNameNotMeaningfulMinimum { get; set; }
 
         [SettingsEntry(true, "FlagArgumentsEnabled")]
-        public bool FlagArgumentsEnabled { get; set; }        
+        public bool FlagArgumentsEnabled { get; set; }
+
+        [SettingsEntry(true, "HollowTypeNameEnabled")]
+        public bool HollowTypeNameEnabled { get; set; }  
 
         [SettingsEntry(true, "ComplexExpressionEnabled")]
         public bool ComplexExpressionEnabled { get; set; }

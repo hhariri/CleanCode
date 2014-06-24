@@ -15,15 +15,15 @@ namespace CleanCode.Features.MethodTooLong
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration statement, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration typeExpression, IHighlightingConsumer consumer)
         {
             var maxLength = Threshold;
 
-            var statementCount = statement.CountChildren<IStatement>();
+            var statementCount = typeExpression.CountChildren<IStatement>();
             if (statementCount > maxLength)
             {
                 var highlighting = new Highlighting(Warnings.Warning_MethodTooLong);
-                consumer.AddHighlighting(highlighting, statement.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, typeExpression.GetNameDocumentRange());
             }
         }
 

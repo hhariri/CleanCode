@@ -20,13 +20,13 @@ namespace CleanCode.Features.FlagArguments
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration statement, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration typeExpression, IHighlightingConsumer consumer)
         {
-            var parameterDeclarations = statement.ParameterDeclarations;
+            var parameterDeclarations = typeExpression.ParameterDeclarations;
 
             foreach (var parameterDeclaration in parameterDeclarations)
             {
-                if (IsFlagArgument(parameterDeclaration, statement.Body))
+                if (IsFlagArgument(parameterDeclaration, typeExpression.Body))
                 {
                     AddHighlighting(consumer, parameterDeclaration);
                 }
