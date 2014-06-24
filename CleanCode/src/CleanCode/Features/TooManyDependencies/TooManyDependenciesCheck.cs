@@ -10,18 +10,18 @@ using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode.Features.TooManyDependencies
 {
-    public class TooManyDependenciesCheck : SimpleCheck<IConstructorDeclaration, int>
+    public class TooManyDependenciesCheck : MonoValueCheck<IConstructorDeclaration, int>
     {
         public TooManyDependenciesCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IConstructorDeclaration typeExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IConstructorDeclaration classDeclaration, IHighlightingConsumer consumer)
         {
-            var maxDependencies = Threshold;
+            var maxDependencies = Value;
 
-            var depedencies = typeExpression.ParameterDeclarations.Select(
+            var depedencies = classDeclaration.ParameterDeclarations.Select(
                 declaration => declaration.DeclaredElement != null &&
                                declaration.DeclaredElement.Type.IsInterfaceType());
 
@@ -30,11 +30,11 @@ namespace CleanCode.Features.TooManyDependencies
             if (dependenciesCount > maxDependencies)
             {
                 var highlighting = new Highlighting(Warnings.TooManyDependencies);
-                consumer.AddHighlighting(highlighting, typeExpression.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, classDeclaration.GetNameDocumentRange());
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
             get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
         }

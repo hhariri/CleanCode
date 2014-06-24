@@ -174,4 +174,10 @@
   <data name="FlagArgumentsCheck" xml:space="preserve">
     <value>Flag Arguments Check</value>
   </data>
+  <data name="HollowTypeNameCheck" xml:space="preserve">
+    <value>Hollow Type Name Check</value>
+  </data>
+  <data name="HollowTypeNameWords" xml:space="preserve">
+    <value>List of meaningless suffixes</value>
+  </data>
 </root>

@@ -74,9 +74,13 @@ namespace CleanCode.Settings
         public bool FlagArgumentsEnabled { get; set; }
 
         [SettingsEntry(true, "HollowTypeNameEnabled")]
-        public bool HollowTypeNameEnabled { get; set; }  
+        public bool HollowTypeNameEnabled { get; set; }
+
+        [SettingsEntry("Handler,Manager,Processor,Controller,Helper", "HollowTypeNameString")]
+        public string HollowTypeNameString { get; set; }  
 
         [SettingsEntry(true, "ComplexExpressionEnabled")]
+
         public bool ComplexExpressionEnabled { get; set; }
         [SettingsEntry(1, "ComplexExpressionMaximum")]
         public int ComplexExpressionMaximum { get; set; }

@@ -1,23 +1,8 @@
 ﻿using System.Collections;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using JetBrains.Annotations;
 using JetBrains.Application.Settings;
 
 namespace CleanCode.Settings
 {
-    public abstract class ViewModel : INotifyPropertyChanged
-    {
-        public virtual event PropertyChangedEventHandler PropertyChanged;
-
-        [NotifyPropertyChangedInvocator]
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = null)
-        {
-            var handler = PropertyChanged;
-            if (handler != null) handler(this, new PropertyChangedEventArgs(propertyName));
-        }
-    }
-
     public sealed class OptionsViewModel : ViewModel
     {
         public OptionsViewModel(IContextBoundSettingsStore settings)
@@ -33,102 +18,114 @@ namespace CleanCode.Settings
         {
             var viewModels = new ArrayList();
 
-            var methodTooLong = new ThresholdCheckSettingViewModel<int>(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
                 codeSettings => codeSettings.MethodTooLongEnabled,
                 codeSettings => codeSettings.MethodTooLongMaximum)
-                {
-                    IsEnabledDescription = Resources.Settings.MethodTooLongCheck,
-                    ValueDescription = Resources.Settings.TooLongLinesPerMethod,
-                };
-            viewModels.Add(methodTooLong);
+                           {
+                               IsEnabledDescription = Resources.Settings.MethodTooLongCheck,
+                               ValueDescription = Resources.Settings.TooLongLinesPerMethod,
+                               Category = Categories.Size,
+                           });
 
-            var tooManyDependencies = new ThresholdCheckSettingViewModel<int>(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyDependenciesMaximumEnabled,
                 e => e.TooManyDependenciesMaximum)
-                {
-                    IsEnabledDescription = Resources.Settings.MaximumDependenciesCheck,
-                    ValueDescription = Resources.Settings.TooManyDependencies,
-                };
-            viewModels.Add(tooManyDependencies);
+                           {
+                               IsEnabledDescription = Resources.Settings.MaximumDependenciesCheck,
+                               ValueDescription = Resources.Settings.TooManyDependencies,
+                               Category = Categories.Coupling,
+                           });
 
-            var tooManyMethodArguments = new ThresholdCheckSettingViewModel<int>(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyMethodArgumentsEnabled,
                 e => e.TooManyMethodArgumentsMaximum)
-                {
-                    IsEnabledDescription = Resources.Settings.MaximumMethodArgumentsCheck,
-                    ValueDescription = Resources.Settings.TooManyMethodArguments,
-                };
+                           {
+                               IsEnabledDescription = Resources.Settings.MaximumMethodArgumentsCheck,
+                               ValueDescription = Resources.Settings.TooManyMethodArguments,
+                               Category = Categories.Responsibility,
+                           });
 
-            viewModels.Add(tooManyMethodArguments);
-
-            var excessiveDepth = new ThresholdCheckSettingViewModel<int>(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
-                e => e.TooManyDependenciesMaximumEnabled,
+                e => e.ExcessiveIndentationEnabled,
                 e => e.ExcessiveIndentationMaximum)
-                {
-                    IsEnabledDescription = Resources.Settings.ExcessiveDepthCheck,
-                    ValueDescription = Resources.Settings.ExcessiveDepth,
-                };
+                           {
+                               IsEnabledDescription = Resources.Settings.ExcessiveDepthCheck,
+                               ValueDescription = Resources.Settings.ExcessiveDepth,
+                               Category = Categories.Coupling,
+                           });
 
-            viewModels.Add(excessiveDepth);
-
-            var classTooBig = new ThresholdCheckSettingViewModel<int>(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
                 e => e.ClassTooBigEnabled,
                 e => e.ClassTooBigMaximum)
-                {
-                    IsEnabledDescription = Resources.Settings.ClassTooBigCheck,
-                    ValueDescription = Resources.Settings.ClassTooBig,
-                };
+                           {
+                               IsEnabledDescription = Resources.Settings.ClassTooBigCheck,
+                               ValueDescription = Resources.Settings.ClassTooBig,
+                               Category = Categories.Size,
+                           });
 
-            viewModels.Add(classTooBig);
-
-            var chainedReferences = new ThresholdCheckSettingViewModel<int>(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
                 e => e.TooManyChainedReferencesEnabled,
                 e => e.TooManyChainedReferencesMaximum)
-                {
-                    IsEnabledDescription = Resources.Settings.MaxChainedReferencesCheck,
-                    ValueDescription = Resources.Settings.MaxChainedReferences,
-                };
+                           {
+                               IsEnabledDescription = Resources.Settings.MaxChainedReferencesCheck,
+                               ValueDescription = Resources.Settings.MaxChainedReferences,
+                               Category = Categories.Responsibility,
+                           });
 
-            viewModels.Add(chainedReferences);
-
-            var methodNameLength = new ThresholdCheckSettingViewModel<int>(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
                 e => e.MethodNameNotMeaningfulMinimumEnabled,
                 e => e.MethodNameNotMeaningfulMinimum)
-                {
-                    IsEnabledDescription = Resources.Settings.MinimumMethodNameLengthCheck,
-                    ValueDescription = Resources.Settings.MinimumMethodNameLength,
-                };
+                           {
+                               IsEnabledDescription = Resources.Settings.MinimumMethodNameLengthCheck,
+                               ValueDescription = Resources.Settings.MinimumMethodNameLength,
+                               Category = Categories.Legibility,
+                           });
 
-            viewModels.Add(methodNameLength);
-
-            var complexCondition = new ThresholdCheckSettingViewModel<int>(
-               settings,
-               e => e.ComplexExpressionEnabled,
-               e => e.ComplexExpressionMaximum)
-            {
-                IsEnabledDescription = Resources.Settings.ComplexExpressionCheck,                
-                ValueDescription = Resources.Settings.ComplexExpressionMaximum,
-            };
-
-            viewModels.Add(complexCondition);
-
-            var flagArguments = new CheckSettingViewModel(
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
                 settings,
-               e => e.FlagArgumentsEnabled)
-            {
-                IsEnabledDescription = Resources.Settings.FlagArgumentsCheck,
-            };
+                e => e.ComplexExpressionEnabled,
+                e => e.ComplexExpressionMaximum)
+                           {
+                               IsEnabledDescription = Resources.Settings.ComplexExpressionCheck,                
+                               ValueDescription = Resources.Settings.ComplexExpressionMaximum,
+                               Category = Categories.Complexity,
+                           });
 
-            viewModels.Add(flagArguments);
+            viewModels.Add(new CheckSettingViewModel(
+                settings,
+                e => e.FlagArgumentsEnabled)
+                           {
+                               IsEnabledDescription = Resources.Settings.FlagArgumentsCheck,
+                               Category = Categories.Responsibility,
+                           });
+           
+            viewModels.Add(new MonoValueCheckSettingViewModel<string>(
+                settings, 
+                codeSettings => codeSettings.HollowTypeNameEnabled, 
+                codeSettings => codeSettings.HollowTypeNameString)
+                           {
+                               IsEnabledDescription = Resources.Settings.HollowTypeNameCheck,
+                               ValueDescription = Resources.Settings.HollowTypeNameWords,
+                               Category = Categories.Legibility,
+                           });
 
             return viewModels;
         }
+    }
+
+    public class Categories
+    {
+        public const string Size = "Size";
+        public const string Complexity = "Complexity";
+        public const string Coupling = "Coupling";
+        public const string Responsibility = "Responsibility";
+        public const string Legibility = "Legibility";
     }
 }

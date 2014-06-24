@@ -124,6 +124,24 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hollow Type Name Check.
+        /// </summary>
+        public static string HollowTypeNameCheck {
+            get {
+                return ResourceManager.GetString("HollowTypeNameCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of meaningless suffixes.
+        /// </summary>
+        public static string HollowTypeNameWords {
+            get {
+                return ResourceManager.GetString("HollowTypeNameWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Chained References.
         /// </summary>
         public static string MaxChainedReferences {

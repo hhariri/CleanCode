@@ -25,21 +25,21 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-namespace CleanCode.Features.HollowNames
-{
-    using CleanCode.Settings;
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
+using JetBrains.ReSharper.Daemon;
 
-    using JetBrains.Application.Settings;
-    using JetBrains.DataFlow;
-    using JetBrains.ProjectModel;
-    using JetBrains.ReSharper.Daemon;
+namespace CleanCode.Features.HollowNames
+{    
 
     [SolutionComponent]
-    public class InvalidateOnMaximumLinesChange
+    public class InvalidateOnHollowTypeNameStringChange
     {
-        public InvalidateOnMaximumLinesChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        public InvalidateOnHollowTypeNameStringChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
         {
-            var maxLines = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.MethodTooLongMaximum);
+            var maxLines = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.HollowTypeNameString);
             settingsStore.AdviseChange(lifetime, maxLines, daemon.Invalidate);
         }
     }

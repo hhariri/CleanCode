@@ -8,26 +8,26 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.TooManyMethodArguments
 {
-    public class TooManyMethodArgumentsCheck : SimpleCheck<IMethodDeclaration, int>
+    public class TooManyMethodArgumentsCheck : MonoValueCheck<IMethodDeclaration, int>
     {
         public TooManyMethodArgumentsCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration typeExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration classDeclaration, IHighlightingConsumer consumer)
         {
-            var parameterDeclarations = typeExpression.ParameterDeclarations;
-            var maxParameters = Threshold;
+            var parameterDeclarations = classDeclaration.ParameterDeclarations;
+            var maxParameters = Value;
 
             if (parameterDeclarations.Count > maxParameters)
             {
                 var highlighting = new Highlighting(Warnings.TooManyMethodArguments);
-                consumer.AddHighlighting(highlighting, typeExpression.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, classDeclaration.GetNameDocumentRange());
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
             get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum); }
         }

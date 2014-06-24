@@ -4,11 +4,11 @@ using JetBrains.Application.Settings;
 
 namespace CleanCode.Settings
 {
-    public class ThresholdCheckSettingViewModel<TType> : CheckSettingViewModel
+    public class MonoValueCheckSettingViewModel<TType> : CheckSettingViewModel
     {
-        protected Expression<Func<CleanCodeSettings, TType>> valueSelector;
+        private readonly Expression<Func<CleanCodeSettings, TType>> valueSelector;
 
-        public ThresholdCheckSettingViewModel(IContextBoundSettingsStore settings, Expression<Func<CleanCodeSettings, bool>> isEnabledSelector, Expression<Func<CleanCodeSettings, TType>> valueSelector) : base(settings, isEnabledSelector)
+        public MonoValueCheckSettingViewModel(IContextBoundSettingsStore settings, Expression<Func<CleanCodeSettings, bool>> isEnabledSelector, Expression<Func<CleanCodeSettings, TType>> valueSelector) : base(settings, isEnabledSelector)
         {
             this.valueSelector = valueSelector;
         }

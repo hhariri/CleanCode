@@ -54,12 +54,13 @@
     <Compile Include="Features\ChainedReferences\Highlighting.cs" />
     <Compile Include="Features\ChainedReferences\InvalidateOnMaximumChainedCalls.cs" />
     <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
+    <Compile Include="Features\Check.cs" />
     <Compile Include="Features\ClassTooBig\Highlighting.cs" />
     <Compile Include="Features\ClassTooBig\InvalidateOnMaximumMethodsPerClass.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
     <Compile Include="Features\ComplexExpression\Highlighting.cs" />
     <Compile Include="Features\ComplexExpression\InvalidateOnComplexExpressionChange.cs" />
-    <Compile Include="Features\ComplexExpression\ExpressionTooComplexCheck.cs" />
+    <Compile Include="Features\ComplexExpression\ComplexExpressionCheck.cs" />
     <Compile Include="Features\ExcessiveIndentation\Highlighting.cs" />
     <Compile Include="Features\ExcessiveIndentation\InvalidateOnExcessiveIndentationChange.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
@@ -72,8 +73,8 @@
     <Compile Include="Features\FlagArguments\Highlighting.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
     <Compile Include="Features\HollowNames\Highlighting.cs" />
-    <Compile Include="Features\HollowNames\InvalidateOnMaximumLinesChange.cs" />
-    <Compile Include="Features\HollowNames\MethodTooLongCheck.cs" />
+    <Compile Include="Features\HollowNames\InvalidateOnHollowTypeNameStringChange.cs" />
+    <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\Highlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\InvalidateOnMinimumMethodNameLenghtChange.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
@@ -84,7 +85,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
-    <Compile Include="Features\SimpleCheck.cs" />
+    <Compile Include="Features\MonoValueCheck.cs" />
     <Compile Include="Features\ChainedReferences\TypeEqualityComparer.cs" />
     <Compile Include="Features\TooManyDependencies\Highlighting.cs">
       <SubType>Code</SubType>
@@ -121,7 +122,8 @@
     </Compile>
     <Compile Include="Settings\OptionsViewModel.cs" />
     <Compile Include="Settings\CheckSettingViewModel.cs" />
-    <Compile Include="Settings\ThresholdCheckSettingViewModel.cs" />
+    <Compile Include="Settings\MonoValueCheckSettingViewModel.cs" />
+    <Compile Include="Settings\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Settings.resx">

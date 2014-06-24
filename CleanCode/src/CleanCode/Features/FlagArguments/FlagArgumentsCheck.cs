@@ -13,20 +13,20 @@ using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode.Features.FlagArguments
 {
-    public class FlagArgumentsCheck : SimpleCheckBase<IMethodDeclaration>
+    public class FlagArgumentsCheck : Check<IMethodDeclaration>
     {
         public FlagArgumentsCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration typeExpression, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration classDeclaration, IHighlightingConsumer consumer)
         {
-            var parameterDeclarations = typeExpression.ParameterDeclarations;
+            var parameterDeclarations = classDeclaration.ParameterDeclarations;
 
             foreach (var parameterDeclaration in parameterDeclarations)
             {
-                if (IsFlagArgument(parameterDeclaration, typeExpression.Body))
+                if (IsFlagArgument(parameterDeclaration, classDeclaration.Body))
                 {
                     AddHighlighting(consumer, parameterDeclaration);
                 }
