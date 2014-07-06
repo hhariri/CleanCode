@@ -15,15 +15,15 @@ namespace CleanCode.Features.ExcessiveIndentation
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
             var maxIndentation = Value;
-            var depth = classDeclaration.GetChildrenDepth();
+            var depth = constructorDeclaration.GetChildrenDepth();
 
             if (depth > maxIndentation)
             {
                 var highlighting = new Highlighting(Warnings.ExcessiveDepth);
-                consumer.AddHighlighting(highlighting, classDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
             }
         }
 

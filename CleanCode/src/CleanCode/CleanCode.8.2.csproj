@@ -87,6 +87,9 @@
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
     <Compile Include="Features\MonoValueCheck.cs" />
     <Compile Include="Features\ChainedReferences\TypeEqualityComparer.cs" />
+    <Compile Include="Features\TooManyDeclarations\Highlighting.cs" />
+    <Compile Include="Features\TooManyDeclarations\InvalidateOnMaximumDeclarationsChange.cs" />
+    <Compile Include="Features\TooManyDeclarations\TooManyDeclarationsCheck.cs" />
     <Compile Include="Features\TooManyDependencies\Highlighting.cs">
       <SubType>Code</SubType>
     </Compile>

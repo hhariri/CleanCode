@@ -18,15 +18,15 @@ namespace CleanCode.Features.ComplexExpression
         {
         }
 
-        protected override void ExecuteCore(IExpression classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IExpression constructorDeclaration, IHighlightingConsumer consumer)
         {
             var maxExpressions = this.Value;
-            var depth = classDeclaration.GetChildrenRecursive<IOperatorExpression>().Count();
+            var depth = constructorDeclaration.GetChildrenRecursive<IOperatorExpression>().Count();
 
             if (depth > maxExpressions)
             {
                 var highlighting = new ExcessiveIndentation.Highlighting(Warnings.ExpressionTooComplex);
-                consumer.AddHighlighting(highlighting, classDeclaration.GetDocumentRange());
+                consumer.AddHighlighting(highlighting, constructorDeclaration.GetDocumentRange());
             }
         }
 

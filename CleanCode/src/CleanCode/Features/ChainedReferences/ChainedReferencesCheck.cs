@@ -20,11 +20,11 @@ namespace CleanCode.Features.ChainedReferences
         {
         }
 
-        protected override void ExecuteCore(ICSharpStatement classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(ICSharpStatement constructorDeclaration, IHighlightingConsumer consumer)
         {
-            if (classDeclaration != null && !classDeclaration.IsEmbeddedStatement)
+            if (constructorDeclaration != null && !constructorDeclaration.IsEmbeddedStatement)
             {
-                this.HighlightMethodChainsThatAreTooLong(classDeclaration, consumer);
+                this.HighlightMethodChainsThatAreTooLong(constructorDeclaration, consumer);
             }
         }
 

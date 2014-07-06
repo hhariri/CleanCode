@@ -17,20 +17,20 @@ namespace CleanCode.Features.TooManyDependencies
         {
         }
 
-        protected override void ExecuteCore(IConstructorDeclaration classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
             var maxDependencies = Value;
 
-            var depedencies = classDeclaration.ParameterDeclarations.Select(
+            var dependencies = constructorDeclaration.ParameterDeclarations.Select(
                 declaration => declaration.DeclaredElement != null &&
                                declaration.DeclaredElement.Type.IsInterfaceType());
 
-            var dependenciesCount = depedencies.Count();
+            var dependenciesCount = dependencies.Count();
 
             if (dependenciesCount > maxDependencies)
             {
                 var highlighting = new Highlighting(Warnings.TooManyDependencies);
-                consumer.AddHighlighting(highlighting, classDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
             }
         }
 

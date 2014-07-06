@@ -84,5 +84,13 @@ namespace CleanCode.Settings
         public bool ComplexExpressionEnabled { get; set; }
         [SettingsEntry(1, "ComplexExpressionMaximum")]
         public int ComplexExpressionMaximum { get; set; }
+
+        [SettingsEntry(true, "TooManyDeclarationsEnabled")]
+        public readonly bool TooManyDeclarationsEnabled;
+        [SettingsEntry(6, "TooManyDeclarationsMaximum")]
+        public readonly int TooManyDeclarationsMaximum;
+
+        [SettingsEntry(true, "InterfacesWithNoPrefixEnabled")]
+        public readonly bool InterfacesWithNoPrefixEnabled;
     }
 }

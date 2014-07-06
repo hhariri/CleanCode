@@ -180,4 +180,10 @@
   <data name="HollowTypeNameWords" xml:space="preserve">
     <value>List of meaningless suffixes</value>
   </data>
+  <data name="DeclarationsMaximum" xml:space="preserve">
+    <value>Maximum number of declarations per method</value>
+  </data>
+  <data name="TooManyDeclarationsCheck" xml:space="preserve">
+    <value>Too Many Declarations Check</value>
+  </data>
 </root>

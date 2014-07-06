@@ -23,15 +23,15 @@ namespace CleanCode.Features.HollowNames
         {
         }
 
-        protected override void ExecuteCore(IClassDeclaration classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IClassDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
             var suffixes = GetSuffixes();
 
-            var match = GetFirstMatchOrDefault(classDeclaration.DeclaredName, suffixes);
+            var match = GetFirstMatchOrDefault(constructorDeclaration.DeclaredName, suffixes);
 
             if (match != null)
             {
-                AddHightlightning(match, consumer, classDeclaration);
+                AddHightlightning(match, consumer, constructorDeclaration);
             }
         }
 

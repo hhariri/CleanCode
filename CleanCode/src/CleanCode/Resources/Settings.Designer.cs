@@ -97,6 +97,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum number of declarations per method.
+        /// </summary>
+        public static string DeclarationsMaximum {
+            get {
+                return ResourceManager.GetString("DeclarationsMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum level of nesting.
         /// </summary>
         public static string ExcessiveDepth {
@@ -228,6 +237,15 @@ namespace CleanCode.Resources {
         public static string TooLongLinesPerMethod {
             get {
                 return ResourceManager.GetString("TooLongLinesPerMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Too Many Declarations Check.
+        /// </summary>
+        public static string TooManyDeclarationsCheck {
+            get {
+                return ResourceManager.GetString("TooManyDeclarationsCheck", resourceCulture);
             }
         }
         

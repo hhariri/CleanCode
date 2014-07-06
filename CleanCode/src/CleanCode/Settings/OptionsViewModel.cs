@@ -116,6 +116,16 @@ namespace CleanCode.Settings
                                Category = Categories.Legibility,
                            });
 
+            viewModels.Add(new MonoValueCheckSettingViewModel<int>(
+               settings,
+               codeSettings => codeSettings.TooManyDeclarationsEnabled,
+               codeSettings => codeSettings.TooManyDeclarationsMaximum)
+            {
+                IsEnabledDescription = Resources.Settings.TooManyDeclarationsCheck,
+                ValueDescription = Resources.Settings.DeclarationsMaximum,
+                Category = Categories.Responsibility,
+            });
+
             return viewModels;
         }
     }

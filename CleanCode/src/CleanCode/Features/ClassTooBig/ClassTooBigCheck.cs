@@ -15,14 +15,14 @@ namespace CleanCode.Features.ClassTooBig
         {
         }
 
-        protected override void ExecuteCore(IClassDeclaration classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IClassDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
             var maxLength = Value;
 
-            var statementCount = classDeclaration.CountChildren<IMethodDeclaration>();
+            var statementCount = constructorDeclaration.CountChildren<IMethodDeclaration>();
             if (statementCount > maxLength)
             {
-                var declarationIdentifier = classDeclaration.NameIdentifier;
+                var declarationIdentifier = constructorDeclaration.NameIdentifier;
                 var documentRange = declarationIdentifier.GetDocumentRange();
                 var highlighting = new Highlighting(Warnings.ClassTooBig);
                 consumer.AddHighlighting(highlighting, documentRange);

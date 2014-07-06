@@ -149,5 +149,14 @@ namespace CleanCode.Resources {
                 return ResourceManager.GetString("Warning_MethodTooLong", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Too many declarations. This method is likely doing more than one thing..
+        /// </summary>
+        public static string Warning_TooManyDeclarations {
+            get {
+                return ResourceManager.GetString("Warning_TooManyDeclarations", resourceCulture);
+            }
+        }
     }
 }

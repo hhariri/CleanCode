@@ -32,6 +32,7 @@ using CleanCode.Features.ExcessiveIndentation;
 using CleanCode.Features.FlagArguments;
 using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
+using CleanCode.Features.TooManyDeclarations;
 using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.Progress;
@@ -62,6 +63,7 @@ namespace CleanCode
         private readonly FlagArgumentsCheck flagArgumentsCheck;
         private readonly ComplexExpressionCheck complexExpressionCheck;
         private readonly HollowNamesCheck hollowNamesCheck;
+        private readonly TooManyDeclarationsCheck tooManyDeclarationsCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
@@ -80,6 +82,7 @@ namespace CleanCode
             flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
             complexExpressionCheck = new ComplexExpressionCheck(settingsStore);
             hollowNamesCheck = new HollowNamesCheck(settingsStore);
+            tooManyDeclarationsCheck = new TooManyDeclarationsCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -97,7 +100,8 @@ namespace CleanCode
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
             excessiveIndentationCheck.ExecuteIfEnabled(methodDeclaration, context);
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
-            flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);            
+            flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);         
+            tooManyDeclarationsCheck.ExecuteIfEnabled(methodDeclaration, context);
         }
 
         public override void VisitCSharpStatement(ICSharpStatement cSharpStatementParam, IHighlightingConsumer context)

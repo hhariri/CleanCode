@@ -31,6 +31,6 @@ namespace CleanCode.Features
             this.ExecuteCore(methodDeclaration, context);
         }
 
-        protected abstract void ExecuteCore(TElement classDeclaration, IHighlightingConsumer consumer);
+        protected abstract void ExecuteCore(TElement constructorDeclaration, IHighlightingConsumer consumer);
     }
 }
