@@ -39,9 +39,8 @@ using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.Progress;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 

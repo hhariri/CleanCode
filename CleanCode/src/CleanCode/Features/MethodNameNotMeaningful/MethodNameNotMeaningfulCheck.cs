@@ -1,8 +1,7 @@
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -28,19 +27,20 @@ namespace CleanCode.Features.MethodNameNotMeaningful
             var methodNameLenght = name.Length;
             if (methodNameLenght < minimumMethodNameLenght)
             {
-                var highlighting = new Highlighting(Warnings.MethodNameNotMeaningful);
-                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
+                var documentRange = constructorDeclaration.GetNameDocumentRange();
+                var highlighting = new Highlighting(Warnings.MethodNameNotMeaningful, documentRange);
+                consumer.AddHighlighting(highlighting);
             }
         }
 
         protected override int Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimumEnabled); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimumEnabled); }
         }
     }
 }

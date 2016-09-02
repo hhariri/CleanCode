@@ -2,13 +2,12 @@ using System.Linq;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.Stages;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Psi.Tree;
 using System.Collections.Generic;
 using System.Diagnostics;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode.Features.FlagArguments
@@ -35,8 +34,9 @@ namespace CleanCode.Features.FlagArguments
 
         private static void AddHighlighting(IHighlightingConsumer consumer, ICSharpParameterDeclaration parameterDeclaration)
         {
-            var highlighting = new Highlighting(Warnings.FlagArgument);
-            consumer.AddHighlighting(highlighting, parameterDeclaration.GetDocumentRange());
+            var documentRange = parameterDeclaration.GetDocumentRange();
+            var highlighting = new Highlighting(Warnings.FlagArgument, documentRange);
+            consumer.AddHighlighting(highlighting);
         }
 
         private static bool IsFlagArgument(ITypeOwnerDeclaration typeOwnerDeclaration, ITreeNode node)

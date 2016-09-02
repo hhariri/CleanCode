@@ -2,8 +2,7 @@ using System.Linq;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
@@ -29,19 +28,20 @@ namespace CleanCode.Features.TooManyDependencies
 
             if (dependenciesCount > maxDependencies)
             {
-                var highlighting = new Highlighting(Warnings.TooManyDependencies);
-                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
+                var highlighting = new Highlighting(Warnings.TooManyDependencies,
+                    constructorDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting);
             }
         }
 
         protected override int Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximumEnabled); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximumEnabled); }
         }
     }
 }

@@ -1,8 +1,7 @@
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -22,19 +21,20 @@ namespace CleanCode.Features.ExcessiveIndentation
 
             if (depth > maxIndentation)
             {
-                var highlighting = new Highlighting(Warnings.ExcessiveDepth);
-                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
+                var documentRange = constructorDeclaration.GetNameDocumentRange();
+                var highlighting = new Highlighting(Warnings.ExcessiveDepth, documentRange);
+                consumer.AddHighlighting(highlighting);
             }
         }
 
         protected override int Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationEnabled); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationEnabled); }
         }
     }
 }

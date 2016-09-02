@@ -1,6 +1,6 @@
-﻿using CleanCode.Resources.Icons82;
+﻿using CleanCode.Resources.Icons;
 using JetBrains.DataFlow;
-using JetBrains.ReSharper.Features.Environment.Options.Inspections;
+using JetBrains.ReSharper.Feature.Services.Daemon.OptionPages;
 using JetBrains.UI.Application;
 using JetBrains.UI.CrossFramework;
 using JetBrains.UI.Options;

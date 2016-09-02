@@ -1,8 +1,7 @@
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -22,19 +21,20 @@ namespace CleanCode.Features.TooManyDeclarations
             var statementCount = constructorDeclaration.CountChildren<IDeclaration>();
             if (statementCount > maxLength)
             {
-                var highlighting = new MethodTooLong.Highlighting(Warnings.Warning_TooManyDeclarations);
-                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
+                var highlighting = new MethodTooLong.Highlighting(Warnings.Warning_TooManyDeclarations,
+                    constructorDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting);
             }
         }
 
         protected override int Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsMaximum); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsEnabled); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsEnabled); }
         }
     }
 }

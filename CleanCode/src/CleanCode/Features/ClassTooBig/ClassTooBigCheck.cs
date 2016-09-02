@@ -1,8 +1,7 @@
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
@@ -24,19 +23,19 @@ namespace CleanCode.Features.ClassTooBig
             {
                 var declarationIdentifier = constructorDeclaration.NameIdentifier;
                 var documentRange = declarationIdentifier.GetDocumentRange();
-                var highlighting = new Highlighting(Warnings.ClassTooBig);
-                consumer.AddHighlighting(highlighting, documentRange);
+                var highlighting = new Highlighting(Warnings.ClassTooBig, documentRange);
+                consumer.AddHighlighting(highlighting);
             }
         }
 
         protected override int Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigMaximum); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigEnabled); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigEnabled); }
         }
     }
 }

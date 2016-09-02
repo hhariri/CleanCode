@@ -1,5 +1,5 @@
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features
@@ -18,17 +18,17 @@ namespace CleanCode.Features
 
         protected IContextBoundSettingsStore SettingsStore
         {
-            get { return this.settingsStore; }
+            get { return settingsStore; }
         }
 
         public void ExecuteIfEnabled(TElement methodDeclaration, IHighlightingConsumer context)
         {
-            if (!this.IsEnabled)
+            if (!IsEnabled)
             {
                 return;
             }
 
-            this.ExecuteCore(methodDeclaration, context);
+            ExecuteCore(methodDeclaration, context);
         }
 
         protected abstract void ExecuteCore(TElement constructorDeclaration, IHighlightingConsumer consumer);

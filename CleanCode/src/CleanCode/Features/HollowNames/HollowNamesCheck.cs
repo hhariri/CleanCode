@@ -1,19 +1,16 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using CleanCode.Resources;
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.Xaml.Tree.MarkupExtensions;
+using JetBrains.ReSharper.Psi.Tree;
+using IContextBoundSettingsStore = JetBrains.Application.Settings.IContextBoundSettingsStore;
 
 namespace CleanCode.Features.HollowNames
 {
-    using System.Collections.Generic;
-    using System.Linq;
-
-    using CleanCode.Resources;
-    using CleanCode.Settings;
-    using JetBrains.Application.Settings;
-    using JetBrains.ReSharper.Daemon.CSharp.Stages;
-    using JetBrains.ReSharper.Daemon.Stages;
-    using JetBrains.ReSharper.Psi.Tree;
-
     public class HollowNamesCheck : MonoValueCheck<IClassDeclaration, string>
     {
         private const string Separator = ",";
@@ -47,19 +44,20 @@ namespace CleanCode.Features.HollowNames
 
         private void AddHightlightning(string bannedSuffix, IHighlightingConsumer consumer, IClassDeclaration typeExpression)
         {
-            var highlighting = new Highlighting(string.Format(Warnings.HollowTypeName, bannedSuffix));
             var identifier = typeExpression.NameIdentifier;
-            consumer.AddHighlighting(highlighting, identifier.GetDocumentRange());
+            var documentRange = identifier.GetDocumentRange();
+            var highlighting = new Highlighting(string.Format(Warnings.HollowTypeName, bannedSuffix), documentRange);
+            consumer.AddHighlighting(highlighting);
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameEnabled); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameEnabled); }
         }
 
         protected override string Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameString); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameString); }
         }
     }
 }

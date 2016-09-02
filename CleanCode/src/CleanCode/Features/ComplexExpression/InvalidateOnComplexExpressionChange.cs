@@ -25,19 +25,18 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
+using CleanCode.Settings;
+using JetBrains.Application.Settings;
+using JetBrains.DataFlow;
+using JetBrains.ProjectModel;
+using JetBrains.ReSharper.Feature.Services.Daemon;
+
 namespace CleanCode.Features.ComplexExpression
 {
-    using CleanCode.Settings;
-
-    using JetBrains.Application.Settings;
-    using JetBrains.DataFlow;
-    using JetBrains.ProjectModel;
-    using JetBrains.ReSharper.Daemon;
-
     [SolutionComponent]
     public class InvalidateOnComplexExpressionChange
     {
-        public InvalidateOnComplexExpressionChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        public InvalidateOnComplexExpressionChange(Lifetime lifetime, IDaemon daemon, ISettingsStore settingsStore)
         {
             var maxDepth = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.ComplexExpressionMaximum);
             settingsStore.AdviseChange(lifetime, maxDepth, daemon.Invalidate);

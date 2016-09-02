@@ -26,8 +26,9 @@
 #endregion
 
 using CleanCode.Features.HollowNames;
-
-using JetBrains.ReSharper.Daemon;
+using JetBrains.DocumentModel;
+using JetBrains.ReSharper.Feature.Services.Daemon;
+using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
     HighlightingGroupIds.CodeSmell, "Hollow Type Name", "This type has a name that doesn't express its intent.",
@@ -35,33 +36,32 @@ using JetBrains.ReSharper.Daemon;
 
 namespace CleanCode.Features.HollowNames
 {
-    using JetBrains.ReSharper.Daemon;
-    using JetBrains.ReSharper.Psi.CSharp;
-
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
     {
         internal const string SeverityID = "HollowTypeName";
         private readonly string tooltip;
+        private readonly DocumentRange documentRange;
 
-        public Highlighting(string toolTip)
+        public Highlighting(string toolTip, DocumentRange documentRange)
         {
-            this.tooltip = toolTip;
+            tooltip = toolTip;
+            this.documentRange = documentRange;
+        }
+
+        public DocumentRange CalculateRange()
+        {
+            return documentRange;
         }
 
         public string ToolTip
         {
-            get { return this.tooltip; }
+            get { return tooltip; }
         }
 
         public string ErrorStripeToolTip
         {
-            get { return this.tooltip; }
-        }
-
-        public int NavigationOffsetPatch
-        {
-            get { return 0; }
+            get { return tooltip; }
         }
 
         public bool IsValid()

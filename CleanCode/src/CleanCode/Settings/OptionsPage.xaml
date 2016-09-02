@@ -65,8 +65,7 @@
                 <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
                          VerticalAlignment="Center" 
                          MaxLength="3"                         
-                         HorizontalAlignment="Stretch" Grid.Column="2">
-                </TextBox>
+                         HorizontalAlignment="Stretch" Grid.Column="2" />
 
             </Grid>
             <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
@@ -96,8 +95,7 @@
                          Grid.Column="2"
                          VerticalAlignment="Center" 
                          MaxLength="400"                             
-                         HorizontalAlignment="Stretch">
-                </TextBox>
+                         HorizontalAlignment="Stretch" />
             </Grid>
             <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
         </DataTemplate>
@@ -156,3 +154,6 @@
         </ItemsControl.ItemContainerStyle>
     </ItemsControl>
 </UserControl>
+
+
+

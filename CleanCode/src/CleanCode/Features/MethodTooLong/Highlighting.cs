@@ -26,7 +26,8 @@
 #endregion
 
 using CleanCode.Features.MethodTooLong;
-using JetBrains.ReSharper.Daemon;
+using JetBrains.DocumentModel;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
@@ -40,10 +41,17 @@ namespace CleanCode.Features.MethodTooLong
     {
         internal const string SeverityID = "MethodTooLong";
         private readonly string tooltip;
+        private readonly DocumentRange documentRange;
 
-        public Highlighting(string toolTip)
+        public Highlighting(string toolTip, DocumentRange documentRange)
         {
             tooltip = toolTip;
+            this.documentRange = documentRange;
+        }
+
+        public DocumentRange CalculateRange()
+        {
+            return documentRange;
         }
 
         public string ToolTip
@@ -54,11 +62,6 @@ namespace CleanCode.Features.MethodTooLong
         public string ErrorStripeToolTip
         {
             get { return tooltip; }
-        }
-
-        public int NavigationOffsetPatch
-        {
-            get { return 0; }
         }
 
         public bool IsValid()

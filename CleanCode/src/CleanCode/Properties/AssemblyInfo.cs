@@ -26,7 +26,6 @@
 #endregion
 using System.Reflection;
 using System.Runtime.InteropServices;
-using JetBrains.Application.PluginSupport;
 
 [assembly: AssemblyTitle("ReSharper Clean Code Plugin")]
 [assembly: AssemblyCompany("Hadi Hariri")]
@@ -41,6 +40,6 @@ using JetBrains.Application.PluginSupport;
 
 [assembly: AssemblyVersion("4.0.0.*")]
 
-[assembly: PluginTitle("Clean Code")]
-[assembly: PluginDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
-[assembly: PluginVendor("Hadi Hariri and Contributors")]
+//[assembly: PluginTitle("Clean Code")]
+//[assembly: PluginDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
+//[assembly: PluginVendor("Hadi Hariri and Contributors")]

@@ -24,7 +24,7 @@ namespace CleanCode.Settings
                 throw new ArgumentNullException("isEnabledSelector");
             }
 
-            this.Settings = settings;
+            Settings = settings;
             this.isEnabledSelector = isEnabledSelector;            
         }
 

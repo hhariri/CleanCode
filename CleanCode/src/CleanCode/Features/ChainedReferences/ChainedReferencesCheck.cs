@@ -1,14 +1,10 @@
 using System.Collections.Generic;
-using System.Linq;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.ReSharper.Daemon.CSharp.Stages;
-using JetBrains.ReSharper.Daemon.Stages;
+using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
-using JetBrains.ReSharper.Psi.ExtensionsAPI.Resolve;
-using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ChainedReferences
@@ -24,7 +20,7 @@ namespace CleanCode.Features.ChainedReferences
         {
             if (constructorDeclaration != null && !constructorDeclaration.IsEmbeddedStatement)
             {
-                this.HighlightMethodChainsThatAreTooLong(constructorDeclaration, consumer);
+                HighlightMethodChainsThatAreTooLong(constructorDeclaration, consumer);
             }
         }
 
@@ -37,7 +33,7 @@ namespace CleanCode.Features.ChainedReferences
                 var referenceExpression = treeNode as IReferenceExpression;
                 if (referenceExpression != null)
                 {
-                    this.HightlightReferenceExpressionIfNeeded(referenceExpression, consumer);
+                    HightlightReferenceExpressionIfNeeded(referenceExpression, consumer);
                 }
                 else
                 {
@@ -79,19 +75,20 @@ namespace CleanCode.Features.ChainedReferences
 
         protected override int Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesEnabled); }
+            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesEnabled); }
         }
 
-        public static void AddHighlightning(IReferenceExpression reference, IHighlightingConsumer consumer)
+        private static void AddHighlightning(IReferenceExpression reference, IHighlightingConsumer consumer)
         {
-            var highlighting = new Highlighting(Warnings.ChainedReferences);
             var nameIdentifier = reference.NameIdentifier;
-            consumer.AddHighlighting(highlighting, nameIdentifier.GetDocumentRange());
+            var documentRange = nameIdentifier.GetDocumentRange();
+            var highlighting = new Highlighting(Warnings.ChainedReferences, documentRange);
+            consumer.AddHighlighting(highlighting);
         }
     }
 }
