@@ -8,12 +8,14 @@ Each check is intended to highlight a symptom that your code is becoming too com
 
 * **Too many dependencies** - warns when a constructor has too many interfaces passed in.
 * **Excessive indentation** - warns if a class contains members with too much indentation.
-* **Too many chained references** - warns if an expression has too many chained statements, is potentially violating the [Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter).
+* **Too many chained references** - warns if an expression has too many chained statements, is potentially violating the [Law of Demeter](https://en.wikipedia.org/wiki/Law_of_Demeter). The check will try to ignore fluent APIs - if the type returned is the same as the type invoked, it doesn't count.
 * **Method too long** - warns when a method contains too many statements.
 * **Class too big** - warns if a class has too many method declarations.
 * **Too many method parameters** - warns if a method has too many parameters.
 * **Method name not meaningful** - simple check that a method name is longer than a certain threshold.
-* **Too many flag parameters in method** - warns if too many boolean parameters are used in a method declaration. Multiple boolean values can be easily mixed up.
+* **Method flag parameters** - warns if a boolean or enum method parameter is used in an `if` statement with the method. This is an indication that the method has more than one responsibility.
+* **Condition complexity** - warns if the condition in an `if` statement contains too many expressions.
+* **Hollow type names** - warns if a class has a name with a suffix that is too general, e.g. `Handler`, `Manager`, `Controller`. The list of names is configurable.
 
 The limits used by each analysis are configurable in the options page.
 
