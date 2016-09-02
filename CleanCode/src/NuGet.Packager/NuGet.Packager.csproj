@@ -11,7 +11,8 @@
     <RootNamespace>NuGet.Packager</RootNamespace>
     <AssemblyName>NuGet.Packager</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -64,9 +65,9 @@
     <Content Include="lib\CleanCode.8.2.pdb" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CleanCode\CleanCode.8.2.csproj">
+    <ProjectReference Include="..\CleanCode\CleanCode.csproj">
       <Project>{5f96119c-2646-4298-ad40-30209e7e7bb2}</Project>
-      <Name>CleanCode.8.2</Name>
+      <Name>CleanCode</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
