@@ -69,5 +69,10 @@ namespace CleanCode.Settings
         public bool MethodNameNotMeaningfulMinimumEnabled { get; set; }
         [SettingsEntry(4, "MethodNameNotMeaningfulMinimum")]
         public int MethodNameNotMeaningfulMinimum { get; set; }
+
+        [SettingsEntry(0, "FlagMethodArgumentsMinimum")]
+        public int FlagMethodArgumentsMinimum { get; set; }
+        [SettingsEntry(true, "FlagMethodArgumentsEnabled")]
+        public bool FlagMethodArgumentsEnabled { get; set; }
     }
 }

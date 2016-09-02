@@ -28,6 +28,7 @@
 using System;
 using CleanCode.Features.ClassTooBig;
 using CleanCode.Features.ExcessiveIndentation;
+using CleanCode.Features.FlagsMethodArguments;
 using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
 using CleanCode.Features.TooManyChainedReferences;
@@ -45,7 +46,7 @@ namespace CleanCode
     public class CleanCodeDaemonStageProcess : CSharpDaemonStageProcessBase
     {
         private readonly IContextBoundSettingsStore settingsStore;
-
+        private readonly FlagsMethodArgumentsCheck flagsMethodArgumentsCheck; 
         private readonly MethodTooLongCheck methodTooLongCheck;
         private readonly ClassTooBigCheck classTooBigCheck;
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
@@ -67,6 +68,7 @@ namespace CleanCode
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNamesNotMeaningfulCheck(settingsStore);
             tooManyChainedReferencesCheck = new TooManyChainedReferencesCheck(settingsStore);
+            flagsMethodArgumentsCheck = new FlagsMethodArgumentsCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -80,6 +82,7 @@ namespace CleanCode
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
             excessiveIndentationCheck.ExecuteIfEnabled(methodDeclaration, context);
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
+            flagsMethodArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
         }
 
         public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
