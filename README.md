@@ -13,6 +13,7 @@ Each check is intended to highlight a symptom that your code is becoming too com
 * **Class too big** - warns if a class has too many method declarations.
 * **Too many method parameters** - warns if a method has too many parameters.
 * **Method name not meaningful** - simple check that a method name is longer than a certain threshold.
+* **Too many flag parameters in method** - warns if too many boolean parameters are used in a method declaration. Multiple boolean values can be easily mixed up.
 
 The limits used by each analysis are configurable in the options page.
 

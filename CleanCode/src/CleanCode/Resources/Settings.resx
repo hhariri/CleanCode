@@ -165,4 +165,10 @@
   <data name="MinimumMethodNameLengthCheck" xml:space="preserve">
     <value>Minimum Method Name Length</value>
   </data>
+  <data name="MethodFlagArgumentsCheck" xml:space="preserve">
+    <value>Method Flag Arguments</value>
+  </data>
+  <data name="MethodFlagArgumentsThreshold" xml:space="preserve">
+    <value>Maximum Boolean (Flag) Arguments in Method</value>
+  </data>
 </root>

@@ -108,6 +108,17 @@ namespace CleanCode.Settings
 
             viewModels.Add(enableMinimumMethodNameLength);
 
+            var flagMethodArguments = new SingleCheckSettingViewModel<int>(
+                settings,
+                e => e.FlagMethodArgumentsEnabled,
+                e => e.FlagMethodArgumentsMinimum)
+                {
+                    IsEnabledDescription = Resources.Settings.MethodFlagArgumentsCheck,
+                    ValueDescription = Resources.Settings.MethodFlagArgumentsThreshold,
+                };
+
+            viewModels.Add(flagMethodArguments);
+
             return viewModels;
         }
     }

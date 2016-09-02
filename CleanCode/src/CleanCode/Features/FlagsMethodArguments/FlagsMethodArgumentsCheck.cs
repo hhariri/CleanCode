@@ -21,7 +21,7 @@ namespace CleanCode.Features.FlagsMethodArguments
             var threshold = Threshold;
 
             var numberOfFlagsArgument = methodDeclaration.ParameterDeclarations.Count(
-                    declaration => declaration.Type.ToString() == typeof(System.Boolean).FullName);
+                    declaration => declaration.Type.ToString() == typeof(bool).FullName);
 
             if (numberOfFlagsArgument > threshold)
             {
