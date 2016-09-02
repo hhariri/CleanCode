@@ -141,4 +141,16 @@
   <data name="FlagMethodArguments" xml:space="preserve">
     <value>This method does more than one thing. Passing a boolean into a function is a truly terrible practice.</value>
   </data>
+  <data name="FlagArgument" xml:space="preserve">
+    <value>This argument is used as a flag in the method. It usually means that the method has more than one responsibility.</value>
+  </data>
+  <data name="ExpressionTooComplex" xml:space="preserve">
+    <value>This expression is too complex to be legible. Please, simplify it.</value>
+  </data>
+  <data name="HollowTypeName" xml:space="preserve">
+    <value>The usage of the suffix '{0}' is discouraged because it's too generic. Please, choose a meaningful name instead to clarify its intent and responsibilities.</value>
+  </data>
+  <data name="Warning_TooManyDeclarations" xml:space="preserve">
+    <value>Too many declarations. This method is likely doing more than one thing.</value>
+  </data>
 </root>

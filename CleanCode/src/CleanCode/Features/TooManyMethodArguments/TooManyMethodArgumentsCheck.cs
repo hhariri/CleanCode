@@ -8,33 +8,33 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.TooManyMethodArguments
 {
-    public class TooManyMethodArgumentsCheck : SimpleCheck<IMethodDeclaration, int>
+    public class TooManyMethodArgumentsCheck : MonoValueCheck<IMethodDeclaration, int>
     {
         public TooManyMethodArgumentsCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration methodDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
-            var parameterDeclarations = methodDeclaration.ParameterDeclarations;
-            var maxParameters = Threshold;
+            var parameterDeclarations = constructorDeclaration.ParameterDeclarations;
+            var maxParameters = Value;
 
             if (parameterDeclarations.Count > maxParameters)
             {
                 var highlighting = new Highlighting(Warnings.TooManyMethodArguments);
-                consumer.AddHighlighting(highlighting, methodDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsEnabled); }
         }
     }
 }

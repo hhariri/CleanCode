@@ -1,6 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
+using JetBrains.ReSharper.Psi.ExtensionsAPI.Resolve;
+using JetBrains.ReSharper.Psi.Resolve;
 using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features
@@ -21,7 +25,7 @@ namespace CleanCode.Features
             return count;
         }
 
-        
+
         public static int GetChildrenDepth(this ITreeNode node)
         {           
             var childrenDepth = 0;
@@ -37,6 +41,39 @@ namespace CleanCode.Features
                 return childrenDepth + 1;    
             }
             return childrenDepth;
+        }
+
+        public static IEnumerable<T> GetFlattenedHierarchyOfType<T>(this ITreeNode root) where T : class, ITreeNode
+        {
+            var list = new List<T>();
+
+            var rootAsType = root as T;
+            if (rootAsType != null)
+            {
+                list.Add(rootAsType);
+            }
+
+            list.AddRange(root.GetChildrenRecursive<T>());
+
+            return list;
+        }
+
+        public static IEnumerable<T> GetChildrenRecursive<T>(this ITreeNode node) where T : ITreeNode
+        {
+            var nodeChildren = node.Children().ToList();
+
+            var list = new List<T>();
+
+            var childOfType = nodeChildren.OfType<T>();
+            list.AddRange(childOfType);
+
+            foreach (var childNode in nodeChildren)
+            {
+                var childrenOfType = GetChildrenRecursive<T>(childNode);
+                list.AddRange(childrenOfType);
+            }
+
+            return list;
         }
 
         private static bool IsNodeThatIncreasesDepth(ITreeNode node)
@@ -59,6 +96,88 @@ namespace CleanCode.Features
             }
 
             return false;
+        }
+
+        public static IType TryGetClosedReturnTypeFrom(ITreeNode treeNode)
+        {
+            IType type = null;
+            var reference = treeNode as IReferenceExpression;
+            if (reference != null)
+            {
+                type = TryGetClosedReturnTypeFromReference(reference.Reference);
+            }
+
+            var invocationExpression = treeNode as IInvocationExpression;
+            if (invocationExpression != null)
+            {
+                type = TryGetClosedReturnTypeFromReference(invocationExpression.Reference);
+            }
+
+            return type;
+        }
+
+        public static IReferenceExpression TryGetFirstReferenceExpression(ITreeNode currentNode)
+        {
+            var childNodes = currentNode.Children();
+            var firstChildNode = childNodes.FirstOrDefault();
+
+            if (firstChildNode == null)
+            {
+                return null;
+            }
+            else
+            {
+                var referenceExpression = firstChildNode as IReferenceExpression;
+
+                if (referenceExpression == null)
+                {
+                    referenceExpression = TryGetFirstReferenceExpression(firstChildNode);
+                }
+
+                return referenceExpression;
+            }
+        }
+
+        private static IType TryGetClosedReturnTypeFromReference(IReference reference)
+        {
+            var resolveResultWithInfo = GetResolveResult(reference);
+
+            if (reference.CurrentResolveResult == null)
+            {
+                reference.Resolve();
+            }
+
+            var declaredElement = resolveResultWithInfo.DeclaredElement;
+            var parametersOwner = declaredElement as IParametersOwner;
+
+            if (parametersOwner != null)
+            {
+                var returnType = parametersOwner.ReturnType;
+                if (returnType.IsOpenType)
+                {
+                    return GetClosedType(resolveResultWithInfo, returnType);
+                }
+
+                return returnType;
+            }
+
+            return null;
+        }
+
+        private static IType GetClosedType(ResolveResultWithInfo resolveResultWithInfo, IType returnType)
+        {
+            var closedType = resolveResultWithInfo.Result.Substitution.Apply(returnType);
+            return closedType;
+        }
+
+        public static ResolveResultWithInfo GetResolveResult(this IReference reference)
+        {
+            if (reference.CurrentResolveResult != null)
+            {
+                return reference.CurrentResolveResult;
+            }
+
+            return reference.Resolve();
         }
     }
 }

@@ -165,10 +165,25 @@
   <data name="MinimumMethodNameLengthCheck" xml:space="preserve">
     <value>Minimum Method Name Length</value>
   </data>
-  <data name="MethodFlagArgumentsCheck" xml:space="preserve">
-    <value>Method Flag Arguments</value>
+  <data name="ComplexExpressionCheck" xml:space="preserve">
+    <value>Complex expression check (conditions)</value>
   </data>
-  <data name="MethodFlagArgumentsThreshold" xml:space="preserve">
-    <value>Maximum Boolean (Flag) Arguments in Method</value>
+  <data name="ComplexExpressionMaximum" xml:space="preserve">
+    <value>Set the maximum of expressions that can be part of a condition</value>
+  </data>
+  <data name="FlagArgumentsCheck" xml:space="preserve">
+    <value>Flag Arguments Check</value>
+  </data>
+  <data name="HollowTypeNameCheck" xml:space="preserve">
+    <value>Hollow Type Name Check</value>
+  </data>
+  <data name="HollowTypeNameWords" xml:space="preserve">
+    <value>List of meaningless suffixes</value>
+  </data>
+  <data name="DeclarationsMaximum" xml:space="preserve">
+    <value>Maximum number of declarations per method</value>
+  </data>
+  <data name="TooManyDeclarationsCheck" xml:space="preserve">
+    <value>Too Many Declarations Check</value>
   </data>
 </root>

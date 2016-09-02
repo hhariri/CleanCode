@@ -79,6 +79,33 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Complex expression check (conditions).
+        /// </summary>
+        public static string ComplexExpressionCheck {
+            get {
+                return ResourceManager.GetString("ComplexExpressionCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the maximum of expressions that can be part of a condition.
+        /// </summary>
+        public static string ComplexExpressionMaximum {
+            get {
+                return ResourceManager.GetString("ComplexExpressionMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum number of declarations per method.
+        /// </summary>
+        public static string DeclarationsMaximum {
+            get {
+                return ResourceManager.GetString("DeclarationsMaximum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum level of nesting.
         /// </summary>
         public static string ExcessiveDepth {
@@ -93,6 +120,33 @@ namespace CleanCode.Resources {
         public static string ExcessiveDepthCheck {
             get {
                 return ResourceManager.GetString("ExcessiveDepthCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Flag Arguments Check.
+        /// </summary>
+        public static string FlagArgumentsCheck {
+            get {
+                return ResourceManager.GetString("FlagArgumentsCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hollow Type Name Check.
+        /// </summary>
+        public static string HollowTypeNameCheck {
+            get {
+                return ResourceManager.GetString("HollowTypeNameCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of meaningless suffixes.
+        /// </summary>
+        public static string HollowTypeNameWords {
+            get {
+                return ResourceManager.GetString("HollowTypeNameWords", resourceCulture);
             }
         }
         
@@ -129,24 +183,6 @@ namespace CleanCode.Resources {
         public static string MaximumMethodArgumentsCheck {
             get {
                 return ResourceManager.GetString("MaximumMethodArgumentsCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Method Flag Arguments.
-        /// </summary>
-        public static string MethodFlagArgumentsCheck {
-            get {
-                return ResourceManager.GetString("MethodFlagArgumentsCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maximum Boolean (Flag) Arguments in Method.
-        /// </summary>
-        public static string MethodFlagArgumentsThreshold {
-            get {
-                return ResourceManager.GetString("MethodFlagArgumentsThreshold", resourceCulture);
             }
         }
         
@@ -201,6 +237,15 @@ namespace CleanCode.Resources {
         public static string TooLongLinesPerMethod {
             get {
                 return ResourceManager.GetString("TooLongLinesPerMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Too Many Declarations Check.
+        /// </summary>
+        public static string TooManyDeclarationsCheck {
+            get {
+                return ResourceManager.GetString("TooManyDeclarationsCheck", resourceCulture);
             }
         }
         

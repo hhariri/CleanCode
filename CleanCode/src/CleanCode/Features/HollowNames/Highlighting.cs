@@ -25,21 +25,48 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using CleanCode.Settings;
-using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
-using JetBrains.ProjectModel;
+using CleanCode.Features.HollowNames;
+
 using JetBrains.ReSharper.Daemon;
 
-namespace CleanCode.Features.FlagsMethodArguments
+[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
+    HighlightingGroupIds.CodeSmell, "Hollow Type Name", "This type has a name that doesn't express its intent.",
+    Severity.SUGGESTION, false)]
+
+namespace CleanCode.Features.HollowNames
 {
-    [SolutionComponent]
-    public class FlagsMethodArgumentsChange
+    using JetBrains.ReSharper.Daemon;
+    using JetBrains.ReSharper.Psi.CSharp;
+
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    public class Highlighting : IHighlighting
     {
-        public FlagsMethodArgumentsChange(Lifetime lifetime, Daemon daemon, ISettingsStore settingsStore)
+        internal const string SeverityID = "HollowTypeName";
+        private readonly string tooltip;
+
+        public Highlighting(string toolTip)
         {
-            var minMethodNameLenght = settingsStore.Schema.GetScalarEntry((CleanCodeSettings s) => s.FlagMethodArgumentsMinimum);
-            settingsStore.AdviseChange(lifetime, minMethodNameLenght, daemon.Invalidate);
+            this.tooltip = toolTip;
+        }
+
+        public string ToolTip
+        {
+            get { return this.tooltip; }
+        }
+
+        public string ErrorStripeToolTip
+        {
+            get { return this.tooltip; }
+        }
+
+        public int NavigationOffsetPatch
+        {
+            get { return 0; }
+        }
+
+        public bool IsValid()
+        {
+            return true;
         }
     }
 }

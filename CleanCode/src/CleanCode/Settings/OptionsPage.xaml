@@ -5,48 +5,154 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:settings="clr-namespace:CleanCode.Settings"
              mc:Ignorable="d"              
-             d:DataContext="{d:DesignInstance settings:OptionsViewModel}" d:DesignWidth="529" d:DesignHeight="126">
+             d:DataContext="{d:DesignInstance settings:OptionsViewModel}" d:DesignWidth="842" d:DesignHeight="414">
     <UserControl.Resources>
+        <CollectionViewSource x:Key="OptionsSource" Source="{Binding Options}">
+            <CollectionViewSource.GroupDescriptions>
+                <PropertyGroupDescription PropertyName="Category" />
+            </CollectionViewSource.GroupDescriptions>
+        </CollectionViewSource>
+
+        <Style TargetType="{x:Type TextBlock}" x:Key="WrappingBlockTextStyle">
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style TargetType="{x:Type GroupBox}" x:Key="GroupBoxStyle" >
+            <Setter Property="BorderBrush" Value="#D5DFE5"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupBox}">
+                        <Grid SnapsToDevicePixels="true">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Border x:Name="Header" Padding="3,1,3,0" Grid.Row="0">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="White" Offset="0"/>
+                                        <GradientStop Color="#FFDEDEDE" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <ContentPresenter ContentSource="Header" TextElement.FontWeight="Bold"  RecognizesAccessKey="True" />
+                            </Border>
+                            <ContentPresenter Margin="{TemplateBinding Padding}" Grid.Row="1" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <DataTemplate x:Key="ThresholdDataTemplate">
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                
+                <CheckBox IsChecked="{Binding IsEnabled}" 
+                          VerticalContentAlignment="Center">
+                    <CheckBox.Content>
+                        <TextBlock Text="{Binding IsEnabledDescription}" Style="{StaticResource WrappingBlockTextStyle}" />
+                    </CheckBox.Content>
+                </CheckBox>
+
+                <TextBlock Grid.Column="1" Text="{Binding ValueDescription}" Style="{StaticResource WrappingBlockTextStyle}" />
+                
+                <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
+                         VerticalAlignment="Center" 
+                         MaxLength="3"                         
+                         HorizontalAlignment="Stretch" Grid.Column="2">
+                </TextBox>
+
+            </Grid>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+        </DataTemplate>
+
+        <DataTemplate x:Key="StringDataTemplate">
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <CheckBox IsChecked="{Binding IsEnabled}" 
+                          VerticalContentAlignment="Center">
+                    <CheckBox.Content>
+                        <TextBlock Text="{Binding IsEnabledDescription}" Style="{StaticResource WrappingBlockTextStyle}" />
+                    </CheckBox.Content>
+                </CheckBox>
+
+                <TextBlock Grid.Column="1"
+                           Text="{Binding ValueDescription}" 
+                           Style="{StaticResource WrappingBlockTextStyle}"
+                           VerticalAlignment="Center" Margin="4" />
+                
+                <TextBox Text="{Binding Value, UpdateSourceTrigger=LostFocus}" 
+                         Grid.Column="2"
+                         VerticalAlignment="Center" 
+                         MaxLength="400"                             
+                         HorizontalAlignment="Stretch">
+                </TextBox>
+            </Grid>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+        </DataTemplate>
+
+        <DataTemplate x:Key="SingleDataTemplate">
+            <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
+            <CheckBox IsChecked="{Binding IsEnabled}" 
+                      VerticalContentAlignment="Center">
+                <CheckBox.Content>
+                    <TextBlock Text="{Binding IsEnabledDescription}"
+                               Style="{StaticResource WrappingBlockTextStyle}"/>
+                </CheckBox.Content>
+            </CheckBox>
+            <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
+        </DataTemplate>
+
+        <settings:CheckTemplateSelector x:Key="DataTemplateSelector" 
+                                        StringCheckTemplate="{StaticResource StringDataTemplate}"
+                                        BasicCheckTemplate="{StaticResource SingleDataTemplate}" 
+                                        ThresholdCheckTemplate="{StaticResource ThresholdDataTemplate}" />
     </UserControl.Resources>
-    <ItemsControl ItemsSource="{Binding Options}">
+    <ItemsControl ItemsSource="{Binding Source={StaticResource OptionsSource}}">
+        <ItemsControl.GroupStyle>
+            <GroupStyle>
+                <GroupStyle.ContainerStyle>
+                    <Style TargetType="{x:Type GroupItem}">
+                        <Setter Property="Margin" Value="3" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type GroupItem}">
+                                    <GroupBox d:DataContext="{d:DesignInstance GroupItem}" Style="{StaticResource GroupBoxStyle}">
+                                        <GroupBox.Header>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </GroupBox.Header>
+                                        <!-- ReSharper disable once Xaml.BindingWithContextNotResolved -->
+                                        <ItemsControl ItemsSource="{Binding Path=Items}"                                                       
+                                                      ItemTemplateSelector="{StaticResource DataTemplateSelector}">
+                                            <ItemsControl.ItemContainerStyle>
+                                                <Style TargetType="{x:Type FrameworkElement}">
+                                                    <Setter Property="Margin" Value="5" />
+                                                </Style>
+                                            </ItemsControl.ItemContainerStyle>
+                                        </ItemsControl>
+                                    </GroupBox>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </GroupStyle.ContainerStyle>
+            </GroupStyle>
+        </ItemsControl.GroupStyle>
         <ItemsControl.ItemContainerStyle>
-            <Style>
-                <Setter Property="Control.Margin" Value="5" />
+            <Style TargetType="{x:Type FrameworkElement}">
+                <Setter Property="Margin" Value="5" />
             </Style>
         </ItemsControl.ItemContainerStyle>
-        <ItemsControl.ItemTemplate>
-            <DataTemplate>
-                <!-- ReSharper disable Xaml.BindingWithContextNotResolved -->
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="*" />
-                    </Grid.ColumnDefinitions>                    
-                    <Grid>
-                        <CheckBox IsChecked="{Binding IsEnabled}" 
-                                  VerticalContentAlignment="Center">                            
-                            <CheckBox.Content>
-                                <TextBlock Text="{Binding IsEnabledDescription}" />
-                            </CheckBox.Content>
-                        </CheckBox>
-                    </Grid>
-                    <Grid Grid.Column="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="40" />
-                        </Grid.ColumnDefinitions>
-                        <TextBlock Text="{Binding ValueDescription}" />                        
-                        <TextBox Text="{Binding Value, UpdateSourceTrigger=PropertyChanged}" 
-                                 VerticalAlignment="Center" 
-                                 MaxLength="3"
-                                 HorizontalAlignment="Stretch" Grid.Column="1">
-                        </TextBox>
-                    </Grid>
-                </Grid>
-                <!-- ReSharper restore Xaml.BindingWithContextNotResolved -->
-            </DataTemplate>
-        </ItemsControl.ItemTemplate>
     </ItemsControl>
-    
-
 </UserControl>

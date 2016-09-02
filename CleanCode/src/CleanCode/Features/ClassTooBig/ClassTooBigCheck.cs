@@ -8,35 +8,35 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ClassTooBig
 {
-    public class ClassTooBigCheck : SimpleCheck<IClassDeclaration, int>
+    public class ClassTooBigCheck : MonoValueCheck<IClassDeclaration, int>
     {
         public ClassTooBigCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IClassDeclaration classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IClassDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
-            var maxLength = Threshold;
+            var maxLength = Value;
 
-            var statementCount = classDeclaration.CountChildren<IMethodDeclaration>();
+            var statementCount = constructorDeclaration.CountChildren<IMethodDeclaration>();
             if (statementCount > maxLength)
             {
-                var declarationIdentifier = classDeclaration.NameIdentifier;
+                var declarationIdentifier = constructorDeclaration.NameIdentifier;
                 var documentRange = declarationIdentifier.GetDocumentRange();
                 var highlighting = new Highlighting(Warnings.ClassTooBig);
                 consumer.AddHighlighting(highlighting, documentRange);
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigEnabled); }
         }
     }
 }

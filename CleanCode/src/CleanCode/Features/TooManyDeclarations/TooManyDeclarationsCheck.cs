@@ -6,11 +6,11 @@ using JetBrains.ReSharper.Daemon.Stages;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
-namespace CleanCode.Features.MethodTooLong
+namespace CleanCode.Features.TooManyDeclarations
 {
-    public class MethodTooLongCheck : MonoValueCheck<IMethodDeclaration, int>
+    public class TooManyDeclarationsCheck : MonoValueCheck<IMethodDeclaration, int>
     {
-        public MethodTooLongCheck(IContextBoundSettingsStore settingsStore)
+        public TooManyDeclarationsCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
@@ -19,22 +19,22 @@ namespace CleanCode.Features.MethodTooLong
         {
             var maxLength = Value;
 
-            var statementCount = constructorDeclaration.CountChildren<IStatement>();
+            var statementCount = constructorDeclaration.CountChildren<IDeclaration>();
             if (statementCount > maxLength)
             {
-                var highlighting = new Highlighting(Warnings.Warning_MethodTooLong);
+                var highlighting = new MethodTooLong.Highlighting(Warnings.Warning_TooManyDeclarations);
                 consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
             }
         }
 
         protected override int Value
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsEnabled); }
         }
     }
 }

@@ -10,7 +10,7 @@ using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode.Features.TooManyDependencies
 {
-    public class TooManyDependenciesCheck : SimpleCheck<IConstructorDeclaration, int>
+    public class TooManyDependenciesCheck : MonoValueCheck<IConstructorDeclaration, int>
     {
         public TooManyDependenciesCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
@@ -19,13 +19,13 @@ namespace CleanCode.Features.TooManyDependencies
 
         protected override void ExecuteCore(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
-            var maxDependencies = Threshold;
+            var maxDependencies = Value;
 
-            var depedencies = constructorDeclaration.ParameterDeclarations.Select(
+            var dependencies = constructorDeclaration.ParameterDeclarations.Select(
                 declaration => declaration.DeclaredElement != null &&
                                declaration.DeclaredElement.Type.IsInterfaceType());
 
-            var dependenciesCount = depedencies.Count();
+            var dependenciesCount = dependencies.Count();
 
             if (dependenciesCount > maxDependencies)
             {
@@ -34,14 +34,14 @@ namespace CleanCode.Features.TooManyDependencies
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximumEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximumEnabled); }
         }
     }
 }

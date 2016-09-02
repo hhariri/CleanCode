@@ -51,15 +51,16 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\FlagsMethodArguments\Highlighting.cs" />
-    <Compile Include="Features\FlagsMethodArguments\FlagsMethodArgumentsChange.cs" />
-    <Compile Include="Features\FlagsMethodArguments\FlagsMethodArgumentsCheck.cs" />
-    <Compile Include="Features\TooManyChainedReferences\Highlighting.cs" />
-    <Compile Include="Features\TooManyChainedReferences\InvalidateOnMaximumChainedCalls.cs" />
-    <Compile Include="Features\TooManyChainedReferences\TooManyChainedReferencesCheck.cs" />
+    <Compile Include="Features\ChainedReferences\Highlighting.cs" />
+    <Compile Include="Features\ChainedReferences\InvalidateOnMaximumChainedCalls.cs" />
+    <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
+    <Compile Include="Features\Check.cs" />
     <Compile Include="Features\ClassTooBig\Highlighting.cs" />
     <Compile Include="Features\ClassTooBig\InvalidateOnMaximumMethodsPerClass.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
+    <Compile Include="Features\ComplexExpression\Highlighting.cs" />
+    <Compile Include="Features\ComplexExpression\InvalidateOnComplexExpressionChange.cs" />
+    <Compile Include="Features\ComplexExpression\ComplexExpressionCheck.cs" />
     <Compile Include="Features\ExcessiveIndentation\Highlighting.cs" />
     <Compile Include="Features\ExcessiveIndentation\InvalidateOnExcessiveIndentationChange.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
@@ -69,9 +70,14 @@
     <Compile Include="CleanCodeDaemonStage.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Features\FlagArguments\Highlighting.cs" />
+    <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
+    <Compile Include="Features\HollowNames\Highlighting.cs" />
+    <Compile Include="Features\HollowNames\InvalidateOnHollowTypeNameStringChange.cs" />
+    <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\Highlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\InvalidateOnMinimumMethodNameLenghtChange.cs" />
-    <Compile Include="Features\MethodNameNotMeaningful\MethodNamesNotMeaningfulCheck.cs" />
+    <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
     <Compile Include="Features\MethodTooLong\Highlighting.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -79,7 +85,11 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
-    <Compile Include="Features\SimpleCheck.cs" />
+    <Compile Include="Features\MonoValueCheck.cs" />
+    <Compile Include="Features\ChainedReferences\TypeEqualityComparer.cs" />
+    <Compile Include="Features\TooManyDeclarations\Highlighting.cs" />
+    <Compile Include="Features\TooManyDeclarations\InvalidateOnMaximumDeclarationsChange.cs" />
+    <Compile Include="Features\TooManyDeclarations\TooManyDeclarationsCheck.cs" />
     <Compile Include="Features\TooManyDependencies\Highlighting.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -96,6 +106,11 @@
     </Compile>
     <Compile Include="Features\MethodTooLong\MethodTooLongCheck.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Settings.resx</DependentUpon>
+    </Compile>
     <Compile Include="Resources\Warnings.Designer.cs">
       <DependentUpon>Warnings.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -103,23 +118,21 @@
     </Compile>
     <Compile Include="Resources\Icons82\Settings\ThemedIcons.Settings.Generated.cs" />
     <Compile Include="Resources\LocalizedStrings.cs" />
-    <Compile Include="Resources\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Settings.resx</DependentUpon>
-    </Compile>
+    <Compile Include="Settings\CheckTemplateSelector.cs" />
     <Compile Include="Settings\CleanCodeSettings.cs" />
     <Compile Include="Settings\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings\OptionsViewModel.cs" />
-    <Compile Include="Settings\SingleCheckSettingViewModel.cs" />
+    <Compile Include="Settings\CheckSettingViewModel.cs" />
+    <Compile Include="Settings\MonoValueCheckSettingViewModel.cs" />
+    <Compile Include="Settings\ViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Settings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Warnings.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -143,6 +156,7 @@
   <ItemGroup>
     <Content Include="Resources\Icons82\Settings\CleanCode.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\build\JetBrains.ReSharper.SDK.Targets')" />
   <Import Project="..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets" Condition="Exists('..\packages\JetBrains.ReSharper.SDK.8.1.296-EAP\tools\MSBuild\JetBrains.Build.Platform.ThemedIconsConverter.Targets')" />

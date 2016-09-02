@@ -8,33 +8,33 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ExcessiveIndentation
 {
-    public class ExcessiveIndentationCheck : SimpleCheck<IMethodDeclaration, int>
+    public class ExcessiveIndentationCheck : MonoValueCheck<IMethodDeclaration, int>
     {
         public ExcessiveIndentationCheck(IContextBoundSettingsStore settingsStore)
             : base(settingsStore)
         {
         }
 
-        protected override void ExecuteCore(IMethodDeclaration classDeclaration, IHighlightingConsumer consumer)
+        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
         {
-            var maxIndentation = Threshold;
-            var depth = classDeclaration.GetChildrenDepth();
+            var maxIndentation = Value;
+            var depth = constructorDeclaration.GetChildrenDepth();
 
             if (depth > maxIndentation)
             {
                 var highlighting = new Highlighting(Warnings.ExcessiveDepth);
-                consumer.AddHighlighting(highlighting, classDeclaration.GetNameDocumentRange());
+                consumer.AddHighlighting(highlighting, constructorDeclaration.GetNameDocumentRange());
             }
         }
 
-        protected override int Threshold
+        protected override int Value
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum); }
         }
 
         protected override bool IsEnabled
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationEnabled); }
+            get { return this.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationEnabled); }
         }
     }
 }

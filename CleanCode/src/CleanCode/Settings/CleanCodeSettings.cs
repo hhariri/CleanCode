@@ -70,9 +70,27 @@ namespace CleanCode.Settings
         [SettingsEntry(4, "MethodNameNotMeaningfulMinimum")]
         public int MethodNameNotMeaningfulMinimum { get; set; }
 
-        [SettingsEntry(0, "FlagMethodArgumentsMinimum")]
-        public int FlagMethodArgumentsMinimum { get; set; }
-        [SettingsEntry(true, "FlagMethodArgumentsEnabled")]
-        public bool FlagMethodArgumentsEnabled { get; set; }
+        [SettingsEntry(true, "FlagArgumentsEnabled")]
+        public bool FlagArgumentsEnabled { get; set; }
+
+        [SettingsEntry(true, "HollowTypeNameEnabled")]
+        public bool HollowTypeNameEnabled { get; set; }
+
+        [SettingsEntry("Handler,Manager,Processor,Controller,Helper", "HollowTypeNameString")]
+        public string HollowTypeNameString { get; set; }  
+
+        [SettingsEntry(true, "ComplexExpressionEnabled")]
+
+        public bool ComplexExpressionEnabled { get; set; }
+        [SettingsEntry(1, "ComplexExpressionMaximum")]
+        public int ComplexExpressionMaximum { get; set; }
+
+        [SettingsEntry(true, "TooManyDeclarationsEnabled")]
+        public readonly bool TooManyDeclarationsEnabled;
+        [SettingsEntry(6, "TooManyDeclarationsMaximum")]
+        public readonly int TooManyDeclarationsMaximum;
+
+        [SettingsEntry(true, "InterfacesWithNoPrefixEnabled")]
+        public readonly bool InterfacesWithNoPrefixEnabled;
     }
 }

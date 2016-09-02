@@ -25,7 +25,7 @@
 // OR OTHER DEALINGS IN THE SOFTWARE.
 #endregion
 
-using CleanCode.Features.TooManyChainedReferences;
+using CleanCode.Features.ChainedReferences;
 using JetBrains.ReSharper.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
@@ -33,7 +33,7 @@ using JetBrains.ReSharper.Psi.CSharp;
     HighlightingGroupIds.CodeSmell, "Chained References", "There are too many chained references.",
     Severity.WARNING, false)]
 
-namespace CleanCode.Features.TooManyChainedReferences
+namespace CleanCode.Features.ChainedReferences
 {
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
     public class Highlighting : IHighlighting
