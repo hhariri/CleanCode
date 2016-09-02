@@ -233,7 +233,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Resources\LocalizedStrings.cs" />
     <Compile Include="Settings\CheckTemplateSelector.cs" />
     <Compile Include="Settings\CleanCodeSettings.cs" />
     <Compile Include="Settings\OptionsPage.xaml.cs">
@@ -271,6 +270,9 @@
     <ThemedIconPng Include="Resources\Icons\Settings\CleanCode.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\CleanCode.nuspec">
+      <Link>CleanCode.nuspec</Link>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

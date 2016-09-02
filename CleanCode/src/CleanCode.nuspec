@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0"?>
 <package >
   <metadata>
-    <id>CleanCode</id>
-    <version>4.0.0.8</version>
-    <title>CleanCode</title>
+    <id>CleanCode.CleanCode</id>
+    <version>5.0.0</version>
+    <title>Clean Code</title>
     <authors>Hadi Hariri, Matt Ellis, SuperJMN</authors>
     <owners>Hadi Hariri, Matt Ellis</owners>
     <iconUrl>https://raw.githubusercontent.com/hhariri/CleanCode/master/logo.png</iconUrl>
@@ -11,21 +11,26 @@
     <licenseUrl>https://raw.github.com/hhariri/CleanCode/master/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
-    <releaseNotes>Major update, thanks to @SuperJMN!
+    <releaseNotes>
+&#8226; Updated to ReSharper 2016.2
+
+From 4.0.0:
+&#8226; Warning if a method uses flag parameters
 &#8226; Warning if a method contains too many nested blocks
 &#8226; Warning if a method name is too short to be meaningful
 &#8226; Warning if an epression is breaking the Law of Demeter
 &#8226; Warning if a constructor has too many parameters, indicating too many dependencies
 &#8226; Warning if a method has too many arguments
 &#8226; Suggestion highlight if class has too many methods
-&#8226; Suggestion highlight if method has too many statements</releaseNotes>
-    <copyright>Copyright 2014 Hadi Hariri and Contributors</copyright>
+&#8226; Suggestion highlight if method has too many statements
+</releaseNotes>
+    <copyright>Copyright 2014-2016 Hadi Hariri and Contributors</copyright>
     <dependencies>
-      <dependency id="ReSharper" version="[8.2,8.3)" />
+      <dependency id="Wave" version="[6.0]" />
     </dependencies>
     <tags>clean code</tags>
   </metadata>
   <files>    
-    <file src="lib\CleanCode.8.2.dll" target="ReSharper\v8.2\plugins" />
+    <file src="CleanCode\bin\Release\CleanCode.dll" target="DotFiles" />
   </files>
 </package>
