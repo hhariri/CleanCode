@@ -1,30 +1,3 @@
-#region License
-// Copyright (C) 2012 Hadi Hariri and Contributors
-// 
-// Permission is hereby granted, free of charge, to any person 
-// obtaining a copy of this software and associated
-// documentation files (the "Software"), to deal in the Software 
-// without restriction, including without limitation the rights 
-// to use, copy, modify, merge, publish, distribute, sublicense, 
-// and/or sell copies of the Software, and to permit persons 
-// to whom the Software is furnished to do so, subject to the 
-// following conditions:
-//  
-// The above copyright notice and this permission notice shall 
-// be included in all copies or substantial portions of the Software.
-//  
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT
-// LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
-// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
-// OR OTHER DEALINGS IN THE SOFTWARE.
-#endregion
-
 using System;
 using CleanCode.Features.ChainedReferences;
 using CleanCode.Features.ClassTooBig;
@@ -37,7 +10,6 @@ using CleanCode.Features.MethodTooLong;
 using CleanCode.Features.TooManyDeclarations;
 using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
-using JetBrains.Application.Progress;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
 using JetBrains.ReSharper.Feature.Services.Daemon;
@@ -48,7 +20,6 @@ namespace CleanCode
 {
     public class CleanCodeDaemonStageProcess : CSharpDaemonStageProcessBase
     {
-        private readonly IDaemonProcess daemonProcess;
         private readonly IContextBoundSettingsStore settingsStore;
         private readonly MethodTooLongCheck methodTooLongCheck;
         private readonly ClassTooBigCheck classTooBigCheck;
@@ -65,7 +36,6 @@ namespace CleanCode
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
         {
-            this.daemonProcess = daemonProcess;
             this.settingsStore = settingsStore;
 
             // TODO: This is starting to feel like a beach of Benidorm in July. Refactoring needed.
@@ -85,10 +55,6 @@ namespace CleanCode
         public override void Execute(Action<DaemonStageResult> commiter)
         {
             HighlightInFile((file, consumer) => file.ProcessDescendants(this, consumer), commiter, settingsStore);
-            if (daemonProcess.InterruptFlag)
-            {
-                throw new ProcessCancelledException();
-            }
         }
 
         public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
