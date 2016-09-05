@@ -129,38 +129,38 @@
   <data name="MethodTooLongCheck" xml:space="preserve">
     <value>Maximum Statements Per Method Check</value>
   </data>
-  <data name="TooLongLinesPerMethod" xml:space="preserve">
+  <data name="MaximumStatementsPerMethod" xml:space="preserve">
     <value>Maximum statements per method</value>
   </data>
-  <data name="TooManyDependencies" xml:space="preserve">
-    <value>Set maximum dependencies to</value>
+  <data name="MaximumConstructorDependencies" xml:space="preserve">
+    <value>Maximum interface dependencies for a constructor</value>
   </data>
-  <data name="TooManyMethodArguments" xml:space="preserve">
-    <value>Set maximum arguments to</value>
+  <data name="MaximumMethodDeclarationParameters" xml:space="preserve">
+    <value>Maximum method declaration parameters</value>
   </data>
   <data name="Options_SubHeader" xml:space="preserve">
     <value>Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)</value>
   </data>
-  <data name="ExcessiveDepth" xml:space="preserve">
-    <value>Maximum level of nesting</value>
+  <data name="MaximumLevelOfNestingInAMethod" xml:space="preserve">
+    <value>Maximum level of nesting in a method</value>
   </data>
   <data name="ExcessiveDepthCheck" xml:space="preserve">
     <value>Excessive Depth Of Nesting Check</value>
   </data>
-  <data name="ClassTooBig" xml:space="preserve">
-    <value>Maximum Methods Per Class</value>
+  <data name="MaximumMethodsPerClass" xml:space="preserve">
+    <value>Maximum methods per class</value>
   </data>
   <data name="ClassTooBigCheck" xml:space="preserve">
     <value>Maximum Methods Per Class Check</value>
   </data>
-  <data name="MaxChainedReferences" xml:space="preserve">
-    <value>Maximum Chained References</value>
+  <data name="MaximumChainedReferences" xml:space="preserve">
+    <value>Maximum chained references</value>
   </data>
   <data name="MaxChainedReferencesCheck" xml:space="preserve">
     <value>Maximum Chained References Check</value>
   </data>
   <data name="MinimumMethodNameLength" xml:space="preserve">
-    <value>Minimum length for the name of methods</value>
+    <value>Minimum method name length</value>
   </data>
   <data name="MinimumMethodNameLengthCheck" xml:space="preserve">
     <value>Minimum Method Name Length</value>
@@ -168,8 +168,8 @@
   <data name="ComplexExpressionCheck" xml:space="preserve">
     <value>Complex expression check (conditions)</value>
   </data>
-  <data name="ComplexExpressionMaximum" xml:space="preserve">
-    <value>Set the maximum of expressions that can be part of a condition</value>
+  <data name="MaximumExpressionsInsideACondition" xml:space="preserve">
+    <value>Maximum expressions inside a condition</value>
   </data>
   <data name="FlagArgumentsCheck" xml:space="preserve">
     <value>Flag Arguments Check</value>
@@ -177,11 +177,14 @@
   <data name="HollowTypeNameCheck" xml:space="preserve">
     <value>Hollow Type Name Check</value>
   </data>
-  <data name="HollowTypeNameWords" xml:space="preserve">
+  <data name="MeaninglessNameSuffixes" xml:space="preserve">
     <value>List of meaningless suffixes</value>
   </data>
+  <data name="MeaninglessNameSuffixesTooltip" xml:space="preserve">
+    <value>Separate items with commas</value>
+  </data>
   <data name="DeclarationsMaximum" xml:space="preserve">
-    <value>Maximum number of declarations per method</value>
+    <value>Maximum declarations per method</value>
   </data>
   <data name="TooManyDeclarationsCheck" xml:space="preserve">
     <value>Too Many Declarations Check</value>

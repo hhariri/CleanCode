@@ -61,15 +61,6 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Methods Per Class.
-        /// </summary>
-        public static string ClassTooBig {
-            get {
-                return ResourceManager.GetString("ClassTooBig", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Maximum Methods Per Class Check.
         /// </summary>
         public static string ClassTooBigCheck {
@@ -88,29 +79,11 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Set the maximum of expressions that can be part of a condition.
-        /// </summary>
-        public static string ComplexExpressionMaximum {
-            get {
-                return ResourceManager.GetString("ComplexExpressionMaximum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maximum number of declarations per method.
+        ///   Looks up a localized string similar to Maximum declarations per method.
         /// </summary>
         public static string DeclarationsMaximum {
             get {
                 return ResourceManager.GetString("DeclarationsMaximum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maximum level of nesting.
-        /// </summary>
-        public static string ExcessiveDepth {
-            get {
-                return ResourceManager.GetString("ExcessiveDepth", resourceCulture);
             }
         }
         
@@ -142,29 +115,29 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to List of meaningless suffixes.
-        /// </summary>
-        public static string HollowTypeNameWords {
-            get {
-                return ResourceManager.GetString("HollowTypeNameWords", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maximum Chained References.
-        /// </summary>
-        public static string MaxChainedReferences {
-            get {
-                return ResourceManager.GetString("MaxChainedReferences", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Maximum Chained References Check.
         /// </summary>
         public static string MaxChainedReferencesCheck {
             get {
                 return ResourceManager.GetString("MaxChainedReferencesCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum chained references.
+        /// </summary>
+        public static string MaximumChainedReferences {
+            get {
+                return ResourceManager.GetString("MaximumChainedReferences", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum interface dependencies for a constructor.
+        /// </summary>
+        public static string MaximumConstructorDependencies {
+            get {
+                return ResourceManager.GetString("MaximumConstructorDependencies", resourceCulture);
             }
         }
         
@@ -178,11 +151,74 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum expressions inside a condition.
+        /// </summary>
+        public static string MaximumExpressionsInsideACondition {
+            get {
+                return ResourceManager.GetString("MaximumExpressionsInsideACondition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum level of nesting in a method.
+        /// </summary>
+        public static string MaximumLevelOfNestingInAMethod {
+            get {
+                return ResourceManager.GetString("MaximumLevelOfNestingInAMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maximum Method Arguments Check.
         /// </summary>
         public static string MaximumMethodArgumentsCheck {
             get {
                 return ResourceManager.GetString("MaximumMethodArgumentsCheck", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum method declaration parameters.
+        /// </summary>
+        public static string MaximumMethodDeclarationParameters {
+            get {
+                return ResourceManager.GetString("MaximumMethodDeclarationParameters", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum methods per class.
+        /// </summary>
+        public static string MaximumMethodsPerClass {
+            get {
+                return ResourceManager.GetString("MaximumMethodsPerClass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum statements per method.
+        /// </summary>
+        public static string MaximumStatementsPerMethod {
+            get {
+                return ResourceManager.GetString("MaximumStatementsPerMethod", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to List of meaningless suffixes.
+        /// </summary>
+        public static string MeaninglessNameSuffixes {
+            get {
+                return ResourceManager.GetString("MeaninglessNameSuffixes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Separate items with commas.
+        /// </summary>
+        public static string MeaninglessNameSuffixesTooltip {
+            get {
+                return ResourceManager.GetString("MeaninglessNameSuffixesTooltip", resourceCulture);
             }
         }
         
@@ -196,7 +232,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Minimum length for the name of methods.
+        ///   Looks up a localized string similar to Minimum method name length.
         /// </summary>
         public static string MinimumMethodNameLength {
             get {
@@ -232,38 +268,11 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum statements per method.
-        /// </summary>
-        public static string TooLongLinesPerMethod {
-            get {
-                return ResourceManager.GetString("TooLongLinesPerMethod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Too Many Declarations Check.
         /// </summary>
         public static string TooManyDeclarationsCheck {
             get {
                 return ResourceManager.GetString("TooManyDeclarationsCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set maximum dependencies to.
-        /// </summary>
-        public static string TooManyDependencies {
-            get {
-                return ResourceManager.GetString("TooManyDependencies", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Set maximum arguments to.
-        /// </summary>
-        public static string TooManyMethodArguments {
-            get {
-                return ResourceManager.GetString("TooManyMethodArguments", resourceCulture);
             }
         }
     }

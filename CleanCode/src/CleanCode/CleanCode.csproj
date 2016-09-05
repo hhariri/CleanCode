@@ -233,6 +233,7 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Settings\CheckTemplateSelector.cs" />
+    <Compile Include="Settings\CleanCodeOptionsPage.cs" />
     <Compile Include="Settings\CleanCodeSettings.cs" />
     <Compile Include="Settings\OptionsPage.xaml.cs">
       <DependentUpon>OptionsPage.xaml</DependentUpon>
