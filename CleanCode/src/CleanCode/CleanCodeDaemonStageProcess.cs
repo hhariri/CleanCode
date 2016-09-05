@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.ClassTooBig;
 using CleanCode.Features.ComplexExpression;
 using CleanCode.Features.ExcessiveIndentation;
 using CleanCode.Features.FlagArguments;
@@ -21,7 +20,6 @@ namespace CleanCode
     {
         private readonly IContextBoundSettingsStore settingsStore;
         private readonly MethodTooLongCheck methodTooLongCheck;
-        private readonly ClassTooBigCheck classTooBigCheck;
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
         private readonly ExcessiveIndentationCheck excessiveIndentationCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
@@ -38,7 +36,6 @@ namespace CleanCode
 
             // TODO: This is starting to feel like a beach of Benidorm in July. Refactoring needed.
             methodTooLongCheck = new MethodTooLongCheck(settingsStore);
-            classTooBigCheck = new ClassTooBigCheck(settingsStore);
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
             excessiveIndentationCheck = new ExcessiveIndentationCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
@@ -71,7 +68,6 @@ namespace CleanCode
 
         public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
         {
-            classTooBigCheck.ExecuteIfEnabled(classDeclaration, context);
             hollowNamesCheck.ExecuteIfEnabled(classDeclaration, context);
         }
 

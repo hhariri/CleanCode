@@ -14,6 +14,7 @@ namespace CleanCode.Features.ChainedReferences
     public class MaximumChainedReferencesHighlighting : IHighlighting
     {
         internal const string SeverityID = "TooManyChainedReferences";
+
         private readonly string tooltip;
         private readonly DocumentRange documentRange;
 
