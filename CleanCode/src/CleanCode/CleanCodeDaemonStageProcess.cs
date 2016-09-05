@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.ChainedReferences;
 using CleanCode.Features.ClassTooBig;
 using CleanCode.Features.ComplexExpression;
 using CleanCode.Features.ExcessiveIndentation;
@@ -27,7 +26,6 @@ namespace CleanCode
         private readonly ExcessiveIndentationCheck excessiveIndentationCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly MethodNameNotMeaningfulCheck methodNamesNotMeaningfulCheck;
-        private readonly ChainedReferencesCheck chainedReferencesCheck;
         private readonly FlagArgumentsCheck flagArgumentsCheck;
         private readonly ComplexExpressionCheck complexExpressionCheck;
         private readonly HollowNamesCheck hollowNamesCheck;
@@ -45,7 +43,6 @@ namespace CleanCode
             excessiveIndentationCheck = new ExcessiveIndentationCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNameNotMeaningfulCheck(settingsStore);
-            chainedReferencesCheck = new ChainedReferencesCheck(settingsStore);
             flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
             complexExpressionCheck = new ComplexExpressionCheck(settingsStore);
             hollowNamesCheck = new HollowNamesCheck(settingsStore);
@@ -65,11 +62,6 @@ namespace CleanCode
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
             flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);         
             tooManyDeclarationsCheck.ExecuteIfEnabled(methodDeclaration, context);
-        }
-
-        public override void VisitCSharpStatement(ICSharpStatement cSharpStatementParam, IHighlightingConsumer context)
-        {
-            chainedReferencesCheck.ExecuteIfEnabled(cSharpStatementParam, context);
         }
 
         public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)

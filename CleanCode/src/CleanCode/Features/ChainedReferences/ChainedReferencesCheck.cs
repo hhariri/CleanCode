@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
@@ -9,22 +10,22 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ChainedReferences
 {
-    public class ChainedReferencesCheck : MonoValueCheck<ICSharpStatement, int>
+    [ElementProblemAnalyzer(typeof(ICSharpStatement), HighlightingTypes = new []
     {
-        public ChainedReferencesCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        typeof(MaximumChainedReferencesHighlighting)
+    })]
+    public class ChainedReferencesCheck : ElementProblemAnalyzer<ICSharpStatement>
+    {
+        protected override void Run(ICSharpStatement element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
-
-        protected override void ExecuteCore(ICSharpStatement constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            if (constructorDeclaration != null && !constructorDeclaration.IsEmbeddedStatement)
+            if (!element.IsEmbeddedStatement)
             {
-                HighlightMethodChainsThatAreTooLong(constructorDeclaration, consumer);
+                var threshold = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum);
+                HighlightMethodChainsThatAreTooLong(element, consumer, threshold);
             }
         }
 
-        private void HighlightMethodChainsThatAreTooLong(ITreeNode statement, IHighlightingConsumer consumer)
+        private void HighlightMethodChainsThatAreTooLong(ITreeNode statement, IHighlightingConsumer consumer, int threshold)
         {
             var children = statement.Children();
 
@@ -33,16 +34,16 @@ namespace CleanCode.Features.ChainedReferences
                 var referenceExpression = treeNode as IReferenceExpression;
                 if (referenceExpression != null)
                 {
-                    HightlightReferenceExpressionIfNeeded(referenceExpression, consumer);
+                    HighlightReferenceExpressionIfNeeded(referenceExpression, consumer, threshold);
                 }
                 else
                 {
-                    HighlightMethodChainsThatAreTooLong(treeNode, consumer);
+                    HighlightMethodChainsThatAreTooLong(treeNode, consumer, threshold);
                 }
             }
         }
 
-        private void HightlightReferenceExpressionIfNeeded(IReferenceExpression referenceExpression, IHighlightingConsumer consumer)
+        private void HighlightReferenceExpressionIfNeeded(IReferenceExpression referenceExpression, IHighlightingConsumer consumer, int threshold)
         {
             var types = new HashSet<IType>();
 
@@ -66,28 +67,18 @@ namespace CleanCode.Features.ChainedReferences
 
             if (!isFluentChain)
             {
-                if (chainLength > Value)
+                if (chainLength > threshold)
                 {
-                    AddHighlightning(referenceExpression, consumer);
+                    AddHighlighting(referenceExpression, consumer);
                 }
             }
         }
 
-        protected override int Value
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum); }
-        }
-
-        protected override bool IsEnabled
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesEnabled); }
-        }
-
-        private static void AddHighlightning(IReferenceExpression reference, IHighlightingConsumer consumer)
+        private static void AddHighlighting(IReferenceExpression reference, IHighlightingConsumer consumer)
         {
             var nameIdentifier = reference.NameIdentifier;
             var documentRange = nameIdentifier.GetDocumentRange();
-            var highlighting = new Highlighting(Warnings.ChainedReferences, documentRange);
+            var highlighting = new MaximumChainedReferencesHighlighting(Warnings.ChainedReferences, documentRange);
             consumer.AddHighlighting(highlighting);
         }
     }

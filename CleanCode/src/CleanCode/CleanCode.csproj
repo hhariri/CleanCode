@@ -167,7 +167,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\ChainedReferences\Highlighting.cs" />
+    <Compile Include="CleanCodeHighlightingGroupIds.cs" />
+    <Compile Include="Features\ChainedReferences\MaximumChainedReferencesHighlighting.cs" />
     <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
     <Compile Include="Features\Check.cs" />
     <Compile Include="Features\ClassTooBig\Highlighting.cs" />
