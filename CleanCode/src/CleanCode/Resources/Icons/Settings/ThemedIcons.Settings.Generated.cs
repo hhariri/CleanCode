@@ -9,8 +9,7 @@
 //------------------------------------------------------------------------------
 
 [assembly: global::System.Windows.Markup.XmlnsDefinitionAttribute("urn:shemas-jetbrains-com:ui-application-icons-settings", "CleanCode.Resources.Icons")]
-[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="CleanCode.8.2;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.X" +
-	"aml", IconNames=new string[] {
+[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xaml", IconNames=new string[] {
 		"CleanCode"})]
 
 namespace CleanCode.Resources.Icons
@@ -77,8 +76,7 @@ namespace CleanCode.Resources.Icons
 		///<example>
 		///  <code>themediconmanager.GetIcon&lt;SettingsThemedIcons.CleanCode&gt;()        // Icon image for rendering</code>
 		///</example>
-		[global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClassAttribute("CleanCode.8.2;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.X" +
-			"aml", 0, "CleanCode")]
+		[global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClassAttribute("CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xaml", 0, "CleanCode")]
 		public sealed class CleanCode : global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClass
 		{
 			
@@ -104,14 +102,13 @@ namespace CleanCode.Resources.Icons
 			///<example>
 			///  <code>themediconmanager.GetIcon&lt;SettingsThemedIcons.CleanCode&gt;()        // Icon image for rendering</code>
 			///</example>
-			public static global::JetBrains.UI.Icons.IconId Id = new global::JetBrains.UI.Icons.CompiledIcons.CompiledIconId("CleanCode.8.2;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.X" +
-					"aml", 0, "CleanCode");
+			public static global::JetBrains.UI.Icons.IconId Id = new global::JetBrains.UI.Icons.CompiledIcons.CompiledIconId("CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xaml", 0, "CleanCode");
 		}
 	}
 }
 
 
-public sealed class RenderedIcons_ByPackResourceNameHash_759358C69B6C25A0E957D60B8E57EEED
+public sealed class RenderedIcons_ByPackResourceNameHash_E1185BB5DC155E8A999AD43CA329D4ED
 {
 	
 	public static byte[] CleanCode____png__x1 = new byte[] {
