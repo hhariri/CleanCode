@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.ComplexExpression;
 using CleanCode.Features.ExcessiveIndentation;
 using CleanCode.Features.FlagArguments;
 using CleanCode.Features.HollowNames;
@@ -25,7 +24,6 @@ namespace CleanCode
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly MethodNameNotMeaningfulCheck methodNamesNotMeaningfulCheck;
         private readonly FlagArgumentsCheck flagArgumentsCheck;
-        private readonly ComplexExpressionCheck complexExpressionCheck;
         private readonly HollowNamesCheck hollowNamesCheck;
         private readonly TooManyDeclarationsCheck tooManyDeclarationsCheck;
 
@@ -41,7 +39,6 @@ namespace CleanCode
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNameNotMeaningfulCheck(settingsStore);
             flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
-            complexExpressionCheck = new ComplexExpressionCheck(settingsStore);
             hollowNamesCheck = new HollowNamesCheck(settingsStore);
             tooManyDeclarationsCheck = new TooManyDeclarationsCheck(settingsStore);
         }
@@ -69,26 +66,6 @@ namespace CleanCode
         public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
         {
             hollowNamesCheck.ExecuteIfEnabled(classDeclaration, context);
-        }
-
-        public override void VisitIfStatement(IIfStatement ifStatementParam, IHighlightingConsumer context)
-        {
-            complexExpressionCheck.ExecuteIfEnabled(ifStatementParam.Condition, context);
-        }
-
-        public override void VisitWhileStatement(IWhileStatement whileStatementParam, IHighlightingConsumer context)
-        {
-            complexExpressionCheck.ExecuteIfEnabled(whileStatementParam.Condition, context);
-        }
-
-        public override void VisitForStatement(IForStatement forStatementParam, IHighlightingConsumer context)
-        {
-            complexExpressionCheck.ExecuteIfEnabled(forStatementParam.Condition, context);
-        }
-
-        public override void VisitDoStatement(IDoStatement doStatementParam, IHighlightingConsumer context)
-        {
-            complexExpressionCheck.ExecuteIfEnabled(doStatementParam.Condition, context);
         }
     }
 }

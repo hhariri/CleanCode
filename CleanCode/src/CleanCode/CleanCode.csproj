@@ -173,8 +173,8 @@
     <Compile Include="Features\Check.cs" />
     <Compile Include="Features\ClassTooBig\ClassTooBigHighlighting.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
-    <Compile Include="Features\ComplexExpression\Highlighting.cs" />
-    <Compile Include="Features\ComplexExpression\ComplexExpressionCheck.cs" />
+    <Compile Include="Features\ComplexExpression\ComplexConditionExpressionHighlighting.cs" />
+    <Compile Include="Features\ComplexExpression\ComplexConditionExpressionCheck.cs" />
     <Compile Include="Features\ExcessiveIndentation\Highlighting.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
     <Compile Include="CleanCodeDaemonStageProcess.cs">

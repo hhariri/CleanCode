@@ -88,7 +88,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This expression is too complex to be legible. Please, simplify it..
+        ///   Looks up a localized string similar to This expression is too complex..
         /// </summary>
         public static string ExpressionTooComplex {
             get {
