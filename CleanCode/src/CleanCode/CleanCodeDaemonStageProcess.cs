@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.HollowNames;
 using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
 using CleanCode.Features.TooManyDeclarations;
@@ -20,7 +19,6 @@ namespace CleanCode
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly MethodNameNotMeaningfulCheck methodNamesNotMeaningfulCheck;
-        private readonly HollowNamesCheck hollowNamesCheck;
         private readonly TooManyDeclarationsCheck tooManyDeclarationsCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
@@ -33,7 +31,6 @@ namespace CleanCode
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNameNotMeaningfulCheck(settingsStore);
-            hollowNamesCheck = new HollowNamesCheck(settingsStore);
             tooManyDeclarationsCheck = new TooManyDeclarationsCheck(settingsStore);
         }
 
@@ -53,11 +50,6 @@ namespace CleanCode
         public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
         {
             tooManyDependenciesCheck.ExecuteIfEnabled(constructorDeclaration, context);
-        }
-
-        public override void VisitClassDeclaration(IClassDeclaration classDeclaration, IHighlightingConsumer context)
-        {
-            hollowNamesCheck.ExecuteIfEnabled(classDeclaration, context);
         }
     }
 }

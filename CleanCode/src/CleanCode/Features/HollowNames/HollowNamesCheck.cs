@@ -4,37 +4,33 @@ using System.Linq;
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
-using IContextBoundSettingsStore = JetBrains.Application.Settings.IContextBoundSettingsStore;
 
 namespace CleanCode.Features.HollowNames
 {
-    public class HollowNamesCheck : MonoValueCheck<IClassDeclaration, string>
+    [ElementProblemAnalyzer(typeof(IClassDeclaration),
+        HighlightingTypes = new []
+        {
+            typeof(HollowTypeNameHighlighting)
+        })]
+    public class HollowNamesCheck : ElementProblemAnalyzer<IClassDeclaration>
     {
-        private const string Separator = ",";
-
-        public HollowNamesCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        protected override void Run(IClassDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
+            var suffixes = GetSuffixes(data.SettingsStore);
 
-        protected override void ExecuteCore(IClassDeclaration constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            var suffixes = GetSuffixes();
-
-            var match = GetFirstMatchOrDefault(constructorDeclaration.DeclaredName, suffixes);
-
+            var match = GetFirstMatchOrDefault(element.DeclaredName, suffixes);
             if (match != null)
-            {
-                AddHightlightning(match, consumer, constructorDeclaration);
-            }
+                AddHighlighting(match, consumer, element);
         }
 
-        private IEnumerable<string> GetSuffixes()
+        private IEnumerable<string> GetSuffixes(IContextBoundSettingsStore dataSettingsStore)
         {
-            return Value.Split(new[] { Separator }, StringSplitOptions.RemoveEmptyEntries);
+            var suffixes = dataSettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameString);
+            return suffixes.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
         }
 
         private static string GetFirstMatchOrDefault(string declaredName, IEnumerable<string> suffixes)
@@ -42,22 +38,12 @@ namespace CleanCode.Features.HollowNames
             return suffixes.FirstOrDefault(declaredName.EndsWith);
         }
 
-        private void AddHightlightning(string bannedSuffix, IHighlightingConsumer consumer, IClassDeclaration typeExpression)
+        private void AddHighlighting(string bannedSuffix, IHighlightingConsumer consumer, IClassDeclaration typeExpression)
         {
             var identifier = typeExpression.NameIdentifier;
             var documentRange = identifier.GetDocumentRange();
-            var highlighting = new Highlighting(string.Format(Warnings.HollowTypeName, bannedSuffix), documentRange);
+            var highlighting = new HollowTypeNameHighlighting(string.Format(Warnings.HollowTypeName, bannedSuffix), documentRange);
             consumer.AddHighlighting(highlighting);
-        }
-
-        protected override bool IsEnabled
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameEnabled); }
-        }
-
-        protected override string Value
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameString); }
         }
     }
 }

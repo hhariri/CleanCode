@@ -185,7 +185,7 @@
     </Compile>
     <Compile Include="Features\FlagArguments\FlagArgumentsHighlighting.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
-    <Compile Include="Features\HollowNames\Highlighting.cs" />
+    <Compile Include="Features\HollowNames\HollowTypeNameHighlighting.cs" />
     <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\Highlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
