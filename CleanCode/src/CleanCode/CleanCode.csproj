@@ -177,12 +177,6 @@
     <Compile Include="Features\ComplexExpression\ComplexConditionExpressionCheck.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentHighlighting.cs" />
     <Compile Include="Features\ExtensionMethods.cs" />
-    <Compile Include="CleanCodeDaemonStageProcess.cs">
-      <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="CleanCodeDaemonStage.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Features\FlagArguments\FlagArgumentsHighlighting.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
     <Compile Include="Features\HollowNames\HollowTypeNameHighlighting.cs" />
@@ -194,12 +188,12 @@
     </Compile>
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
     <Compile Include="Features\MonoValueCheck.cs" />
-    <Compile Include="Features\TooManyDependencies\Highlighting.cs">
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheck.cs" />
     <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheck.cs" />
-    <Compile Include="Features\TooManyMethodArguments\Highlighting.cs">
+    <Compile Include="Features\TooManyMethodArguments\TooManyArgumentsHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\MethodTooLong\MethodTooLongCheck.cs" />

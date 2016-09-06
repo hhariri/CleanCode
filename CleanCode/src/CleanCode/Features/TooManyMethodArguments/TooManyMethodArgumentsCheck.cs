@@ -1,40 +1,30 @@
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.TooManyMethodArguments
 {
-    public class TooManyMethodArgumentsCheck : MonoValueCheck<IMethodDeclaration, int>
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new []
     {
-        public TooManyMethodArgumentsCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        typeof(TooManyArgumentsHighlighting)
+    })]
+    public class TooManyMethodArgumentsCheck : ElementProblemAnalyzer<IMethodDeclaration>
+    {
+        protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
-
-        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            var parameterDeclarations = constructorDeclaration.ParameterDeclarations;
-            var maxParameters = Value;
+            var maxParameters = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum);
+            var parameterDeclarations = element.ParameterDeclarations;
 
             if (parameterDeclarations.Count > maxParameters)
             {
-                var highlighting = new Highlighting(Warnings.TooManyMethodArguments,
-                    constructorDeclaration.GetNameDocumentRange());
+                var highlighting = new TooManyArgumentsHighlighting(Warnings.TooManyMethodArguments,
+                    element.GetNameDocumentRange());
                 consumer.AddHighlighting(highlighting);
             }
-        }
-
-        protected override int Value
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum); }
-        }
-
-        protected override bool IsEnabled
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsEnabled); }
         }
     }
 }
