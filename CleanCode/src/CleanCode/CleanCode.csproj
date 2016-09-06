@@ -187,7 +187,7 @@
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
     <Compile Include="Features\HollowNames\HollowTypeNameHighlighting.cs" />
     <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
-    <Compile Include="Features\MethodNameNotMeaningful\Highlighting.cs" />
+    <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulHighlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
     <Compile Include="Features\MethodTooLong\Highlighting.cs">
       <SubType>Code</SubType>

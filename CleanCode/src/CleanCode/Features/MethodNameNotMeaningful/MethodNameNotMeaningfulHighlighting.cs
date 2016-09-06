@@ -1,25 +1,24 @@
 using CleanCode.Features.MethodNameNotMeaningful;
+using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
-[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
-    HighlightingGroupIds.CodeSmell, "Method Name Not Meaningful",
-    "This method name is to short to be meaningful. Please, choose a better name that describes its intent.",
+[assembly: RegisterConfigurableSeverity(MethodNameNotMeaningfulHighlighting.SeverityID, null, 
+    HighlightingGroupIds.CodeSmell, "Method name not meaningful",
+    "This method name is too short to be meaningful.",
     Severity.WARNING, false)]
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-    public class Highlighting : IHighlighting
+    public class MethodNameNotMeaningfulHighlighting : IHighlighting
     {
-        internal const string SeverityID = "MethodNamesNotMeaningful";
-        private readonly string tooltip;
+        internal const string SeverityID = "MethodNameNotMeaningful";
         private readonly DocumentRange documentRange;
 
-        public Highlighting(string toolTip, DocumentRange documentRange)
+        public MethodNameNotMeaningfulHighlighting(DocumentRange documentRange)
         {
-            tooltip = toolTip;
             this.documentRange = documentRange;
         }
 
@@ -30,12 +29,12 @@ namespace CleanCode.Features.MethodNameNotMeaningful
 
         public string ToolTip
         {
-            get { return tooltip; }
+            get { return Warnings.MethodNameNotMeaningful; }
         }
 
         public string ErrorStripeToolTip
         {
-            get { return tooltip; }
+            get { return ToolTip; }
         }
 
         public bool IsValid()

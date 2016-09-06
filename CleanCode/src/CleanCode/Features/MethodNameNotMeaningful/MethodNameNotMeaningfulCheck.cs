@@ -1,46 +1,34 @@
 using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {
-    public class MethodNameNotMeaningfulCheck : MonoValueCheck<IMethodDeclaration, int>
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new []
     {
-        public MethodNameNotMeaningfulCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        typeof(MethodNameNotMeaningfulHighlighting)
+    })]
+    public class MethodNameNotMeaningfulCheck : ElementProblemAnalyzer<IMethodDeclaration>
+    {
+        protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
-
-        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            var minimumMethodNameLenght = Value;
-
-            if (constructorDeclaration.NameIdentifier == null)
-            {
+            if (element.NameIdentifier == null)
                 return;
-            }
 
-            var name = constructorDeclaration.NameIdentifier.GetText();
-            var methodNameLenght = name.Length;
-            if (methodNameLenght < minimumMethodNameLenght)
+            var minimumMethodNameLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum);
+
+            var name = element.NameIdentifier.GetText();
+            var methodNameLength = name.Length;
+            if (methodNameLength < minimumMethodNameLength)
             {
-                var documentRange = constructorDeclaration.GetNameDocumentRange();
-                var highlighting = new Highlighting(Warnings.MethodNameNotMeaningful, documentRange);
+                var documentRange = element.GetNameDocumentRange();
+                var highlighting = new MethodNameNotMeaningfulHighlighting(documentRange);
                 consumer.AddHighlighting(highlighting);
             }
-        }
-
-        protected override int Value
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum); }
-        }
-
-        protected override bool IsEnabled
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimumEnabled); }
         }
     }
 }

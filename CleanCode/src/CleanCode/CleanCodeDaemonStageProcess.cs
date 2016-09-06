@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
 using CleanCode.Features.TooManyDeclarations;
 using CleanCode.Features.TooManyDependencies;
@@ -18,7 +17,6 @@ namespace CleanCode
         private readonly MethodTooLongCheck methodTooLongCheck;
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
-        private readonly MethodNameNotMeaningfulCheck methodNamesNotMeaningfulCheck;
         private readonly TooManyDeclarationsCheck tooManyDeclarationsCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
@@ -30,7 +28,6 @@ namespace CleanCode
             methodTooLongCheck = new MethodTooLongCheck(settingsStore);
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
-            methodNamesNotMeaningfulCheck = new MethodNameNotMeaningfulCheck(settingsStore);
             tooManyDeclarationsCheck = new TooManyDeclarationsCheck(settingsStore);
         }
 
@@ -43,7 +40,6 @@ namespace CleanCode
         {
             methodTooLongCheck.ExecuteIfEnabled(methodDeclaration, context);
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
-            methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
             tooManyDeclarationsCheck.ExecuteIfEnabled(methodDeclaration, context);
         }
 
