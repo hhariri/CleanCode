@@ -1,7 +1,7 @@
 using System.Linq;
-using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
@@ -9,39 +9,26 @@ using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode.Features.TooManyDependencies
 {
-    public class TooManyDependenciesCheck : MonoValueCheck<IConstructorDeclaration, int>
+    [ElementProblemAnalyzer(typeof(IConstructorDeclaration), HighlightingTypes = new []
     {
-        public TooManyDependenciesCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        typeof(TooManyDependenciesHighlighting)
+    })]
+    public class TooManyDependenciesCheck : ElementProblemAnalyzer<IConstructorDeclaration>
+    {
+        protected override void Run(IConstructorDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
+            var maxDependencies = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum);
 
-        protected override void ExecuteCore(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            var maxDependencies = Value;
-
-            var dependencies = constructorDeclaration.ParameterDeclarations.Select(
+            var dependencies = element.ParameterDeclarations.Select(
                 declaration => declaration.DeclaredElement != null &&
                                declaration.DeclaredElement.Type.IsInterfaceType());
 
             var dependenciesCount = dependencies.Count();
-
             if (dependenciesCount > maxDependencies)
             {
-                var highlighting = new Highlighting(Warnings.TooManyDependencies,
-                    constructorDeclaration.GetNameDocumentRange());
+                var highlighting = new TooManyDependenciesHighlighting(element.GetNameDocumentRange());
                 consumer.AddHighlighting(highlighting);
             }
-        }
-
-        protected override int Value
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum); }
-        }
-
-        protected override bool IsEnabled
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximumEnabled); }
         }
     }
 }

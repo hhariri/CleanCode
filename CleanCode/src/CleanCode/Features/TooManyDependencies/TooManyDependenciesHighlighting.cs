@@ -1,24 +1,24 @@
+using CleanCode;
 using CleanCode.Features.TooManyDependencies;
+using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
-[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null,
-    HighlightingGroupIds.CodeSmell, "Too Many Dependencies", "Too many dependencies passed into constructor.",
+[assembly: RegisterConfigurableSeverity(TooManyDependenciesHighlighting.SeverityID, null,
+    CleanCodeHighlightingGroupIds.CleanCode, "Too many dependencies", "Too many dependencies passed into constructor.",
     Severity.WARNING, false)]
 
 namespace CleanCode.Features.TooManyDependencies
 {
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-    public class Highlighting : IHighlighting
+    public class TooManyDependenciesHighlighting : IHighlighting
     {
         internal const string SeverityID = "TooManyDependencies";
-        private readonly string tooltip;
         private readonly DocumentRange documentRange;
 
-        public Highlighting(string toolTip, DocumentRange documentRange)
+        public TooManyDependenciesHighlighting(DocumentRange documentRange)
         {
-            tooltip = toolTip;
             this.documentRange = documentRange;
         }
 
@@ -29,12 +29,12 @@ namespace CleanCode.Features.TooManyDependencies
 
         public string ToolTip
         {
-            get { return tooltip; }
+            get { return Warnings.TooManyDependencies; }
         }
 
         public string ErrorStripeToolTip
         {
-            get { return tooltip; }
+            get { return ToolTip; }
         }
 
         public bool IsValid()

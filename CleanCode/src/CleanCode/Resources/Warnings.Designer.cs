@@ -142,7 +142,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating SRP..
+        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating the Single Responsibility Principle..
         /// </summary>
         public static string TooManyDependencies {
             get {

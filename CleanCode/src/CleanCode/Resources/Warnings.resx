@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TooManyDependencies" xml:space="preserve">
-    <value>There are too many interfaces being passed in to this constructor. You might be violating SRP.</value>
+    <value>There are too many interfaces being passed in to this constructor. You might be violating the Single Responsibility Principle.</value>
   </data>
   <data name="TooManyMethodArguments" xml:space="preserve">
     <value>This method requires too many arguments.</value>

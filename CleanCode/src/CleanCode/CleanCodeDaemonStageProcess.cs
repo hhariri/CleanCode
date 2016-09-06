@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon.CSharp.Stages;
@@ -13,7 +12,6 @@ namespace CleanCode
     {
         private readonly IContextBoundSettingsStore settingsStore;
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
-        private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
 
         public CleanCodeDaemonStageProcess(IDaemonProcess daemonProcess, ICSharpFile file, IContextBoundSettingsStore settingsStore)
             : base(daemonProcess, file)
@@ -22,7 +20,6 @@ namespace CleanCode
 
             // TODO: This is starting to feel like a beach of Benidorm in July. Refactoring needed.
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
-            tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
         }
 
         public override void Execute(Action<DaemonStageResult> commiter)
@@ -33,11 +30,6 @@ namespace CleanCode
         public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
         {
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
-        }
-
-        public override void VisitConstructorDeclaration(IConstructorDeclaration constructorDeclaration, IHighlightingConsumer context)
-        {
-            tooManyDependenciesCheck.ExecuteIfEnabled(constructorDeclaration, context);
         }
     }
 }
