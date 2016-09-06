@@ -1,24 +1,24 @@
+using CleanCode;
 using CleanCode.Features.MethodTooLong;
+using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
-[assembly: RegisterConfigurableSeverity(Highlighting.SeverityID, null, 
-    HighlightingGroupIds.CodeSmell, "Method Too Long", "The method is bigger than it should be.",
+[assembly: RegisterConfigurableSeverity(MethodTooLongHighlighting.SeverityID, null, 
+    CleanCodeHighlightingGroupIds.CleanCode, "Method too long", "The method is bigger than it should be.",
     Severity.SUGGESTION, false)]
 
 namespace CleanCode.Features.MethodTooLong
 {
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-    public class Highlighting : IHighlighting
+    public class MethodTooLongHighlighting : IHighlighting
     {
         internal const string SeverityID = "MethodTooLong";
-        private readonly string tooltip;
         private readonly DocumentRange documentRange;
 
-        public Highlighting(string toolTip, DocumentRange documentRange)
+        public MethodTooLongHighlighting(DocumentRange documentRange)
         {
-            tooltip = toolTip;
             this.documentRange = documentRange;
         }
 
@@ -29,12 +29,12 @@ namespace CleanCode.Features.MethodTooLong
 
         public string ToolTip
         {
-            get { return tooltip; }
+            get { return Warnings.MethodTooLong; }
         }
 
         public string ErrorStripeToolTip
         {
-            get { return tooltip; }
+            get { return ToolTip; }
         }
 
         public bool IsValid()

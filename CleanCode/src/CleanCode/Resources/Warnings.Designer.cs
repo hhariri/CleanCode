@@ -133,6 +133,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This method is too long..
+        /// </summary>
+        public static string MethodTooLong {
+            get {
+                return ResourceManager.GetString("MethodTooLong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating SRP..
         /// </summary>
         public static string TooManyDependencies {
@@ -147,15 +156,6 @@ namespace CleanCode.Resources {
         public static string TooManyMethodArguments {
             get {
                 return ResourceManager.GetString("TooManyMethodArguments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This method contains too many statements..
-        /// </summary>
-        public static string Warning_MethodTooLong {
-            get {
-                return ResourceManager.GetString("Warning_MethodTooLong", resourceCulture);
             }
         }
         

@@ -21,7 +21,7 @@ namespace CleanCode.Features.TooManyDeclarations
             var statementCount = constructorDeclaration.CountChildren<IDeclaration>();
             if (statementCount > maxLength)
             {
-                var highlighting = new MethodTooLong.Highlighting(Warnings.Warning_TooManyDeclarations,
+                var highlighting = new Highlighting(Warnings.Warning_TooManyDeclarations,
                     constructorDeclaration.GetNameDocumentRange());
                 consumer.AddHighlighting(highlighting);
             }

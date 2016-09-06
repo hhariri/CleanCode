@@ -1,39 +1,28 @@
-using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodTooLong
 {
-    public class MethodTooLongCheck : MonoValueCheck<IMethodDeclaration, int>
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new []
     {
-        public MethodTooLongCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        typeof(MethodTooLongHighlighting)
+    })]
+    public class MethodTooLongCheck : ElementProblemAnalyzer<IMethodDeclaration>
+    {
+        protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
+            var maxLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum);
 
-        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            var maxLength = Value;
-
-            var statementCount = constructorDeclaration.CountChildren<IStatement>();
+            var statementCount = element.CountChildren<IStatement>();
             if (statementCount > maxLength)
             {
-                var highlighting = new Highlighting(Warnings.Warning_MethodTooLong, constructorDeclaration.GetNameDocumentRange());
+                var highlighting = new MethodTooLongHighlighting(element.GetNameDocumentRange());
                 consumer.AddHighlighting(highlighting);
             }
-        }
-
-        protected override int Value
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum); }
-        }
-
-        protected override bool IsEnabled
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongEnabled); }
         }
     }
 }

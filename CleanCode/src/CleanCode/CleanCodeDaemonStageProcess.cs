@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.MethodTooLong;
 using CleanCode.Features.TooManyDeclarations;
 using CleanCode.Features.TooManyDependencies;
 using CleanCode.Features.TooManyMethodArguments;
@@ -14,7 +13,6 @@ namespace CleanCode
     public class CleanCodeDaemonStageProcess : CSharpDaemonStageProcessBase
     {
         private readonly IContextBoundSettingsStore settingsStore;
-        private readonly MethodTooLongCheck methodTooLongCheck;
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly TooManyDeclarationsCheck tooManyDeclarationsCheck;
@@ -25,7 +23,6 @@ namespace CleanCode
             this.settingsStore = settingsStore;
 
             // TODO: This is starting to feel like a beach of Benidorm in July. Refactoring needed.
-            methodTooLongCheck = new MethodTooLongCheck(settingsStore);
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             tooManyDeclarationsCheck = new TooManyDeclarationsCheck(settingsStore);
@@ -38,7 +35,6 @@ namespace CleanCode
 
         public override void VisitMethodDeclaration(IMethodDeclaration methodDeclaration, IHighlightingConsumer context)
         {
-            methodTooLongCheck.ExecuteIfEnabled(methodDeclaration, context);
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
             tooManyDeclarationsCheck.ExecuteIfEnabled(methodDeclaration, context);
         }

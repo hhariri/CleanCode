@@ -123,8 +123,8 @@
   <data name="TooManyMethodArguments" xml:space="preserve">
     <value>This method requires too many arguments.</value>
   </data>
-  <data name="Warning_MethodTooLong" xml:space="preserve">
-    <value>This method contains too many statements.</value>
+  <data name="MethodTooLong" xml:space="preserve">
+    <value>This method is too long.</value>
   </data>
   <data name="ExcessiveDepth" xml:space="preserve">
     <value>Excessive depth of nested code blocks.</value>
