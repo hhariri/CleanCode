@@ -14,33 +14,17 @@ namespace CleanCode.Features.TooManyMethodArguments
     public class TooManyArgumentsHighlighting : IHighlighting
     {
         internal const string SeverityID = "TooManyArguments";
-        private readonly string tooltip;
         private readonly DocumentRange documentRange;
 
         public TooManyArgumentsHighlighting(string toolTip, DocumentRange documentRange)
         {
-            tooltip = toolTip;
+            ToolTip = toolTip;
             this.documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange()
-        {
-            return documentRange;
-        }
-
-        public string ToolTip
-        {
-            get { return tooltip; }
-        }
-
-        public string ErrorStripeToolTip
-        {
-            get { return tooltip; }
-        }
-
-        public bool IsValid()
-        {
-            return true;
-        }
+        public DocumentRange CalculateRange() => documentRange;
+        public string ToolTip { get; }
+        public string ErrorStripeToolTip => ToolTip;
+        public bool IsValid() => true;
     }
 }

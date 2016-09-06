@@ -27,7 +27,7 @@ namespace CleanCode.Features
 
 
         public static int GetChildrenDepth(this ITreeNode node)
-        {           
+        {
             var childrenDepth = 0;
             var children = node.Children();
             foreach (var block in children)
@@ -38,7 +38,7 @@ namespace CleanCode.Features
 
             if (IsNodeThatIncreasesDepth(node))
             {
-                return childrenDepth + 1;    
+                return childrenDepth + 1;
             }
             return childrenDepth;
         }
@@ -122,20 +122,10 @@ namespace CleanCode.Features
             var firstChildNode = childNodes.FirstOrDefault();
 
             if (firstChildNode == null)
-            {
                 return null;
-            }
-            else
-            {
-                var referenceExpression = firstChildNode as IReferenceExpression;
 
-                if (referenceExpression == null)
-                {
-                    referenceExpression = TryGetFirstReferenceExpression(firstChildNode);
-                }
-
-                return referenceExpression;
-            }
+            return firstChildNode as IReferenceExpression ??
+                   TryGetFirstReferenceExpression(firstChildNode);
         }
 
         private static IType TryGetClosedReturnTypeFromReference(IReference reference)
@@ -143,9 +133,7 @@ namespace CleanCode.Features
             var resolveResultWithInfo = GetResolveResult(reference);
 
             if (reference.CurrentResolveResult == null)
-            {
                 reference.Resolve();
-            }
 
             var declaredElement = resolveResultWithInfo.DeclaredElement;
             var parametersOwner = declaredElement as IParametersOwner;
@@ -153,12 +141,7 @@ namespace CleanCode.Features
             if (parametersOwner != null)
             {
                 var returnType = parametersOwner.ReturnType;
-                if (returnType.IsOpenType)
-                {
-                    return GetClosedType(resolveResultWithInfo, returnType);
-                }
-
-                return returnType;
+                return returnType.IsOpenType ? GetClosedType(resolveResultWithInfo, returnType) : returnType;
             }
 
             return null;

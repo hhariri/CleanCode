@@ -22,24 +22,9 @@ namespace CleanCode.Features.ExcessiveIndentation
             this.documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange()
-        {
-            return documentRange;
-        }
-
-        public string ToolTip
-        {
-            get { return Warnings.ExcessiveDepth; }
-        }
-
-        public string ErrorStripeToolTip
-        {
-            get { return ToolTip; }
-        }
-
-        public bool IsValid()
-        {
-            return true;
-        }
+        public DocumentRange CalculateRange() => documentRange;
+        public string ToolTip => Warnings.ExcessiveDepth;
+        public string ErrorStripeToolTip => ToolTip;
+        public bool IsValid() => true;
     }
 }

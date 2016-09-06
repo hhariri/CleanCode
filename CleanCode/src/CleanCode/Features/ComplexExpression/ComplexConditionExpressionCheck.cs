@@ -53,10 +53,7 @@ namespace CleanCode.Features.ComplexExpression
                 return assignmentExpression.Source;
 
             var expressionInitializer = node as IExpressionInitializer;
-            if (expressionInitializer != null)
-                return expressionInitializer.Value;
-
-            return null;
+            return expressionInitializer?.Value;
         }
 
         private static void CheckExpression(IExpression expression, ElementProblemAnalyzerData data,

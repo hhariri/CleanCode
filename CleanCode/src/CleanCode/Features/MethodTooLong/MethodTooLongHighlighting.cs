@@ -22,24 +22,9 @@ namespace CleanCode.Features.MethodTooLong
             this.documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange()
-        {
-            return documentRange;
-        }
-
-        public string ToolTip
-        {
-            get { return Warnings.MethodTooLong; }
-        }
-
-        public string ErrorStripeToolTip
-        {
-            get { return ToolTip; }
-        }
-
-        public bool IsValid()
-        {
-            return true;
-        }
+        public DocumentRange CalculateRange() => documentRange;
+        public string ToolTip => Warnings.MethodTooLong;
+        public string ErrorStripeToolTip => ToolTip;
+        public bool IsValid() => true;
     }
 }

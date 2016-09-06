@@ -22,24 +22,9 @@ namespace CleanCode.Features.TooManyDependencies
             this.documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange()
-        {
-            return documentRange;
-        }
-
-        public string ToolTip
-        {
-            get { return Warnings.TooManyDependencies; }
-        }
-
-        public string ErrorStripeToolTip
-        {
-            get { return ToolTip; }
-        }
-
-        public bool IsValid()
-        {
-            return true;
-        }
+        public DocumentRange CalculateRange() => documentRange;
+        public string ToolTip => Warnings.TooManyDependencies;
+        public string ErrorStripeToolTip => ToolTip;
+        public bool IsValid() => true;
     }
 }

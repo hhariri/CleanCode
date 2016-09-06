@@ -22,24 +22,9 @@ namespace CleanCode.Features.FlagArguments
             this.documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange()
-        {
-            return documentRange;
-        }
-
-        public string ToolTip
-        {
-            get { return Warnings.FlagArgument; }
-        }
-
-        public string ErrorStripeToolTip
-        {
-            get { return ToolTip; }
-        }
-
-        public bool IsValid()
-        {
-            return true;
-        }
+        public DocumentRange CalculateRange() => documentRange;
+        public string ToolTip => Warnings.FlagArgument;
+        public string ErrorStripeToolTip => ToolTip;
+        public bool IsValid() => true;
     }
 }

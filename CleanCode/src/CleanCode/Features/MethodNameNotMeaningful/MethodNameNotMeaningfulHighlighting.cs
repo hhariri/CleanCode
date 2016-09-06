@@ -23,24 +23,9 @@ namespace CleanCode.Features.MethodNameNotMeaningful
             this.documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange()
-        {
-            return documentRange;
-        }
-
-        public string ToolTip
-        {
-            get { return Warnings.MethodNameNotMeaningful; }
-        }
-
-        public string ErrorStripeToolTip
-        {
-            get { return ToolTip; }
-        }
-
-        public bool IsValid()
-        {
-            return true;
-        }
+        public DocumentRange CalculateRange() => documentRange;
+        public string ToolTip => Warnings.MethodNameNotMeaningful;
+        public string ErrorStripeToolTip => ToolTip;
+        public bool IsValid() => true;
     }
 }
