@@ -15,14 +15,19 @@ namespace CleanCode.Features.MethodTooLong
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var maxLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum);
+            var maxStatements = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum);
+            var maxDeclarations = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsMaximum);
 
             var statementCount = element.CountChildren<IStatement>();
-            if (statementCount > maxLength)
+            if (statementCount <= maxStatements)
             {
-                var highlighting = new MethodTooLongHighlighting(element.GetNameDocumentRange());
-                consumer.AddHighlighting(highlighting);
+                var declarationCount = element.CountChildren<IDeclaration>();
+                if (declarationCount <= maxDeclarations)
+                    return;
             }
+
+            var highlighting = new MethodTooLongHighlighting(element.GetNameDocumentRange());
+            consumer.AddHighlighting(highlighting);
         }
     }
 }
