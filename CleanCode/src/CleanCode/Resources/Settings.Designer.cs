@@ -61,65 +61,11 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Methods Per Class Check.
-        /// </summary>
-        public static string ClassTooBigCheck {
-            get {
-                return ResourceManager.GetString("ClassTooBigCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Complex expression check (conditions).
-        /// </summary>
-        public static string ComplexExpressionCheck {
-            get {
-                return ResourceManager.GetString("ComplexExpressionCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Maximum declarations per method.
         /// </summary>
         public static string DeclarationsMaximum {
             get {
                 return ResourceManager.GetString("DeclarationsMaximum", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Excessive Depth Of Nesting Check.
-        /// </summary>
-        public static string ExcessiveDepthCheck {
-            get {
-                return ResourceManager.GetString("ExcessiveDepthCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Flag Arguments Check.
-        /// </summary>
-        public static string FlagArgumentsCheck {
-            get {
-                return ResourceManager.GetString("FlagArgumentsCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Hollow Type Name Check.
-        /// </summary>
-        public static string HollowTypeNameCheck {
-            get {
-                return ResourceManager.GetString("HollowTypeNameCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maximum Chained References Check.
-        /// </summary>
-        public static string MaxChainedReferencesCheck {
-            get {
-                return ResourceManager.GetString("MaxChainedReferencesCheck", resourceCulture);
             }
         }
         
@@ -142,15 +88,6 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Dependencies Check.
-        /// </summary>
-        public static string MaximumDependenciesCheck {
-            get {
-                return ResourceManager.GetString("MaximumDependenciesCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Maximum expressions inside a condition.
         /// </summary>
         public static string MaximumExpressionsInsideACondition {
@@ -165,15 +102,6 @@ namespace CleanCode.Resources {
         public static string MaximumLevelOfNestingInAMethod {
             get {
                 return ResourceManager.GetString("MaximumLevelOfNestingInAMethod", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Maximum Method Arguments Check.
-        /// </summary>
-        public static string MaximumMethodArgumentsCheck {
-            get {
-                return ResourceManager.GetString("MaximumMethodArgumentsCheck", resourceCulture);
             }
         }
         
@@ -223,56 +151,11 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Maximum Statements Per Method Check.
-        /// </summary>
-        public static string MethodTooLongCheck {
-            get {
-                return ResourceManager.GetString("MethodTooLongCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Minimum method name length.
         /// </summary>
         public static string MinimumMethodNameLength {
             get {
                 return ResourceManager.GetString("MinimumMethodNameLength", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Minimum Method Name Length.
-        /// </summary>
-        public static string MinimumMethodNameLengthCheck {
-            get {
-                return ResourceManager.GetString("MinimumMethodNameLengthCheck", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The options below help enforce certain practices that can be considered to leading to cleaner and more maintainable code..
-        /// </summary>
-        public static string Options_Header {
-            get {
-                return ResourceManager.GetString("Options_Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob).
-        /// </summary>
-        public static string Options_SubHeader {
-            get {
-                return ResourceManager.GetString("Options_SubHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Too Many Declarations Check.
-        /// </summary>
-        public static string TooManyDeclarationsCheck {
-            get {
-                return ResourceManager.GetString("TooManyDeclarationsCheck", resourceCulture);
             }
         }
     }

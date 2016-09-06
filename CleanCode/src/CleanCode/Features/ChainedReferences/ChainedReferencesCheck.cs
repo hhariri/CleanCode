@@ -20,7 +20,7 @@ namespace CleanCode.Features.ChainedReferences
         {
             if (!element.IsEmbeddedStatement)
             {
-                var threshold = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum);
+                var threshold = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumChainedReferences);
                 HighlightMethodChainsThatAreTooLong(element, consumer, threshold);
             }
         }

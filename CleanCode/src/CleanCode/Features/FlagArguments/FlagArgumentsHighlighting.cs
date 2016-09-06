@@ -1,3 +1,4 @@
+using CleanCode;
 using CleanCode.Features.FlagArguments;
 using CleanCode.Resources;
 using JetBrains.DocumentModel;
@@ -5,7 +6,7 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(FlagArgumentsHighlighting.SeverityID, null, 
-    HighlightingGroupIds.CodeSmell, "Flag argument", "An argument that is used as a flag.",
+    CleanCodeHighlightingGroupIds.CleanCode, "Flag argument", "An argument that is used as a flag.",
     Severity.WARNING, false)]
 
 namespace CleanCode.Features.FlagArguments

@@ -1,32 +1,3 @@
-#region License
-
-// Copyright (C) 2012 Hadi Hariri and Contributors
-// 
-// Permission is hereby granted, free of charge, to any person 
-// obtaining a copy of this software and associated
-// documentation files (the "Software"), to deal in the Software 
-// without restriction, including without limitation the rights 
-// to use, copy, modify, merge, publish, distribute, sublicense, 
-// and/or sell copies of the Software, and to permit persons 
-// to whom the Software is furnished to do so, subject to the 
-// following conditions:
-//  
-// The above copyright notice and this permission notice shall 
-// be included in all copies or substantial portions of the Software.
-//  
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, 
-// EXPRESS OR IMPLIED, INCLUDING BUT NOT
-// LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND
-// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
-// OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-// OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
-// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE
-// OR OTHER DEALINGS IN THE SOFTWARE.
-
-#endregion
-
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Resources.Settings;
 
@@ -35,62 +6,34 @@ namespace CleanCode.Settings
     [SettingsKey(typeof(CodeInspectionSettings), "CleanCode")]
     public class CleanCodeSettings
     {
-        [SettingsEntry(3, "TooManyDependenciesMaximum")]
-        public readonly int TooManyDependenciesMaximum;
-        [SettingsEntry(true, "TooManyDependenciesMaximumEnabled")]
-        public readonly bool TooManyDependenciesMaximumEnabled;
+        [SettingsEntry(3, "MaximumConstructorDependencies")]
+        public readonly int MaximumConstructorDependencies;
 
-        [SettingsEntry(3, "TooManyMethodArgumentsMaximum")]
-        public readonly int TooManyMethodArgumentsMaximum;
-        [SettingsEntry(true, "TooManyMethodArgumentsEnabled")]
-        public readonly bool TooManyMethodArgumentsEnabled;
+        [SettingsEntry(3, "MaximumMethodParameters")]
+        public readonly int MaximumMethodParameters;
 
-        [SettingsEntry(true, "MethodTooLongEnabled")]
-        public readonly bool MethodTooLongEnabled;
-        [SettingsEntry(15, "MethodTooLongMaximum")]
-        public readonly int MethodTooLongMaximum;
+        [SettingsEntry(15, "MaximumMethodStatements")]
+        public readonly int MaximumMethodStatements;
 
-        [SettingsEntry(3, "ExcessiveIndentationMaximum")]
-        public int ExcessiveIndentationMaximum { get; set; }
-        [SettingsEntry(true, "ExcessiveIndentationEnabled")]
-        public bool ExcessiveIndentationEnabled { get; set; }
+        [SettingsEntry(6, "MaximumDeclarationsInMethod")]
+        public readonly int MaximumDeclarationsInMethod;
 
-        [SettingsEntry(true, "ClassTooBigEnabled")]
-        public bool ClassTooBigEnabled { get; set; }
-        [SettingsEntry(20, "ClassTooBigMaximum")]
-        public int ClassTooBigMaximum { get; set; }
+        [SettingsEntry(3, "MaximumIndentationDepth")]
+        public int MaximumIndentationDepth { get; set; }
 
-        [SettingsEntry(true, "TooManyChainedReferencesEnabled")]
-        public bool TooManyChainedReferencesEnabled { get; set; }
-        [SettingsEntry(2, "TooManyChainedReferencesMaximum")]
-        public int TooManyChainedReferencesMaximum { get; set; }
+        [SettingsEntry(20, "MaximumMethodsInClass")]
+        public int MaximumMethodsInClass { get; set; }
 
-        [SettingsEntry(true, "MethodNameNotMeaningfulMinimumEnabled")]
-        public bool MethodNameNotMeaningfulMinimumEnabled { get; set; }
-        [SettingsEntry(4, "MethodNameNotMeaningfulMinimum")]
-        public int MethodNameNotMeaningfulMinimum { get; set; }
+        [SettingsEntry(2, "MaximumChainedReferences")]
+        public int MaximumChainedReferences { get; set; }
 
-        [SettingsEntry(true, "FlagArgumentsEnabled")]
-        public bool FlagArgumentsEnabled { get; set; }
+        [SettingsEntry(4, "MinimumMeaningfulMethodNameLength")]
+        public int MinimumMeaningfulMethodNameLength { get; set; }
 
-        [SettingsEntry(true, "HollowTypeNameEnabled")]
-        public bool HollowTypeNameEnabled { get; set; }
+        [SettingsEntry("Handler,Manager,Processor,Controller,Helper", "MeaninglessClassNameSuffixes")]
+        public string MeaninglessClassNameSuffixes { get; set; }  
 
-        [SettingsEntry("Handler,Manager,Processor,Controller,Helper", "HollowTypeNameString")]
-        public string HollowTypeNameString { get; set; }  
-
-        [SettingsEntry(true, "ComplexExpressionEnabled")]
-
-        public bool ComplexExpressionEnabled { get; set; }
-        [SettingsEntry(1, "ComplexExpressionMaximum")]
-        public int ComplexExpressionMaximum { get; set; }
-
-        [SettingsEntry(true, "TooManyDeclarationsEnabled")]
-        public readonly bool TooManyDeclarationsEnabled;
-        [SettingsEntry(6, "TooManyDeclarationsMaximum")]
-        public readonly int TooManyDeclarationsMaximum;
-
-        [SettingsEntry(true, "InterfacesWithNoPrefixEnabled")]
-        public readonly bool InterfacesWithNoPrefixEnabled;
+        [SettingsEntry(1, "MaximumExpressionsInCondition")]
+        public int MaximumExpressionsInCondition { get; set; }
     }
 }

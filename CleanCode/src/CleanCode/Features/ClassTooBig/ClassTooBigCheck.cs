@@ -16,7 +16,7 @@ namespace CleanCode.Features.ClassTooBig
     {
         protected override void Run(IClassDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var maxLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.ClassTooBigMaximum);
+            var maxLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodsInClass);
 
             var statementCount = element.CountChildren<IMethodDeclaration>();
             if (statementCount > maxLength)

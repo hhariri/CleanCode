@@ -1,3 +1,4 @@
+using CleanCode;
 using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Resources;
 using JetBrains.DocumentModel;
@@ -5,7 +6,7 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(MethodNameNotMeaningfulHighlighting.SeverityID, null, 
-    HighlightingGroupIds.CodeSmell, "Method name not meaningful",
+    CleanCodeHighlightingGroupIds.CleanCode, "Method name not meaningful",
     "This method name is too short to be meaningful.",
     Severity.WARNING, false)]
 

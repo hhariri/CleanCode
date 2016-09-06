@@ -18,7 +18,7 @@ namespace CleanCode.Features.MethodNameNotMeaningful
             if (element.NameIdentifier == null)
                 return;
 
-            var minimumMethodNameLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum);
+            var minimumMethodNameLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MinimumMeaningfulMethodNameLength);
 
             var name = element.NameIdentifier.GetText();
             var methodNameLength = name.Length;

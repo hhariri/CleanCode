@@ -1,8 +1,10 @@
-﻿using CleanCode.Resources.Icons;
+﻿using System.Drawing;
+using CleanCode.Resources.Icons;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Feature.Services.Daemon.OptionPages;
 using JetBrains.UI.Options;
 using JetBrains.UI.Options.OptionsDialog2.SimpleOptions;
+using JetBrains.UI.RichText;
 
 namespace CleanCode.Settings
 {
@@ -16,42 +18,46 @@ namespace CleanCode.Settings
         {
             AddHeader("Single Responsibility");
             AddText("A class should only have a single responsibility. Do not do too much in a class or method.");
-            AddIntOption((CleanCodeSettings s) => s.ClassTooBigMaximum,
+            AddIntOption((CleanCodeSettings s) => s.MaximumMethodsInClass,
                 Resources.Settings.MaximumMethodsPerClass,
                 "Too many method declarations in a class is an indicator that the class is doing too much.");
-            AddIntOption((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum,
+            AddIntOption((CleanCodeSettings s) => s.MaximumMethodParameters,
                 Resources.Settings.MaximumMethodDeclarationParameters,
                 "Too many parameters in a method declaration is an indicator of having more than one responsibility");
-            AddIntOption((CleanCodeSettings s) => s.MethodTooLongMaximum, Resources.Settings.MaximumStatementsPerMethod,
+            AddIntOption((CleanCodeSettings s) => s.MaximumMethodStatements, Resources.Settings.MaximumStatementsPerMethod,
                 "Long methods are indicator of having more than one responsibility.");
-            AddIntOption((CleanCodeSettings s) => s.TooManyDeclarationsMaximum,
+            AddIntOption((CleanCodeSettings s) => s.MaximumDeclarationsInMethod,
                 Resources.Settings.DeclarationsMaximum,
                 "Too many variables are an indicator of having more than one responsibility.");
-            AddIntOption((CleanCodeSettings s) => s.ExcessiveIndentationMaximum,
+            AddIntOption((CleanCodeSettings s) => s.MaximumIndentationDepth,
                 Resources.Settings.MaximumLevelOfNestingInAMethod,
                 "Too much nesting in a method is an indicator of having more than one responsibility.");
 
             AddHeader("Coupling");
             AddText("Avoid excessive coupling beween classes.");
-            AddIntOption((CleanCodeSettings s) => s.TooManyDependenciesMaximum,
+            AddIntOption((CleanCodeSettings s) => s.MaximumConstructorDependencies,
                 Resources.Settings.MaximumConstructorDependencies);
-            AddIntOption((CleanCodeSettings s) => s.TooManyChainedReferencesMaximum,
+            AddIntOption((CleanCodeSettings s) => s.MaximumChainedReferences,
                 Resources.Settings.MaximumChainedReferences,
                 "Avoid breaking the Law of Demeter.");
 
             AddHeader("Legibility");
             AddText("Names should be meaningful.");
-            AddIntOption((CleanCodeSettings s) => s.MethodNameNotMeaningfulMinimum,
+            AddIntOption((CleanCodeSettings s) => s.MinimumMeaningfulMethodNameLength,
                 Resources.Settings.MinimumMethodNameLength);
-            AddStringOption((CleanCodeSettings s) => s.HollowTypeNameString,
+            AddStringOption((CleanCodeSettings s) => s.MeaninglessClassNameSuffixes,
                 Resources.Settings.MeaninglessNameSuffixes,
                 Resources.Settings.MeaninglessNameSuffixesTooltip);
 
             AddHeader("Complexity");
             AddText("Reduce complexity in individual statements.");
-            AddIntOption((CleanCodeSettings s) => s.ComplexExpressionMaximum,
+            AddIntOption((CleanCodeSettings s) => s.MaximumExpressionsInCondition,
                 Resources.Settings.MaximumExpressionsInsideACondition);
 
+            AddRichText(
+                new RichText(
+                    "Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)",
+                    new TextStyle(FontStyle.Italic)));
             FinishPage();
         }
     }

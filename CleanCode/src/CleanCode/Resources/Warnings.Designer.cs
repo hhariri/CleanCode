@@ -61,7 +61,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Too many chained references..
+        ///   Looks up a localized string similar to Too many chained references. This might be violating the Law of Demeter..
         /// </summary>
         public static string ChainedReferences {
             get {
@@ -70,7 +70,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class contains too many methods..
+        ///   Looks up a localized string similar to Class contains too many methods. This might be violating the Single Responsibility Principle..
         /// </summary>
         public static string ClassTooBig {
             get {
@@ -97,7 +97,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This argument is used as a flag in the method. It usually means that the method has more than one responsibility..
+        ///   Looks up a localized string similar to This argument is used as a flag in the method. This might be violating the Single Responsibility Principle..
         /// </summary>
         public static string FlagArgument {
             get {
@@ -106,16 +106,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method does more than one thing. Passing a boolean into a function is a truly terrible practice..
-        /// </summary>
-        public static string FlagMethodArguments {
-            get {
-                return ResourceManager.GetString("FlagMethodArguments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The usage of the suffix &apos;{0}&apos; is discouraged because it&apos;s too generic. Please, choose a meaningful name instead to clarify its intent and responsibilities..
+        ///   Looks up a localized string similar to The usage of the suffix &apos;{0}&apos; is discouraged because it&apos;s too generic. Choose a meaningful name instead to clarify its intent and responsibilities..
         /// </summary>
         public static string HollowTypeName {
             get {
@@ -133,7 +124,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method is too long..
+        ///   Looks up a localized string similar to This method is too long, indicating that it has too much responsibility..
         /// </summary>
         public static string MethodTooLong {
             get {
@@ -142,7 +133,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. You might be violating the Single Responsibility Principle..
+        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. It might be violating the Single Responsibility Principle..
         /// </summary>
         public static string TooManyDependencies {
             get {
@@ -156,15 +147,6 @@ namespace CleanCode.Resources {
         public static string TooManyMethodArguments {
             get {
                 return ResourceManager.GetString("TooManyMethodArguments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Too many declarations. This method is likely doing more than one thing..
-        /// </summary>
-        public static string Warning_TooManyDeclarations {
-            get {
-                return ResourceManager.GetString("Warning_TooManyDeclarations", resourceCulture);
             }
         }
     }

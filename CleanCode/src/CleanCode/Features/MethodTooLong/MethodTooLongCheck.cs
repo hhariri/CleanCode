@@ -15,8 +15,8 @@ namespace CleanCode.Features.MethodTooLong
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var maxStatements = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MethodTooLongMaximum);
-            var maxDeclarations = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDeclarationsMaximum);
+            var maxStatements = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodStatements);
+            var maxDeclarations = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumDeclarationsInMethod);
 
             var statementCount = element.CountChildren<IStatement>();
             if (statementCount <= maxStatements)

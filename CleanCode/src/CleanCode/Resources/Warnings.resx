@@ -118,39 +118,33 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TooManyDependencies" xml:space="preserve">
-    <value>There are too many interfaces being passed in to this constructor. You might be violating the Single Responsibility Principle.</value>
+    <value>There are too many interfaces being passed in to this constructor. It might be violating the Single Responsibility Principle.</value>
   </data>
   <data name="TooManyMethodArguments" xml:space="preserve">
     <value>This method requires too many arguments.</value>
   </data>
   <data name="MethodTooLong" xml:space="preserve">
-    <value>This method is too long.</value>
+    <value>This method is too long, indicating that it has too much responsibility.</value>
   </data>
   <data name="ExcessiveDepth" xml:space="preserve">
     <value>Excessive depth of nested code blocks.</value>
   </data>
   <data name="ClassTooBig" xml:space="preserve">
-    <value>Class contains too many methods.</value>
+    <value>Class contains too many methods. This might be violating the Single Responsibility Principle.</value>
   </data>
   <data name="ChainedReferences" xml:space="preserve">
-    <value>Too many chained references.</value>
+    <value>Too many chained references. This might be violating the Law of Demeter.</value>
   </data>
   <data name="MethodNameNotMeaningful" xml:space="preserve">
     <value>The name of this method is too short to be meaningful.</value>
   </data>
-  <data name="FlagMethodArguments" xml:space="preserve">
-    <value>This method does more than one thing. Passing a boolean into a function is a truly terrible practice.</value>
-  </data>
   <data name="FlagArgument" xml:space="preserve">
-    <value>This argument is used as a flag in the method. It usually means that the method has more than one responsibility.</value>
+    <value>This argument is used as a flag in the method. This might be violating the Single Responsibility Principle.</value>
   </data>
   <data name="ExpressionTooComplex" xml:space="preserve">
     <value>This expression is too complex.</value>
   </data>
   <data name="HollowTypeName" xml:space="preserve">
-    <value>The usage of the suffix '{0}' is discouraged because it's too generic. Please, choose a meaningful name instead to clarify its intent and responsibilities.</value>
-  </data>
-  <data name="Warning_TooManyDeclarations" xml:space="preserve">
-    <value>Too many declarations. This method is likely doing more than one thing.</value>
+    <value>The usage of the suffix '{0}' is discouraged because it's too generic. Choose a meaningful name instead to clarify its intent and responsibilities.</value>
   </data>
 </root>

@@ -29,7 +29,7 @@ namespace CleanCode.Features.HollowNames
 
         private IEnumerable<string> GetSuffixes(IContextBoundSettingsStore dataSettingsStore)
         {
-            var suffixes = dataSettingsStore.GetValue((CleanCodeSettings s) => s.HollowTypeNameString);
+            var suffixes = dataSettingsStore.GetValue((CleanCodeSettings s) => s.MeaninglessClassNameSuffixes);
             return suffixes.Split(new[] { "," }, StringSplitOptions.RemoveEmptyEntries);
         }
 

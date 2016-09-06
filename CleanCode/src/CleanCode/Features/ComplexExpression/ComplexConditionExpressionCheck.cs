@@ -62,7 +62,7 @@ namespace CleanCode.Features.ComplexExpression
         private static void CheckExpression(IExpression expression, ElementProblemAnalyzerData data,
             IHighlightingConsumer consumer)
         {
-            var maxExpressions = data.SettingsStore.GetValue((CleanCodeSettings s) => s.ComplexExpressionMaximum);
+            var maxExpressions = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumExpressionsInCondition);
             var expressionCount = expression.GetChildrenRecursive<IOperatorExpression>().Count();
 
             if (expressionCount > maxExpressions)

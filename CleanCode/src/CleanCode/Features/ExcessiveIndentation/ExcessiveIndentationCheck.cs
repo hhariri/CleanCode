@@ -16,7 +16,7 @@ namespace CleanCode.Features.ExcessiveIndentation
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var maxIndentation = data.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum);
+            var maxIndentation = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumIndentationDepth);
             var depth = element.GetChildrenDepth();
 
             if (depth > maxIndentation)

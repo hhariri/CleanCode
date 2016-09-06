@@ -17,7 +17,7 @@ namespace CleanCode.Features.TooManyDependencies
     {
         protected override void Run(IConstructorDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var maxDependencies = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyDependenciesMaximum);
+            var maxDependencies = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumConstructorDependencies);
 
             var dependencies = element.ParameterDeclarations.Select(
                 declaration => declaration.DeclaredElement != null &&

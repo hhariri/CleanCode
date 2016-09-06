@@ -16,7 +16,7 @@ namespace CleanCode.Features.TooManyMethodArguments
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            var maxParameters = data.SettingsStore.GetValue((CleanCodeSettings s) => s.TooManyMethodArgumentsMaximum);
+            var maxParameters = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodParameters);
             var parameterDeclarations = element.ParameterDeclarations;
 
             if (parameterDeclarations.Count > maxParameters)
