@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.FlagArguments;
 using CleanCode.Features.HollowNames;
 using CleanCode.Features.MethodNameNotMeaningful;
 using CleanCode.Features.MethodTooLong;
@@ -21,7 +20,6 @@ namespace CleanCode
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly MethodNameNotMeaningfulCheck methodNamesNotMeaningfulCheck;
-        private readonly FlagArgumentsCheck flagArgumentsCheck;
         private readonly HollowNamesCheck hollowNamesCheck;
         private readonly TooManyDeclarationsCheck tooManyDeclarationsCheck;
 
@@ -35,7 +33,6 @@ namespace CleanCode
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNameNotMeaningfulCheck(settingsStore);
-            flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
             hollowNamesCheck = new HollowNamesCheck(settingsStore);
             tooManyDeclarationsCheck = new TooManyDeclarationsCheck(settingsStore);
         }
@@ -50,7 +47,6 @@ namespace CleanCode
             methodTooLongCheck.ExecuteIfEnabled(methodDeclaration, context);
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
-            flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);         
             tooManyDeclarationsCheck.ExecuteIfEnabled(methodDeclaration, context);
         }
 

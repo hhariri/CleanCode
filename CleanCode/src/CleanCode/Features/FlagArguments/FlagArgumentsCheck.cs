@@ -1,42 +1,33 @@
 using System.Linq;
-using CleanCode.Resources;
-using CleanCode.Settings;
-using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Psi;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using System.Collections.Generic;
 using System.Diagnostics;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.Util;
 
 namespace CleanCode.Features.FlagArguments
 {
-    public class FlagArgumentsCheck : Check<IMethodDeclaration>
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration),
+        HighlightingTypes = new []
+        {
+            typeof(FlagArgumentsHighlighting)
+        })]
+    public class FlagArgumentsCheck : ElementProblemAnalyzer<IMethodDeclaration>
     {
-        public FlagArgumentsCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
-
-        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            var parameterDeclarations = constructorDeclaration.ParameterDeclarations;
+            var parameterDeclarations = element.ParameterDeclarations;
 
             foreach (var parameterDeclaration in parameterDeclarations)
             {
-                if (IsFlagArgument(parameterDeclaration, constructorDeclaration.Body))
+                if (IsFlagArgument(parameterDeclaration, element.Body))
                 {
                     AddHighlighting(consumer, parameterDeclaration);
                 }
             }
-        }
-
-        private static void AddHighlighting(IHighlightingConsumer consumer, ICSharpParameterDeclaration parameterDeclaration)
-        {
-            var documentRange = parameterDeclaration.GetDocumentRange();
-            var highlighting = new Highlighting(Warnings.FlagArgument, documentRange);
-            consumer.AddHighlighting(highlighting);
         }
 
         private static bool IsFlagArgument(ITypeOwnerDeclaration typeOwnerDeclaration, ITreeNode node)
@@ -88,9 +79,11 @@ namespace CleanCode.Features.FlagArguments
             return declaredElement.ShortName == toFind.ShortName;
         }
 
-        protected override bool IsEnabled
+        private static void AddHighlighting(IHighlightingConsumer consumer, ICSharpParameterDeclaration parameterDeclaration)
         {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.FlagArgumentsEnabled); }
+            var documentRange = parameterDeclaration.GetDocumentRange();
+            var highlighting = new FlagArgumentsHighlighting(documentRange);
+            consumer.AddHighlighting(highlighting);
         }
     }
 }
