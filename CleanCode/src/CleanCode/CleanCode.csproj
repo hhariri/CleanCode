@@ -170,7 +170,6 @@
     <Compile Include="CleanCodeHighlightingGroupIds.cs" />
     <Compile Include="Features\ChainedReferences\MaximumChainedReferencesHighlighting.cs" />
     <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
-    <Compile Include="Features\Check.cs" />
     <Compile Include="Features\ClassTooBig\ClassTooBigHighlighting.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
     <Compile Include="Features\ComplexExpression\ComplexConditionExpressionHighlighting.cs" />
@@ -187,7 +186,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
-    <Compile Include="Features\MonoValueCheck.cs" />
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
