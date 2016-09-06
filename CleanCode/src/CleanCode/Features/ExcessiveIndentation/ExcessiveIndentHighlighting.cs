@@ -1,24 +1,24 @@
+using CleanCode;
 using CleanCode.Features.ExcessiveIndentation;
+using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
-[assembly:RegisterConfigurableSeverity(Highlighting.SeverityID, null,
-    HighlightingGroupIds.CodeSmell, "Excessive Depth", "The nesting in this method is excessive.",
+[assembly:RegisterConfigurableSeverity(ExcessiveIndentHighlighting.SeverityID, null,
+    CleanCodeHighlightingGroupIds.CleanCode, "Excessive indentation", "The nesting in this method is excessive.",
     Severity.WARNING, false)]
 
 namespace CleanCode.Features.ExcessiveIndentation
 {
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
-    public class Highlighting : IHighlighting
+    public class ExcessiveIndentHighlighting : IHighlighting
     {
         internal const string SeverityID = "ExcessiveIndentation";
-        private readonly string tooltip;
         private readonly DocumentRange documentRange;
 
-        public Highlighting(string toolTip, DocumentRange documentRange)
+        public ExcessiveIndentHighlighting(DocumentRange documentRange)
         {
-            tooltip = toolTip;
             this.documentRange = documentRange;
         }
 
@@ -29,12 +29,12 @@ namespace CleanCode.Features.ExcessiveIndentation
 
         public string ToolTip
         {
-            get { return tooltip; }
+            get { return Warnings.ExcessiveDepth; }
         }
 
         public string ErrorStripeToolTip
         {
-            get { return tooltip; }
+            get { return ToolTip; }
         }
 
         public bool IsValid()

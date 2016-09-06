@@ -1,40 +1,30 @@
-using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
+using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ExcessiveIndentation
 {
-    public class ExcessiveIndentationCheck : MonoValueCheck<IMethodDeclaration, int>
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration),
+        HighlightingTypes = new []
+        {
+            typeof(ExcessiveIndentHighlighting)
+        })]
+    public class ExcessiveIndentationCheck : ElementProblemAnalyzer<IMethodDeclaration>
     {
-        public ExcessiveIndentationCheck(IContextBoundSettingsStore settingsStore)
-            : base(settingsStore)
+        protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-        }
-
-        protected override void ExecuteCore(IMethodDeclaration constructorDeclaration, IHighlightingConsumer consumer)
-        {
-            var maxIndentation = Value;
-            var depth = constructorDeclaration.GetChildrenDepth();
+            var maxIndentation = data.SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum);
+            var depth = element.GetChildrenDepth();
 
             if (depth > maxIndentation)
             {
-                var documentRange = constructorDeclaration.GetNameDocumentRange();
-                var highlighting = new Highlighting(Warnings.ExcessiveDepth, documentRange);
+                var documentRange = element.GetNameDocumentRange();
+                var highlighting = new ExcessiveIndentHighlighting(documentRange);
                 consumer.AddHighlighting(highlighting);
             }
-        }
-
-        protected override int Value
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationMaximum); }
-        }
-
-        protected override bool IsEnabled
-        {
-            get { return SettingsStore.GetValue((CleanCodeSettings s) => s.ExcessiveIndentationEnabled); }
         }
     }
 }

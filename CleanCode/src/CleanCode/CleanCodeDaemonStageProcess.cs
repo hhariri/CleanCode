@@ -1,5 +1,4 @@
 using System;
-using CleanCode.Features.ExcessiveIndentation;
 using CleanCode.Features.FlagArguments;
 using CleanCode.Features.HollowNames;
 using CleanCode.Features.MethodNameNotMeaningful;
@@ -20,7 +19,6 @@ namespace CleanCode
         private readonly IContextBoundSettingsStore settingsStore;
         private readonly MethodTooLongCheck methodTooLongCheck;
         private readonly TooManyMethodArgumentsCheck tooManyArgumentsCheck;
-        private readonly ExcessiveIndentationCheck excessiveIndentationCheck;
         private readonly TooManyDependenciesCheck tooManyDependenciesCheck;
         private readonly MethodNameNotMeaningfulCheck methodNamesNotMeaningfulCheck;
         private readonly FlagArgumentsCheck flagArgumentsCheck;
@@ -35,7 +33,6 @@ namespace CleanCode
             // TODO: This is starting to feel like a beach of Benidorm in July. Refactoring needed.
             methodTooLongCheck = new MethodTooLongCheck(settingsStore);
             tooManyArgumentsCheck = new TooManyMethodArgumentsCheck(settingsStore);
-            excessiveIndentationCheck = new ExcessiveIndentationCheck(settingsStore);
             tooManyDependenciesCheck = new TooManyDependenciesCheck(settingsStore);
             methodNamesNotMeaningfulCheck = new MethodNameNotMeaningfulCheck(settingsStore);
             flagArgumentsCheck = new FlagArgumentsCheck(settingsStore);
@@ -52,7 +49,6 @@ namespace CleanCode
         {
             methodTooLongCheck.ExecuteIfEnabled(methodDeclaration, context);
             tooManyArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);
-            excessiveIndentationCheck.ExecuteIfEnabled(methodDeclaration, context);
             methodNamesNotMeaningfulCheck.ExecuteIfEnabled(methodDeclaration, context);
             flagArgumentsCheck.ExecuteIfEnabled(methodDeclaration, context);         
             tooManyDeclarationsCheck.ExecuteIfEnabled(methodDeclaration, context);
