@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CleanCode.CleanCode</id>
-    <version>5.0.1</version>
+    <version>5.0.2</version>
     <title>Clean Code</title>
     <authors>Hadi Hariri, Matt Ellis, SuperJMN</authors>
     <owners>Hadi Hariri, Matt Ellis</owners>
@@ -12,6 +12,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
     <releaseNotes>
+&#8226; Method parameter and type parameter declarations mistakenly used for "method too long" check (#12)
+
+From 5.0.1:
 &#8226; Updated to ReSharper 2016.2
 &#8226; Fix minor installer issue
 

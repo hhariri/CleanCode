@@ -21,7 +21,10 @@ namespace CleanCode.Features.MethodTooLong
             var statementCount = element.CountChildren<IStatement>();
             if (statementCount <= maxStatements)
             {
-                var declarationCount = element.CountChildren<IDeclaration>();
+                // Only look in the method body for declarations, otherwise we see
+                // parameters + type parameters. We can ignore arrow expressions, as
+                // they must be a single expression and won't have declarations
+                var declarationCount = element.Body?.CountChildren<IDeclaration>();
                 if (declarationCount <= maxDeclarations)
                     return;
             }
