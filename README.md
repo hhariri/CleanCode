@@ -27,7 +27,7 @@ Please use the previous issue tracker for logging bugs, feature requests, etc.
 
 ## Installing
 
-Copy the DLL for each Plugin to the ReSharper\bin\Plugins folder
+Install from ReSharper &rarr; Extension Manager.
 
 ## License
 
