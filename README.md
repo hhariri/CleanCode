@@ -21,9 +21,7 @@ The limits used by each analysis are configurable in the options page.
 
 ### Upcoming features
 
-All features are [logged here](http://youtrack.codebetter.com/issues/cc)
-
-Please use the previous issue tracker for logging bugs, feature requests, etc.
+Please log feature requests and bugs in [Issues](https://github.com/hhariri/CleanCode/issues).
 
 ## Installing
 
