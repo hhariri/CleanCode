@@ -4,7 +4,7 @@
 
 An experiment in trying to automate some of concepts described in [Uncle Bob's books on Clean Code](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882). 
 
-Each check is intended to highlight a symptom that your code is becoming too complex, is not "clean" enough. Increased complexity can make your code harder to read, understand and maintain. The plugin currently checks:
+This is a ReSharper extension to analyse your C# code to highlight a symptom that your code is becoming too complex, is not "clean" enough. Increased complexity can make your code harder to read, understand and maintain. The plugin currently checks:
 
 * **Too many dependencies** - warns when a constructor has too many interfaces passed in.
 * **Excessive indentation** - warns if a class contains members with too much indentation.
@@ -21,7 +21,7 @@ The limits used by each analysis are configurable in the options page.
 
 ### Upcoming features
 
-Please log feature requests and bugs in [Issues](https://github.com/hhariri/CleanCode/issues).
+Please log feature requests and bugs in [Issues](https://github.com/hhariri/CleanCode/issues). Note that this version only supports C#.
 
 ## Installing
 
