@@ -184,6 +184,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheck.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheckVb.cs" />
     <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheck.cs" />
     <Compile Include="Features\TooManyMethodArguments\TooManyArgumentsHighlighting.cs">
       <SubType>Code</SubType>
