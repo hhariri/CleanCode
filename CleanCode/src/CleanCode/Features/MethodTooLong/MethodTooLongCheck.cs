@@ -24,7 +24,7 @@ namespace CleanCode.Features.MethodTooLong
                 // Only look in the method body for declarations, otherwise we see
                 // parameters + type parameters. We can ignore arrow expressions, as
                 // they must be a single expression and won't have declarations
-                var declarationCount = element.Body?.CountChildren<IDeclaration>();
+                var declarationCount = element.Body?.CountChildren<IDeclaration>() ?? 0;
                 if (declarationCount <= maxDeclarations)
                     return;
             }
