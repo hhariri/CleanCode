@@ -172,6 +172,7 @@
     <Compile Include="Features\ExtensionMethods.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsHighlighting.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
+    <Compile Include="Features\HollowNames\HollowNamesCheckVb.cs" />
     <Compile Include="Features\HollowNames\HollowTypeNameHighlighting.cs" />
     <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulHighlighting.cs" />
