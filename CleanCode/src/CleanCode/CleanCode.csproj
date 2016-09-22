@@ -164,6 +164,7 @@
     <Compile Include="CleanCodeHighlightingGroupIds.cs" />
     <Compile Include="Features\ChainedReferences\MaximumChainedReferencesHighlighting.cs" />
     <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
+    <Compile Include="Features\ClassTooBig\ClassTooBigCheckVb.cs" />
     <Compile Include="Features\ClassTooBig\ClassTooBigHighlighting.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
     <Compile Include="Features\ComplexExpression\ComplexConditionExpressionHighlighting.cs" />
