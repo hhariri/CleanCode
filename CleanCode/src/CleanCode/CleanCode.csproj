@@ -178,6 +178,7 @@
     <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulHighlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
+    <Compile Include="Features\MethodTooLong\MethodTooLongCheckVb.cs" />
     <Compile Include="Features\MethodTooLong\MethodTooLongHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
