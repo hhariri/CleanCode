@@ -182,6 +182,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheckVb.cs" />
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>

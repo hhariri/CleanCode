@@ -4,6 +4,7 @@ using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+using JetBrains.ReSharper.Psi.VB;
 
 [assembly: RegisterConfigurableSeverity(TooManyDependenciesHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Too many dependencies", "Too many dependencies passed into constructor.",
@@ -11,7 +12,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.Features.TooManyDependencies
 {
-    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name + "," + VBLanguage.Name)]
     public class TooManyDependenciesHighlighting : IHighlighting
     {
         internal const string SeverityID = "TooManyDependencies";
