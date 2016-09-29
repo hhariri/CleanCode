@@ -176,6 +176,7 @@
     <Compile Include="Features\HollowNames\HollowNamesCheckVb.cs" />
     <Compile Include="Features\HollowNames\HollowTypeNameHighlighting.cs" />
     <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
+    <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheckVb.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulHighlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
     <Compile Include="Features\MethodTooLong\MethodTooLongCheckVb.cs" />
