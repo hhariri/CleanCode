@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(MethodTooLongHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Method too long", "The method is bigger than it should be.",
-    Severity.SUGGESTION, false)]
+    Severity.SUGGESTION)]
 
 namespace CleanCode.Features.MethodTooLong
 {

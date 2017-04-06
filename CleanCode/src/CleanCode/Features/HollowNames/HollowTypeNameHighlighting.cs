@@ -6,7 +6,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(HollowTypeNameHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Hollow type name", "This type has a name that doesn't express its intent.",
-    Severity.SUGGESTION, false)]
+    Severity.SUGGESTION)]
 
 namespace CleanCode.Features.HollowNames
 {

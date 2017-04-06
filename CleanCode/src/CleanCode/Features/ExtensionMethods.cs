@@ -132,9 +132,6 @@ namespace CleanCode.Features
         {
             var resolveResultWithInfo = GetResolveResult(reference);
 
-            if (reference.CurrentResolveResult == null)
-                reference.Resolve();
-
             var declaredElement = resolveResultWithInfo.DeclaredElement;
             var parametersOwner = declaredElement as IParametersOwner;
 
@@ -155,11 +152,6 @@ namespace CleanCode.Features
 
         public static ResolveResultWithInfo GetResolveResult(this IReference reference)
         {
-            if (reference.CurrentResolveResult != null)
-            {
-                return reference.CurrentResolveResult;
-            }
-
             return reference.Resolve();
         }
     }

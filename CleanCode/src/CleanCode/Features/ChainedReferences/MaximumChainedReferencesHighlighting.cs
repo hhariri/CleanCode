@@ -6,7 +6,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(MaximumChainedReferencesHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Too many chained references", "Too many chained references can break the Law of Demeter.",
-    Severity.WARNING, false)]
+    Severity.WARNING)]
 
 namespace CleanCode.Features.ChainedReferences
 {

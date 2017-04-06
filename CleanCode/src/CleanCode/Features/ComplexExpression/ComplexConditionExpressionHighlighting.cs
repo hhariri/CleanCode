@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly:RegisterConfigurableSeverity(ComplexConditionExpressionHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Condition expression too complex", "The expression in the condition is too complex.",
-    Severity.WARNING, false)]
+    Severity.WARNING)]
 
 namespace CleanCode.Features.ComplexExpression
 {
