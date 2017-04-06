@@ -3,6 +3,7 @@ using CleanCode.Features.HollowNames;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+using JetBrains.ReSharper.Psi.VB;
 
 [assembly: RegisterConfigurableSeverity(HollowTypeNameHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Hollow type name", "This type has a name that doesn't express its intent.",
@@ -10,7 +11,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.Features.HollowNames
 {
-    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name + "," + VBLanguage.Name)]
     public class HollowTypeNameHighlighting : IHighlighting
     {
         internal const string SeverityID = "HollowTypeName";

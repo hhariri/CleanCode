@@ -4,6 +4,7 @@ using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+using JetBrains.ReSharper.Psi.VB;
 
 [assembly: RegisterConfigurableSeverity(MethodTooLongHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Method too long", "The method is bigger than it should be.",
@@ -11,7 +12,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.Features.MethodTooLong
 {
-    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name + "," + VBLanguage.Name)]
     public class MethodTooLongHighlighting : IHighlighting
     {
         internal const string SeverityID = "MethodTooLong";
