@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly:RegisterConfigurableSeverity(ExcessiveIndentHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Excessive indentation", "The nesting in this method is excessive.",
-    Severity.WARNING, false)]
+    Severity.WARNING)]
 
 namespace CleanCode.Features.ExcessiveIndentation
 {

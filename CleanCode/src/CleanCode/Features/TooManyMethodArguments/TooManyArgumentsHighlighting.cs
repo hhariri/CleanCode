@@ -6,7 +6,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(TooManyArgumentsHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Too many arguments", "Too many arguments passed to a method.",
-    Severity.WARNING, false)]
+    Severity.WARNING)]
 
 namespace CleanCode.Features.TooManyMethodArguments
 {

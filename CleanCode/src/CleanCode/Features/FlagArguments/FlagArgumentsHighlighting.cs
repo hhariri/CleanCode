@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(FlagArgumentsHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Flag argument", "An argument that is used as a flag.",
-    Severity.WARNING, false)]
+    Severity.WARNING)]
 
 namespace CleanCode.Features.FlagArguments
 {

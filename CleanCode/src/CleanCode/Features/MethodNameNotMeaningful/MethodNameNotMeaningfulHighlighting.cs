@@ -8,7 +8,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 [assembly: RegisterConfigurableSeverity(MethodNameNotMeaningfulHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Method name not meaningful",
     "This method name is too short to be meaningful.",
-    Severity.WARNING, false)]
+    Severity.WARNING)]
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {

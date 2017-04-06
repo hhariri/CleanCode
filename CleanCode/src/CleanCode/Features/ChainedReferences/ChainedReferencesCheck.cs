@@ -18,7 +18,7 @@ namespace CleanCode.Features.ChainedReferences
     {
         protected override void Run(ICSharpStatement element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
-            if (!element.IsEmbeddedStatement)
+            if (!element.CanBeEmbedded)
             {
                 var threshold = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumChainedReferences);
                 HighlightMethodChainsThatAreTooLong(element, consumer, threshold);

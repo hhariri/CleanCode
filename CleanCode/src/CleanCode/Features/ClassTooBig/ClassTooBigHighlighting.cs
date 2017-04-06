@@ -6,7 +6,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 [assembly: RegisterConfigurableSeverity(ClassTooBigHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Class too big", "This class contains too many methods",
-    Severity.SUGGESTION, false)]
+    Severity.SUGGESTION)]
 
 namespace CleanCode.Features.ClassTooBig
 { 
