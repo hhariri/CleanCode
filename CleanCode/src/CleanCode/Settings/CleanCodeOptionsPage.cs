@@ -1,9 +1,9 @@
 ﻿using System.Drawing;
 using CleanCode.Resources.Icons;
+using JetBrains.Application.UI.Options;
+using JetBrains.Application.UI.Options.OptionsDialog;
 using JetBrains.DataFlow;
 using JetBrains.ReSharper.Feature.Services.Daemon.OptionPages;
-using JetBrains.UI.Options;
-using JetBrains.UI.Options.OptionsDialog2.SimpleOptions;
 using JetBrains.UI.RichText;
 
 namespace CleanCode.Settings

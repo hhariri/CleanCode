@@ -1,6 +1,7 @@
 #################
 ## Visual Studio
 #################
+.vs/
 
 # User-specific files
 *.suo
