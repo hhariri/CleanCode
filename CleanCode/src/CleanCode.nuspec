@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>CleanCode.CleanCode</id>
-    <version>5.1.0</version>
+    <version>5.2.0</version>
     <title>Clean Code</title>
     <authors>Hadi Hariri, Matt Ellis, SuperJMN</authors>
     <owners>Hadi Hariri, Matt Ellis</owners>
@@ -12,6 +12,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
     <releaseNotes>
+&#8226; Updated to ReSharper 2017.2
+
+From 5.1.0:
 &#8226; Updated to ReSharper 2017.1
 
 From 5.0.3:
@@ -34,9 +37,9 @@ From 4.0.0:
 &#8226; Suggestion highlight if class has too many methods
 &#8226; Suggestion highlight if method has too many statements
 </releaseNotes>
-    <copyright>Copyright 2014-2016 Hadi Hariri and Contributors</copyright>
+    <copyright>Copyright 2014-2017 Hadi Hariri and Contributors</copyright>
     <dependencies>
-      <dependency id="Wave" version="[8.0]" />
+      <dependency id="Wave" version="[9.0]" />
     </dependencies>
     <tags>clean code</tags>
   </metadata>
