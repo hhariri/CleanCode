@@ -3,14 +3,15 @@ using CleanCode.Features.ClassTooBig;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+using JetBrains.ReSharper.Psi.VB;
 
 [assembly: RegisterConfigurableSeverity(ClassTooBigHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Class too big", "This class contains too many methods",
     Severity.SUGGESTION)]
 
 namespace CleanCode.Features.ClassTooBig
-{ 
-    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+{
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name + "," + VBLanguage.Name)]
     public class ClassTooBigHighlighting : IHighlighting
     {
         internal const string SeverityID = "ClassTooBig";

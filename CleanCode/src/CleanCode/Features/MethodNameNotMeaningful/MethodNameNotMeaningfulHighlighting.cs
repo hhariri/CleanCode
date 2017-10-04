@@ -4,6 +4,7 @@ using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
+using JetBrains.ReSharper.Psi.VB;
 
 [assembly: RegisterConfigurableSeverity(MethodNameNotMeaningfulHighlighting.SeverityID, null, 
     CleanCodeHighlightingGroupIds.CleanCode, "Method name not meaningful",
@@ -12,7 +13,7 @@ using JetBrains.ReSharper.Psi.CSharp;
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {
-    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name)]
+    [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name + "," + VBLanguage.Name)]
     public class MethodNameNotMeaningfulHighlighting : IHighlighting
     {
         internal const string SeverityID = "MethodNameNotMeaningful";

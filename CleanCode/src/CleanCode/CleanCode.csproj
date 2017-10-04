@@ -296,6 +296,7 @@
     <Compile Include="CleanCodeHighlightingGroupIds.cs" />
     <Compile Include="Features\ChainedReferences\MaximumChainedReferencesHighlighting.cs" />
     <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
+    <Compile Include="Features\ClassTooBig\ClassTooBigCheckVb.cs" />
     <Compile Include="Features\ClassTooBig\ClassTooBigHighlighting.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
     <Compile Include="Features\ComplexExpression\ComplexConditionExpressionHighlighting.cs" />
@@ -304,18 +305,23 @@
     <Compile Include="Features\ExtensionMethods.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsHighlighting.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
+    <Compile Include="Features\HollowNames\HollowNamesCheckVb.cs" />
     <Compile Include="Features\HollowNames\HollowTypeNameHighlighting.cs" />
     <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
+    <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheckVb.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulHighlighting.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
+    <Compile Include="Features\MethodTooLong\MethodTooLongCheckVb.cs" />
     <Compile Include="Features\MethodTooLong\MethodTooLongHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheckVb.cs" />
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheck.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheckVb.cs" />
     <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheck.cs" />
     <Compile Include="Features\TooManyMethodArguments\TooManyArgumentsHighlighting.cs">
       <SubType>Code</SubType>
