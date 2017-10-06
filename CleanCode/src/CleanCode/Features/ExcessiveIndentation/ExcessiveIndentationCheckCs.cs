@@ -8,18 +8,17 @@ using JetBrains.ReSharper.Psi.Tree;
 namespace CleanCode.Features.ExcessiveIndentation
 {
     [ElementProblemAnalyzer(typeof(IMethodDeclaration),
-        HighlightingTypes = new []
+        HighlightingTypes = new[]
         {
             typeof(ExcessiveIndentHighlighting)
         })]
-    public class ExcessiveIndentationCheck : ElementProblemAnalyzer<IMethodDeclaration>
+    public class ExcessiveIndentationCheckCs : ElementProblemAnalyzer<IMethodDeclaration>
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
             var maxIndentation = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumIndentationDepth);
-            var depth = element.GetChildrenDepth();
 
-            if (depth > maxIndentation)
+            if (element.GetChildrenDepth() > maxIndentation)
             {
                 var documentRange = element.GetNameDocumentRange();
                 var highlighting = new ExcessiveIndentHighlighting(documentRange);

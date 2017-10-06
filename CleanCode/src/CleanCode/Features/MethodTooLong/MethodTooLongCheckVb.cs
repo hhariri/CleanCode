@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodTooLong
 {
-    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new []
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new[]
     {
         typeof(MethodTooLongHighlighting)
     })]

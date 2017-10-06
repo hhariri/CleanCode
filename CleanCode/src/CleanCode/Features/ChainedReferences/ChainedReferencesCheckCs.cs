@@ -10,11 +10,11 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ChainedReferences
 {
-    [ElementProblemAnalyzer(typeof(ICSharpStatement), HighlightingTypes = new []
+    [ElementProblemAnalyzer(typeof(ICSharpStatement), HighlightingTypes = new[]
     {
         typeof(MaximumChainedReferencesHighlighting)
     })]
-    public class ChainedReferencesCheck : ElementProblemAnalyzer<ICSharpStatement>
+    public class ChainedReferencesCheckCs : ElementProblemAnalyzer<ICSharpStatement>
     {
         protected override void Run(ICSharpStatement element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
@@ -31,8 +31,7 @@ namespace CleanCode.Features.ChainedReferences
 
             foreach (var treeNode in children)
             {
-                var referenceExpression = treeNode as IReferenceExpression;
-                if (referenceExpression != null)
+                if (treeNode is IReferenceExpression referenceExpression)
                 {
                     HighlightReferenceExpressionIfNeeded(referenceExpression, consumer, threshold);
                 }
@@ -52,7 +51,7 @@ namespace CleanCode.Features.ChainedReferences
 
             while (nextReferenceExpression != null)
             {
-                var childReturnType = ExtensionMethods.TryGetClosedReturnTypeFrom(nextReferenceExpression);
+                var childReturnType = ExtensionMethodsCsharp.TryGetClosedReturnTypeFrom(nextReferenceExpression);
 
                 if (childReturnType != null)
                 {
@@ -60,7 +59,7 @@ namespace CleanCode.Features.ChainedReferences
                     chainLength++;
                 }
 
-                nextReferenceExpression = ExtensionMethods.TryGetFirstReferenceExpression(nextReferenceExpression);
+                nextReferenceExpression = ExtensionMethodsCsharp.TryGetFirstReferenceExpression(nextReferenceExpression);
             }
 
             var isFluentChain = types.Count == 1;

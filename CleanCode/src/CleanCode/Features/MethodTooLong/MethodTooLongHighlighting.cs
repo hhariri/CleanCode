@@ -16,16 +16,19 @@ namespace CleanCode.Features.MethodTooLong
     public class MethodTooLongHighlighting : IHighlighting
     {
         internal const string SeverityID = "MethodTooLong";
-        private readonly DocumentRange documentRange;
+        private readonly DocumentRange _documentRange;
 
         public MethodTooLongHighlighting(DocumentRange documentRange)
         {
-            this.documentRange = documentRange;
+            _documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange() => documentRange;
+        public DocumentRange CalculateRange() => _documentRange;
+
         public string ToolTip => Warnings.MethodTooLong;
+
         public string ErrorStripeToolTip => ToolTip;
+
         public bool IsValid() => true;
     }
 }

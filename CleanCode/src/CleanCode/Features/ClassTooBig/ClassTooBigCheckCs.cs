@@ -8,11 +8,11 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ClassTooBig
 {
-    [ElementProblemAnalyzer(typeof(IClassDeclaration), HighlightingTypes = new []
+    [ElementProblemAnalyzer(typeof(IClassDeclaration), HighlightingTypes = new[]
     {
         typeof(ClassTooBigHighlighting)
     })]
-    public class ClassTooBigCheck : ElementProblemAnalyzer<IClassDeclaration>
+    public class ClassTooBigCheckCs : ElementProblemAnalyzer<IClassDeclaration>
     {
         protected override void Run(IClassDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {

@@ -11,11 +11,11 @@ using JetBrains.ReSharper.Psi.Util;
 namespace CleanCode.Features.FlagArguments
 {
     [ElementProblemAnalyzer(typeof(IMethodDeclaration),
-        HighlightingTypes = new []
+        HighlightingTypes = new[]
         {
             typeof(FlagArgumentsHighlighting)
         })]
-    public class FlagArgumentsCheck : ElementProblemAnalyzer<IMethodDeclaration>
+    public class FlagArgumentsCheckCs : ElementProblemAnalyzer<IMethodDeclaration>
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
@@ -32,13 +32,7 @@ namespace CleanCode.Features.FlagArguments
 
         private static bool IsFlagArgument(ITypeOwnerDeclaration typeOwnerDeclaration, ITreeNode node)
         {
-            if (IsOfTypeThatCanBeUsedAsFlag(typeOwnerDeclaration))
-            {
-                var references = GetReferencesTo(typeOwnerDeclaration.DeclaredElement, node);
-                return references.Any();    
-            }
-
-            return false;
+            return IsOfTypeThatCanBeUsedAsFlag(typeOwnerDeclaration) && GetReferencesTo(typeOwnerDeclaration.DeclaredElement, node).Any();
         }
 
         private static bool IsOfTypeThatCanBeUsedAsFlag(ITypeOwnerDeclaration arg)
@@ -50,11 +44,8 @@ namespace CleanCode.Features.FlagArguments
         private static IEnumerable<IReferenceExpression> GetReferencesTo(IDeclaredElement declaredElement, ITreeNode body)
         {
             var ifStatements = body.GetChildrenRecursive<IIfStatement>();
-
             var allConditions = ifStatements.Select(statement => statement.Condition);
-
-            var allReferencesInConditions =
-                allConditions.SelectMany(expression => expression.GetFlattenedHierarchyOfType<IReferenceExpression>());
+            var allReferencesInConditions = allConditions.SelectMany(expression => expression.GetFlattenedHierarchyOfType<IReferenceExpression>());
 
             return GetReferencesToArgument(allReferencesInConditions, declaredElement);
         }

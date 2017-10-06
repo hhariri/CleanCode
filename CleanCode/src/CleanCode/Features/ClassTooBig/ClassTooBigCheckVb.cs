@@ -8,7 +8,7 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ClassTooBig
 {
-    [ElementProblemAnalyzer(typeof(IClassDeclaration), HighlightingTypes = new []
+    [ElementProblemAnalyzer(typeof(IClassDeclaration), HighlightingTypes = new[]
     {
         typeof(ClassTooBigHighlighting)
     })]

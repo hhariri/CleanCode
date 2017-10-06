@@ -10,7 +10,7 @@ var configuration = Argument("configuration", "Release");
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var buildDir = Directory("./src/CleanCode/bin") + Directory(configuration);
+var buildDir = Directory("./CleanCode/src/CleanCode/bin") + Directory(configuration);
 
 //////////////////////////////////////////////////////////////////////
 // TASKS

@@ -9,7 +9,7 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features
 {
-    public static class ExtensionMethods
+    public static class ExtensionMethodsCsharp
     {
         public static int CountChildren<T>(this ITreeNode node) where T : ITreeNode
         {
@@ -46,12 +46,8 @@ namespace CleanCode.Features
         public static IEnumerable<T> GetFlattenedHierarchyOfType<T>(this ITreeNode root) where T : class, ITreeNode
         {
             var list = new List<T>();
-
-            var rootAsType = root as T;
-            if (rootAsType != null)
-            {
+            if (root is T rootAsType)
                 list.Add(rootAsType);
-            }
 
             list.AddRange(root.GetChildrenRecursive<T>());
 
@@ -78,21 +74,16 @@ namespace CleanCode.Features
 
         private static bool IsNodeThatIncreasesDepth(ITreeNode node)
         {
-            if (node is IIfStatement)
+            switch (node)
             {
-                return true;
-            }
-            if (node is IForeachStatement)
-            {
-                return true;
-            }
-            if (node is IForStatement)
-            {
-                return true;
-            }
-            if (node is ISwitchStatement)
-            {
-                return true;
+                case IIfStatement _:
+                    return true;
+                case IForeachStatement _:
+                    return true;
+                case IForStatement _:
+                    return true;
+                case ISwitchStatement _:
+                    return true;
             }
 
             return false;
@@ -100,20 +91,14 @@ namespace CleanCode.Features
 
         public static IType TryGetClosedReturnTypeFrom(ITreeNode treeNode)
         {
-            IType type = null;
-            var reference = treeNode as IReferenceExpression;
-            if (reference != null)
+            switch (treeNode)
             {
-                type = TryGetClosedReturnTypeFromReference(reference.Reference);
+                case IReferenceExpression reference:
+                    return TryGetClosedReturnTypeFromReference(reference.Reference);
+                case IInvocationExpression invocationExpression:
+                    return TryGetClosedReturnTypeFromReference(invocationExpression.Reference);
+                default: return null;
             }
-
-            var invocationExpression = treeNode as IInvocationExpression;
-            if (invocationExpression != null)
-            {
-                type = TryGetClosedReturnTypeFromReference(invocationExpression.Reference);
-            }
-
-            return type;
         }
 
         public static IReferenceExpression TryGetFirstReferenceExpression(ITreeNode currentNode)
@@ -131,11 +116,9 @@ namespace CleanCode.Features
         private static IType TryGetClosedReturnTypeFromReference(IReference reference)
         {
             var resolveResultWithInfo = GetResolveResult(reference);
-
             var declaredElement = resolveResultWithInfo.DeclaredElement;
-            var parametersOwner = declaredElement as IParametersOwner;
 
-            if (parametersOwner != null)
+            if (declaredElement is IParametersOwner parametersOwner)
             {
                 var returnType = parametersOwner.ReturnType;
                 return returnType.IsOpenType ? GetClosedType(resolveResultWithInfo, returnType) : returnType;
@@ -146,8 +129,7 @@ namespace CleanCode.Features
 
         private static IType GetClosedType(ResolveResultWithInfo resolveResultWithInfo, IType returnType)
         {
-            var closedType = resolveResultWithInfo.Result.Substitution.Apply(returnType);
-            return closedType;
+            return resolveResultWithInfo.Result.Substitution.Apply(returnType);
         }
 
         public static ResolveResultWithInfo GetResolveResult(this IReference reference)

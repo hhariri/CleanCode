@@ -16,16 +16,19 @@ namespace CleanCode.Features.TooManyDependencies
     public class TooManyDependenciesHighlighting : IHighlighting
     {
         internal const string SeverityID = "TooManyDependencies";
-        private readonly DocumentRange documentRange;
+        private readonly DocumentRange _documentRange;
 
         public TooManyDependenciesHighlighting(DocumentRange documentRange)
         {
-            this.documentRange = documentRange;
+            _documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange() => documentRange;
+        public DocumentRange CalculateRange() => _documentRange;
+
         public string ToolTip => Warnings.TooManyDependencies;
+
         public string ErrorStripeToolTip => ToolTip;
+
         public bool IsValid() => true;
     }
 }

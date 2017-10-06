@@ -15,17 +15,20 @@ namespace CleanCode.Features.HollowNames
     public class HollowTypeNameHighlighting : IHighlighting
     {
         internal const string SeverityID = "HollowTypeName";
-        private readonly DocumentRange documentRange;
+        private readonly DocumentRange _documentRange;
 
         public HollowTypeNameHighlighting(string toolTip, DocumentRange documentRange)
         {
             ToolTip = toolTip;
-            this.documentRange = documentRange;
+            _documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange() => documentRange;
+        public DocumentRange CalculateRange() => _documentRange;
+
         public string ToolTip { get; }
+
         public string ErrorStripeToolTip => ToolTip;
+
         public bool IsValid() => true;
     }
 }

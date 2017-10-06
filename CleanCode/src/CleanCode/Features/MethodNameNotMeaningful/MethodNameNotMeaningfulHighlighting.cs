@@ -17,16 +17,19 @@ namespace CleanCode.Features.MethodNameNotMeaningful
     public class MethodNameNotMeaningfulHighlighting : IHighlighting
     {
         internal const string SeverityID = "MethodNameNotMeaningful";
-        private readonly DocumentRange documentRange;
+        private readonly DocumentRange _documentRange;
 
         public MethodNameNotMeaningfulHighlighting(DocumentRange documentRange)
         {
-            this.documentRange = documentRange;
+            _documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange() => documentRange;
+        public DocumentRange CalculateRange() => _documentRange;
+
         public string ToolTip => Warnings.MethodNameNotMeaningful;
+
         public string ErrorStripeToolTip => ToolTip;
+
         public bool IsValid() => true;
     }
 }

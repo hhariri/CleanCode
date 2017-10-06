@@ -7,11 +7,11 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.MethodNameNotMeaningful
 {
-    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new []
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new[]
     {
         typeof(MethodNameNotMeaningfulHighlighting)
     })]
-    public class MethodNameNotMeaningfulCheck : ElementProblemAnalyzer<IMethodDeclaration>
+    public class MethodNameNotMeaningfulCheckCs : ElementProblemAnalyzer<IMethodDeclaration>
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
@@ -19,10 +19,9 @@ namespace CleanCode.Features.MethodNameNotMeaningful
                 return;
 
             var minimumMethodNameLength = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MinimumMeaningfulMethodNameLength);
-
             var name = element.NameIdentifier.GetText();
-            var methodNameLength = name.Length;
-            if (methodNameLength < minimumMethodNameLength)
+
+            if (name.Length < minimumMethodNameLength)
             {
                 var documentRange = element.GetNameDocumentRange();
                 var highlighting = new MethodNameNotMeaningfulHighlighting(documentRange);

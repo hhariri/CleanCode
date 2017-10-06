@@ -12,7 +12,7 @@ using JetBrains.ReSharper.Psi.Tree;
 namespace CleanCode.Features.HollowNames
 {
     [ElementProblemAnalyzer(typeof(IClassDeclaration),
-        HighlightingTypes = new []
+        HighlightingTypes = new[]
         {
             typeof(HollowTypeNameHighlighting)
         })]
@@ -38,7 +38,7 @@ namespace CleanCode.Features.HollowNames
             return suffixes.FirstOrDefault(declaredName.EndsWith);
         }
 
-        private void AddHighlighting(string bannedSuffix, IHighlightingConsumer consumer, IClassDeclaration typeExpression)
+        private static void AddHighlighting(string bannedSuffix, IHighlightingConsumer consumer, IClassDeclaration typeExpression)
         {
             var identifier = typeExpression.Name;
             var documentRange = identifier.GetDocumentRange();

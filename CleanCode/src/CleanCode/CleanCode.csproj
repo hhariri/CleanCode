@@ -218,39 +218,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CleanCodeHighlightingGroupIds.cs" />
+    <Compile Include="Features\ChainedReferences\ChainedReferencesCheckVb.cs" />
     <Compile Include="Features\ChainedReferences\MaximumChainedReferencesHighlighting.cs" />
-    <Compile Include="Features\ChainedReferences\ChainedReferencesCheck.cs" />
+    <Compile Include="Features\ChainedReferences\ChainedReferencesCheckCs.cs" />
     <Compile Include="Features\ClassTooBig\ClassTooBigCheckVb.cs" />
     <Compile Include="Features\ClassTooBig\ClassTooBigHighlighting.cs" />
-    <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheck.cs" />
+    <Compile Include="Features\ComplexExpression\ComplexConditionExpressionCheckVb.cs" />
+    <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentationCheckCs.cs" />
     <Compile Include="Features\ComplexExpression\ComplexConditionExpressionHighlighting.cs" />
-    <Compile Include="Features\ComplexExpression\ComplexConditionExpressionCheck.cs" />
+    <Compile Include="Features\ComplexExpression\ComplexConditionExpressionCheckCs.cs" />
     <Compile Include="Features\ExcessiveIndentation\ExcessiveIndentHighlighting.cs" />
-    <Compile Include="Features\ExtensionMethods.cs" />
+    <Compile Include="Features\ExtensionMethodsVb.cs" />
+    <Compile Include="Features\ExtensionMethodsCsharp.cs" />
     <Compile Include="Features\FlagArguments\FlagArgumentsHighlighting.cs" />
-    <Compile Include="Features\FlagArguments\FlagArgumentsCheck.cs" />
+    <Compile Include="Features\FlagArguments\FlagArgumentsCheckCs.cs" />
     <Compile Include="Features\HollowNames\HollowNamesCheckVb.cs" />
     <Compile Include="Features\HollowNames\HollowTypeNameHighlighting.cs" />
-    <Compile Include="Features\HollowNames\HollowNamesCheck.cs" />
+    <Compile Include="Features\HollowNames\HollowNamesCheckCs.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheckVb.cs" />
     <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulHighlighting.cs" />
-    <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheck.cs" />
+    <Compile Include="Features\MethodNameNotMeaningful\MethodNameNotMeaningfulCheckCs.cs" />
     <Compile Include="Features\MethodTooLong\MethodTooLongCheckVb.cs" />
     <Compile Include="Features\MethodTooLong\MethodTooLongHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Features\ClassTooBig\ClassTooBigCheck.cs" />
+    <Compile Include="Features\ClassTooBig\ClassTooBigCheckCs.cs" />
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheckVb.cs" />
     <Compile Include="Features\TooManyDependencies\TooManyDependenciesHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheck.cs" />
+    <Compile Include="Features\TooManyDependencies\TooManyDependenciesCheckCs.cs" />
     <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheckVb.cs" />
-    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheck.cs" />
+    <Compile Include="Features\TooManyMethodArguments\TooManyMethodArgumentsCheckCs.cs" />
     <Compile Include="Features\TooManyMethodArguments\TooManyArgumentsHighlighting.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Features\MethodTooLong\MethodTooLongCheck.cs" />
+    <Compile Include="Features\MethodTooLong\MethodTooLongCheckCs.cs" />
     <Compile Include="InvalidateOnSettingsChange.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\Icons\Settings\ThemedIcons.Settings.Generated.cs" />
@@ -266,6 +269,7 @@
     </Compile>
     <Compile Include="Settings\CleanCodeOptionsPage.cs" />
     <Compile Include="Settings\CleanCodeSettings.cs" />
+    <Compile Include="Extension\ExpressionExt.cs" />
     <Compile Include="ZoneMarker.cs" />
   </ItemGroup>
   <ItemGroup>

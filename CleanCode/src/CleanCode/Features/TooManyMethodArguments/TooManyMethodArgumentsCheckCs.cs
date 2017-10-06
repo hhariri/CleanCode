@@ -8,11 +8,11 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.TooManyMethodArguments
 {
-    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new []
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new[]
     {
         typeof(TooManyArgumentsHighlighting)
     })]
-    public class TooManyMethodArgumentsCheck : ElementProblemAnalyzer<IMethodDeclaration>
+    public class TooManyMethodArgumentsCheckCs : ElementProblemAnalyzer<IMethodDeclaration>
     {
         protected override void Run(IMethodDeclaration element, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {

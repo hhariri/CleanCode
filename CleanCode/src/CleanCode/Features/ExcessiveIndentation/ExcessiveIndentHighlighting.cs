@@ -15,16 +15,19 @@ namespace CleanCode.Features.ExcessiveIndentation
     public class ExcessiveIndentHighlighting : IHighlighting
     {
         internal const string SeverityID = "ExcessiveIndentation";
-        private readonly DocumentRange documentRange;
+        private readonly DocumentRange _documentRange;
 
         public ExcessiveIndentHighlighting(DocumentRange documentRange)
         {
-            this.documentRange = documentRange;
+            _documentRange = documentRange;
         }
 
-        public DocumentRange CalculateRange() => documentRange;
+        public DocumentRange CalculateRange() => _documentRange;
+
         public string ToolTip => Warnings.ExcessiveDepth;
+
         public string ErrorStripeToolTip => ToolTip;
+        
         public bool IsValid() => true;
     }
 }

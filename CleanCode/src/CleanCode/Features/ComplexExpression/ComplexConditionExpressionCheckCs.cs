@@ -8,9 +8,6 @@ using JetBrains.ReSharper.Psi.Tree;
 
 namespace CleanCode.Features.ComplexExpression
 {
-    // TODO: This might be better working with IOperatorExpression
-    // Walk up from the operator to the highest containing expression
-    // and count depth?
     [ElementProblemAnalyzer(typeof(IIfStatement),
         typeof(ILoopWithConditionStatement),
         typeof(IConditionalTernaryExpression),
@@ -20,7 +17,7 @@ namespace CleanCode.Features.ComplexExpression
         {
             typeof(ComplexConditionExpressionHighlighting)
         })]
-    public class ComplexConditionExpressionCheck : ElementProblemAnalyzer<ICSharpTreeNode>
+    public class ComplexConditionExpressionCheckCs : ElementProblemAnalyzer<ICSharpTreeNode>
     {
         protected override void Run(ICSharpTreeNode element, ElementProblemAnalyzerData data,
             IHighlightingConsumer consumer)
@@ -32,32 +29,19 @@ namespace CleanCode.Features.ComplexExpression
 
         private static IExpression GetExpression(ITreeNode node)
         {
-            // Covers for, while and do
-            var loopStatement = node as ILoopWithConditionStatement;
-            if (loopStatement != null)
-                return loopStatement.Condition;
-
-            var ifStatement = node as IIfStatement;
-            if (ifStatement != null)
-                return ifStatement.Condition;
-
-            var conditionalTernaryExpression = node as IConditionalTernaryExpression;
-            if (conditionalTernaryExpression != null)
-                return conditionalTernaryExpression.ConditionOperand;
-
-            // TODO: Should these two be part of this check?
-            // Perhaps they should also check the type of the resulting
-            // variable to be bool?
-            var assignmentExpression = node as IAssignmentExpression;
-            if (assignmentExpression != null)
-                return assignmentExpression.Source;
-
-            var expressionInitializer = node as IExpressionInitializer;
-            return expressionInitializer?.Value;
+            switch (node)
+            {
+                case ILoopWithConditionStatement loopWithConditionStatement: return loopWithConditionStatement.Condition;
+                case IIfStatement ifStatement: return ifStatement.Condition;
+                case IConditionalTernaryExpression conditionalTernaryExpression: return conditionalTernaryExpression.ConditionOperand;
+                case IAssignmentExpression assignmentExpression: return assignmentExpression.Source;
+                case IExpressionInitializer expressionInitializer: return expressionInitializer.Value;
+                default:
+                    return null;
+            }
         }
 
-        private static void CheckExpression(IExpression expression, ElementProblemAnalyzerData data,
-            IHighlightingConsumer consumer)
+        private static void CheckExpression(IExpression expression, ElementProblemAnalyzerData data, IHighlightingConsumer consumer)
         {
             var maxExpressions = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumExpressionsInCondition);
             var expressionCount = expression.GetChildrenRecursive<IOperatorExpression>().Count();
