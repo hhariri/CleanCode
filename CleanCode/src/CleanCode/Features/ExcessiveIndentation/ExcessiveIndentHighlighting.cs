@@ -17,14 +17,15 @@ namespace CleanCode.Features.ExcessiveIndentation
         internal const string SeverityID = "ExcessiveIndentation";
         private readonly DocumentRange _documentRange;
 
-        public ExcessiveIndentHighlighting(DocumentRange documentRange)
+        public ExcessiveIndentHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
+            ToolTip = string.Format(Warnings.ExcessiveDepth, currentValue, threshold);
             _documentRange = documentRange;
         }
 
         public DocumentRange CalculateRange() => _documentRange;
 
-        public string ToolTip => Warnings.ExcessiveDepth;
+        public string ToolTip { get; }
 
         public string ErrorStripeToolTip => ToolTip;
         

@@ -1,5 +1,6 @@
 using CleanCode;
 using CleanCode.Features.ChainedReferences;
+using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
@@ -18,9 +19,9 @@ namespace CleanCode.Features.ChainedReferences
 
         private readonly DocumentRange _documentRange;
 
-        public MaximumChainedReferencesHighlighting(string toolTip, DocumentRange documentRange)
+        public MaximumChainedReferencesHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = toolTip;
+            ToolTip = string.Format(Warnings.ChainedReferences, currentValue, threshold);
             _documentRange = documentRange;
         }
 

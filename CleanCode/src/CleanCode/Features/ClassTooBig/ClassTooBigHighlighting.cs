@@ -1,5 +1,6 @@
 using CleanCode;
 using CleanCode.Features.ClassTooBig;
+using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
@@ -18,9 +19,9 @@ namespace CleanCode.Features.ClassTooBig
 
         private readonly DocumentRange _documentRange;
 
-        public ClassTooBigHighlighting(string toolTip, DocumentRange documentRange)
+        public ClassTooBigHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = toolTip;
+            ToolTip = string.Format(Warnings.ClassTooBig, currentValue, threshold);
             _documentRange = documentRange;
         }
 

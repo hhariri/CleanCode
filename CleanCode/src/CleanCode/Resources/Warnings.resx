@@ -118,22 +118,22 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="TooManyDependencies" xml:space="preserve">
-    <value>There are too many interfaces being passed in to this constructor. It might be violating the Single Responsibility Principle.</value>
+    <value>There are too many interfaces being passed in to this constructor. It might be violating the Single Responsibility Principle. ({0} / {1})</value>
   </data>
   <data name="TooManyMethodArguments" xml:space="preserve">
-    <value>This method requires too many arguments.</value>
+    <value>This method requires too many arguments. ({0} / {1})</value>
   </data>
   <data name="MethodTooLong" xml:space="preserve">
-    <value>This method is too long, indicating that it has too much responsibility.</value>
+    <value>This method is too long, indicating that it has too much responsibility. ({0} / {1})</value>
   </data>
   <data name="ExcessiveDepth" xml:space="preserve">
-    <value>Excessive depth of nested code blocks.</value>
+    <value>Excessive depth of nested code blocks. ({0} / {1})</value>
   </data>
   <data name="ClassTooBig" xml:space="preserve">
-    <value>Class contains too many methods. This might be violating the Single Responsibility Principle.</value>
+    <value>Class contains too many methods. This might be violating the Single Responsibility Principle. ({0} / {1})</value>
   </data>
   <data name="ChainedReferences" xml:space="preserve">
-    <value>Too many chained references. This might be violating the Law of Demeter.</value>
+    <value>Too many chained references. This might be violating the Law of Demeter. ({0} / {1})</value>
   </data>
   <data name="MethodNameNotMeaningful" xml:space="preserve">
     <value>The name of this method is too short to be meaningful.</value>
@@ -142,7 +142,7 @@
     <value>This argument is used as a flag in the method. This might be violating the Single Responsibility Principle.</value>
   </data>
   <data name="ExpressionTooComplex" xml:space="preserve">
-    <value>This expression is too complex.</value>
+    <value>This expression is too complex. ({0} / {1})</value>
   </data>
   <data name="HollowTypeName" xml:space="preserve">
     <value>The usage of the suffix '{0}' is discouraged because it's too generic. Choose a meaningful name instead to clarify its intent and responsibilities.</value>

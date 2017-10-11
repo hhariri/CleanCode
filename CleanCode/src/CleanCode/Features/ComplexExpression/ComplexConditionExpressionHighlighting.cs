@@ -19,14 +19,15 @@ namespace CleanCode.Features.ComplexExpression
 
         private readonly DocumentRange _documentRange;
 
-        public ComplexConditionExpressionHighlighting(DocumentRange documentRange)
+        public ComplexConditionExpressionHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
+            ToolTip = string.Format(Warnings.ExpressionTooComplex, currentValue, threshold);
             _documentRange = documentRange;
         }
 
         public DocumentRange CalculateRange() => _documentRange;
 
-        public string ToolTip => Warnings.ExpressionTooComplex;
+        public string ToolTip { get; }
 
         public string ErrorStripeToolTip => ToolTip;
 

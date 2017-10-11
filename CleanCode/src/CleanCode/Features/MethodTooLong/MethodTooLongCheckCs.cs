@@ -29,7 +29,7 @@ namespace CleanCode.Features.MethodTooLong
                     return;
             }
 
-            var highlighting = new MethodTooLongHighlighting(element.GetNameDocumentRange());
+            var highlighting = new MethodTooLongHighlighting(element.GetNameDocumentRange(), maxStatements, statementCount);
             consumer.AddHighlighting(highlighting);
         }
     }

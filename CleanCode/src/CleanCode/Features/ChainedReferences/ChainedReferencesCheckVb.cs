@@ -60,21 +60,17 @@ namespace CleanCode.Features.ChainedReferences
             }
 
             var isFluentChain = types.Count == 1;
-
-            if (!isFluentChain)
+            if (!isFluentChain && chainLength > threshold)
             {
-                if (chainLength > threshold)
-                {
-                    AddHighlighting(referenceExpression, consumer);
-                }
+                AddHighlighting(referenceExpression, consumer, threshold, chainLength);
             }
         }
 
-        private static void AddHighlighting(IReferenceExpression reference, IHighlightingConsumer consumer)
+        private static void AddHighlighting(IReferenceExpression reference, IHighlightingConsumer consumer, int threshold, int currentValue)
         {
             var nameIdentifier = reference.NameIdentifier;
             var documentRange = nameIdentifier.GetDocumentRange();
-            var highlighting = new MaximumChainedReferencesHighlighting(Warnings.ChainedReferences, documentRange);
+            var highlighting = new MaximumChainedReferencesHighlighting(documentRange, threshold, currentValue);
             consumer.AddHighlighting(highlighting);
         }
     }

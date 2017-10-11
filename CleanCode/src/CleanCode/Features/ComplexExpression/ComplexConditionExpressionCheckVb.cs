@@ -58,7 +58,7 @@ namespace CleanCode.Features.ComplexExpression
             if (expressionCount > maxExpressions)
             {
                 var documentRange = expression.GetDocumentRange();
-                var highlighting = new ComplexConditionExpressionHighlighting(documentRange);
+                var highlighting = new ComplexConditionExpressionHighlighting(documentRange, maxExpressions, expressionCount);
                 consumer.AddHighlighting(highlighting);
             }
         }

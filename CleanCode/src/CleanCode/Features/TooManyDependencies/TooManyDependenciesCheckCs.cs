@@ -19,10 +19,11 @@ namespace CleanCode.Features.TooManyDependencies
         {
             var maxDependencies = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumConstructorDependencies);
             var dependencies = element.ParameterDeclarations.Select(declaration => (declaration.DeclaredElement?.Type).IsInterfaceType());
-            
-            if (dependencies.Count() > maxDependencies)
+
+            var dependenciesCount = dependencies.Count();
+            if (dependenciesCount > maxDependencies)
             {
-                var highlighting = new TooManyDependenciesHighlighting(element.GetNameDocumentRange());
+                var highlighting = new TooManyDependenciesHighlighting(element.GetNameDocumentRange(), maxDependencies, dependenciesCount);
                 consumer.AddHighlighting(highlighting);
             }
         }

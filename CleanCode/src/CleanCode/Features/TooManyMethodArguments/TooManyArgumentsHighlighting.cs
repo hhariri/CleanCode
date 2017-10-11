@@ -1,5 +1,7 @@
+using System;
 using CleanCode;
 using CleanCode.Features.TooManyMethodArguments;
+using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
@@ -17,9 +19,9 @@ namespace CleanCode.Features.TooManyMethodArguments
         internal const string SeverityID = "TooManyArguments";
         private readonly DocumentRange _documentRange;
 
-        public TooManyArgumentsHighlighting(string toolTip, DocumentRange documentRange)
+        public TooManyArgumentsHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = toolTip;
+            ToolTip = String.Format(Warnings.TooManyMethodArguments, currentValue, threshold);
             _documentRange = documentRange;
         }
 

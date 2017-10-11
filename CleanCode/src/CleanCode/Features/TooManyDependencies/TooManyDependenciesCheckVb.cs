@@ -3,9 +3,9 @@ using CleanCode.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
-using JetBrains.ReSharper.Psi.VB.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 using JetBrains.ReSharper.Psi.Util;
+using JetBrains.ReSharper.Psi.VB.Tree;
 
 namespace CleanCode.Features.TooManyDependencies
 {
@@ -20,9 +20,10 @@ namespace CleanCode.Features.TooManyDependencies
             var maxDependencies = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumConstructorDependencies);
             var dependencies = element.ParameterDeclarations.Select(declaration => (declaration.DeclaredElement?.Type).IsInterfaceType());
 
-            if (dependencies.Count() > maxDependencies)
+            var dependenciesCount = dependencies.Count();
+            if (dependenciesCount > maxDependencies)
             {
-                var highlighting = new TooManyDependenciesHighlighting(element.GetNameDocumentRange());
+                var highlighting = new TooManyDependenciesHighlighting(element.GetNameDocumentRange(), maxDependencies, dependenciesCount);
                 consumer.AddHighlighting(highlighting);
             }
         }

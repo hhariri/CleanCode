@@ -1,4 +1,3 @@
-using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
@@ -19,10 +18,10 @@ namespace CleanCode.Features.TooManyMethodArguments
             var maxParameters = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodParameters);
             var parameterDeclarations = element.ParameterDeclarations;
 
-            if (parameterDeclarations.Count > maxParameters)
+            var parameterCount = parameterDeclarations.Count;
+            if (parameterCount > maxParameters)
             {
-                var highlighting = new TooManyArgumentsHighlighting(Warnings.TooManyMethodArguments,
-                    element.GetNameDocumentRange());
+                var highlighting = new TooManyArgumentsHighlighting(element.GetNameDocumentRange(), maxParameters, parameterCount);
                 consumer.AddHighlighting(highlighting);
             }
         }

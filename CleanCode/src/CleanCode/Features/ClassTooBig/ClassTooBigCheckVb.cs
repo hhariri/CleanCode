@@ -1,10 +1,9 @@
-using CleanCode.Resources;
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
 using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
-using JetBrains.ReSharper.Psi.VB.Tree;
 using JetBrains.ReSharper.Psi.Tree;
+using JetBrains.ReSharper.Psi.VB.Tree;
 
 namespace CleanCode.Features.ClassTooBig
 {
@@ -23,7 +22,7 @@ namespace CleanCode.Features.ClassTooBig
             {
                 var declarationIdentifier = element.Name;
                 var documentRange = declarationIdentifier.GetDocumentRange();
-                var highlighting = new ClassTooBigHighlighting(Warnings.ClassTooBig, documentRange);
+                var highlighting = new ClassTooBigHighlighting(documentRange, maxLength, statementCount);
                 consumer.AddHighlighting(highlighting);
             }
         }

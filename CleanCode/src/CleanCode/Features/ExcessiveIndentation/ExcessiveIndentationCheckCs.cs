@@ -18,10 +18,11 @@ namespace CleanCode.Features.ExcessiveIndentation
         {
             var maxIndentation = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumIndentationDepth);
 
-            if (element.GetChildrenDepth() > maxIndentation)
+            var childrenDepth = element.GetChildrenDepth();
+            if (childrenDepth > maxIndentation)
             {
                 var documentRange = element.GetNameDocumentRange();
-                var highlighting = new ExcessiveIndentHighlighting(documentRange);
+                var highlighting = new ExcessiveIndentHighlighting(documentRange, maxIndentation, childrenDepth);
                 consumer.AddHighlighting(highlighting);
             }
         }

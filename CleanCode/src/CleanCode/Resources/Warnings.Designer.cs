@@ -19,7 +19,7 @@ namespace CleanCode.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Warnings {
@@ -61,7 +61,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Too many chained references. This might be violating the Law of Demeter..
+        ///   Looks up a localized string similar to Too many chained references. This might be violating the Law of Demeter. ({0} / {1}).
         /// </summary>
         public static string ChainedReferences {
             get {
@@ -70,7 +70,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Class contains too many methods. This might be violating the Single Responsibility Principle..
+        ///   Looks up a localized string similar to Class contains too many methods. This might be violating the Single Responsibility Principle. ({0} / {1}).
         /// </summary>
         public static string ClassTooBig {
             get {
@@ -79,7 +79,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Excessive depth of nested code blocks..
+        ///   Looks up a localized string similar to Excessive depth of nested code blocks. ({0} / {1}).
         /// </summary>
         public static string ExcessiveDepth {
             get {
@@ -88,7 +88,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This expression is too complex..
+        ///   Looks up a localized string similar to This expression is too complex. ({0} / {1}).
         /// </summary>
         public static string ExpressionTooComplex {
             get {
@@ -124,7 +124,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method is too long, indicating that it has too much responsibility..
+        ///   Looks up a localized string similar to This method is too long, indicating that it has too much responsibility. ({0} / {1}).
         /// </summary>
         public static string MethodTooLong {
             get {
@@ -133,7 +133,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. It might be violating the Single Responsibility Principle..
+        ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. It might be violating the Single Responsibility Principle. ({0} / {1}).
         /// </summary>
         public static string TooManyDependencies {
             get {
@@ -142,7 +142,7 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This method requires too many arguments..
+        ///   Looks up a localized string similar to This method requires too many arguments. ({0} / {1}).
         /// </summary>
         public static string TooManyMethodArguments {
             get {

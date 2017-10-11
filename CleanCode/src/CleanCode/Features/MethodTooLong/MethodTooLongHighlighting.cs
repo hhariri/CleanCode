@@ -1,3 +1,4 @@
+using System;
 using CleanCode;
 using CleanCode.Features.MethodTooLong;
 using CleanCode.Resources;
@@ -18,14 +19,15 @@ namespace CleanCode.Features.MethodTooLong
         internal const string SeverityID = "MethodTooLong";
         private readonly DocumentRange _documentRange;
 
-        public MethodTooLongHighlighting(DocumentRange documentRange)
+        public MethodTooLongHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
+            ToolTip = string.Format(Warnings.MethodTooLong, currentValue, threshold);
             _documentRange = documentRange;
         }
 
         public DocumentRange CalculateRange() => _documentRange;
 
-        public string ToolTip => Warnings.MethodTooLong;
+        public string ToolTip { get; } 
 
         public string ErrorStripeToolTip => ToolTip;
 

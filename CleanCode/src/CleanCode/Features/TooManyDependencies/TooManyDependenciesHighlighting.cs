@@ -18,14 +18,15 @@ namespace CleanCode.Features.TooManyDependencies
         internal const string SeverityID = "TooManyDependencies";
         private readonly DocumentRange _documentRange;
 
-        public TooManyDependenciesHighlighting(DocumentRange documentRange)
+        public TooManyDependenciesHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
+            ToolTip = string.Format(Warnings.TooManyDependencies, currentValue, threshold);
             _documentRange = documentRange;
         }
 
         public DocumentRange CalculateRange() => _documentRange;
 
-        public string ToolTip => Warnings.TooManyDependencies;
+        public string ToolTip { get; } 
 
         public string ErrorStripeToolTip => ToolTip;
 
