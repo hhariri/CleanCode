@@ -25,10 +25,7 @@ namespace CleanCode.Features.MethodTooLong
             var maxStatements = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumMethodStatements);
             var maxDeclarations = data.SettingsStore.GetValue((CleanCodeSettings s) => s.MaximumDeclarationsInMethod);
 
-            var highlighting = CheckStatementCount(element, maxStatements);
-            highlighting = CheckDeclarationCount(element, maxDeclarations);
-
-            return highlighting;
+            return CheckStatementCount(element, maxStatements) ?? CheckDeclarationCount(element, maxDeclarations);
         }
 
         private static IHighlighting CheckStatementCount(IMethodDeclaration element, int maxStatements)
