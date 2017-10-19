@@ -147,4 +147,7 @@
   <data name="HollowTypeName" xml:space="preserve">
     <value>The usage of the suffix '{0}' is discouraged because it's too generic. Choose a meaningful name instead to clarify its intent and responsibilities.</value>
   </data>
+  <data name="TooManyDeclarations" xml:space="preserve">
+    <value>This method has too many declarations. ({0} / {1})</value>
+  </data>
 </root>

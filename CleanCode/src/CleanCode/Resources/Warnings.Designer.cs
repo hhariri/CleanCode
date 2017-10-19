@@ -133,6 +133,15 @@ namespace CleanCode.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This method has too many declarations. ({0} / {1}).
+        /// </summary>
+        public static string TooManyDeclarations {
+            get {
+                return ResourceManager.GetString("TooManyDeclarations", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There are too many interfaces being passed in to this constructor. It might be violating the Single Responsibility Principle. ({0} / {1}).
         /// </summary>
         public static string TooManyDependencies {
