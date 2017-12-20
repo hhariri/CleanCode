@@ -29,6 +29,6 @@ Install from ReSharper &rarr; Extension Manager.
 
 ## License
 
-Licensed under MIT (c) 2012 - 2016  Hadi Hariri and Contributors
+Licensed under MIT (c) 2012 - 2017  Hadi Hariri and Contributors
 
 Note: All references to [Clean Code](http://www.cleancoders.com/), including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)
