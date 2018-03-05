@@ -4,14 +4,14 @@
     <id>CleanCode.CleanCode</id>
     <version>5.3.3</version>
     <title>Clean Code</title>
-    <authors>Hadi Hariri, Matt Ellis, SuperJMN</authors>
-    <owners>Hadi Hariri, Matt Ellis</owners>
-    <iconUrl>https://raw.githubusercontent.com/hhariri/CleanCode/master/logo.png</iconUrl>
-    <projectUrl>https://github.com/hhariri/CleanCode</projectUrl>
-    <licenseUrl>https://raw.github.com/hhariri/CleanCode/master/license.txt</licenseUrl>
+    <authors>Martin Oehlert, Hadi Hariri, Matt Ellis, SuperJMN</authors>
+    <owners>Martin Oehlert, Hadi Hariri, Matt Ellis</owners>
+    <iconUrl>https://raw.githubusercontent.com/MO2k4/CleanCode/master/logo.png</iconUrl>
+    <projectUrl>https://github.com/MO2k4/CleanCode</projectUrl>
+    <licenseUrl>https://raw.github.com/MO2k4/CleanCode/master/license.txt</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
-    <releaseNotes>    
+    <releaseNotes>
 &#8226; Highlighting CurrentValue/Threshold in Message
 &#8226; Added VB.Net Support
 
@@ -44,7 +44,7 @@ From 4.0.0:
 &#8226; Suggestion highlight if class has too many methods
 &#8226; Suggestion highlight if method has too many statements
 </releaseNotes>
-    <copyright>Copyright 2014-2017 Hadi Hariri and Contributors</copyright>
+    <copyright>Copyright 2014-2018 Martin Oehlert and Contributors</copyright>
     <dependencies>
       <dependency id="Wave" version="[11.0]" />
     </dependencies>

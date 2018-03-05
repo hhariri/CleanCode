@@ -40,7 +40,7 @@ Task("Nuget-Pack")
     .IsDependentOn("Build")
     .Does(() => 
 {
-    NuGetPack("./src/CleanCode.nuspec", new NuGetPackSettings() { 
+    NuGetPack("./src/CleanCode.nuspec", new NuGetPackSettings() {
         OutputDirectory = "."
     });
 });
@@ -50,7 +50,7 @@ Task("Nuget-Pack")
 //////////////////////////////////////////////////////////////////////
 
 Task("Default")
-    .IsDependentOn("Nuget-Pack");    
+    .IsDependentOn("Nuget-Pack");
 
 //////////////////////////////////////////////////////////////////////
 // EXECUTION
