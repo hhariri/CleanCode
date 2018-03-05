@@ -10,7 +10,7 @@ var configuration = Argument("configuration", "Release");
 //////////////////////////////////////////////////////////////////////
 
 // Define directories.
-var buildDir = Directory("./CleanCode/src/CleanCode/bin") + Directory(configuration);
+var buildDir = Directory("./src/CleanCode/bin") + Directory(configuration);
 
 //////////////////////////////////////////////////////////////////////
 // TASKS
@@ -26,22 +26,22 @@ Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    NuGetRestore("./CleanCode/src/CleanCode.sln");
+    NuGetRestore("./src/CleanCode.sln");
 });
 
 Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    MSBuild("./CleanCode/src/CleanCode.sln", settings => settings.SetConfiguration(configuration));
+    MSBuild("./src/CleanCode.sln", settings => settings.SetConfiguration(configuration));
 });
 
 Task("Nuget-Pack")
     .IsDependentOn("Build")
     .Does(() => 
 {
-    NuGetPack("./CleanCode/src/CleanCode.nuspec", new NuGetPackSettings() { 
-        OutputDirectory = "."        
+    NuGetPack("./src/CleanCode.nuspec", new NuGetPackSettings() { 
+        OutputDirectory = "."
     });
 });
 
