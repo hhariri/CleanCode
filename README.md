@@ -27,6 +27,10 @@ Please log feature requests and bugs in [Issues](https://github.com/hhariri/Clea
 
 Install from ReSharper &rarr; Extension Manager.
 
+## Groundwork
+
+This project is a fork from [Hadi Hariri](https://github.com/hhariri/CleanCode) work.
+
 ## License
 
 Licensed under MIT (c) 2012 - 2017  Hadi Hariri and Contributors
