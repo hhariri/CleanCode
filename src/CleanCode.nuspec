@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MO.CleanCode</id>
-    <version>5.4.0</version>
+    <version>5.5.0</version>
     <title>Clean Code</title>
     <authors>Martin Oehlert, Hadi Hariri, Matt Ellis, SuperJMN</authors>
     <owners>Martin Oehlert, Hadi Hariri, Matt Ellis</owners>
@@ -12,7 +12,11 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
     <releaseNotes>
-      &#8226; Updated to ReSharper 2018.1
+      &#8226; Updated to ReSharper 2018.2
+
+From 5.4.0
+&#8226; Updated to ReSharper 2018.1
+
 From 5.3.3
 &#8226; Highlighting CurrentValue/Threshold in Message
 &#8226; Added VB.Net Support
@@ -48,7 +52,7 @@ From 4.0.0:
 </releaseNotes>
     <copyright>Copyright 2014-2018 Martin Oehlert and Contributors</copyright>
     <dependencies>
-      <dependency id="Wave" version="[12.0]" />
+      <dependency id="Wave" version="[182.0.0]" />
     </dependencies>
     <tags>clean code</tags>
   </metadata>
