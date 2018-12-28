@@ -33,7 +33,7 @@ Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    MSBuild("./src/CleanCode.sln", settings => settings.SetConfiguration(configuration));
+    DotNetBuild("./src/CleanCode.sln", settings => settings.SetConfiguration(configuration));
 });
 
 Task("Nuget-Pack")
@@ -41,7 +41,7 @@ Task("Nuget-Pack")
     .Does(() => 
 {
     NuGetPack("./src/CleanCode.nuspec", new NuGetPackSettings() {
-        OutputDirectory = "."
+        OutputDirectory = "distribution"
     });
 });
 
