@@ -1,5 +1,7 @@
 # Clean Code ReSharper Plugin Project
 
+[![Build Status](https://dev.azure.com/mo2k4/CleanCode/_apis/build/status/CleanCode-CI?branchName=master)](https://dev.azure.com/mo2k4/CleanCode/_build/latest?definitionId=1?branchName=master)
+
 ### CleanCode
 
 An experiment in trying to automate some of concepts described in [Uncle Bob's books on Clean Code](http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882). 
