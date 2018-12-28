@@ -1,0 +1,14 @@
+queue:
+  name: Hosted VS2017
+steps:
+- task: cake-build.cake.cake-build-task.Cake@0
+  displayName: 'Cake '
+
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Nuget-Paket'
+  inputs:
+    PathtoPublish: distribution
+
+    ArtifactName: 'Nuget-Paket'
+
