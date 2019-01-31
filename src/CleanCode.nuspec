@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>MO.CleanCode</id>
-    <version>5.6.1</version>
+    <version>5.6.2</version>
     <title>Clean Code</title>
     <authors>Martin Oehlert, Hadi Hariri, Matt Ellis, SuperJMN</authors>
     <owners>Martin Oehlert, Hadi Hariri, Matt Ellis</owners>
@@ -12,7 +12,10 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
     <releaseNotes>
-      &#8226; Updated to ReSharper 2018.3.1
+    &#8226; Updated to ReSharper 2018.3.2
+
+From 5.6.1
+&#8226; Updated to ReSharper 2018.3.1
 
 From 5.6.0
 &#8226; Updated to ReSharper 2018.3
