@@ -42,7 +42,7 @@ Task("Nuget-Pack")
     .IsDependentOn("Build")
     .Does(() => 
 {
-    var version = GetFullVersionNumber($"./src/CleanCode/bin/{configuration}/CleanCode.dll");
+    var version = GetFullVersionNumber($"./src/CleanCode/bin/{configuration}/net461/CleanCode.dll");
     NuGetPack("./src/CleanCode/CleanCode.nuspec", new NuGetPackSettings {
         OutputDirectory = "distribution",
         Version = version

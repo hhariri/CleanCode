@@ -2,10 +2,10 @@
 using System.Runtime.InteropServices;
 
 [assembly: AssemblyTitle("ReSharper Clean Code Plugin")]
-[assembly: AssemblyCompany("Hadi Hariri")]
+[assembly: AssemblyCompany("Martin Oehlert, Hadi Hariri, Matt Ellis")]
 [assembly: AssemblyProduct("ReSharper Clean Code Plugin")]
 [assembly: AssemblyDescription("Automates some of the concepts in Uncle Bob's Clean Code book")]
-[assembly: AssemblyCopyright("Copyright ® 2016 Hadi Hariri and Contributors")]
+[assembly: AssemblyCopyright("Copyright ® 2014-2019 Martin Oehlert and Contributors")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
