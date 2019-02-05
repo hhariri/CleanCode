@@ -1,3 +1,5 @@
+#addin nuget:?package=Cake.VersionReader
+
 //////////////////////////////////////////////////////////////////////
 // ARGUMENTS
 //////////////////////////////////////////////////////////////////////
@@ -40,8 +42,10 @@ Task("Nuget-Pack")
     .IsDependentOn("Build")
     .Does(() => 
 {
-    NuGetPack("./src/CleanCode.nuspec", new NuGetPackSettings() {
-        OutputDirectory = "distribution"
+    var version = GetFullVersionNumber($"./src/CleanCode/bin/{configuration}/CleanCode.dll");
+    NuGetPack("./src/CleanCode/CleanCode.nuspec", new NuGetPackSettings {
+        OutputDirectory = "distribution",
+        Version = version
     });
 });
 
