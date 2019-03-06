@@ -13,6 +13,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Automates some of the concepts in Uncle Bob's Clean Code book</description>
         <releaseNotes>
+            &#8226; Updated to ReSharper 2018.3.4
+
+            From 5.6.3
             &#8226; Updated to ReSharper 2018.3.3
             &#8226; Changed project structure to .Net-Core
 

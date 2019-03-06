@@ -61,7 +61,7 @@ From 4.0.0:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2018.3.3">
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2018.3.4">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
