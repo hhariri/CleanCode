@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.TooManyDependencies;
 using CleanCode.Resources;
@@ -20,13 +21,13 @@ namespace CleanCode.Features.TooManyDependencies
 
         public TooManyDependenciesHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.TooManyDependencies, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture, Warnings.TooManyDependencies, currentValue, threshold);
             _documentRange = documentRange;
         }
 
         public DocumentRange CalculateRange() => _documentRange;
 
-        public string ToolTip { get; } 
+        public string ToolTip { get; }
 
         public string ErrorStripeToolTip => ToolTip;
 

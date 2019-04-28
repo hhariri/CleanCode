@@ -7,16 +7,16 @@ namespace CleanCode.Settings
     public class CleanCodeSettings
     {
         [SettingsEntry(3, "MaximumConstructorDependencies")]
-        public readonly int MaximumConstructorDependencies;
+        public int MaximumConstructorDependencies { get; set; }
 
         [SettingsEntry(3, "MaximumMethodParameters")]
-        public readonly int MaximumMethodParameters;
+        public int MaximumMethodParameters { get; set; }
 
         [SettingsEntry(15, "MaximumMethodStatements")]
-        public readonly int MaximumMethodStatements;
+        public int MaximumMethodStatements { get; set; }
 
         [SettingsEntry(6, "MaximumDeclarationsInMethod")]
-        public readonly int MaximumDeclarationsInMethod;
+        public int MaximumDeclarationsInMethod { get; set; }
 
         [SettingsEntry(3, "MaximumIndentationDepth")]
         public int MaximumIndentationDepth { get; set; }
@@ -31,7 +31,7 @@ namespace CleanCode.Settings
         public int MinimumMeaningfulMethodNameLength { get; set; }
 
         [SettingsEntry("Handler,Manager,Processor,Controller,Helper", "MeaninglessClassNameSuffixes")]
-        public string MeaninglessClassNameSuffixes { get; set; }  
+        public string MeaninglessClassNameSuffixes { get; set; }
 
         [SettingsEntry(1, "MaximumExpressionsInCondition")]
         public int MaximumExpressionsInCondition { get; set; }

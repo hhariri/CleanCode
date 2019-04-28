@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using CleanCode.Resources;
 using CleanCode.Settings;
@@ -42,7 +43,8 @@ namespace CleanCode.Features.HollowNames
         {
             var identifier = typeExpression.NameIdentifier;
             var documentRange = identifier.GetDocumentRange();
-            var highlighting = new HollowTypeNameHighlighting(string.Format(Warnings.HollowTypeName, bannedSuffix), documentRange);
+            var toolTip = string.Format(CultureInfo.CurrentCulture, Warnings.HollowTypeName, bannedSuffix);
+            var highlighting = new HollowTypeNameHighlighting(toolTip, documentRange);
             consumer.AddHighlighting(highlighting);
         }
     }

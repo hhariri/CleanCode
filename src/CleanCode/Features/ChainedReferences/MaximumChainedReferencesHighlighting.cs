@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.ChainedReferences;
 using CleanCode.Resources;
@@ -21,7 +22,10 @@ namespace CleanCode.Features.ChainedReferences
 
         public MaximumChainedReferencesHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.ChainedReferences, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture,
+                                    Warnings.ChainedReferences,
+                                    currentValue,
+                                    threshold);
             _documentRange = documentRange;
         }
 

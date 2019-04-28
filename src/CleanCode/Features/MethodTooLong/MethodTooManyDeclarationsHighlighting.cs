@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.MethodTooLong;
 using CleanCode.Resources;
@@ -20,13 +21,13 @@ namespace CleanCode.Features.MethodTooLong
 
         public MethodTooManyDeclarationsHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.TooManyDeclarations, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture, Warnings.TooManyDeclarations, currentValue, threshold);
             _documentRange = documentRange;
         }
 
         public DocumentRange CalculateRange() => _documentRange;
 
-        public string ToolTip { get; } 
+        public string ToolTip { get; }
 
         public string ErrorStripeToolTip => ToolTip;
 

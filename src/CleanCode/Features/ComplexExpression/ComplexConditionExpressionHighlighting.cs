@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.ComplexExpression;
 using CleanCode.Resources;
@@ -21,7 +22,7 @@ namespace CleanCode.Features.ComplexExpression
 
         public ComplexConditionExpressionHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.ExpressionTooComplex, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture, Warnings.ExpressionTooComplex, currentValue, threshold);
             _documentRange = documentRange;
         }
 

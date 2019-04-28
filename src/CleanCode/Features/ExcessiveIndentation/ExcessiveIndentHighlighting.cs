@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.ExcessiveIndentation;
 using CleanCode.Resources;
@@ -5,7 +6,7 @@ using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 
-[assembly:RegisterConfigurableSeverity(ExcessiveIndentHighlighting.SeverityID, null,
+[assembly: RegisterConfigurableSeverity(ExcessiveIndentHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Excessive indentation", "The nesting in this method is excessive.",
     Severity.WARNING)]
 
@@ -19,7 +20,7 @@ namespace CleanCode.Features.ExcessiveIndentation
 
         public ExcessiveIndentHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.ExcessiveDepth, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture, Warnings.ExcessiveDepth, currentValue, threshold);
             _documentRange = documentRange;
         }
 
@@ -28,7 +29,7 @@ namespace CleanCode.Features.ExcessiveIndentation
         public string ToolTip { get; }
 
         public string ErrorStripeToolTip => ToolTip;
-        
+
         public bool IsValid() => true;
     }
 }

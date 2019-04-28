@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.ClassTooBig;
 using CleanCode.Resources;
@@ -21,7 +22,7 @@ namespace CleanCode.Features.ClassTooBig
 
         public ClassTooBigHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.ClassTooBig, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture, Warnings.ClassTooBig, currentValue, threshold);
             _documentRange = documentRange;
         }
 

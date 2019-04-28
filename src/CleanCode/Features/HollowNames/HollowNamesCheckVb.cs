@@ -8,6 +8,7 @@ using JetBrains.ReSharper.Daemon.Stages.Dispatcher;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.VB.Tree;
 using JetBrains.ReSharper.Psi.Tree;
+using System.Globalization;
 
 namespace CleanCode.Features.HollowNames
 {
@@ -42,7 +43,8 @@ namespace CleanCode.Features.HollowNames
         {
             var identifier = typeExpression.Name;
             var documentRange = identifier.GetDocumentRange();
-            var highlighting = new HollowTypeNameHighlighting(string.Format(Warnings.HollowTypeName, bannedSuffix), documentRange);
+            var toolTip = string.Format(CultureInfo.CurrentCulture, Warnings.HollowTypeName, bannedSuffix);
+            var highlighting = new HollowTypeNameHighlighting(toolTip, documentRange);
             consumer.AddHighlighting(highlighting);
         }
     }

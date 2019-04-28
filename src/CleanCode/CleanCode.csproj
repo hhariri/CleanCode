@@ -58,6 +58,7 @@ From 4.0.0:
 &amp;#8226; Warning if a method has too many arguments
 &amp;#8226; Suggestion highlight if class has too many methods
 &amp;#8226; Suggestion highlight if method has too many statements</PackageReleaseNotes>
+    <CodeAnalysisRuleset>CleanCode.ruleset</CodeAnalysisRuleset>
   </PropertyGroup>
 
   <ItemGroup>
@@ -65,6 +66,7 @@ From 4.0.0:
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.2" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>

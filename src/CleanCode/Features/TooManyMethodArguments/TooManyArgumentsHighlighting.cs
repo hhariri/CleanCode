@@ -1,3 +1,4 @@
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.TooManyMethodArguments;
 using CleanCode.Resources;
@@ -20,7 +21,7 @@ namespace CleanCode.Features.TooManyMethodArguments
 
         public TooManyArgumentsHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.TooManyMethodArguments, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture, Warnings.TooManyMethodArguments, currentValue, threshold);
             _documentRange = documentRange;
         }
 

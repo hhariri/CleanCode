@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using CleanCode;
 using CleanCode.Features.MethodTooLong;
 using CleanCode.Resources;
@@ -7,7 +8,7 @@ using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.VB;
 
-[assembly: RegisterConfigurableSeverity(MethodTooLongHighlighting.SeverityID, null, 
+[assembly: RegisterConfigurableSeverity(MethodTooLongHighlighting.SeverityID, null,
     CleanCodeHighlightingGroupIds.CleanCode, "Method too long", "The method is bigger than it should be.",
     Severity.SUGGESTION)]
 
@@ -21,13 +22,13 @@ namespace CleanCode.Features.MethodTooLong
 
         public MethodTooLongHighlighting(DocumentRange documentRange, int threshold, int currentValue)
         {
-            ToolTip = string.Format(Warnings.MethodTooLong, currentValue, threshold);
+            ToolTip = string.Format(CultureInfo.CurrentCulture, Warnings.MethodTooLong, currentValue, threshold);
             _documentRange = documentRange;
         }
 
         public DocumentRange CalculateRange() => _documentRange;
 
-        public string ToolTip { get; } 
+        public string ToolTip { get; }
 
         public string ErrorStripeToolTip => ToolTip;
 
