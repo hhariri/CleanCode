@@ -2,7 +2,7 @@
 using CleanCode.Resources.Icons;
 using JetBrains.Application.UI.Options;
 using JetBrains.Application.UI.Options.OptionsDialog;
-using JetBrains.DataFlow;
+using JetBrains.Lifetimes;
 using JetBrains.ReSharper.Feature.Services.Daemon.OptionPages;
 using JetBrains.UI.RichText;
 

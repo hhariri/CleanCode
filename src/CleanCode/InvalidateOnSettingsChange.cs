@@ -1,6 +1,6 @@
 using CleanCode.Settings;
 using JetBrains.Application.Settings;
-using JetBrains.DataFlow;
+using JetBrains.Lifetimes;
 using JetBrains.ProjectModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 
