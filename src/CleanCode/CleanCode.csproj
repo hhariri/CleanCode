@@ -1,4 +1,4 @@
-<Project Sdk="MSBuild.Sdk.Extras/1.6.65">
+﻿<Project Sdk="MSBuild.Sdk.Extras/1.6.65">
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
@@ -12,7 +12,10 @@
     <Authors>Martin Oehlert, Hadi Hariri, Matt Ellis</Authors>
     <PackageId>MO.CleanCode</PackageId>
     <PackageTags>clean code</PackageTags>
-    <PackageReleaseNotes>&amp;#8226; Updated to ReSharper 2019.1
+    <PackageReleaseNotes>&amp;#8226; Updated to ReSharper 2019.1.1
+
+From 5.6.5
+&amp;#8226; Updated to ReSharper 2019.1
       
 From 5.6.4
 &amp;#8226; Updated to ReSharper 2018.3.4
@@ -72,7 +75,7 @@ From 4.0.0:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2019.1.0">
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2019.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
