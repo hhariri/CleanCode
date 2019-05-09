@@ -76,7 +76,7 @@
     <copyright>Copyright ® 2014-2019 Martin Oehlert and Contributors</copyright>
     <references></references>
     <dependencies>
-      <dependency id="Wave" version="[183.0.0]" />
+      <dependency id="Wave" version="[191.0.0]" />
     </dependencies>
     <tags>clean code</tags>
   </metadata>
