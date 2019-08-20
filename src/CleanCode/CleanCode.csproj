@@ -75,11 +75,11 @@ From 4.0.0:
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2019.1.1">
+    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2019.2.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.2" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4" PrivateAssets="All" />
   </ItemGroup>
 
   <ItemGroup>
@@ -109,6 +109,12 @@ From 4.0.0:
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Warnings.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="CleanCode.ruleset">
+      <DependentUpon>CleanCode.nuspec</DependentUpon>
+    </None>
   </ItemGroup>
 
 </Project>
