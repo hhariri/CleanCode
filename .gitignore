@@ -20,3 +20,21 @@ packages/
 *.nupkg
 tools
 /*.lnk
+
+build
+output
+.gradle
+.tmp
+
+# User-specific files
+*.suo
+*.user
+*.sln.docstates
+*.cache
+
+# IDEs
+.idea
+.vs
+_ReSharper*
+_dotTrace*
+/distribution/*.zip

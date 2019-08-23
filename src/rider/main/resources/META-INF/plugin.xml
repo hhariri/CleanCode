@@ -1,0 +1,27 @@
+<idea-plugin>
+  <id>cleancode-rider</id>
+  <name>CleanCode</name>
+  <version>_PLACEHOLDER_</version>
+  <vendor url="https://project-url">Author</vendor>
+  <idea-version since-build="_PLACEHOLDER_" until-build="_PLACEHOLDER_" />
+  <depends>com.intellij.modules.rider</depends>
+
+  <description>
+<![CDATA[
+<p>An experiment in trying to automate some of concepts described in <a href="http://www.amazon.com/Clean-Code-Handbook-Software-Craftsmanship/dp/0132350882" rel="nofollow">Uncle Bob's books on Clean Code</a>.</p>
+<p>This is a ReSharper extension to analyse your C# code to highlight a symptom that your code is becoming too complex, is not "clean" enough. Increased complexity can make your code harder to read, understand and maintain. The plugin currently checks:</p>
+<ul>
+<li><strong>Too many dependencies</strong> - warns when a constructor has too many interfaces passed in.</li>
+<li><strong>Excessive indentation</strong> - warns if a class contains members with too much indentation.</li>
+<li><strong>Too many chained references</strong> - warns if an expression has too many chained statements, is potentially violating the <a href="https://en.wikipedia.org/wiki/Law_of_Demeter" rel="nofollow">Law of Demeter</a>. The check will try to ignore fluent APIs - if the type returned is the same as the type invoked, it doesn't count.</li>
+<li><strong>Method too long</strong> - warns when a method contains too many statements.</li>
+<li><strong>Class too big</strong> - warns if a class has too many method declarations.</li>
+<li><strong>Too many method parameters</strong> - warns if a method has too many parameters.</li>
+<li><strong>Method name not meaningful</strong> - simple check that a method name is longer than a certain threshold.</li>
+<li><strong>Method flag parameters</strong> - warns if a boolean or enum method parameter is used in an <code>if</code> statement with the method. This is an indication that the method has more than one responsibility.</li>
+<li><strong>Condition complexity</strong> - warns if the condition in an <code>if</code> statement contains too many expressions.</li>
+<li><strong>Hollow type names</strong> - warns if a class has a name with a suffix that is too general, e.g. <code>Handler</code>, <code>Manager</code>, <code>Controller</code>. The list of names is configurable.</li>
+</ul>
+]]>
+  </description>
+</idea-plugin>
