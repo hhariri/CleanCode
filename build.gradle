@@ -21,7 +21,8 @@ ext {
     sdkVersion = "2019.2.1" // -SNAPSHOT or -EAPX suffixes possible
     rdLibDirectory = new File(repoRoot, "build/riderRD-$sdkVersion/lib/rd")
     dotNetDir = new File(repoRoot, "src/")
-    dotNetPluginId = "CleanCode"
+    dotNetPluginId = "MO.CleanCode"
+    dotNetAssembly = "CleanCode"
     dotnetSolution = new File(repoRoot, "src/CleanCode.sln")
 }
 
@@ -115,7 +116,7 @@ buildPlugin {
 
         exec {
             executable findMsBuild.executable
-            args "/t:Pack","$dotnetSolution","/v:minimal","/p:Configuration=$BuildConfiguration","/p:PackageOutputPath=$rootDir/distribution","/p:PackageReleaseNotes=$changeNotes","/p:PackageVersion=$version"
+            args "/t:Pack","$dotnetSolution","/v:minimal","/p:Configuration=$BuildConfiguration","/p:PackageOutputPath=$rootDir/distribution","/p:PackageReleaseNotes=$changeNotes","/p:PackageVersion=$version","/p:PackageId=MO.CleanCode"
         }
     }
 }
@@ -168,10 +169,10 @@ patchPluginXml {
 prepareSandbox {
     dependsOn compileDotNet
 
-    def outputFolder = "$dotNetDir/$dotNetPluginId/bin/${dotNetPluginId}.Rider/$BuildConfiguration"
+    def outputFolder = "$dotNetDir/$dotNetAssembly/bin/${dotNetAssembly}.Rider/$BuildConfiguration"
     def dllFiles = [
-            "$outputFolder/${dotNetPluginId}.dll",
-            "$outputFolder/${dotNetPluginId}.pdb"
+            "$outputFolder/${dotNetAssembly}.dll",
+            "$outputFolder/${dotNetAssembly}.pdb"
     ]
 
     dllFiles.forEach({ f ->

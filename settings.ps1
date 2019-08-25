@@ -1,5 +1,5 @@
 $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
-$PluginId = "CleanCode"
+$PluginId = "MO.CleanCode"
 $SolutionPath = "$PSScriptRoot\src\CleanCode.sln"
 $SourceBasePath = "$PSScriptRoot\src"
 
