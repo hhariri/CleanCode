@@ -4,6 +4,7 @@
     <TargetFramework>net461</TargetFramework>
     <AssemblyName>CleanCode</AssemblyName>
     <RootNamespace>CleanCode</RootNamespace>
+    <IsPackable>false</IsPackable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <CodeAnalysisRuleset>CleanCode.ruleset</CodeAnalysisRuleset>
   </PropertyGroup>
