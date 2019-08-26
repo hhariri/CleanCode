@@ -8,22 +8,18 @@
     <CodeAnalysisRuleset>CleanCode.ruleset</CodeAnalysisRuleset>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="2019.2.1">
+  <ItemGroup><PackageReference Include="JetBrains.ReSharper.SDK" Version="$(SdkVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4" PrivateAssets="All" />
-    <PackageReference Include="JetBrains.ReSharper.SDK" Version="$(SdkVersion)">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.3" PrivateAssets="All" />
     <!-- TODO: https://github.com/NuGet/Home/issues/7154 -->
     <PackageReference Include="Wave" Version="$(WaveVersion)" />
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
@@ -53,9 +49,20 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Page Include="**\*.xaml">      
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  
+  <ItemGroup>
     <None Update="CleanCode.ruleset">
       <DependentUpon>CleanCode.nuspec</DependentUpon>
     </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ThemedIconPng Include="Resources\Icons\Settings\CleanCode.png" />
   </ItemGroup>
 
 </Project>
