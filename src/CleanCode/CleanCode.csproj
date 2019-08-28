@@ -49,18 +49,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Page Include="**\*.xaml">      
+    <Page Include="Resources\Icons\Settings\ThemedIcons.Settings.Generated.Xaml">      
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   
-  <ItemGroup>
-    <None Update="CleanCode.ruleset">
-      <DependentUpon>CleanCode.nuspec</DependentUpon>
-    </None>
-  </ItemGroup>
-
   <ItemGroup>
     <ThemedIconPng Include="Resources\Icons\Settings\CleanCode.png" />
   </ItemGroup>

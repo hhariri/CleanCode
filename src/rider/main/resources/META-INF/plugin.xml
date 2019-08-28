@@ -24,4 +24,8 @@
 </ul>
 ]]>
   </description>
+
+  <extensions defaultExtensionNs="com.intellij">
+    <applicationConfigurable parentId="CodeInspectionSettingsId" instance="com.jetbrains.rider.settings.CleanCodeOptionsPage" id="MO.CleanCode" />
+  </extensions>
 </idea-plugin>

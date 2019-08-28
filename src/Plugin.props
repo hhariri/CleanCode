@@ -1,14 +1,11 @@
 <Project>
   <PropertyGroup>
     <SdkVersion>2019.2.1</SdkVersion>
-    
     <Title>CleanCode</Title>
     <Description>Automates some of the concepts in Uncle Bob's Clean Code book</Description>
-  
     <Authors>Martin Oehlert, Hadi Hariri, Matt Ellis</Authors>
     <Copyright>Copyright $([System.DateTime]::Now.Year) Maintainers of CleanCode</Copyright>
     <PackageTags>resharper plugin cleancode clean code</PackageTags>
-  
     <PackageProjectUrl>https://github.com/MO2k4/CleanCode</PackageProjectUrl>
     <PackageLicenseUrl>https://raw.github.com/MO2k4/CleanCode/master/license.txt</PackageLicenseUrl>
     <PackageIconUrl>https://raw.githubusercontent.com/MO2k4/CleanCode/master/logo.png</PackageIconUrl>

@@ -38,3 +38,4 @@ output
 _ReSharper*
 _dotTrace*
 /distribution/*.zip
+/gradle.properties

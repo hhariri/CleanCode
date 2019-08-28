@@ -8,7 +8,7 @@ $ErrorActionPreference = "Stop"
 
 . ".\settings.ps1"
 
-$UserProjectXmlFile = "$SourceBasePath\$PluginId\$PluginId.csproj.user"
+$UserProjectXmlFile = "$SourceBasePath\CleanCode\CleanCode.csproj.user"
 
 if (!(Test-Path "$UserProjectXmlFile")) {
     # Determine download link
