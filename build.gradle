@@ -18,7 +18,7 @@ plugins {
 ext {
     repoRoot = projectDir
     isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
-    sdkVersion = "2019.3" // -SNAPSHOT or -EAPX suffixes possible
+    sdkVersion = "2019.3.1" // -SNAPSHOT or -EAPX suffixes possible
     rdLibDirectory = new File(repoRoot, "build/riderRD-$sdkVersion/lib/rd")
     dotNetDir = new File(repoRoot, "src/")
     dotNetPluginId = "MO.CleanCode"
@@ -44,7 +44,7 @@ if (!ext.has("BuildConfiguration"))
 if (ext.has("pluginVersion"))
     ext.version = ext.pluginVersion
 else
-    ext.version = "5.6.12"
+    ext.version = "5.6.13"
 
 if (ext.has("username"))
     intellij.publish.username = ext.username

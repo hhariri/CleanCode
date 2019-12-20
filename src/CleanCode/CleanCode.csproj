@@ -13,8 +13,9 @@
             <PrivateAssets>all</PrivateAssets>
             <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
         </PackageReference>
-        <PackageReference Include="JetBrains.Lifetimes" Version="$(SdkVersion)" />
-        <PackageReference Include="JetBrains.RdFramework" Version="$(SdkVersion)" />
+        <PackageReference Include="JetBrains.RdFramework" Version="2019.3.0">
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
         <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.4" PrivateAssets="All"/>
         <!-- TODO: https://github.com/NuGet/Home/issues/7154 -->
         <PackageReference Include="Wave" Version="$(WaveVersion)"/>
