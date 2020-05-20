@@ -16,16 +16,16 @@
         <PackageReference Include="JetBrains.RdFramework" Version="2020.1.3">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.8" PrivateAssets="All"/>
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0" PrivateAssets="All" />
         <!-- TODO: https://github.com/NuGet/Home/issues/7154 -->
-        <PackageReference Include="Wave" Version="$(WaveVersion)"/>
+        <PackageReference Include="Wave" Version="$(WaveVersion)" />
     </ItemGroup>
 
     <ItemGroup>
-        <Reference Include="PresentationCore"/>
-        <Reference Include="PresentationFramework"/>
-        <Reference Include="System.Xaml"/>
-        <Reference Include="WindowsBase"/>
+        <Reference Include="PresentationCore" />
+        <Reference Include="PresentationFramework" />
+        <Reference Include="System.Xaml" />
+        <Reference Include="WindowsBase" />
     </ItemGroup>
 
     <ItemGroup>
@@ -60,7 +60,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ThemedIconPng Include="Resources\Icons\Settings\CleanCode.png"/>
+        <ThemedIconPng Include="Resources\Icons\Settings\CleanCode.png" />
     </ItemGroup>
 
 </Project>
