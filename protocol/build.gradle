@@ -10,8 +10,6 @@ dependencies {
 }
 
 repositories {
+    maven { url 'https://www.myget.org/F/rd-snapshots/maven/' }
     mavenCentral()
-    flatDir {
-        dirs rdLibDirectory.absolutePath
-    }
 }

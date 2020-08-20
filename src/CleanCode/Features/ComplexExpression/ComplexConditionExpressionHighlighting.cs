@@ -1,18 +1,18 @@
 using System.Globalization;
-using CleanCode;
-using CleanCode.Features.ComplexExpression;
 using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.VB;
 
-[assembly: RegisterConfigurableSeverity(ComplexConditionExpressionHighlighting.SeverityID, null,
-    CleanCodeHighlightingGroupIds.CleanCode, "Condition expression too complex", "The expression in the condition is too complex.",
-    Severity.WARNING)]
-
 namespace CleanCode.Features.ComplexExpression
 {
+    [RegisterConfigurableSeverity(SeverityID,
+        null,
+        CleanCodeHighlightingGroupIds.CleanCode,
+        "Condition expression too complex",
+        "The expression in the condition is too complex.",
+        Severity.WARNING)]
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name + "," + VBLanguage.Name)]
     public class ComplexConditionExpressionHighlighting : IHighlighting
     {

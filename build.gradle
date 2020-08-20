@@ -6,20 +6,25 @@ buildscript {
         mavenCentral()
     }
 
-    dependencies { classpath "com.jetbrains.rd:rd-gen:0.1.18" }
+    dependencies {
+        classpath("com.jetbrains.rd:rd-gen:0.201.57") // https://github.com/JetBrains/rd#rdgen
+    }
 }
 
 plugins {
     id 'java'
-    id 'org.jetbrains.kotlin.jvm' version '1.2.50'
-    id 'org.jetbrains.intellij' version '0.3.4'
+    id 'org.jetbrains.kotlin.jvm' version '1.3.61'
+    id 'org.jetbrains.intellij' version '0.4.19' // https://github.com/JetBrains/gradle-intellij-plugin/releases
 }
 
 ext {
     repoRoot = projectDir
     isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
-    sdkVersion = "2020.1.3" // -SNAPSHOT or -EAPX suffixes possible
-    rdLibDirectory = new File(repoRoot, "build/riderRD-$sdkVersion/lib/rd")
+    sdkVersion = "2020.2" // -SNAPSHOT or -EAPX suffixes possible
+    // rdLibDirectory = new File(repoRoot, "build/riderRD-$sdkVersion/lib/rd")
+    rdLibDirectory = {
+        new File(intellij.ideaDependency.classes, "lib/rd")
+    }
     dotNetDir = new File(repoRoot, "src/")
     dotNetPluginId = "MO.CleanCode"
     dotNetAssembly = "CleanCode"
@@ -29,7 +34,6 @@ ext {
 repositories {
     maven { url 'https://cache-redirector.jetbrains.com/intellij-repository/snapshots' }
     maven { url 'https://cache-redirector.jetbrains.com/maven-central' }
-    flatDir { dirs rdLibDirectory.absolutePath }
 }
 
 wrapper {
@@ -44,7 +48,7 @@ if (!ext.has("BuildConfiguration"))
 if (ext.has("pluginVersion"))
     ext.version = ext.pluginVersion
 else
-    ext.version = "5.6.17"
+    ext.version = "5.6.18"
 
 if (ext.has("username"))
     intellij.publish.username = ext.username
@@ -123,8 +127,9 @@ buildPlugin {
 
 intellij {
     type = 'RD'
-    version = "$sdkVersion"
+    version = "${sdkVersion}"
     downloadSources = false
+    instrumentCode = false
 }
 
 apply plugin: 'com.jetbrains.rdgen'
