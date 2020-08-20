@@ -1,10 +1,8 @@
-using CleanCode;
 using JetBrains.ReSharper.Feature.Services.Daemon;
-
-[assembly: RegisterConfigurableHighlightingsGroup(CleanCodeHighlightingGroupIds.CleanCode, "Clean Code")]
 
 namespace CleanCode
 {
+    [RegisterConfigurableHighlightingsGroup(CleanCode, "Clean Code")]
     public static class CleanCodeHighlightingGroupIds
     {
         public const string CleanCode = "CleanCode";

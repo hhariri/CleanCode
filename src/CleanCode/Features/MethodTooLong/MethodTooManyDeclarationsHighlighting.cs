@@ -1,18 +1,18 @@
 using System.Globalization;
-using CleanCode;
-using CleanCode.Features.MethodTooLong;
 using CleanCode.Resources;
 using JetBrains.DocumentModel;
 using JetBrains.ReSharper.Feature.Services.Daemon;
 using JetBrains.ReSharper.Psi.CSharp;
 using JetBrains.ReSharper.Psi.VB;
 
-[assembly: RegisterConfigurableSeverity(MethodTooManyDeclarationsHighlighting.SeverityID, null,
-    CleanCodeHighlightingGroupIds.CleanCode, "Too many Declarations", "The method has more declarations than there should be.",
-    Severity.SUGGESTION)]
-
 namespace CleanCode.Features.MethodTooLong
 {
+    [RegisterConfigurableSeverity(SeverityID,
+        null,
+        CleanCodeHighlightingGroupIds.CleanCode,
+        "Too many Declarations",
+        "The method has more declarations than there should be.",
+        Severity.SUGGESTION)]
     [ConfigurableSeverityHighlighting(SeverityID, CSharpLanguage.Name + "," + VBLanguage.Name)]
     public class MethodTooManyDeclarationsHighlighting : IHighlighting
     {
