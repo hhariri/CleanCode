@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using JetBrains.ReSharper.Psi.VB.Tree;
 using JetBrains.ReSharper.Psi.Tree;
 

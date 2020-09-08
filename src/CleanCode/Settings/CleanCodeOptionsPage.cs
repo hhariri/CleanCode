@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq.Expressions;
 using CleanCode.Resources.Icons;
 using JetBrains.Application.Settings;

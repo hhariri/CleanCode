@@ -7,7 +7,7 @@ using JetBrains.ReSharper.Psi.VB.Tree;
 
 namespace CleanCode.Features.TooManyMethodArguments
 {
-    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new []
+    [ElementProblemAnalyzer(typeof(IMethodDeclaration), HighlightingTypes = new[]
     {
         typeof(TooManyArgumentsHighlighting)
     })]
