@@ -1,6 +1,6 @@
 # Clean Code ReSharper Plugin Project
 
-[![Build Status](https://dev.azure.com/mo2k4/CleanCode/_apis/build/status/CleanCode-CI?branchName=master)](https://dev.azure.com/mo2k4/CleanCode/_build/latest?definitionId=1?branchName=master)
+[![Build Status](https://dev.azure.com/mo2k4/CleanCode/_apis/build/status/CleanCode-CI?branchName=master)](https://dev.azure.com/mo2k4/CleanCode/_build/latest?definitionId=1&branchName=master)
 
 ### CleanCode
 
