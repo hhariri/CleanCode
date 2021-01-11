@@ -17,7 +17,7 @@
         <PackageReference Include="JetBrains.RdFramework" Version="2020.3.2">
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
-        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.0" PrivateAssets="All" />
+        <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.3.2" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>
