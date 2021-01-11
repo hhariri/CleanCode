@@ -20,7 +20,7 @@ plugins {
 ext {
     repoRoot = projectDir
     isWindows = Os.isFamily(Os.FAMILY_WINDOWS)
-    sdkVersion = "2020.2.1" // -SNAPSHOT or -EAPX suffixes possible
+    sdkVersion = "2020.3.2" // -SNAPSHOT or -EAPX suffixes possible
     // rdLibDirectory = new File(repoRoot, "build/riderRD-$sdkVersion/lib/rd")
     rdLibDirectory = {
         new File(intellij.ideaDependency.classes, "lib/rd")
@@ -48,7 +48,7 @@ if (!ext.has("BuildConfiguration"))
 if (ext.has("pluginVersion"))
     ext.version = ext.pluginVersion
 else
-    ext.version = "5.6.18"
+    ext.version = "5.6.19"
 
 if (ext.has("username"))
     intellij.publish.username = ext.username
