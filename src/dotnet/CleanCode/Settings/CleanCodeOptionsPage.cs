@@ -15,7 +15,7 @@ namespace CleanCode.Settings
     [OptionsPage(PageId, "Clean Code", typeof(SettingsThemedIcons.CleanCode), ParentId = CodeInspectionPage.PID)]
     public class CleanCodeOptionsPage : BeSimpleOptionsPage
     {
-        private const string PageId = "MO.CleanCode";
+        private const string PageId = "CleanCodeAnalysisOptionsPage";
 
         public CleanCodeOptionsPage(
             Lifetime lifetime,

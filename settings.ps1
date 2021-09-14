@@ -1,9 +1,9 @@
 $PSScriptRoot = Split-Path $MyInvocation.MyCommand.Path -Parent
 $PluginId = "MO.CleanCode"
-$SolutionPath = "$PSScriptRoot\src\CleanCode.sln"
-$SourceBasePath = "$PSScriptRoot\src"
+$SolutionPath = "$PSScriptRoot\src\dotnet\CleanCode.sln"
+$SourceBasePath = "$PSScriptRoot\src\dotnet"
 
-$VsWhereOutput = [xml] (& "$PSScriptRoot\tools\vswhere.exe" -format xml)
+$VsWhereOutput = [xml] (& "$PSScriptRoot\tools\vswhere.exe" -format xml -latest -products *)
 $VisualStudio = $VsWhereOutput.instances.instance |
     Where-Object { $_.channelId -match "Release" } |
     Sort-Object -Property installationVersion |
@@ -12,10 +12,10 @@ $VisualStudio = $VsWhereOutput.instances.instance |
 $VisualStudioBaseDirectory = $VisualStudio.installationPath
 $VisualStudioMajorVersion = ($VisualStudio.installationVersion -split '\.')[0]
 $VisualStudioInstanceId = $VisualStudio.instanceId
-$DevEnvPath = Get-ChildItem "$VisualStudioBaseDirectory\Common7\IDE\devenv.exe"
+$DevEnvPath = Get-ChildItem "$VisualStudioBaseDirectory\*\IDE\devenv.exe"
 $MSBuildPath = Get-ChildItem "$VisualStudioBaseDirectory\MSBuild\*\Bin\MSBuild.exe"
 
-$OutputDirectory = "$PSScriptRoot\distribution"
+$OutputDirectory = "$PSScriptRoot\output"
 $NuGetPath = "$PSScriptRoot\tools\nuget.exe"
 
 Function Invoke-Exe {

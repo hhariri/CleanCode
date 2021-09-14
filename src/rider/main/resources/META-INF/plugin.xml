@@ -26,6 +26,6 @@
   </description>
 
   <extensions defaultExtensionNs="com.intellij">
-    <applicationConfigurable parentId="CodeInspectionSettingsId" instance="com.jetbrains.rider.settings.CleanCodeOptionsPage" id="MO.CleanCode" />
+    <applicationConfigurable parentId="CodeInspectionSettingsId" instance="com.jetbrains.rider.plugins.cleancode.options.CleanCodeOptionsPage" id="CleanCodeAnalysisOptionsPage" />
   </extensions>
 </idea-plugin>

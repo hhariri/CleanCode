@@ -9,7 +9,8 @@
 //------------------------------------------------------------------------------
 
 [assembly: global::System.Windows.Markup.XmlnsDefinitionAttribute("urn:shemas-jetbrains-com:ui-application-icons-settings", "CleanCode.Resources.Icons")]
-[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xaml", IconNames=new string[] {
+[assembly: global::JetBrains.UI.Icons.CompiledIcons.CompiledIconsPackAttribute(IconPackResourceIdentification="MO.CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xa" +
+	"ml", IconNames=new string[] {
 		"CleanCode"})]
 
 namespace CleanCode.Resources.Icons
@@ -76,7 +77,8 @@ namespace CleanCode.Resources.Icons
 		///<example>
 		///  <code>themediconmanager.GetIcon&lt;SettingsThemedIcons.CleanCode&gt;()        // Icon image for rendering</code>
 		///</example>
-		[global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClassAttribute("CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xaml", 0, "CleanCode")]
+		[global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClassAttribute("MO.CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xa" +
+			"ml", 0, "CleanCode")]
 		public sealed class CleanCode : global::JetBrains.UI.Icons.CompiledIcons.CompiledIconClass
 		{
 			
@@ -102,13 +104,14 @@ namespace CleanCode.Resources.Icons
 			///<example>
 			///  <code>themediconmanager.GetIcon&lt;SettingsThemedIcons.CleanCode&gt;()        // Icon image for rendering</code>
 			///</example>
-			public static global::JetBrains.UI.Icons.IconId Id = new global::JetBrains.UI.Icons.CompiledIcons.CompiledIconId("CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xaml", 0, "CleanCode");
+			public static global::JetBrains.UI.Icons.IconId Id = new global::JetBrains.UI.Icons.CompiledIcons.CompiledIconId("MO.CleanCode;component/Resources/Icons/Settings/ThemedIcons.Settings.Generated.Xa" +
+					"ml", 0, "CleanCode");
 		}
 	}
 }
 
 
-public sealed class RenderedIcons_ByPackResourceNameHash_E1185BB5DC155E8A999AD43CA329D4ED
+public sealed class RenderedIcons_ByPackResourceNameHash_648FB37D75A94B00E240CCFFFBB8EFDD
 {
 	
 	public static byte[] CleanCode____png__x1 = new byte[] {
