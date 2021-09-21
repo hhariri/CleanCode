@@ -35,5 +35,8 @@ namespace CleanCode.Settings
 
         [SettingsEntry(1, nameof(MaximumExpressionsInCondition))]
         public int MaximumExpressionsInCondition { get; set; }
+
+        [SettingsEntry(true, nameof(IsFlagAnalysisEnabled))]
+        public bool IsFlagAnalysisEnabled { get; set; }
     }
 }

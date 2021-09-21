@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Linq.Expressions;
 using CleanCode.Resources.Icons;
 using JetBrains.Application.Settings;
@@ -23,35 +24,74 @@ namespace CleanCode.Settings
             OptionsSettingsSmartContext optionsSettingsSmartContext)
             : base(lifetime, optionsPageContext, optionsSettingsSmartContext)
         {
-            AddHeader("Single Responsibility");
-            AddText("A class should only have a single responsibility. Do not do too much in a class or method.");
+            CreateSettingsArea("Single Responsibility", CreateSingleResponsibilitySettings);
+            CreateSettingsArea("Coupling", CreateCouplingSettingsArea);
+            CreateSettingsArea("Legibility", CreateLegibilitySettingsArea);
+            CreateSettingsArea("Complexity", CreateComplexitySettingsArea);
 
-            AddIntOption((CleanCodeSettings s) => s.MaximumMethodsInClass, Resources.Settings.MaximumMethodsPerClass);
-            AddIntOption((CleanCodeSettings s) => s.MaximumMethodParameters, Resources.Settings.MaximumMethodDeclarationParameters);
-            AddIntOption((CleanCodeSettings s) => s.MaximumMethodStatements, Resources.Settings.MaximumStatementsPerMethod);
-            AddIntOption((CleanCodeSettings s) => s.MaximumDeclarationsInMethod, Resources.Settings.DeclarationsMaximum);
-            AddIntOption((CleanCodeSettings s) => s.MaximumIndentationDepth, Resources.Settings.MaximumLevelOfNestingInAMethod);
+            CreateFooterArea();
+        }
 
-            AddHeader("Coupling");
-            AddText("Avoid excessive coupling beween classes.");
+        private void CreateFooterArea()
+        {
+            AddSpacer();
+            AddRichText(CreateItalicText(
+                "Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)"));
+        }
 
-            AddIntOption((CleanCodeSettings s) => s.MaximumConstructorDependencies, Resources.Settings.MaximumConstructorDependencies);
-            AddIntOption((CleanCodeSettings s) => s.MaximumChainedReferences, Resources.Settings.MaximumChainedReferences);
+        private static RichText CreateItalicText(string value) => new RichText(value, new TextStyle(FontStyle.Italic));
 
-            AddHeader("Legibility");
+        private void CreateComplexitySettingsArea()
+        {
+            AddText("Reduce complexity in individual statements.");
+            AddIntOption((CleanCodeSettings s) => s.MaximumExpressionsInCondition,
+                Resources.Settings.MaximumExpressionsInsideACondition);
+        }
+
+        private void CreateLegibilitySettingsArea()
+        {
             AddText("Names should be meaningful.");
 
-            AddIntOption((CleanCodeSettings s) => s.MinimumMeaningfulMethodNameLength, Resources.Settings.MinimumMethodNameLength);
-            AddStringOption((CleanCodeSettings s) => s.MeaninglessClassNameSuffixes, Resources.Settings.MeaninglessNameSuffixes);
+            AddIntOption((CleanCodeSettings s) => s.MinimumMeaningfulMethodNameLength,
+                Resources.Settings.MinimumMethodNameLength);
+            AddStringOption((CleanCodeSettings s) => s.MeaninglessClassNameSuffixes,
+                Resources.Settings.MeaninglessNameSuffixes);
+        }
 
-            AddHeader("Complexity");
-            AddText("Reduce complexity in individual statements.");
+        private void CreateCouplingSettingsArea()
+        {
+            AddText("Avoid excessive coupling between classes.");
 
-            AddIntOption((CleanCodeSettings s) => s.MaximumExpressionsInCondition, Resources.Settings.MaximumExpressionsInsideACondition);
+            AddIntOption((CleanCodeSettings s) => s.MaximumConstructorDependencies,
+                Resources.Settings.MaximumConstructorDependencies);
+            AddIntOption((CleanCodeSettings s) => s.MaximumChainedReferences,
+                Resources.Settings.MaximumChainedReferences);
+        }
 
+        private void CreateSingleResponsibilitySettings()
+        {
+            AddText("A class should only have a single responsibility. Do not do too much in a class or method.");
+
+            AddIntOption((CleanCodeSettings s) => s.MaximumMethodsInClass,
+                Resources.Settings.MaximumMethodsPerClass);
+            AddIntOption((CleanCodeSettings s) => s.MaximumMethodParameters,
+                Resources.Settings.MaximumMethodDeclarationParameters);
+            AddIntOption((CleanCodeSettings s) => s.MaximumMethodStatements,
+                Resources.Settings.MaximumStatementsPerMethod);
+            AddIntOption((CleanCodeSettings s) => s.MaximumDeclarationsInMethod,
+                Resources.Settings.DeclarationsMaximum);
+            AddIntOption((CleanCodeSettings s) => s.MaximumIndentationDepth,
+                Resources.Settings.MaximumLevelOfNestingInAMethod);
             AddSpacer();
-            AddRichText(new RichText("Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)",
-                new TextStyle(System.Drawing.FontStyle.Italic)));
+            AddBoolOption((CleanCodeSettings cleanCodeSettings) => cleanCodeSettings.IsFlagAnalysisEnabled,
+                Resources.Settings.IsFlagAnalysisEnabled);
+        }
+
+        private void CreateSettingsArea(string headerText, Action createSettingsArea)
+        {
+            AddHeader(headerText);
+
+            using (Indent()) createSettingsArea();
         }
 
         private void AddIntOption<TKeyClass>(Expression<Func<TKeyClass, int>> expression, string description)
@@ -64,6 +104,12 @@ namespace CleanCode.Settings
         {
             var valueProperty = OptionsSettingsSmartContext.GetValueProperty(Lifetime, expression);
             AddControl(valueProperty.GetBeTextBox(Lifetime).WithDescription(description, Lifetime));
+        }
+
+        private void AddBoolOption<TKeyClass>(Expression<Func<TKeyClass, bool>> expression, string description)
+        {
+            var valueProperty = OptionsSettingsSmartContext.GetValueProperty(Lifetime, expression);
+            AddControl(valueProperty.GetBeCheckBox(Lifetime, description));
         }
     }
 }

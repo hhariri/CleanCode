@@ -150,4 +150,7 @@
   <data name="DeclarationsMaximum" xml:space="preserve">
     <value>Maximum declarations per method</value>
   </data>
+  <data name="IsFlagAnalysisEnabled" xml:space="preserve">
+    <value>Is flag analysis active.</value>
+  </data>
 </root>
