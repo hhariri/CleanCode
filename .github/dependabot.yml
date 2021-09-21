@@ -1,0 +1,22 @@
+version: 2
+updates:
+- package-ecosystem: nuget
+  directory: "/"
+  schedule:
+    interval: daily
+    time: "04:00"
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: JetBrains.Rider.SDK
+    versions:
+    - 2020.3.3
+    - 2020.3.4
+    - 2021.1.0
+  - dependency-name: JetBrains.ReSharper.SDK
+    versions:
+    - 2020.3.3
+    - 2020.3.4
+    - 2021.1.0
+  - dependency-name: JetBrains.RdFramework
+    versions:
+    - 2021.1.0
