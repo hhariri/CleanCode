@@ -38,3 +38,7 @@ output
 _ReSharper*
 _dotTrace*
 /distribution/*.zip
+.settings/org.eclipse.buildship.core.prefs
+.project
+.classpath
+protocol/.settings/org.eclipse.buildship.core.prefs
