@@ -21,11 +21,8 @@ steps:
     tasks: buildPlugin
     publishJUnitResults: false
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Nuget-Paket'
-  inputs:
-    PathtoPublish: output
-    ArtifactName: 'Nuget-Paket'
+- publish: $(System.DefaultWorkingDirectory)/output
+  artifact: 'Nuget-Paket'
 
 - task: EvgenyChernyi.telegram-notification-extension.sample-telegram-task.SendTelegramNotification@0
   displayName: 'Send Telegram Notification'
