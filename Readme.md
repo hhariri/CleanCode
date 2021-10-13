@@ -25,7 +25,7 @@ The limits used by each analysis are configurable in the options page.
 
 ### Upcoming features
 
-Please log feature requests and bugs in [Issues](https://github.com/hhariri/CleanCode/issues). Note that this version only supports C# and VB.Net.
+Please log feature requests and bugs in [Issues](https://github.com/MO2k4/CleanCode/issues). Note that this version only supports C# and VB.Net.
 
 ## Installing
 
