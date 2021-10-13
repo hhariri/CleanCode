@@ -1,14 +1,38 @@
-queue:
-  name: Hosted VS2017
-steps:
-- task: cake-build.cake.cake-build-task.Cake@0
-  displayName: 'Cake '
+pool:
+  name: Azure Pipelines
+  vmImage: windows-latest
+  demands: java
 
+trigger:
+ branches:
+   include:
+     - master
+
+steps:
+- script: |
+   echo "##vso[task.setvariable variable=JAVA_HOME]$(JAVA_HOME_11_X64)"
+   echo "##vso[task.setvariable variable=PATH]$(JAVA_HOME_11_X64)\bin;$(PATH)"
+  displayName: 'Set Java Version'
+
+- task: Gradle@2
+  displayName: 'Build Plugin'
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    tasks: buildPlugin
+    publishJUnitResults: false
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Nuget-Paket'
   inputs:
-    PathtoPublish: distribution
-
+    PathtoPublish: output
     ArtifactName: 'Nuget-Paket'
 
+- task: EvgenyChernyi.telegram-notification-extension.sample-telegram-task.SendTelegramNotification@0
+  displayName: 'Send Telegram Notification'
+  inputs:
+    botToken: '$(token)'
+    chats: $(chatId)
+    teamUrl: true
+    buildNumber: true
+    buildQueuedBy: true
+  condition: succeededOrFailed()
