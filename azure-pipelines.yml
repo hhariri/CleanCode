@@ -14,6 +14,13 @@ steps:
    echo "##vso[task.setvariable variable=PATH]$(JAVA_HOME_11_X64)\bin;$(PATH)"
   displayName: 'Set Java Version'
 
+- task: UseDotNet@2
+  displayName: 'Install .NET 6 SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '6.0.x'
+    performMultiLevelLookup: true
+
 - task: Gradle@2
   displayName: 'Build Plugin'
   inputs:
