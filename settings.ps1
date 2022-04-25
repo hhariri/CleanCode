@@ -3,7 +3,7 @@ $PluginId = "MO.CleanCode"
 $SolutionPath = "$PSScriptRoot\src\dotnet\CleanCode.sln"
 $SourceBasePath = "$PSScriptRoot\src\dotnet"
 
-$VsWhereOutput = [xml] (& "$PSScriptRoot\tools\vswhere.exe" -format xml -latest -products *)
+$VsWhereOutput = [xml] (& "$PSScriptRoot\tools\vswhere.exe" -format xml -products *)
 $VisualStudio = $VsWhereOutput.instances.instance |
     Where-Object { $_.channelId -match "Release" } |
     Sort-Object -Property installationVersion |

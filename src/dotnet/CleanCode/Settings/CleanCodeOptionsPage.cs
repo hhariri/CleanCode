@@ -1,5 +1,4 @@
 using System;
-using System.Drawing;
 using System.Linq.Expressions;
 using CleanCode.Resources.Icons;
 using JetBrains.Application.Settings;
@@ -39,7 +38,7 @@ namespace CleanCode.Settings
                 "Note: All references to Clean Code, including but not limited to the Clean Code icon are used with permission of Robert C. Martin (a.k.a. UncleBob)"));
         }
 
-        private static RichText CreateItalicText(string value) => new RichText(value, new TextStyle(FontStyle.Italic));
+        private static RichText CreateItalicText(string value) => new(value, new TextStyle(JetFontStyles.Italic));
 
         private void CreateComplexitySettingsArea()
         {
